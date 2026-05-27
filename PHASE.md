@@ -1,24 +1,35 @@
-# Phase 2 — Pistes créatives (UI exploration)
+# Phase 3 — Design System UI (intégration brand)
 
-**Durée estimée** : 1 semaine  
-**Outil** : Claude Design (claude.ai/design)  
-**Input** : Brand book client (logo, palette, polices, ton)
+**Durée estimée** : 2-3 jours  
+**Outil** : Claude Code (CLI ou IDE)  
+**Input** : Direction artistique validée en phase 2
 
 ## Actions
 
-- [ ] Extraire les tokens visuels du brand book (couleurs, polices, radius, densité)
-- [ ] Sélectionner 3 écrans phares (hero, dashboard, écran clé métier)
-- [ ] Générer 2-3 directions différentes sur ces 3 écrans :
-  - *Direction A* — ex: "Premium éditorial" (serif, dense, radius minimal)
-  - *Direction B* — ex: "Tech vibrant" (sans-serif, couleurs saturées, gradient)
-  - *Direction C* — ex: "Institutionnel sobre" (gris, primary discret, espace)
-- [ ] Présenter au client → validation d'UNE direction
+- [ ] Mettre à jour `src/app/globals.css` avec les tokens de la direction validée
+- [ ] Si police custom : remplacer Geist par la police brand (Google Fonts via `next/font`)
+- [ ] Tester sur `/gallery` que tous les composants rendent bien avec le nouveau thème
+- [ ] Documenter les tokens dans `BRAND.md`
+
+## Tokens à configurer dans globals.css
+
+```css
+:root {
+  --primary: oklch(...);
+  --primary-foreground: oklch(...);
+  --secondary: oklch(...);
+  --accent: oklch(...);
+  --destructive: oklch(...);
+  --radius: 0.5rem;
+}
+```
 
 ## Output attendu
 
-- 9 visuels (3 directions × 3 écrans) sur preview Vercel
-- Direction artistique signée par le client
+- `globals.css` brand-ready
+- Gallery testée, aucun composant cassé visuellement
+- `BRAND.md` avec les tokens documentés
 
 ---
 
-> Branche suivante : `phase/3-design-system-ui`
+> Branche suivante : `phase/4-declinaison-ui`
