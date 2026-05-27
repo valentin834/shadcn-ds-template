@@ -1,35 +1,21 @@
-# Phase 3 — Design System UI (intégration brand)
+# Phase 4 — Déclinaison UI sur tous les écrans
 
-**Durée estimée** : 2-3 jours  
-**Outil** : Claude Code (CLI ou IDE)  
-**Input** : Direction artistique validée en phase 2
+**Durée estimée** : 1-2 semaines  
+**Outil** : Claude Design (claude.ai/design)  
+**Input** : DS brandé (phase 3 mergée)
 
 ## Actions
 
-- [ ] Mettre à jour `src/app/globals.css` avec les tokens de la direction validée
-- [ ] Si police custom : remplacer Geist par la police brand (Google Fonts via `next/font`)
-- [ ] Tester sur `/gallery` que tous les composants rendent bien avec le nouveau thème
-- [ ] Documenter les tokens dans `BRAND.md`
-
-## Tokens à configurer dans globals.css
-
-```css
-:root {
-  --primary: oklch(...);
-  --primary-foreground: oklch(...);
-  --secondary: oklch(...);
-  --accent: oklch(...);
-  --destructive: oklch(...);
-  --radius: 0.5rem;
-}
-```
+- [ ] Prompter Claude Design : *"Le DS a été customisé avec les tokens brand. Décline tous les écrans wireframe en UI finale. Aucune valeur de couleur en dur — uniquement variables CSS / classes Tailwind."*
+- [ ] Reviewer écran par écran sur la preview Vercel
+- [ ] Vérifier que tous les états (empty/loading/error) ont la direction artistique
+- [ ] Validation client par flow (pas écran par écran)
 
 ## Output attendu
 
-- `globals.css` brand-ready
-- Gallery testée, aucun composant cassé visuellement
-- `BRAND.md` avec les tokens documentés
+- Tous les écrans desktop en UI finale
+- Validation client signée par flow
 
 ---
 
-> Branche suivante : `phase/4-declinaison-ui`
+> Branche suivante : `phase/5-responsive`
