@@ -1,22 +1,24 @@
-# Phase 1 — Wireframes low-fi
+# Phase 2 — Pistes créatives (UI exploration)
 
 **Durée estimée** : 1 semaine  
 **Outil** : Claude Design (claude.ai/design)  
-**Thème** : Neutre par défaut (noir/blanc/gris) — pas de surcharge brand
+**Input** : Brand book client (logo, palette, polices, ton)
 
 ## Actions
 
-- [ ] Rédiger le `CAHIER-CHARGES.md` (flows, écrans, données, états)
-- [ ] Prompter Claude Design : *"Génère les wireframes navigables de tous les flows du CDC. Utilise le design system avec le thème neutre. Mock data réaliste, états empty/loading/error inclus."*
-- [ ] Itérer route par route jusqu'à structure validée
-- [ ] Partager preview Vercel au client
+- [ ] Extraire les tokens visuels du brand book (couleurs, polices, radius, densité)
+- [ ] Sélectionner 3 écrans phares (hero, dashboard, écran clé métier)
+- [ ] Générer 2-3 directions différentes sur ces 3 écrans :
+  - *Direction A* — ex: "Premium éditorial" (serif, dense, radius minimal)
+  - *Direction B* — ex: "Tech vibrant" (sans-serif, couleurs saturées, gradient)
+  - *Direction C* — ex: "Institutionnel sobre" (gris, primary discret, espace)
+- [ ] Présenter au client → validation d'UNE direction
 
 ## Output attendu
 
-- Toutes les routes du périmètre en visuel neutre
-- Mock data dans `src/lib/mock-data.ts`
-- Validation client signée sur la **structure** (pas le style)
+- 9 visuels (3 directions × 3 écrans) sur preview Vercel
+- Direction artistique signée par le client
 
 ---
 
-> Branche suivante : `phase/2-pistes-creatives`
+> Branche suivante : `phase/3-design-system-ui`
