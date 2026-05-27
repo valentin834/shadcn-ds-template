@@ -1,21 +1,25 @@
-# Phase 4 — Déclinaison UI sur tous les écrans
+# Phase 5 — Responsive
 
-**Durée estimée** : 1-2 semaines  
+**Durée estimée** : 1 semaine  
 **Outil** : Claude Design (claude.ai/design)  
-**Input** : DS brandé (phase 3 mergée)
+**Input** : UI desktop validée (phase 4 mergée)
 
 ## Actions
 
-- [ ] Prompter Claude Design : *"Le DS a été customisé avec les tokens brand. Décline tous les écrans wireframe en UI finale. Aucune valeur de couleur en dur — uniquement variables CSS / classes Tailwind."*
-- [ ] Reviewer écran par écran sur la preview Vercel
-- [ ] Vérifier que tous les états (empty/loading/error) ont la direction artistique
-- [ ] Validation client par flow (pas écran par écran)
+- [ ] Prompter : *"Génère les déclinaisons tablette (768px) et mobile (375px). Breakpoints Tailwind (`sm`, `md`, `lg`). Sidebar → drawer mobile, tables → cards empilées, navigation → burger."*
+- [ ] Tester sur preview Vercel en mode device (DevTools Chrome)
+- [ ] Vérifier zones tactiles 44×44px min sur mobile
+- [ ] Test réel sur iPhone + Android
+- [ ] Validation client → fin de la phase design
 
 ## Output attendu
 
-- Tous les écrans desktop en UI finale
-- Validation client signée par flow
+- Tous les écrans en 3 breakpoints (desktop / tablette / mobile)
+- Tests réels validés
+- Validation client signée
 
 ---
 
-> Branche suivante : `phase/5-responsive`
+> ══ POINT DE BASCULE DESIGN → DEV ══  
+> Cette branche est livrée aux devs via PR vers `main`.  
+> Phases suivantes (Polish Code + Handoff) : voir `process-design-40-60.md`.
