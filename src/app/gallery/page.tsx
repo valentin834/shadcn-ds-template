@@ -43,6 +43,7 @@ const studioBlocks = [
   { slug: "hero-section-41",          label: "Hero Section 41" },
   { slug: "navbar-component-01",      label: "Navbar 01" },
   { slug: "features-section-01",      label: "Features Section" },
+  { slug: "bento-grid-15",            label: "Bento Grid 15" },
   { slug: "pricing-component-01",     label: "Pricing" },
   { slug: "faq-component-01",         label: "FAQ 01" },
   { slug: "faq-component-17",         label: "FAQ 17" },
@@ -128,14 +129,16 @@ const studioBlocks = [
   { slug: "user-schedule-01",         label: "User Schedule" },
 ]
 
-const shadcnOfficial = [
+const shadcnOfficial: { name: string; desc: string; isNew?: boolean }[] = [
   { name: "accordion",       desc: "Collapsible content sections" },
   { name: "alert",           desc: "Inline contextual messages" },
   { name: "alert-dialog",    desc: "Destructive action confirmation" },
   { name: "aspect-ratio",    desc: "Fixed-ratio media container" },
+  { name: "attachment",      desc: "File and image attachments", isNew: true },
   { name: "avatar",          desc: "User image with fallback" },
   { name: "badge",           desc: "Status and count labels" },
   { name: "breadcrumb",      desc: "Hierarchical location indicator" },
+  { name: "bubble",          desc: "Chat message bubble", isNew: true },
   { name: "button",          desc: "Primary action element" },
   { name: "button-group",    desc: "Grouped buttons" },
   { name: "calendar",        desc: "Date selection" },
@@ -143,22 +146,35 @@ const shadcnOfficial = [
   { name: "carousel",        desc: "Sliding content panels" },
   { name: "chart",           desc: "Recharts wrapper for data viz" },
   { name: "checkbox",        desc: "Boolean selection" },
+  { name: "code-block",      desc: "Highlighted code (Shiki)", isNew: true },
   { name: "collapsible",     desc: "Single expandable section" },
   { name: "combobox",        desc: "Searchable select" },
   { name: "command",         desc: "Command palette / search" },
   { name: "context-menu",    desc: "Right-click menu" },
   { name: "dialog",          desc: "Modal overlay" },
-  { name: "drawer",          desc: "Vaul side/bottom drawer" },
+  { name: "direction",       desc: "RTL / LTR provider" },
+  { name: "drawer",          desc: "Bottom/side drawer (Base UI)" },
   { name: "dropdown-menu",   desc: "Action menu" },
+  { name: "empty",           desc: "Empty state" },
+  { name: "field",           desc: "Form field layout + label + error" },
+  { name: "form",            desc: "react-hook-form wrapper (legacy, prefer field)" },
   { name: "hover-card",      desc: "Hover preview card" },
   { name: "input",           desc: "Text input field" },
+  { name: "input-group",     desc: "Input with addons" },
   { name: "input-otp",       desc: "OTP code input" },
+  { name: "item",            desc: "List item layout" },
+  { name: "kbd",             desc: "Keyboard shortcut" },
   { name: "label",           desc: "Form field label" },
+  { name: "marker",          desc: "Inline status line", isNew: true },
   { name: "menubar",         desc: "Application menu bar" },
+  { name: "message",         desc: "Conversation message layout", isNew: true },
+  { name: "message-scroller",desc: "Chat scroll area", isNew: true },
+  { name: "native-select",   desc: "Native HTML select" },
   { name: "navigation-menu", desc: "Site navigation" },
   { name: "pagination",      desc: "Page controls" },
   { name: "popover",         desc: "Floating panel" },
   { name: "progress",        desc: "Progress indicator" },
+  { name: "questionnaire",   desc: "Step-by-step questions", isNew: true },
   { name: "radio-group",     desc: "Single choice selection" },
   { name: "resizable",       desc: "Resizable panel layout" },
   { name: "scroll-area",     desc: "Custom scrollbar container" },
@@ -169,13 +185,16 @@ const shadcnOfficial = [
   { name: "skeleton",        desc: "Loading placeholder" },
   { name: "slider",          desc: "Range input" },
   { name: "sonner",          desc: "Toast notifications" },
+  { name: "spinner",         desc: "Loading spinner" },
   { name: "switch",          desc: "Toggle" },
   { name: "table",           desc: "Tabular data display" },
   { name: "tabs",            desc: "Tabbed content sections" },
   { name: "textarea",        desc: "Multiline text input" },
+  { name: "toast",           desc: "Toasts (Base UI)", isNew: true },
   { name: "toggle",          desc: "On/off button" },
   { name: "toggle-group",    desc: "Group of toggles" },
   { name: "tooltip",         desc: "Hover label" },
+  { name: "trace",           desc: "Agent activity log", isNew: true },
 ]
 
 export default function GalleryIndexPage() {
@@ -186,9 +205,10 @@ export default function GalleryIndexPage() {
         <h1 className="text-4xl font-bold tracking-tight">Component Gallery</h1>
         <p className="text-muted-foreground">
           Visual reference for all installed components.{" "}
-          <strong className="text-foreground">55</strong> shadcn official ·{" "}
+          <strong className="text-foreground">65</strong> shadcn official ·{" "}
+          <strong className="text-foreground">11</strong> ReUI / Dice UI ·{" "}
           <strong className="text-foreground">608</strong> shadcnstudio variants ·{" "}
-          <strong className="text-foreground">85</strong> shadcnstudio blocks.
+          <strong className="text-foreground">87</strong> shadcnstudio blocks.
         </p>
       </div>
 
@@ -196,17 +216,35 @@ export default function GalleryIndexPage() {
       <section className="space-y-4">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-semibold">shadcn/ui — Official Components</h2>
-          <Badge variant="secondary">55</Badge>
+          <Badge variant="secondary">65</Badge>
         </div>
         <p className="text-sm text-muted-foreground">Import from <code className="font-mono">@/components/ui/[name]</code></p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {shadcnOfficial.map((c) => (
             <div key={c.name} className="rounded-lg border bg-card p-3 space-y-0.5">
-              <p className="text-sm font-medium font-mono">{c.name}</p>
+              <p className="flex items-center gap-1.5 text-sm font-medium font-mono">
+                {c.name}
+                {c.isNew && <Badge variant="outline" className="text-[10px]">new</Badge>}
+              </p>
               <p className="text-xs text-muted-foreground leading-tight">{c.desc}</p>
             </div>
           ))}
         </div>
+      </section>
+
+      <Separator />
+
+      {/* Extended: new official components + ReUI + Dice UI */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-3">
+          <h2 className="text-xl font-semibold">Extended — new shadcn, ReUI, Dice UI</h2>
+          <Badge variant="secondary">21</Badge>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Live demos of the new official components and of the ReUI / Dice UI components
+          (kanban, tree, filters, stepper, timeline…).{" "}
+          <Link href="/gallery/extended" className="underline underline-offset-2">Open the extended gallery →</Link>
+        </p>
       </section>
 
       <Separator />

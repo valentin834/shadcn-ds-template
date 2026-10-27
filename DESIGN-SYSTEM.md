@@ -1,120 +1,212 @@
 # Design System — shadcn-ds-4060
-> Référence complète pour Claude Design et tout agent IA composant des écrans.
-> Stack : Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui · shadcnstudio Pro
+> Référence complète pour Claude Design et tout agent IA qui compose des écrans.
+> Stack : Next.js 16.4 (App Router) · React 19.3 · TypeScript · Tailwind CSS v4 · shadcn/ui (style `base-nova`, primitives Base UI) · shadcnstudio Pro · ReUI · Dice UI
+> Inventaire vérifié le 27/10/2026 : **65** composants shadcn officiels · **11** composants ReUI / Dice UI · **28** primitives shadcnstudio · **608** variantes shadcnstudio · **87** blocs shadcnstudio · **3** blocs shadcn officiels.
 
 ---
 
 ## 1. Principes d'utilisation
 
-- **Import officiel shadcn** : `import { ComponentName } from "@/components/ui/[name]"`
-- **Import shadcnstudio variant** : `import ComponentName from "@/components/shadcn-studio/[category]/[category]-[01]"` (default export)
-- **Thème** : neutral, CSS variables oklch, pas de customisation — base pure shadcn
-- **Icônes** : `lucide-react` exclusivement (pas de FontAwesome, pas de Material)
-- **Charts** : `recharts` via le composant `chart` de shadcn (`ChartContainer`, `ChartTooltip`)
-- **Animations** : `framer-motion` (déjà installé via shadcnstudio)
-- **Police** : Geist Sans (variable `--font-geist-sans`)
+### Sources et imports
+
+| Source | Dossier | Import | Export |
+|---|---|---|---|
+| shadcn/ui officiel | `src/components/ui/` | `import { Button } from "@/components/ui/button"` | nommé |
+| ReUI ([reui.io](https://reui.io), variante base-nova) | `src/components/reui/` | `import { Kanban } from "@/components/reui/kanban"` | nommé |
+| Dice UI ([diceui.com](https://diceui.com), variante base-nova) | `src/components/diceui/` | `import { TagsInput } from "@/components/diceui/tags-input"` | nommé |
+| Primitives shadcnstudio | `src/components/ui/` (§ 4) | `import { Rating } from "@/components/ui/rating"` | nommé (`multi-select` : default) |
+| Variantes shadcnstudio | `src/components/shadcn-studio/[category]/` | `import Button22 from "@/components/shadcn-studio/button/button-22"` | **default** |
+| Blocs shadcnstudio | `src/components/shadcn-studio/blocks/[block]/` | `import HeroSection01 from "@/components/shadcn-studio/blocks/hero-section-01/hero-section-01"` | **default** |
+| Blocs shadcn officiels | `src/components/` | `import { AppSidebar } from "@/components/app-sidebar"` | nommé |
+
+### Règles
+
+- **Thème** : `neutral`, variables CSS oklch, **niveaux de gris uniquement** — aucune personnalisation. Ne pas ajouter de tokens colorés (`--success`, `--info`, `--warning`…) : certains registres tiers en installent, ils ont été écartés. Seul `--destructive` est coloré (rouge shadcn par défaut).
+- **Primitives** : Base UI (`@base-ui/react`). Différences avec l'API Radix qu'on trouve dans beaucoup d'exemples en ligne :
+  - pas d'`asChild` → prop `render` : `<DialogTrigger render={<Button variant="outline" />}>Ouvrir</DialogTrigger>` ; un `Button` rendu en lien prend aussi `nativeButton={false}`
+  - `Accordion` : `multiple` (booléen) et valeurs en tableau (une couche de compatibilité accepte aussi `type="single"` pour les variantes shadcnstudio)
+  - `ToggleGroup` : `value` / `defaultValue` en `string[]`
+  - `Select`, `Slider`, `Combobox` : `onValueChange(value, eventDetails)`
+  - `Drawer` : `swipeDirection="down" | "right" | "left" | "up"` (plus de prop `direction`, plus de Vaul)
+- `radix-ui` reste installé : seules certaines variantes shadcnstudio l'utilisent. Ne pas l'utiliser pour du nouveau code.
+- **Icônes** : `lucide-react` exclusivement.
+- **Charts** : `recharts` via le composant `chart` (`ChartContainer`, `ChartTooltip`). Les couleurs `--chart-1..5` sont des gris.
+- **Animations** : `motion` (`import { motion } from "motion/react"`), utilisé par shadcnstudio.
+- **Police** : Geist Sans (`--font-geist-sans`) et Geist Mono.
+- **`cn()`** : toujours `import { cn } from "@/lib/utils"` (clsx + tailwind-merge). La CLI shadcn 4.22 écrit `import { cn } from "cn"` : remplacer cet import après chaque `shadcn add` (voir README).
+- **Toasts** : deux systèmes coexistent. `sonner` (utilisé par shadcnstudio) et `ui/toast` (Base UI, nouveau composant officiel). En choisir un par projet. Aucun `Toaster` n'est monté dans le layout racine : l'ajouter dans le layout du projet.
+
+### Galeries
+
+- `/gallery` — index de tous les composants et blocs
+- `/gallery/studio/[category]` — les 608 variantes shadcnstudio
+- `/gallery/extended` — démos des nouveaux composants officiels, de ReUI et de Dice UI (une page par composant : `/gallery/extended/kanban`, etc.)
 
 ---
 
-## 2. Composants officiels shadcn (55)
+## 2. Composants officiels shadcn (65)
 
-Import path : `@/components/ui/[name]`
+Import : `@/components/ui/[name]`. Exports et variantes extraits du code.
 
-### Layout & Structure
-| Composant | Import | Usage principal |
-|---|---|---|
-| `card` | `Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction` | Container principal — dashboard tiles, product cards, form containers |
-| `separator` | `Separator` | Divider horizontal ou vertical entre sections |
-| `resizable` | `ResizablePanelGroup, ResizablePanel, ResizableHandle` | Layouts à panneaux redimensionnables |
-| `scroll-area` | `ScrollArea` | Zone de scroll personnalisée avec scrollbar custom |
-| `aspect-ratio` | `AspectRatio` | Container avec ratio fixe (images, vidéos) |
-| `sidebar` | `SidebarProvider, Sidebar, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset, SidebarTrigger` | Navigation latérale complète avec collapse |
+### Layout & structure
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `card` | `Card`, `CardHeader`, `CardFooter`, `CardTitle`, `CardAction`, `CardDescription`, `CardContent` | `size`: `default` · `sm` | Conteneur principal : tuiles de dashboard, cartes produit, formulaires. `size="sm"` pour une version compacte. |
+| `separator` | `Separator` | — | Séparateur horizontal ou vertical. |
+| `resizable` | `ResizableHandle`, `ResizablePanel`, `ResizablePanelGroup` | — | Panneaux redimensionnables (react-resizable-panels). |
+| `scroll-area` | `ScrollArea`, `ScrollBar` | — | Zone de défilement avec scrollbar stylée. |
+| `aspect-ratio` | `AspectRatio` | — | Conteneur à ratio fixe (images, vidéos). |
+| `sidebar` | `Sidebar`, `SidebarContent`, `SidebarFooter`, `SidebarGroup`, `SidebarGroupAction`, `SidebarGroupContent`, `SidebarGroupLabel`, `SidebarHeader`, `SidebarInput`, `SidebarInset`, `SidebarMenu`, `SidebarMenuAction`, `SidebarMenuBadge`, `SidebarMenuButton`, `SidebarMenuItem`, `SidebarMenuSkeleton`, `SidebarMenuSub`, `SidebarMenuSubButton`, `SidebarMenuSubItem`, `SidebarProvider`, `SidebarRail`, `SidebarSeparator`, `SidebarTrigger`, `useSidebar` | `variant`: `default` · `outline`<br>`size`: `default` · `sm` · `lg`<br>`state`: `expanded` · `collapsed`<br>`side`: `left` · `right`<br>`collapsible`: `offcanvas` · `icon` · `none` | Navigation latérale complète, repliable (icônes) — voir le bloc `dashboard-01`. |
+| `item` | `Item`, `ItemMedia`, `ItemContent`, `ItemActions`, `ItemGroup`, `ItemSeparator`, `ItemTitle`, `ItemDescription`, `ItemHeader`, `ItemFooter` | `variant`: `default` · `icon` · `image`<br>`size`: `default` · `sm` · `xs` | Ligne de liste générique : média, titre, description, actions. |
+| `empty` | `Empty`, `EmptyHeader`, `EmptyTitle`, `EmptyDescription`, `EmptyContent`, `EmptyMedia` | `variant`: `default` · `icon` | État vide : icône, titre, description, actions. |
 
 ### Navigation
-| Composant | Import | Usage principal |
-|---|---|---|
-| `breadcrumb` | `Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator` | Fil d'Ariane hiérarchique |
-| `navigation-menu` | `NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink` | Menu de navigation principal avec sous-menus |
-| `menubar` | `Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem` | Barre de menu style application desktop |
-| `tabs` | `Tabs, TabsList, TabsTrigger, TabsContent` | Sections tabbées |
-| `pagination` | `Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis` | Navigation entre pages |
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `breadcrumb` | `Breadcrumb`, `BreadcrumbList`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbPage`, `BreadcrumbSeparator`, `BreadcrumbEllipsis` | — | Fil d'Ariane. |
+| `navigation-menu` | `NavigationMenu`, `NavigationMenuContent`, `NavigationMenuIndicator`, `NavigationMenuItem`, `NavigationMenuLink`, `NavigationMenuList`, `NavigationMenuTrigger`, `NavigationMenuPositioner` | — | Menu principal de site avec sous-menus. |
+| `menubar` | `Menubar`, `MenubarPortal`, `MenubarMenu`, `MenubarTrigger`, `MenubarContent`, `MenubarGroup`, `MenubarSeparator`, `MenubarLabel`, `MenubarItem`, `MenubarShortcut`, `MenubarCheckboxItem`, `MenubarRadioGroup`, `MenubarRadioItem`, `MenubarSub`, `MenubarSubTrigger`, `MenubarSubContent` | — | Barre de menus type application desktop. |
+| `tabs` | `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`, `tabsListVariants` | `variant`: `default` · `line` | Onglets. `TabsList variant="line"` pour des onglets soulignés. |
+| `pagination` | `Pagination`, `PaginationContent`, `PaginationEllipsis`, `PaginationItem`, `PaginationLink`, `PaginationNext`, `PaginationPrevious` | — | Navigation entre pages. |
 
-### Formulaires & Saisie
-| Composant | Import | Usage principal |
-|---|---|---|
-| `input` | `Input` | Champ texte standard |
-| `textarea` | `Textarea` | Zone de texte multiligne |
-| `select` | `Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel` | Liste déroulante |
-| `checkbox` | `Checkbox` | Case à cocher booléenne |
-| `radio-group` | `RadioGroup, RadioGroupItem` | Choix unique parmi plusieurs options |
-| `switch` | `Switch` | Bascule on/off |
-| `slider` | `Slider` | Sélecteur de valeur par glissement |
-| `input-otp` | `InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator` | Saisie de code OTP/2FA |
-| `combobox` | `Combobox` (base-ui) | Dropdown avec recherche — voir shadcnstudio variants pour API simple |
-| `calendar` | `Calendar` | Sélecteur de date (react-day-picker) |
-| `label` | `Label` | Étiquette de champ de formulaire |
+### Formulaires & saisie
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `field` | `Field`, `FieldLabel`, `FieldDescription`, `FieldError`, `FieldGroup`, `FieldLegend`, `FieldSeparator`, `FieldSet`, `FieldContent`, `FieldTitle` | `orientation`: `vertical` · `horizontal` · `responsive`<br>`variant`: `legend` · `label` | **Wrapper recommandé** pour un champ : label, description, erreur, groupes et fieldsets. |
+| `form` | `useFormField`, `Form`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, `FormField` | — | Wrapper react-hook-form historique (le registre base-nova ne le fournit plus : préférer `field`). |
+| `input` | `Input` | — | Champ texte. |
+| `input-group` | `InputGroup`, `InputGroupAddon`, `InputGroupButton`, `InputGroupText`, `InputGroupInput`, `InputGroupTextarea` | `align`: `inline-start` · `inline-end` · `block-start` · `block-end`<br>`size`: `xs` · `sm` · `icon-xs` · `icon-sm` | Champ avec préfixe / suffixe (icône, texte, bouton). |
+| `textarea` | `Textarea` | — | Texte multiligne. |
+| `select` | `Select`, `SelectContent`, `SelectGroup`, `SelectItem`, `SelectLabel`, `SelectScrollDownButton`, `SelectScrollUpButton`, `SelectSeparator`, `SelectTrigger`, `SelectValue` | `size`: `sm` · `default` | Liste déroulante (Base UI). `onValueChange(value, eventDetails)`. |
+| `native-select` | `NativeSelect`, `NativeSelectOptGroup`, `NativeSelectOption` | `size`: `sm` · `default` | Select HTML natif stylé. |
+| `combobox` | `Combobox`, `ComboboxInput`, `ComboboxContent`, `ComboboxList`, `ComboboxItem`, `ComboboxGroup`, `ComboboxLabel`, `ComboboxCollection`, `ComboboxEmpty`, `ComboboxSeparator`, `ComboboxChips`, `ComboboxChip`, `ComboboxChipsInput`, `ComboboxTrigger`, `ComboboxValue`, `useComboboxAnchor` | — | Liste avec recherche, multi-sélection en chips (Base UI). |
+| `checkbox` | `Checkbox` | — | Case à cocher. |
+| `radio-group` | `RadioGroup`, `RadioGroupItem` | — | Choix unique. |
+| `switch` | `Switch` | `size`: `sm` · `default` | Interrupteur on/off. |
+| `slider` | `Slider` | — | Valeur ou plage par glissement. |
+| `input-otp` | `InputOTP`, `InputOTPGroup`, `InputOTPSlot`, `InputOTPSeparator` | — | Code OTP / 2FA. |
+| `calendar` | `Calendar`, `CalendarDayButton` | — | Calendrier (react-day-picker v10), simple ou plage. |
+| `label` | `Label` | — | Étiquette de champ. |
 
-### Overlays & Popups
-| Composant | Import | Usage principal |
-|---|---|---|
-| `dialog` | `Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose` | Modal overlay — confirmations, formulaires |
-| `alert-dialog` | `AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel` | Confirmation d'action destructive |
-| `sheet` | `Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose` | Panneau latéral coulissant |
-| `drawer` | `Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose` | Tiroir bottom/side (Vaul) |
-| `popover` | `Popover, PopoverTrigger, PopoverContent` | Panneau flottant au clic |
-| `hover-card` | `HoverCard, HoverCardTrigger, HoverCardContent` | Carte preview au survol |
-| `tooltip` | `Tooltip, TooltipTrigger, TooltipContent` | Info-bulle au survol (wrapper app avec TooltipProvider) |
-| `dropdown-menu` | `DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem` | Menu contextuel d'actions |
-| `context-menu` | `ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem` | Menu clic-droit |
+### Overlays & popups
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `dialog` | `Dialog`, `DialogClose`, `DialogContent`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogOverlay`, `DialogPortal`, `DialogTitle`, `DialogTrigger` | — | Modale : formulaires secondaires, confirmations simples. |
+| `alert-dialog` | `AlertDialog`, `AlertDialogAction`, `AlertDialogCancel`, `AlertDialogContent`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogHeader`, `AlertDialogMedia`, `AlertDialogOverlay`, `AlertDialogPortal`, `AlertDialogTitle`, `AlertDialogTrigger` | `size`: `default` · `sm` | Confirmation d'action destructive ou irréversible. |
+| `sheet` | `Sheet`, `SheetTrigger`, `SheetClose`, `SheetContent`, `SheetHeader`, `SheetFooter`, `SheetTitle`, `SheetDescription` | `side`: `top` · `right` · `bottom` · `left` | Panneau latéral (détail d'un objet, filtres). |
+| `drawer` | `Drawer`, `DrawerPortal`, `DrawerOverlay`, `DrawerSwipeHandle`, `DrawerTrigger`, `DrawerClose`, `DrawerContent`, `DrawerHeader`, `DrawerFooter`, `DrawerTitle`, `DrawerDescription` | — | Tiroir bas / côté, **désormais sur Base UI** (plus Vaul) : `swipeDirection="down" | "right" | "left" | "up"`. |
+| `popover` | `Popover`, `PopoverContent`, `PopoverDescription`, `PopoverHeader`, `PopoverTitle`, `PopoverTrigger` | — | Panneau flottant au clic. |
+| `hover-card` | `HoverCard`, `HoverCardTrigger`, `HoverCardContent` | — | Aperçu au survol. |
+| `tooltip` | `Tooltip`, `TooltipTrigger`, `TooltipContent`, `TooltipProvider` | — | Info-bulle (le layout racine fournit `TooltipProvider`). |
+| `dropdown-menu` | `DropdownMenu`, `DropdownMenuPortal`, `DropdownMenuTrigger`, `DropdownMenuContent`, `DropdownMenuGroup`, `DropdownMenuLabel`, `DropdownMenuItem`, `DropdownMenuCheckboxItem`, `DropdownMenuRadioGroup`, `DropdownMenuRadioItem`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, `DropdownMenuSub`, `DropdownMenuSubTrigger`, `DropdownMenuSubContent` | `variant`: `default` · `destructive` | Menu d'actions (sous-menus, cases, radios). |
+| `context-menu` | `ContextMenu`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuCheckboxItem`, `ContextMenuRadioItem`, `ContextMenuLabel`, `ContextMenuSeparator`, `ContextMenuShortcut`, `ContextMenuGroup`, `ContextMenuPortal`, `ContextMenuSub`, `ContextMenuSubContent`, `ContextMenuSubTrigger`, `ContextMenuRadioGroup` | `variant`: `default` · `destructive` | Menu clic droit. |
+| `command` | `Command`, `CommandDialog`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandItem`, `CommandShortcut`, `CommandSeparator` | — | Palette de commandes / recherche (cmdk). |
 
-### Feedback & Indicateurs
-| Composant | Import | Usage principal |
-|---|---|---|
-| `alert` | `Alert, AlertTitle, AlertDescription` | Message d'info contextuel inline |
-| `badge` | `Badge` | Label d'état, compteur, catégorie. Variants : `default`, `secondary`, `destructive`, `outline` |
-| `progress` | `Progress` | Barre de progression |
-| `skeleton` | `Skeleton` | Placeholder de chargement |
-| `sonner` | `Toaster` (dans layout) + `toast()` de `sonner` | Notifications toast |
-| `spinner` | `Spinner` | Indicateur de chargement circulaire |
+### Feedback & indicateurs
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `alert` | `Alert`, `AlertTitle`, `AlertDescription`, `AlertAction` | `variant`: `default` · `destructive` | Message contextuel inline. |
+| `badge` | `Badge`, `badgeVariants` | `variant`: `default` · `secondary` · `destructive` · `outline` · `ghost` · `link` | Statut, compteur, catégorie. |
+| `progress` | `Progress`, `ProgressTrack`, `ProgressIndicator`, `ProgressLabel`, `ProgressValue` | — | Barre de progression. |
+| `skeleton` | `Skeleton` | — | Placeholder de chargement. |
+| `spinner` | `Spinner` | — | Indicateur de chargement. |
+| `sonner` | `Toaster` | — | Toasts `sonner` : `<Toaster />` + `toast()` importé de `sonner`. Utilisé par les variantes et blocs shadcnstudio. |
+| `toast` | `Toaster`, `Toast`, `ToastAction`, `ToastClose`, `ToastContent`, `ToastDescription`, `ToastPortal`, `ToastProvider`, `ToastTitle`, `ToastViewport`, `createToastManager`, `toast`, `useToastManager` | — | **Nouveau** — toasts Base UI : `<Toaster>` (wrapper) + `toast.add({ title, description })`, `toast.promise()`. |
+| `kbd` | `Kbd`, `KbdGroup` | — | Raccourci clavier. |
 
-### Data Display
-| Composant | Import | Usage principal |
-|---|---|---|
-| `table` | `Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption` | Tableau de données — toujours utiliser avec TanStack Table pour les cas complexes |
-| `chart` | `ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent` + `recharts` | Graphiques — wrapp recharts avec tokens de couleurs |
-| `avatar` | `Avatar, AvatarImage, AvatarFallback` | Photo de profil avec fallback initiales |
-| `carousel` | `Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext` | Carrousel de contenu |
-| `accordion` | `Accordion, AccordionItem, AccordionTrigger, AccordionContent` | Sections accordéon (base-ui — pas de prop `type="single"`) |
-| `collapsible` | `Collapsible, CollapsibleTrigger, CollapsibleContent` | Section unique expandable |
+### Data display
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `table` | `Table`, `TableHeader`, `TableBody`, `TableFooter`, `TableHead`, `TableRow`, `TableCell`, `TableCaption` | — | Tableau HTML stylé. Pour tri / filtres / pagination : TanStack Table v8 (voir `data-table` shadcnstudio et `src/components/data-table.tsx`). |
+| `chart` | `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, `ChartLegendContent` | `indicator`: `line` · `dot` · `dashed` | Graphiques recharts avec tokens de couleur (`ChartContainer`, `ChartTooltip`, `ChartLegend`). |
+| `avatar` | `Avatar`, `AvatarImage`, `AvatarFallback`, `AvatarGroup`, `AvatarGroupCount`, `AvatarBadge` | `size`: `default` · `sm` · `lg` | Photo avec initiales en fallback, groupes et badge. |
+| `carousel` | `Carousel`, `CarouselContent`, `CarouselItem`, `CarouselPrevious`, `CarouselNext`, `useCarousel` | `orientation`: `horizontal` · `vertical` | Carrousel (Embla). |
+| `accordion` | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent` | — | Sections dépliables (Base UI : `multiple`, valeurs en tableau). **Modif locale** : accepte aussi `type="single" | "multiple"`, `collapsible` et une valeur string, pour les variantes shadcnstudio. |
+| `collapsible` | `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent` | — | Section unique dépliable. |
 
 ### Actions
-| Composant | Import | Usage principal |
-|---|---|---|
-| `button` | `Button` | Variants : `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`. Sizes : `default`, `sm`, `lg`, `icon` |
-| `button-group` | `ButtonGroup` | Groupe de boutons jointifs |
-| `toggle` | `Toggle` | Bouton on/off |
-| `toggle-group` | `ToggleGroup, ToggleGroupItem` | Groupe de toggles (base-ui — value: `readonly string[]`) |
-| `command` | `Command, CommandInput, CommandList, CommandGroup, CommandItem, CommandEmpty, CommandSeparator` | Palette de commandes / recherche |
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `button` | `Button`, `buttonVariants` | `variant`: `default` · `outline` · `secondary` · `ghost` · `destructive` · `link`<br>`size`: `default` · `xs` · `sm` · `lg` · `icon` · `icon-xs` · `icon-sm` · `icon-lg` | Bouton. Avec Base UI, un lien se fait via `render={<a href="…" />}` (pas d'`asChild`). |
+| `button-group` | `ButtonGroup`, `ButtonGroupSeparator`, `ButtonGroupText`, `buttonGroupVariants` | `orientation`: `horizontal` · `vertical` | Boutons jointifs, séparateur et texte. |
+| `toggle` | `Toggle`, `toggleVariants` | `variant`: `default` · `outline`<br>`size`: `default` · `sm` · `lg` | Bouton on/off. |
+| `toggle-group` | `ToggleGroup`, `ToggleGroupItem` | `orientation`: `horizontal` · `vertical` | Groupe de toggles (Base UI : `value: string[]`). |
+
+### IA & conversation (nouveaux)
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `message` | `MessageGroup`, `Message`, `MessageAvatar`, `MessageContent`, `MessageFooter`, `MessageHeader` | `align`: `start` · `end` | Mise en page d'un message : avatar, en-tête, contenu, pied. `align="end"` pour l'utilisateur. |
+| `bubble` | `BubbleGroup`, `Bubble`, `BubbleContent`, `BubbleReactions` | `variant`: `default` · `secondary` · `muted` · `tinted` · `outline` · `ghost` · `destructive`<br>`side`: `top` · `bottom`<br>`align`: `start` · `end` | Bulle de chat : 7 variantes, groupes, réactions. |
+| `message-scroller` | `MessageScrollerProvider`, `MessageScroller`, `MessageScrollerViewport`, `MessageScrollerContent`, `MessageScrollerItem`, `MessageScrollerButton`, `useMessageScroller`, `useMessageScrollerScrollable`, `useMessageScrollerVisibility` | — | Zone de conversation qui suit le dernier message, bouton « revenir en bas ». |
+| `attachment` | `Attachment`, `AttachmentGroup`, `AttachmentMedia`, `AttachmentContent`, `AttachmentTitle`, `AttachmentDescription`, `AttachmentActions`, `AttachmentAction`, `AttachmentTrigger` | `size`: `default` · `sm` · `xs`<br>`orientation`: `horizontal` · `vertical`<br>`variant`: `icon` · `image`<br>`state`: `idle` · `uploading` · `processing` · `error` · `done` | Pièces jointes (fichier, image) : tailles, états d'upload, actions. |
+| `marker` | `Marker`, `MarkerIcon`, `MarkerContent`, `markerVariants` | `variant`: `default` · `separator` · `border` | Ligne de statut inline (« Thinking… », spinner, shimmer). |
+| `trace` | `Trace`, `TraceLine`, `TraceIcon`, `TraceTitle`, `TraceDescription`, `TraceCollapsible`, `TraceCollapsibleTrigger`, `TraceCollapsibleContent` | `status`: `running` · `error` · `pending` | Journal d'activité d'un agent : étapes en cours / erreur / en attente, repliables. |
+| `questionnaire` | `Questionnaire`, `QuestionnaireActions`, `QuestionnaireChoice`, `QuestionnaireChoiceDescription`, `QuestionnaireChoices`, `QuestionnaireDescription`, `QuestionnaireError`, `QuestionnaireInput`, `QuestionnaireItem`, `QuestionnaireNext`, `QuestionnairePrevious`, `QuestionnaireProgress`, `QuestionnaireSkip`, `QuestionnaireSubmit`, `QuestionnaireTitle` | — | Questions pas à pas avec choix, progression, passer / précédent. |
+| `code-block` | `CodeBlock`, `CodeBlockHeader`, `CodeBlockTitle`, `CodeBlockActions`, `CodeBlockCopyButton`, `CodeBlockContent`, `CodeBlockLine`, `CodeBlockFooter` | `variant`: `default` · `added` · `removed` · `highlighted`<br>`size`: `default` · `sm` | Bloc de code surligné (Shiki), copie, numéros de ligne, diff. |
 
 ### Utilitaires
-| Composant | Import | Usage principal |
-|---|---|---|
-| `kbd` | `Kbd` | Affichage de raccourcis clavier |
-| `empty` | `Empty` | État vide générique |
-| `field` | `Field` | Wrapper de champ de formulaire |
-| `item` | `Item` | Élément de liste générique |
-| `input-group` | `InputGroup, InputGroupInput, InputGroupAddon` | Input avec préfixe/suffixe |
-| `native-select` | `NativeSelect` | Select HTML natif |
-| `direction` | `DirectionProvider` | RTL support |
+| Composant | Exports | Variantes / props | Usage |
+|---|---|---|---|
+| `direction` | `DirectionProvider`, `useDirection` | — | `DirectionProvider` pour le RTL. |
 
 ---
 
-## 3. shadcnstudio Pro — Variants par catégorie
+## 3. Composants étendus — ReUI et Dice UI (11)
+
+Ce sont des composants qui manquent à shadcn et qui reviennent souvent dans les SaaS BtoB et les back-offices. Ils sont installés dans leur variante **base-nova** (Base UI), réutilisent les composants `ui/` du repo et les mêmes tokens, et restent en gris. Démo et code d'exemple de chacun : `/gallery/extended/[slug]`, source dans `src/components/examples/`.
+
+| Composant | Import | Exports principaux | Variantes / props | Démo (source) | Usage |
+|---|---|---|---|---|---|
+| Kanban | `@/components/reui/kanban` | `Kanban`, `KanbanBoard`, `KanbanColumn`, `KanbanColumnHandle`, `KanbanColumnContent`, `KanbanItem`, `KanbanItemHandle`, `KanbanOverlay` | — | `examples/c-kanban-1.tsx` | Tableau de tâches / pipeline en colonnes, glisser-déposer (dnd-kit) |
+| Sortable | `@/components/reui/sortable` | `Sortable`, `SortableItem`, `SortableItemHandle`, `SortableOverlay` | `strategy`: `vertical` · `horizontal` · `grid` | `examples/c-sortable-1.tsx` | Liste réordonnable (priorités, étapes, menus) |
+| Tree | `@/components/reui/tree` | `Tree`, `TreeItem`, `TreeItemLabel`, `TreeDragLine` | — | `examples/c-tree-1.tsx` | Arborescence : dossiers, catégories, organigramme (headless-tree) |
+| Filters | `@/components/reui/filters/filters` | `Filters`, `FiltersRow` (+ types dans `filters-types`, helpers dans `filters-query`) | — | `examples/c-filters-8.tsx`, `examples/c-filters-2.tsx` | Barre de filtres façon Linear : champ → opérateur → valeur, chips, groupes |
+| Stepper | `@/components/reui/stepper` | `Stepper`, `StepperItem`, `StepperTrigger`, `StepperIndicator`, `StepperSeparator`, `StepperTitle`, `StepperDescription`, `StepperNav`, `StepperPanel`, `StepperContent` | `orientation`: `horizontal` · `vertical` | `examples/c-stepper-5.tsx`, `examples/c-stepper-13.tsx` | Wizard, onboarding, suivi de process |
+| Timeline | `@/components/reui/timeline` | `Timeline`, `TimelineItem`, `TimelineHeader`, `TimelineTitle`, `TimelineDate`, `TimelineContent`, `TimelineIndicator`, `TimelineSeparator` | `orientation`: `vertical` · `horizontal` | `examples/c-timeline-1.tsx` | Historique, journal d'activité, suivi de commande |
+| Number Field | `@/components/reui/number-field` | `NumberField`, `NumberFieldGroup`, `NumberFieldInput`, `NumberFieldIncrement`, `NumberFieldDecrement`, `NumberFieldScrubArea` | `size`: `sm` · `default` · `lg` | `examples/c-number-field-1.tsx` | Quantité, montant, seuil (Base UI NumberField) |
+| Time Picker | `@/components/reui/time-picker` | `TimePicker`, `TimePickerTrigger`, `TimePickerValue`, `TimePickerContent`, `TimePickerColumns`, `TimePickerInput`, `TimePickerFooter`, `TimePickerNow` | — | `examples/c-time-picker-2.tsx` | Heure de rendez-vous, d'envoi, de créneau |
+| Tags Input | `@/components/diceui/tags-input` | `TagsInput`, `TagsInputLabel`, `TagsInputList`, `TagsInputItem`, `TagsInputInput`, `TagsInputClear` | — | `examples/tags-input-demo.tsx` | Saisie de tags, destinataires, mots-clés |
+| Editable | `@/components/diceui/editable` | `Editable`, `EditableLabel`, `EditableArea`, `EditablePreview`, `EditableInput`, `EditableTrigger`, `EditableToolbar`, `EditableSubmit`, `EditableCancel` | `triggerMode`: `click` · `dblclick` · `focus` | `examples/editable-demo.tsx` | Édition en place d'une valeur (titre, nom, champ de fiche) |
+| Action Bar | `@/components/diceui/action-bar` | `ActionBar`, `ActionBarSelection`, `ActionBarGroup`, `ActionBarItem`, `ActionBarSeparator`, `ActionBarClose` | `side`: `top` · `bottom` · `align`: `start` · `center` · `end` | `examples/action-bar-demo.tsx` | Barre flottante d'actions groupées sur une sélection (tableaux, listes) |
+
+**Ajouter un composant ReUI ou Dice UI** : `npx shadcn@latest add @reui/<name>` ou `@diceui/<name>`. Ensuite :
+- répondre **non** aux propositions d'écraser des fichiers `ui/` existants ;
+- remplacer `import { cn } from "cn"` par `@/lib/utils` ;
+- pour Dice UI, déplacer le fichier de `ui/` vers `diceui/` ;
+- vérifier qu'aucune couleur codée en dur et aucun token coloré n'a été ajouté (`git diff src/app/globals.css`).
+
+**Adaptations locales** (à refaire après une mise à jour de ces fichiers) :
+- `reui/tree.tsx` : surlignage de recherche `bg-blue-50` → `bg-primary/10`.
+- `diceui/action-bar.tsx` : types explicites sur les paramètres `event` des handlers (TypeScript ne les inférait pas avec le `Button` base-nova).
+- `diceui/editable.tsx` : import de `@/components/diceui/visually-hidden-input`.
+- Démos `c-kanban-1` et `c-sortable-1` : badges shadcn (`ui/badge`) à la place de `reui/badge`, sans couleurs ; avatars sans photos externes.
+
+---
+
+## 4. Primitives shadcnstudio dans `ui/` (28)
+
+Installées par les variantes et blocs shadcnstudio, à côté des composants officiels. Import : `@/components/ui/[name]`.
+
+| Composant | Exports |
+|---|---|
+| Boutons animés : `bounce-button`, `craft-button`, `flow-button`, `glass-button`, `grow-button`, `magnetic-button`, `matter-button`, `neural-button`, `orion-button`, `ripple-button`, `shimmer-button`, `swipe-button` | `BounceButton`, `CraftButton` (+ `CraftButtonLabel`, `CraftButtonIcon`), `PrimaryFlowButton` / `SecondaryFlowButton`, `GlassButton`, `PrimaryGrowButton` / `SecondaryGrowButton`, `MagneticButton`, `MatterButton`, `NeuralButton`, `PrimaryOrionButton` / `SecondaryOrionButton`, `RippleButton`, `ShimmerButton`, `PrimarySwipeButton` / `SecondarySwipeButton` |
+| `motion-checkbox`, `motion-radio-group`, `motion-switch` (primitives Radix, composition `asChild`), `motion-tabs`, `motion-tooltip`, `motion-highlight`, `motion-preset` | `Checkbox`, `RadioGroup` / `RadioGroupItem`, `Switch`, `Tabs` / `TabsList` / `TabsTrigger` / `TabsContents` / `TabsContent`, `AnimatedTooltip`, `MotionHighlight` / `MotionHighlightItem`, `MotionPreset` |
+| `global-tooltip` | `TooltipProvider`, `Tooltip`, `TooltipTrigger`, `TooltipContent`, `useGlobalTooltip`, `useTooltip` |
+| `multi-select` | default export (+ `useDebounce`) |
+| `select-native` | `SelectNative` |
+| `rating` | `Rating`, `ratingVariants` — `variant`: `default` · `destructive` · `outline` · `secondary` · `yellow` · `dark` |
+| `marquee`, `number-ticker`, `orbiting`, `border-beam`, `copy-code` | `Marquee`, `NumberTicker`, `Orbiting`, `BorderBeam`, `CopyCode` |
+
+> Pour des wireframes, préférer les composants officiels : ces primitives sont surtout décoratives (animations, effets).
+
+---
+
+## 5. shadcnstudio Pro — Variantes par catégorie (608)
 
 Import : `import Component from "@/components/shadcn-studio/[category]/[category]-[01]"`
 Galerie visuelle : `/gallery/studio/[category]`
 
-> Tous ces composants sont des **default exports**. Ils utilisent les composants shadcn officiels comme base.
+> Tous ces composants sont des **default exports**. Ils utilisent les composants shadcn officiels comme base. Leur code porte `// @ts-nocheck` (voir § 12).
 
 ### Accordion (16 variants) — `/gallery/studio/accordion`
 - `accordion-01` : Basic FAQ collapsible
@@ -241,7 +333,7 @@ Couvre : simple, avec arrow, multiline, avec raccourci clavier, rich tooltip, av
 
 ---
 
-## 4. shadcnstudio Blocks — Pages complètes (85)
+## 6. shadcnstudio Pro — Blocs pages complètes (87)
 
 Import : `import BlockName from "@/components/shadcn-studio/blocks/[block-name]/[block-name]"`
 Chaque block a sa propre page Next.js : `/[block-name]`
@@ -254,6 +346,7 @@ Chaque block a sa propre page Next.js : `/[block-name]`
 | `hero-section-41` | `/hero-section-41` | Hero avec animation |
 | `navbar-component-01` | `/navbar-component-01` | Navbar responsive avec mega-menu |
 | `features-section-01` | `/features-section-01` | Features 3 colonnes avec icônes |
+| `bento-grid-15` | `/bento-grid-15` | Grille bento animée (features, chiffres clés) |
 | `pricing-component-01` | `/pricing-component-01` | Pricing 3 plans |
 | `faq-component-01` | `/faq-component-01` | FAQ accordéon |
 | `faq-component-17` | `/faq-component-17` | FAQ variante |
@@ -360,19 +453,29 @@ Composants transverses pour parcours d'achat, formulaires, et pages systèmes.
 
 ---
 
-## 5. Composition patterns — Reference pages
+---
 
+## 7. Pages de référence
+
+### Pages de composition
 | Page | URL | Composants démontrés |
 |---|---|---|
 | Dashboard SaaS | `/examples/dashboard` | `SidebarProvider`, `AppSidebar`, `Breadcrumb`, `Avatar`, `DropdownMenu`, `Card` (stat), `ChartAreaInteractive`, `Table` |
 | Landing page | `/examples/landing` | Navbar, Hero, `Card` (features/pricing), `Accordion` (FAQ), Footer |
 | Settings | `/examples/settings` | `Tabs`, `Input`, `Textarea`, `Select`, `Switch`, `RadioGroup`, `Button`, `Card`, `Badge` |
-| Sign In | `/examples/signin` | `Card`, `Input`, `Button`, `Separator`, OAuth buttons |
-| CRM List | `/examples/crm-list` | `Table`, `Checkbox`, `Sheet` (détail), `Select` (filter), `ToggleGroup`, `Badge`, `DropdownMenu` |
+| Sign In | `/examples/signin` | `Card`, `Input`, `Button`, `Separator`, boutons OAuth |
+| CRM List | `/examples/crm-list` | `Table`, `Checkbox`, `Sheet` (détail), `Select` (filtre), `ToggleGroup`, `Badge`, `DropdownMenu` |
+
+### Blocs shadcn officiels
+| Bloc | URL | Fichiers |
+|---|---|---|
+| `dashboard-01` | `/dashboard` | `app-sidebar`, `nav-main`, `nav-documents`, `nav-secondary`, `nav-user`, `site-header`, `section-cards`, `chart-area-interactive`, `data-table` (TanStack Table v8, tri, colonnes, drag & drop, drawer de détail) dans `src/components/` ; données : `src/app/dashboard/data.json` |
+| `login-01` | `/login` | `src/components/login-form.tsx` |
+| `signup-01` | `/signup` | `src/components/signup-form.tsx` |
 
 ---
 
-## 6. Patterns d'import recommandés
+## 8. Patterns d'import recommandés
 
 ### Server Component (RSC)
 ```tsx
@@ -389,53 +492,102 @@ import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 ```
 
-### shadcnstudio variant
+### Composition Base UI (`render` au lieu d'`asChild`)
+```tsx
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline" />}>Modifier</DialogTrigger>
+  <DialogContent>
+    <DialogTitle>Modifier le client</DialogTitle>
+  </DialogContent>
+</Dialog>
+
+// Un bouton qui est un lien
+<Button render={<a href="/clients" />} nativeButton={false}>Clients</Button>
+```
+
+### Variante shadcnstudio
 ```tsx
 // default export — pas de destructuring
 import Accordion05 from "@/components/shadcn-studio/accordion/accordion-05"
 import Button22 from "@/components/shadcn-studio/button/button-22"
 ```
 
+### Composant ReUI / Dice UI
+```tsx
+import { Timeline, TimelineItem, TimelineHeader, TimelineTitle, TimelineDate, TimelineContent, TimelineIndicator, TimelineSeparator } from "@/components/reui/timeline"
+import { TagsInput, TagsInputList, TagsInputItem, TagsInputInput } from "@/components/diceui/tags-input"
+// Exemples complets : src/components/examples/
+```
+
 ### Chart avec recharts
 ```tsx
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
 import { AreaChart, Area, XAxis, CartesianGrid } from "recharts"
-// ChartConfig type pour les couleurs
 ```
 
 ### Sidebar layout
 ```tsx
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar" // Pro Block dashboard-01
-// Wrap page avec <SidebarProvider><AppSidebar /><SidebarInset>...</SidebarInset></SidebarProvider>
+import { AppSidebar } from "@/components/app-sidebar" // bloc dashboard-01
+// <SidebarProvider><AppSidebar variant="inset" /><SidebarInset>…</SidebarInset></SidebarProvider>
+```
+
+### Toasts
+```tsx
+// sonner (variantes et blocs shadcnstudio)
+import { Toaster } from "@/components/ui/sonner"   // dans le layout
+import { toast } from "sonner"
+toast.success("Client enregistré")
+
+// ou Base UI (nouveau composant officiel)
+import { Toaster, toast } from "@/components/ui/toast" // <Toaster>{children}</Toaster> dans le layout
+toast.add({ title: "Client enregistré", description: "Les modifications sont visibles par l'équipe." })
 ```
 
 ---
 
-## 7. Règles de sélection de composant
+## 9. Règles de sélection de composant
 
 | Besoin | Composant recommandé |
 |---|---|
 | Confirmation irréversible | `AlertDialog` |
 | Formulaire secondaire | `Dialog` ou `Sheet` |
-| Détail d'un item | `Sheet` (droite) |
-| Navigation principale | `Sidebar` + `NavigationMenu` |
-| Filtres avancés | `Sheet` ou `Popover` |
+| Détail d'un item | `Sheet` (droite) ; sur mobile `Drawer` (`swipeDirection="down"`) |
+| Navigation principale | `Sidebar` (app) + `NavigationMenu` (site) |
+| Champ de formulaire | `Field` + `FieldLabel` + contrôle + `FieldError` |
+| Filtres simples | `Select`, `ToggleGroup`, `Popover` |
+| Filtres avancés (champ / opérateur / valeur) | `Filters` (ReUI) |
 | Sélection simple | `Select` |
-| Sélection avec recherche | `Combobox` (shadcnstudio variants plus simples) |
-| Sélection multiple | `combobox` variant multi ou `Checkbox` group |
+| Sélection avec recherche | `Combobox` (ou variantes shadcnstudio) |
+| Sélection multiple | `Combobox` en chips, `multi-select` shadcnstudio, groupe de `Checkbox` |
+| Saisie de tags / destinataires | `TagsInput` (Dice UI) |
+| Nombre, quantité, montant | `NumberField` (ReUI) |
 | Date unique | `date-picker` shadcnstudio |
-| Plage de dates | `calendar` avec range |
+| Plage de dates | `Calendar` avec `mode="range"` |
+| Heure | `TimePicker` (ReUI) |
 | Actions sur une ligne | `DropdownMenu` avec `MoreHorizontal` |
+| Actions groupées sur une sélection | `ActionBar` (Dice UI) |
+| Édition en place | `Editable` (Dice UI) |
 | État d'un objet | `Badge` |
-| Feedback utilisateur | `sonner` (toast) |
+| Feedback utilisateur | toast (`sonner` ou `ui/toast`) |
 | État de chargement | `Skeleton` ou `Spinner` |
+| État vide | `Empty` ou `empty-state-01` |
 | Données tabulaires simples | `Table` |
-| Données tabulaires complexes | `data-table` shadcnstudio (TanStack Table intégré) |
-| KPIs/stats | `Card` + `CardHeader` + `Badge` trend |
+| Données tabulaires complexes | `data-table` shadcnstudio ou `src/components/data-table.tsx` (TanStack Table v8) |
+| Tableau de tâches / pipeline | `Kanban` (ReUI) |
+| Liste réordonnable | `Sortable` (ReUI) |
+| Arborescence (dossiers, catégories) | `Tree` (ReUI) |
+| Wizard / process en étapes | `Stepper` (ReUI) ou `multi-step-form-01` |
+| Historique / activité | `Timeline` (ReUI) ou `timeline-component-05` |
+| KPIs / stats | `Card` + `CardHeader` + `Badge` (tendance) |
 | Graphique | `ChartContainer` + recharts |
-| Onboarding | `onboarding-feed-01` (shadcnstudio block) |
-| Tunnel / wizard multi-étapes | `multi-step-form-01` |
+| Interface de chat / assistant IA | `Message` + `Bubble` + `MessageScroller`, `Attachment`, `Marker` (« Thinking… »), `Trace` (étapes d'un agent) |
+| Questionnaire guidé | `Questionnaire` |
+| Code / JSON à afficher | `CodeBlock` |
+| Onboarding | `onboarding-feed-01` |
 | Page 404 / erreur | `error-page-01` ou `error-page-02` |
 | Bandeau cookies (RGPD) | `cookies-consent-01` ou `cookies-consent-02` |
 | Page de téléchargement | `download-01` |
@@ -451,43 +603,60 @@ import { AppSidebar } from "@/components/app-sidebar" // Pro Block dashboard-01
 
 ---
 
-## 8. Variables de thème (CSS)
+## 10. Variables de thème (CSS)
+
+Définies dans `src/app/globals.css` (`:root` et `.dark`), toutes en niveaux de gris sauf `--destructive`.
 
 ```css
 /* Couleurs principales */
---background    /* Fond de page */
---foreground    /* Texte principal */
---primary       /* Actions principales */
---secondary     /* Actions secondaires */
---muted         /* Fond doux, texte secondaire */
---accent        /* Hover states */
---destructive   /* Actions dangereuses, erreurs */
---border        /* Bordures */
---input         /* Fond d'input */
---ring          /* Focus ring */
+--background --foreground
+--primary --primary-foreground
+--secondary --secondary-foreground
+--muted --muted-foreground
+--accent --accent-foreground
+--destructive
+--border --input --ring
 
-/* Couleurs de composants */
---card          /* Fond de card */
---popover       /* Fond de popover/dialog */
---sidebar       /* Fond de sidebar */
+/* Surfaces */
+--card --card-foreground
+--popover --popover-foreground
+--sidebar --sidebar-foreground --sidebar-primary --sidebar-primary-foreground
+--sidebar-accent --sidebar-accent-foreground --sidebar-border --sidebar-ring
 
-/* Charts */
+/* Charts (gris) */
 --chart-1 .. --chart-5
 
-/* Radius */
---radius        /* Base: 0.625rem */
---radius-sm --radius-md --radius-lg --radius-xl
+/* Radius — base 0.625rem */
+--radius --radius-sm --radius-md --radius-lg --radius-xl --radius-2xl --radius-3xl --radius-4xl
+
+/* Typo */
+--font-sans --font-mono --font-heading
 ```
 
 ---
 
-## 9. Quickstart pour créer un écran
+## 11. Quickstart pour créer un écran
 
-1. **Structure** : Choisir un layout (sidebar, centré, full-width)
-2. **Navigation** : `Sidebar` pour app, `NavigationMenu` pour landing, `Breadcrumb` pour pages internes
-3. **Contenu** : Composer avec `Card`, `Table`, `Chart` selon les données
-4. **Formulaires** : `Input` + `Label` + `Select` + `Button` en `Card`
-5. **Feedback** : `Badge` pour statuts, `Alert` pour messages, `sonner` pour toasts
-6. **Actions** : `Button` primary pour CTA, `DropdownMenu` pour actions contextuelles
-7. **Overlays** : `Dialog` pour modals, `Sheet` pour panneaux de détail
+1. **Structure** : choisir un layout (sidebar, centré, pleine largeur)
+2. **Navigation** : `Sidebar` pour une app, `NavigationMenu` pour un site, `Breadcrumb` pour les pages internes
+3. **Contenu** : composer avec `Card`, `Table`, `Chart`, `Kanban`, `Timeline`, `Tree` selon les données
+4. **Formulaires** : `Field` + `Input` / `Select` / `NumberField` / `TagsInput` + `Button`, dans une `Card`
+5. **Filtres** : `Filters` (ReUI) au-dessus d'une table ou d'une liste
+6. **Feedback** : `Badge` pour les statuts, `Alert` pour les messages, toast pour les confirmations
+7. **Actions** : `Button` (primary) pour le CTA, `DropdownMenu` pour les actions de ligne, `ActionBar` pour les actions groupées
+8. **Overlays** : `Dialog` pour les modales, `Sheet` pour les panneaux de détail
 
+---
+
+## 12. Limites connues
+
+- **Code shadcnstudio non vérifié par TypeScript** : 722 fichiers (variantes, blocs et 6 primitives `motion-*`) commencent par `// @ts-nocheck`. Sans cette ligne, 51 erreurs de type apparaissent dans 45 fichiers. Ce sont surtout des écarts d'API Radix → Base UI : signatures de `onValueChange`, `checked="indeterminate"`, `openDelay` sur `Tooltip`, `required_error` de zod 3. Elles ne bloquent pas l'affichage, mais certaines changent un comportement. Exemple : la case « tout sélectionner » des data-tables ne passe pas en état indéterminé.
+- **Lint** : les règles qui échouent dans le code copié des registres (`src/components/**`, `src/hooks/**`) sont des avertissements, pas des erreurs (voir `eslint.config.mjs`). Le code de l'app (`src/app`, `src/lib`) reste en erreur.
+- **Locale fixée à `en-US`** : `ui/progress`, `ui/slider` et `reui/number-field` passent `locale="en-US"` à Base UI, et les variantes et blocs shadcnstudio appellent `toLocaleString('en-US')` / `toLocaleDateString('en-US')`. Sans locale explicite, le serveur (Node, en-US) et un navigateur français formatent différemment (« 75% » / « 75 % », « 1,234 » / « 1 234 »), ce qui casse l'hydratation. Pour un projet en français, passer `locale="fr-FR"` partout : il suffit que la valeur soit la même côté serveur et côté client.
+- **Modifications locales des composants officiels** : `accordion` (compatibilité Radix), `progress` et `slider` (locale), `chart-area-interactive` (type du `labelFormatter` avec recharts 3.10) et `data-table` (drawer Base UI, TanStack Table v8 conservé, alors que le bloc officiel est passé en v9). À vérifier avant toute réinstallation avec `--overwrite`.
+- **Corrections dans le code shadcnstudio** (bugs trouvés à l'audit navigateur, à refaire si ces fichiers sont réinstallés) :
+  - `motion-checkbox`, `motion-switch`, `motion-radio-group` reposent sur Radix (`radix-ui`) : ils composent avec `asChild`, pas avec `render`. Avec `render`, l'élément animé et ses styles étaient perdus (variantes checkbox-17/18, switch-19/20, radio-group-14).
+  - Déclencheurs rendus via `render={<Button … />}` au lieu d'envelopper un `<Button>` dans le déclencheur : `datatable-transaction` (menu de ligne), `user-schedule-01` (« Create event »), `form-09` (date). Sinon : bouton dans un bouton, et erreur d'hydratation.
+  - `menu-navigation` (hero-section-35/41) : prop Radix `viewport={false}` retirée.
+  - `checkout-page-01`, `product-overview-02` : `aria-label` sur les champs de quantité react-aria.
+- **`cn`** : le paquet `cn` proposé par la CLI shadcn 4.22 n'est pas adopté. Sur les combinaisons de classes du repo, il donne un résultat différent de tailwind-merge dans environ 0,3 % des cas (dégradés, ombres des variantes shadcnstudio).
