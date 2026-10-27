@@ -56,7 +56,14 @@ copy(path.join(here, "out/bundle.css"), path.join(project, "components/bundle.cs
 
 // 4. What changed since the last publish
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]))
-const files = Object.fromEntries(walk(project).map((p) => [path.relative(dist, p), crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex")]).sort(([a], [b]) => a.localeCompare(b)))
+// tokens.json carries the commit and the date it was built from: a new commit
+// alone is not a change to publish, so they are left out of its hash.
+const hash = (p) => {
+  let data = fs.readFileSync(p)
+  if (p.endsWith("project/tokens.json")) { const t = JSON.parse(data); delete t.meta.ref; delete t.meta.synced; data = JSON.stringify(t) }
+  return crypto.createHash("sha256").update(data).digest("hex")
+}
+const files = Object.fromEntries(walk(project).map((p) => [path.relative(dist, p), hash(p)]).sort(([a], [b]) => a.localeCompare(b)))
 const manifestFile = path.join(here, "published-manifest.json")
 const published = fs.existsSync(manifestFile) ? JSON.parse(fs.readFileSync(manifestFile, "utf8")) : { files: {} }
 const changed = Object.keys(files).filter((p) => published.files[p] && published.files[p] !== files[p])

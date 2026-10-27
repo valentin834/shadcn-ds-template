@@ -1,7 +1,7 @@
 {
  "artifact": "https://claude.ai/artifact/Bb9RN7fVcuHY63aQwaC3uD",
- "ref": "maj-composants-2026-10@b7228b6",
- "version": "1793116995-179f",
+ "ref": "maj-composants-2026-10@f4a5b38",
+ "version": "1793121319-be55",
  "publishedAt": "2026-10-27",
  "files": {
   "project/components/Accordion/preview.html": "d21cd38ffa826d1b9c506e5afc5ee278ade4fc6a4878f0e4380d579e66fe03f4",
@@ -204,7 +204,7 @@
   "project/components/Breadcrumb/README.md": "f592e40606c33ddd39d001923e1766b243c1b99b2c266721a82a7f672d1bccd5",
   "project/components/Bubble/preview.html": "5aaf8477a87210d3dbcb04d68c99cf33d4f71daa80d72efb04eb647ea87af68b",
   "project/components/Bubble/README.md": "75e574244bbd4329d997b158bbc54f9c0e3febfacd18df3ab7600e81e6a79e27",
-  "project/components/bundle.css": "2ecdfff11df0670460415539cec19f4756471963859806705dadf4fe8c2adea1",
+  "project/components/bundle.css": "faa6d5c48a3a56ae32331f06381d9f27acbc37e9f38f7da9e73428231281f9d0",
   "project/components/bundle.js": "69d0c30cbda87dc5e23076eca95e050a41da9148ad5cd397f672f49e24659228",
   "project/components/Button/preview.html": "39298f7ddcb028f33e54233280fc362340937989ad3db2c9a52ca38db9afcae1",
   "project/components/Button/README.md": "3069245b7bb3b7aa89cece68154aa8510531d1f3227e22e3a8cdda4d7ef09149",
@@ -334,7 +334,7 @@
   "project/components/Questionnaire/README.md": "f6ba979ca33f3f164b4a08eeb8620815455eefa43845fb4342a4666818665ab9",
   "project/components/RadioGroup/preview.html": "da8ab1edef749eeee89568aa8c3a3d82e1f291882dccf77546f2b63ba8f0f1c5",
   "project/components/RadioGroup/README.md": "2f4ec2484755e228cbc958103a0d2eeb80d7c55c094e1b2d6990b38b43727333",
-  "project/components/Rating/preview.html": "04efce52b8c1d6c9c6b6eafb83b898d8a67ccc7004f153a0f95224d78454ede4",
+  "project/components/Rating/preview.html": "e1f0017ef36aa3382c8650cdf6f8616ba1e52e1725e99f52b9d5a6acaffdda39",
   "project/components/Rating/README.md": "9a017d23ec93c31ac8e6ce66138247d7f45da89484619b6f5d6fa2d566fa587d",
   "project/components/ResizablePanelGroup/preview.html": "2357da379a02df839d4e5bd643cdee6013901cf2d352d7d8d40e09fc6cf25323",
   "project/components/ResizablePanelGroup/README.md": "b4d6e3b27e9e44779c861913cf1da076ec978cb37dbf78ca977f731569e4edd1",
@@ -396,6 +396,6 @@
   "project/components/Tree/README.md": "24cedeaf23570c46e1e777947a774f2c1b856f1a08301e6c49a56f455556ae73",
   "project/README.md": "1a3c83bb901d8507b06b45efe8b762cb6a1cc4457e78d3c78769c704bd38af0f",
   "project/tokens.css": "625508d92507b8da0ff5e1e8374eb8be07bcfb8736bf8de99ca661cc71e78257",
-  "project/tokens.json": "6f33f4f0247455fb6121642ff55c42ac7ea6fa2c7a3321f671c7df7cd5266807"
+  "project/tokens.json": "e70a34e9f3fa8016f3b38188dc87b6e32a2156a03d0f4577bed4b9cb84f209b5"
  }
 }
