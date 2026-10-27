@@ -1,26 +1,22 @@
-// @ts-nocheck
 'use client'
 
-import { useState, type ReactNode } from 'react'
-
-import { CheckIcon } from 'lucide-react'
-
+import { useState, type ReactElement } from 'react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
 
 import { cn } from '@/lib/utils'
+import { CheckIcon } from 'lucide-react'
 
 type Props = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   className?: string
 }
@@ -33,26 +29,26 @@ const ConfirmationDialog = ({ defaultOpen = false, trigger, className }: Props) 
       <DialogTrigger render={trigger} onClick={() => setOpen(true)} />
       <DialogContent className={cn('sm:max-w-145 [&>[data-slot=dialog-close]>svg]:size-5', className)}>
         <DialogHeader className='items-center gap-4'>
-          <Avatar className='size-15 border bg-transparent p-2'>
+          <Avatar className='size-15 border bg-transparent p-2 after:hidden'>
             <AvatarFallback>
-              <div className='bg-muted flex items-center justify-center'>
+              <div className='bg-muted text-foreground flex items-center justify-center'>
                 <CheckIcon className='size-7' />
               </div>
             </AvatarFallback>
           </Avatar>
           <div className='space-y-3.5 text-center'>
-            <DialogTitle className='leading-7'>Congratulations!</DialogTitle>
+            <DialogTitle className='text-lg leading-7 font-semibold'>Congratulations!</DialogTitle>
             <DialogDescription className='max-w-sm'>
               You have successfully subscribed! 🎉 You will never miss our updates, latest news, and exclusive offers.
             </DialogDescription>
           </div>
         </DialogHeader>
 
-        <p className='text-center font-medium'>Thank you for joining our community!</p>
+        <p className='text-center text-base font-medium'>Thank you for joining our community!</p>
 
-        <DialogFooter className='flex-row !justify-center'>
+        <div className='flex flex-row justify-center gap-4'>
           <Button size='lg'>Subscribe</Button>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   )

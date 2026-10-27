@@ -1,11 +1,7 @@
-// @ts-nocheck
 'use client'
 
-import { useState, type ReactNode } from 'react'
-
-import { Trash2Icon } from 'lucide-react'
-
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { useState, type ReactElement } from 'react'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -18,6 +14,8 @@ import {
 } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Input } from '@/components/ui/input'
+import { Trash2Icon } from 'lucide-react'
 
 // Constants
 const FREE_DELIVERY_THRESHOLD = 50
@@ -25,7 +23,7 @@ const DELIVERY_FEE = 60
 const DEFAULT_DISCOUNT_PERCENTAGE = 5
 
 type ShoppingCartProps = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   discountPercentage?: number
   onSizeChange?: (itemId: number, newSize: string) => void
@@ -41,6 +39,13 @@ type ShoppingCartProps = {
     label: string
   }[]
 }
+
+const quantityItems = [
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' }
+]
 
 const ShoppingCart = ({
   defaultOpen = false,
@@ -100,10 +105,10 @@ const ShoppingCart = ({
       <SheetTrigger render={trigger} />
       <SheetContent
         side='left'
-        className='w-full gap-6 p-6 sm:max-w-131 [&>button]:top-7 [&>button]:right-6 [&>button>svg]:size-5'
+        className='gap-6 overflow-y-auto p-6 data-[side=left]:w-full data-[side=left]:sm:max-w-131 [&>button]:top-6 [&>button]:right-6 [&>button>svg]:size-6!'
       >
         <SheetHeader className='p-0'>
-          <SheetTitle className='text-2xl'>Cart</SheetTitle>
+          <SheetTitle className='text-2xl font-semibold'>Cart</SheetTitle>
           <SheetDescription hidden />
         </SheetHeader>
         <div className='flex flex-col justify-between'>
@@ -114,44 +119,55 @@ const ShoppingCart = ({
             </div>
           ) : (
             activeCartItems.map(item => (
-              <div key={item.id} className='flex border-b pt-4 pb-7 max-sm:flex-col max-sm:gap-y-2 sm:items-center'>
+              <div
+                key={item.id}
+                className='flex pt-7 pb-7 not-last:border-b first:pt-4 last:pb-4 max-sm:flex-col max-sm:gap-y-2 sm:items-center'
+              >
                 <div className='flex grow items-center gap-4'>
                   <div className='size-18.5 overflow-hidden rounded-lg border'>
                     <img src={item.image} alt={item.name} />
                   </div>
-                  <div className='flex flex-col gap-1.5'>
-                    <h4 className='font-medium'>{item.name}</h4>
+                  <div className='flex flex-col gap-2'>
+                    <h4 className='text-base font-medium'>{item.name}</h4>
                     <div className='flex items-center gap-2'>
                       {item.size === 'Free Style' ? (
-                        <span className='text-accent-foreground border-input dark:bg-input/30 w-29 rounded-md border bg-transparent px-2.5 py-2.25 text-xs'>
-                          {item.size}
-                        </span>
+                        <Input className='input-sm w-29' readOnly value={item.size} />
                       ) : (
-                        <Select defaultValue={item.size} onValueChange={value => handleSizeChange(item.id, value)}>
-                          <SelectTrigger className='w-29 shadow-none'>
-                            <SelectValue placeholder='Size' />
+                        <Select
+                          items={availableSizes}
+                          defaultValue={item.size}
+                          onValueChange={(value: string | null) => value && handleSizeChange(item.id, value)}
+                        >
+                          <SelectTrigger className='input-sm w-29 shadow-none'>
+                            <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {availableSizes.map((sizeItem, index: number) => (
-                              <SelectItem key={`${sizeItem.value}-${index}`} value={sizeItem.value}>
-                                {sizeItem.label}
-                              </SelectItem>
-                            ))}
+                            <SelectGroup>
+                              {availableSizes.map((sizeItem, index: number) => (
+                                <SelectItem key={`${sizeItem.value}-${index}`} value={sizeItem.value}>
+                                  {sizeItem.label}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
                           </SelectContent>
                         </Select>
                       )}
                       <Select
+                        items={quantityItems}
                         value={quantities[item.id]?.toString() || '1'}
-                        onValueChange={value => handleQuantityChange(item.id, value)}
+                        onValueChange={(value: string | null) => value && handleQuantityChange(item.id, value)}
                       >
-                        <SelectTrigger className='w-29 shadow-none'>
-                          <SelectValue placeholder='Quantity' />
+                        <SelectTrigger className='input-sm w-29 shadow-none'>
+                          <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value='1'>1</SelectItem>
-                          <SelectItem value='2'>2</SelectItem>
-                          <SelectItem value='3'>3</SelectItem>
-                          <SelectItem value='4'>4</SelectItem>
+                          <SelectGroup>
+                            {quantityItems.map(q => (
+                              <SelectItem key={q.value} value={q.value}>
+                                {q.label}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
                         </SelectContent>
                       </Select>
                     </div>
@@ -163,7 +179,10 @@ const ShoppingCart = ({
                     open={openPopovers[item.id] || false}
                     onOpenChange={open => setOpenPopovers(prev => ({ ...prev, [item.id]: open }))}
                   >
-                    <PopoverTrigger render={<Button variant='ghost' size='icon' className='cursor-pointer' />}><Trash2Icon className='size-6' /><span className='sr-only'>Delete Item</span></PopoverTrigger>
+                    <PopoverTrigger render={<Button variant='ghost' size='icon' className='cursor-pointer' />}>
+                      <Trash2Icon className='size-6' />
+                      <span className='sr-only'>Delete Item</span>
+                    </PopoverTrigger>
                     <PopoverContent className='w-80'>
                       <div className='flex flex-col items-center gap-4'>
                         <div className='flex aspect-square size-12 items-center justify-center rounded-full bg-red-500/10'>
@@ -183,6 +202,7 @@ const ShoppingCart = ({
                           <Button
                             variant='destructive'
                             size='sm'
+                            className='bg-destructive! dark:bg-destructive! text-white'
                             onClick={() => {
                               handleDeleteItem(item.id)
                               setOpenPopovers(prev => ({ ...prev, [item.id]: false }))
@@ -199,8 +219,8 @@ const ShoppingCart = ({
             ))
           )}
         </div>
-        <SheetFooter className='p-0'>
-          <div className='space-y-3'>
+        <SheetFooter className='gap-6 p-0'>
+          <div className='space-y-3 text-base'>
             <div className='flex items-center justify-between gap-2.5'>
               <p className='text-muted-foreground'>Price</p>
               <p className='font-semibold'>${subtotal.toFixed(2)}</p>
@@ -215,16 +235,16 @@ const ShoppingCart = ({
             </div>
             <Separator />
             <div className='flex items-center justify-between gap-2.5'>
-              <h5 className='grow text-lg font-semibold'>Total</h5>
+              <p className='grow text-lg font-semibold'>Total</p>
               <p className='text-lg font-semibold'>${total.toFixed(2)}</p>
             </div>
           </div>
 
-          <div className='mt-6 flex flex-col gap-2'>
-            <Button size='lg' className='w-full rounded-lg'>
+          <div className='flex flex-col gap-2'>
+            <Button size='lg' className='w-full'>
               Checkout
             </Button>
-            <Button size='lg' variant='outline' className='w-full rounded-lg'>
+            <Button size='lg' variant='outline' className='w-full'>
               Continue Shopping
             </Button>
           </div>

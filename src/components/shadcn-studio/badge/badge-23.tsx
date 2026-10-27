@@ -1,18 +1,17 @@
-// @ts-nocheck
+import { Avatar, AvatarFallback, AvatarBadge } from '@/components/ui/avatar'
 import { ShoppingCartIcon } from 'lucide-react'
-
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 
 const BadgeCartDemo = () => {
   return (
     <div className='relative w-fit'>
-      <Avatar className='size-9 rounded-sm'>
+      <Avatar className='size-9 rounded-sm after:rounded-[inherit]'>
         <AvatarFallback className='rounded-sm'>
           <ShoppingCartIcon className='size-5' />
         </AvatarFallback>
+        <AvatarBadge className='bg-primary -top-2.5 -right-2.5 rounded-full text-xs group-data-[size=default]/avatar:size-5'>
+          8
+        </AvatarBadge>
       </Avatar>
-      <Badge className='absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums'>8</Badge>
     </div>
   )
 }

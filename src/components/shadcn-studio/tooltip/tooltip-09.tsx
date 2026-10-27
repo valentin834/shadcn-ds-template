@@ -1,23 +1,28 @@
-// @ts-nocheck
-import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-const TooltipBadgeDemo = () => {
+const TooltipAvatarDemo = () => {
   return (
     <Tooltip>
-      <TooltipTrigger render={<Button variant='outline' size='sm' />}>Badge
-                  </TooltipTrigger>
+      <TooltipTrigger
+        render={
+          <Button variant='outline' size='sm'>
+            Avatar
+          </Button>
+        }
+      />
       <TooltipContent>
-        <div className='flex items-center gap-2'>
-          <p>Team plan: $99/month per user.</p>
-          <Badge variant='secondary' className='px-1.5 py-px'>
-            Trending
-          </Badge>
+        <div className='flex items-center gap-1.5'>
+          <Avatar className='size-5'>
+            <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />
+            <AvatarFallback className='text-xs'>HR</AvatarFallback>
+          </Avatar>
+          <p className='font-medium'>Hallie Richards</p>
         </div>
       </TooltipContent>
     </Tooltip>
   )
 }
 
-export default TooltipBadgeDemo
+export default TooltipAvatarDemo

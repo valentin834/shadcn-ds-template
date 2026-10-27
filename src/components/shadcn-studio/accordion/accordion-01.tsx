@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const items = [
@@ -20,7 +19,7 @@ const items = [
 
 const AccordionDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+    <Accordion className='w-full' defaultValue={['item-1']}>
       {items.map((item, index) => (
         <AccordionItem key={index} value={`item-${index + 1}`}>
           <AccordionTrigger>{item.title}</AccordionTrigger>

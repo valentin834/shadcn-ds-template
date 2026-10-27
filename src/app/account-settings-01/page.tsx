@@ -11,13 +11,13 @@ const TabsUnderlineDemo = () => {
   return (
     <div className='w-full py-8'>
       <div className='mx-auto min-h-screen max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <Tabs defaultValue='general' className='gap-4'>
-          <TabsList className='h-fit! w-full rounded-none border-b bg-transparent p-0 sm:justify-start'>
+        <Tabs defaultValue='general'>
+          <TabsList variant='line' className='w-full gap-2 rounded-none border-b p-0 sm:justify-start'>
             {tabs.map(tab => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className='data-[state=active]:border-primary dark:data-[state=active]:border-primary rounded-none border-0 border-b-2 border-transparent data-[state=active]:shadow-none! sm:flex-0 dark:data-[state=active]:bg-transparent'
+                className='not-data-active:hover:group-data-horizontal/tabs:after:bg-muted-foreground/30 border-0 text-base group-data-horizontal/tabs:after:-bottom-[0.5px] not-data-active:hover:group-data-horizontal/tabs:after:opacity-100 sm:flex-0'
               >
                 {tab.name}
               </TabsTrigger>

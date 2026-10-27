@@ -1,9 +1,7 @@
-// @ts-nocheck
-import { ChevronUpIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { ChevronUpIcon } from 'lucide-react'
 
 const tasks = [
   {
@@ -38,7 +36,7 @@ const tasks = [
 
 const CollapsibleListDemo = () => {
   return (
-    <Collapsible className='flex w-full max-w-[350px] flex-col items-start gap-4'>
+    <Collapsible className='flex w-full max-w-87.5 flex-col items-start gap-4'>
       <div className='font-medium'>Today&apos;s task completion</div>
       <ul className='flex w-full flex-col gap-2'>
         {tasks.slice(0, 2).map(task => (
@@ -70,7 +68,15 @@ const CollapsibleListDemo = () => {
           ))}
         </CollapsibleContent>
       </ul>
-      <CollapsibleTrigger render={<Button variant='outline' size='sm' />}><span className='[[data-state=open]>&]:hidden'>Show more</span><span className='[[data-state=closed]>&]:hidden'>Show less</span><ChevronUpIcon className='[[data-state=closed]>&]:rotate-180' /></CollapsibleTrigger>
+      <CollapsibleTrigger
+        render={
+          <Button variant='outline' size='sm'>
+            <span className='in-data-open:hidden'>Show more</span>
+            <span className='in-data-closed:hidden'>Show less</span>
+            <ChevronUpIcon className='in-data-closed:rotate-180' />
+          </Button>
+        }
+      />
     </Collapsible>
   )
 }

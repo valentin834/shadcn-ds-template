@@ -1,9 +1,11 @@
-// @ts-nocheck
-import { Globe, Camera, MessageCircle, Play } from 'lucide-react'
-
 import { Separator } from '@/components/ui/separator'
 
 import Logo from '@/components/shadcn-studio/logo'
+
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
+import YoutubeIcon from '@/assets/svg/youtube-icon'
 
 const Footer = () => {
   return (
@@ -32,16 +34,16 @@ const Footer = () => {
 
         <div className='flex items-center gap-4'>
           <a href='#'>
-            <Globe className='size-5' />
+            <FacebookIcon className='size-5' />
           </a>
           <a href='#'>
-            <Camera className='size-5' />
+            <InstagramIcon className='size-5' />
           </a>
           <a href='#'>
-            <MessageCircle className='size-5' />
+            <TwitterIcon className='size-5' />
           </a>
           <a href='#'>
-            <Play className='size-5' />
+            <YoutubeIcon className='size-5' />
           </a>
         </div>
       </div>

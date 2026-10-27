@@ -1,29 +1,28 @@
-// @ts-nocheck
 import { useId } from 'react'
 
-import { SelectNative } from '@/components/ui/select-native'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
 const NativeSelectWithInsetLabelDemo = () => {
   const id = useId()
 
   return (
-    <div className='border-input bg-background focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative w-full max-w-xs rounded-md border shadow-xs transition-[color,box-shadow] outline-none focus-within:ring-[3px] has-[select:disabled]:cursor-not-allowed has-[select:disabled]:opacity-50 has-[select:is(:disabled)_*]:pointer-events-none'>
-      <label htmlFor={id} className='text-foreground block px-3 pt-1 text-xs font-medium'>
+    <div className='border-input bg-background focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 dark:bg-input/30 dark:has-aria-invalid:border-destructive/50 dark:has-aria-invalid:ring-destructive/40 relative w-full max-w-xs rounded-lg border ring-1 ring-transparent transition-colors outline-none focus-within:ring-3 has-aria-invalid:ring-3 has-[select:disabled]:cursor-not-allowed has-[select:disabled]:opacity-50 has-[select:is(:disabled)_*]:pointer-events-none'>
+      <label htmlFor={id} className='text-foreground block px-2.5 pt-1 text-xs font-medium'>
         Native select with inset label
       </label>
-      <SelectNative
+      <NativeSelect
         id={id}
         defaultValue=''
-        className='border-none bg-transparent shadow-none focus-visible:ring-0 focus-visible:ring-offset-0'
+        className='w-full *:data-[slot=native-select]:border-none *:data-[slot=native-select]:focus-visible:ring-0 dark:*:data-[slot=native-select]:bg-transparent'
       >
-        <option value='' disabled>
+        <NativeSelectOption value='' disabled>
           Pick your favorite movie
-        </option>
-        <option value='1'>Interstellar</option>
-        <option value='2'>Dune</option>
-        <option value='3'>The Matrix</option>
-        <option value='4'>Catch Me If You Can</option>
-      </SelectNative>
+        </NativeSelectOption>
+        <NativeSelectOption value='1'>Interstellar</NativeSelectOption>
+        <NativeSelectOption value='2'>Dune</NativeSelectOption>
+        <NativeSelectOption value='3'>The Matrix</NativeSelectOption>
+        <NativeSelectOption value='4'>Catch Me If You Can</NativeSelectOption>
+      </NativeSelect>
     </div>
   )
 }

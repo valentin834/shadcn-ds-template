@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ChevronDownIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +10,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { ChevronDownIcon } from 'lucide-react'
 
 const options = [
   {
@@ -33,11 +31,14 @@ const ButtonGroupDropdownDemo = () => {
   const [selectedIndex, setSelectedIndex] = useState('0')
 
   return (
-    <div className='divide-primary-foreground/30 inline-flex w-fit divide-x rounded-md shadow-xs'>
-      <Button className='rounded-none rounded-l-md focus-visible:z-10'>{options[Number(selectedIndex)].label}</Button>
+    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>
+      <Button>{options[Number(selectedIndex)].label}</Button>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button size='icon' className='rounded-none rounded-r-md focus-visible:z-10' />}><ChevronDownIcon /><span className='sr-only'>Select option</span></DropdownMenuTrigger>
-        <DropdownMenuContent side='bottom' sideOffset={4} align='end' className='max-w-64 md:max-w-xs!'>
+        <DropdownMenuTrigger render={<Button size='icon' />}>
+          <ChevronDownIcon />
+          <span className='sr-only'>Select option</span>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side='bottom' sideOffset={4} align='end' className='w-full max-w-70'>
           <DropdownMenuRadioGroup value={selectedIndex} onValueChange={setSelectedIndex}>
             {options.map((option, index) => (
               <DropdownMenuRadioItem key={option.label} value={String(index)} className='items-start [&>span]:pt-1.5'>
@@ -50,7 +51,7 @@ const ButtonGroupDropdownDemo = () => {
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
+    </ButtonGroup>
   )
 }
 

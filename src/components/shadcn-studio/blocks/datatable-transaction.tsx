@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ChevronLeftIcon, ChevronRightIcon, EllipsisVerticalIcon } from 'lucide-react'
 
 import type { ColumnDef, PaginationState } from '@tanstack/react-table'
 import {
@@ -14,7 +11,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -29,6 +25,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem } fro
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { usePagination } from '@/hooks/use-pagination'
+import { ChevronLeftIcon, ChevronRightIcon, EllipsisVerticalIcon } from 'lucide-react'
 
 export type Item = {
   id: string
@@ -76,7 +73,7 @@ export const columns: ColumnDef<Item>[] = [
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => (
-      <Badge className='bg-primary/10 text-primary rounded-sm px-1.5 capitalize'>{row.getValue('status')}</Badge>
+      <Badge className='bg-primary/10 text-primary h-auto rounded-sm px-1.5 capitalize'>{row.getValue('status')}</Badge>
     )
   },
   {
@@ -192,7 +189,7 @@ const TransactionDatatable = ({ data }: { data: Item[] }) => {
               <PaginationItem>
                 <Button
                   className='disabled:pointer-events-none disabled:opacity-50'
-                  variant={'ghost'}
+                  variant='ghost'
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                   aria-label='Go to previous page'
@@ -234,7 +231,7 @@ const TransactionDatatable = ({ data }: { data: Item[] }) => {
               <PaginationItem>
                 <Button
                   className='disabled:pointer-events-none disabled:opacity-50'
-                  variant={'ghost'}
+                  variant='ghost'
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                   aria-label='Go to next page'
@@ -256,7 +253,7 @@ export default TransactionDatatable
 function RowActions() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button size='icon' variant='ghost' className='rounded-full p-2' aria-label='Edit item' />}>
+      <DropdownMenuTrigger render={<Button size='icon' variant='ghost' aria-label='Edit item' />}>
         <EllipsisVerticalIcon className='size-5' aria-hidden='true' />
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>

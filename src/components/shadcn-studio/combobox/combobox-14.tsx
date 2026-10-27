@@ -1,81 +1,38 @@
-// @ts-nocheck
 'use client'
 
-import { useId, useState } from 'react'
+import { useId } from 'react'
 
-import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList
+} from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
-import { cn } from '@/lib/utils'
-
-const frameworks = [
-  {
-    value: 'next.js',
-    label: 'Next.js'
-  },
-  {
-    value: 'sveltekit',
-    label: 'SvelteKit'
-  },
-  {
-    value: 'nuxt.js',
-    label: 'Nuxt.js'
-  },
-  {
-    value: 'remix',
-    label: 'Remix'
-  },
-  {
-    value: 'astro',
-    label: 'Astro'
-  }
-]
+const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'] as const
 
 const ComboboxSlideInDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Combobox menu zoom-in</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='w-full max-w-xs justify-between' />}>{value ? frameworks.find(framework => framework.value === value)?.label : 'Select framework...'}<ChevronsUpDownIcon className='opacity-50' /></PopoverTrigger>
-        <PopoverContent className='data-[state=open]:!zoom-in-0 origin-center p-0 duration-500'>
-          <Command>
-            <CommandInput placeholder='Search framework...' className='h-9' />
-            <CommandList>
-              <CommandEmpty>No framework found.</CommandEmpty>
-              <CommandGroup>
-                {frameworks.map(framework => (
-                  <CommandItem
-                    key={framework.value}
-                    value={framework.value}
-                    onSelect={currentValue => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                  >
-                    {framework.label}
-                    <CheckIcon className={cn('ml-auto', value === framework.value ? 'opacity-100' : 'opacity-0')} />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={frameworks}>
+        <ComboboxInput placeholder='Select a framework' />
+        <ComboboxContent className='data-open:zoom-in-0! duration-500'>
+          <ComboboxEmpty>No items found.</ComboboxEmpty>
+          <ComboboxList>
+            {item => (
+              <ComboboxItem key={item} value={item}>
+                {item}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

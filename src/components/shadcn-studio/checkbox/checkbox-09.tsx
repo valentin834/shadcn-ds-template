@@ -1,13 +1,20 @@
-// @ts-nocheck
-import { AppleIcon, CherryIcon, GrapeIcon } from 'lucide-react'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { AppleIcon, CherryIcon, GrapeIcon } from 'lucide-react'
 
 const fruits = [
-  { label: 'Apple', icon: AppleIcon },
-  { label: 'Cherry', icon: CherryIcon },
-  { label: 'Grape', icon: GrapeIcon }
+  {
+    label: 'Apple',
+    icon: <AppleIcon aria-hidden='true' />
+  },
+  {
+    label: 'Cherry',
+    icon: <CherryIcon aria-hidden='true' />
+  },
+  {
+    label: 'Grape',
+    icon: <GrapeIcon aria-hidden='true' />
+  }
 ]
 
 const CheckboxVerticalGroupDemo = () => {
@@ -15,11 +22,11 @@ const CheckboxVerticalGroupDemo = () => {
     <div className='space-y-4'>
       <Label className='font-semibold'>Favorite Fruits</Label>
       <div className='flex flex-col gap-4'>
-        {fruits.map(({ label, icon: Icon }) => (
+        {fruits.map(({ label, icon }) => (
           <div key={label} className='flex items-center gap-2'>
             <Checkbox id={label} />
-            <Label htmlFor={label}>
-              <Icon className='size-4' aria-hidden='true' />
+            <Label htmlFor={label} className='*:[svg]:size-4'>
+              {icon}
               {label}
             </Label>
           </div>

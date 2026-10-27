@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useMemo, useState } from 'react'
-
-import { SearchIcon } from 'lucide-react'
 
 import type { Column, ColumnDef, ColumnFiltersState, RowData, SortingState } from '@tanstack/react-table'
 import {
@@ -16,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -24,8 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-
-import { cn } from '@/lib/utils'
+import { SearchIcon } from 'lucide-react'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -49,7 +44,8 @@ const columns: ColumnDef<Item>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -99,9 +95,7 @@ const columns: ColumnDef<Item>[] = [
           'bg-amber-600/10 text-amber-600 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:focus-visible:ring-amber-400/40 [a&]:hover:bg-amber-600/5 dark:[a&]:hover:bg-amber-400/5'
       }[availability]
 
-      return (
-        <Badge className={(cn('border-none focus-visible:outline-none'), styles)}>{row.getValue('availability')}</Badge>
-      )
+      return <Badge className={styles}>{row.getValue('availability')}</Badge>
     },
     enableSorting: false,
     meta: {
@@ -225,16 +219,16 @@ const DataTableWithColumnFilterDemo = () => {
     <div className='w-full'>
       <div className='rounded-md border'>
         <div className='flex flex-wrap gap-3 px-2 py-6'>
-          <div className='w-44'>
+          <div className='w-full sm:w-44'>
             <Filter column={table.getColumn('product')!} />
           </div>
-          <div className='w-36'>
+          <div className='w-full sm:w-36'>
             <Filter column={table.getColumn('price')!} />
           </div>
-          <div className='w-44'>
+          <div className='w-full sm:w-44'>
             <Filter column={table.getColumn('availability')!} />
           </div>
-          <div className='w-36'>
+          <div className='w-full sm:w-36'>
             <Filter column={table.getColumn('rating')!} />
           </div>
         </div>
@@ -277,7 +271,7 @@ const DataTableWithColumnFilterDemo = () => {
   )
 }
 
-function Filter({ column }: { column: Column<any, unknown> }) {
+function Filter({ column }: { column: Column<Item, unknown> }) {
   const id = useId()
   const columnFilterValue = column.getFilterValue()
   const { filterVariant } = column.columnDef.meta ?? {}
@@ -307,7 +301,7 @@ function Filter({ column }: { column: Column<any, unknown> }) {
         <div className='flex'>
           <Input
             id={`${id}-range-1`}
-            className='flex-1 rounded-r-none [-moz-appearance:_textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none'
+            className='flex-1 rounded-r-none [-moz-appearance:textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none'
             value={(columnFilterValue as [number, number])?.[0] ?? ''}
             onChange={e =>
               column.setFilterValue((old: [number, number]) => [
@@ -321,7 +315,7 @@ function Filter({ column }: { column: Column<any, unknown> }) {
           />
           <Input
             id={`${id}-range-2`}
-            className='-ms-px flex-1 rounded-l-none [-moz-appearance:_textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none'
+            className='-ms-px flex-1 rounded-l-none [-moz-appearance:textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none'
             value={(columnFilterValue as [number, number])?.[1] ?? ''}
             onChange={e =>
               column.setFilterValue((old: [number, number]) => [
@@ -339,10 +333,19 @@ function Filter({ column }: { column: Column<any, unknown> }) {
   }
 
   if (filterVariant === 'select') {
+    const selectItems = [
+      { label: 'All', value: 'all' },
+      ...sortedUniqueValues.map(value => ({
+        label: String(value),
+        value: String(value)
+      }))
+    ]
+
     return (
       <div className='*:not-first:mt-2'>
         <Label htmlFor={`${id}-select`}>{columnHeader}</Label>
         <Select
+          items={selectItems}
           value={columnFilterValue?.toString() ?? 'all'}
           onValueChange={value => {
             column.setFilterValue(value === 'all' ? undefined : value)
@@ -351,11 +354,10 @@ function Filter({ column }: { column: Column<any, unknown> }) {
           <SelectTrigger id={`${id}-select`} className='w-full'>
             <SelectValue />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='all'>All</SelectItem>
-            {sortedUniqueValues.map(value => (
-              <SelectItem key={String(value)} value={String(value)}>
-                {String(value)}
+          <SelectContent className='p-1'>
+            {selectItems.map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
               </SelectItem>
             ))}
           </SelectContent>

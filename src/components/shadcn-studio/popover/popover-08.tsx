@@ -1,14 +1,15 @@
-// @ts-nocheck
-import { MessageCircleIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Textarea } from '@/components/ui/textarea'
+import { MessageCircleIcon } from 'lucide-react'
 
 const PopoverFeedbackDemo = () => {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><MessageCircleIcon /><span className='sr-only'>Feedback</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <MessageCircleIcon />
+        <span className='sr-only'>Feedback</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
         <div className='grid gap-2'>
           <div className='font-medium'>Feedback</div>

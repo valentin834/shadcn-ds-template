@@ -1,213 +1,214 @@
-// @ts-nocheck
-import { MailIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from '@/components/ui/field'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
+import { MailIcon } from 'lucide-react'
+
+const visibilityItems = [
+  { label: 'Public - Anyone can view', value: 'public' },
+  { label: 'Private - Only team members', value: 'private' }
+]
 
 const FormLayout = () => {
   return (
     <form>
       {/* Personal Information */}
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
-        <div className='space-y-1'>
-          <h2 className='font-semibold'>Personal Information</h2>
-          <p className='text-muted-foreground text-sm'>Enter your contact details and address information.</p>
+      <FieldSet className='grid grid-cols-1 gap-10 md:grid-cols-3'>
+        <div>
+          <FieldLegend className='mb-1.5 font-semibold'>Personal Information</FieldLegend>
+          <FieldDescription>Enter your contact details and address information.</FieldDescription>
         </div>
 
-        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:col-span-2'>
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='first-name'>First Name</Label>
+        <FieldGroup className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:col-span-2'>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='first-name'>First Name</FieldLabel>
             <Input id='first-name' placeholder='John' />
-            <p className='text-muted-foreground text-xs'>Your legal first name</p>
-          </div>
+            <FieldDescription className='text-xs'>Your legal first name</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='last-name'>Last Name</Label>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='last-name'>Last Name</FieldLabel>
             <Input id='last-name' placeholder='Doe' />
-            <p className='text-muted-foreground text-xs'>Your legal last name</p>
-          </div>
+            <FieldDescription className='text-xs'>Your legal last name</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col gap-2 sm:col-span-2'>
-            <Label htmlFor='email'>Email Address</Label>
-            <div className='relative'>
-              <Input id='email' type='email' placeholder='Email address' className='peer pr-9' />
-              <div className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>
+          <Field className='gap-2 sm:col-span-2'>
+            <FieldLabel htmlFor='email'>Email Address</FieldLabel>
+            <InputGroup>
+              <InputGroupInput id='email' type='email' placeholder='Email address' />
+              <InputGroupAddon align='inline-end'>
                 <MailIcon className='size-4' />
                 <span className='sr-only'>Email</span>
-              </div>
-            </div>
-            <p className='text-muted-foreground text-xs'>We&apos;ll never share your email with anyone else</p>
-          </div>
+              </InputGroupAddon>
+            </InputGroup>
+            <FieldDescription className='text-xs'>We&apos;ll never share your email with anyone else</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='mobile'>Mobile</Label>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='mobile'>Mobile</FieldLabel>
             <Input id='mobile' type='tel' placeholder='+1 (555) 123-4567' />
-            <p className='text-muted-foreground text-xs'>Include country code for international numbers</p>
-          </div>
+            <FieldDescription className='text-xs'>Include country code for international numbers</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='pincode'>Pincode</Label>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='pincode'>Pincode</FieldLabel>
             <Input id='pincode' placeholder='10001' />
-            <p className='text-muted-foreground text-xs'>5-digit postal code</p>
-          </div>
+            <FieldDescription className='text-xs'>5-digit postal code</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2 sm:col-span-2'>
-            <Label htmlFor='address'>Address</Label>
+          <Field className='gap-2 sm:col-span-2'>
+            <FieldLabel htmlFor='address'>Address</FieldLabel>
             <Input id='address' placeholder='123 Main St, Apt 4B' />
-            <p className='text-muted-foreground text-xs'>Street address with apartment or suite number</p>
-          </div>
+            <FieldDescription className='text-xs'>Street address with apartment or suite number</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2 sm:col-span-2'>
-            <Label htmlFor='landmark'>Landmark</Label>
+          <Field className='gap-2 sm:col-span-2'>
+            <FieldLabel htmlFor='landmark'>Landmark</FieldLabel>
             <Input id='landmark' placeholder='Near Central Park' />
-            <p className='text-muted-foreground text-xs'>Optional nearby landmark for easier location</p>
-          </div>
+            <FieldDescription className='text-xs'>Optional nearby landmark for easier location</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='city'>City</Label>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='city'>City</FieldLabel>
             <Input id='city' placeholder='New York' />
-          </div>
+          </Field>
 
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='state'>State</Label>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='state'>State</FieldLabel>
             <Input id='state' placeholder='NY' />
-          </div>
-        </div>
-      </div>
+          </Field>
+        </FieldGroup>
+      </FieldSet>
 
       <Separator className='my-10' />
 
       {/* Workspace Setting */}
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
-        <div className='space-y-1'>
-          <h2 className='font-semibold'>Workspace Settings</h2>
-          <p className='text-muted-foreground text-sm'>Configure your workspace preferences and visibility options.</p>
+      <FieldSet className='grid grid-cols-1 gap-10 md:grid-cols-3'>
+        <div>
+          <FieldLegend className='mb-1.5 font-semibold'>Workspace Settings</FieldLegend>
+          <FieldDescription>Configure your workspace preferences and visibility options.</FieldDescription>
         </div>
 
-        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:col-span-2'>
-          <div className='flex flex-col items-start gap-2'>
-            <Label htmlFor='workspace-name'>Workspace Name</Label>
+        <FieldGroup className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:col-span-2'>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='workspace-name'>Workspace Name</FieldLabel>
             <Input id='workspace-name' placeholder='My Workspace' />
-            <p className='text-muted-foreground text-xs'>Choose a unique name for your workspace</p>
-          </div>
+            <FieldDescription className='text-xs'>Choose a unique name for your workspace</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='visibility'>Visibility</Label>
-            <Select defaultValue='public'>
+          <Field className='gap-2'>
+            <FieldLabel htmlFor='visibility'>Visibility</FieldLabel>
+            <Select defaultValue='public' items={visibilityItems}>
               <SelectTrigger id='visibility' className='w-full'>
-                <SelectValue placeholder='Select visibility' />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value='public'>Public - Anyone can view</SelectItem>
-                  <SelectItem value='private'>Private - Only team members</SelectItem>
+                  {visibilityItems.map(item => (
+                    <SelectItem key={item.value} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <p className='text-muted-foreground text-xs'>Control who can access your workspace</p>
-          </div>
+            <FieldDescription className='text-xs'>Control who can access your workspace</FieldDescription>
+          </Field>
 
-          <div className='flex flex-col gap-2 sm:col-span-2'>
-            <Label htmlFor='workspace-description'>Workspace Description</Label>
+          <Field className='gap-2 sm:col-span-2'>
+            <FieldLabel htmlFor='workspace-description'>Workspace Description</FieldLabel>
             <Textarea placeholder='Describe your workspace purpose and goals...' id='workspace-description' rows={4} />
-            <p className='text-muted-foreground text-xs'>
+            <FieldDescription className='text-xs'>
               This description is for internal use and won&apos;t be displayed publicly.
-            </p>
-          </div>
-        </div>
-      </div>
+            </FieldDescription>
+          </Field>
+        </FieldGroup>
+      </FieldSet>
 
       <Separator className='my-10' />
 
       {/* Notification Setting */}
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-3'>
-        <div className='space-y-1'>
-          <h2 className='font-semibold'>Notification Settings</h2>
-          <p className='text-muted-foreground text-sm'>Choose how you want to receive notifications and updates.</p>
+      <FieldSet className='grid grid-cols-1 gap-10 md:grid-cols-3'>
+        <div>
+          <FieldLegend className='mb-1.5 font-semibold'>Notification Settings</FieldLegend>
+          <FieldDescription>Choose how you want to receive notifications and updates.</FieldDescription>
         </div>
 
         <div className='grid grid-cols-1 gap-6 md:col-span-2 lg:grid-cols-2'>
-          <div className='space-y-4'>
-            <div>
-              <Label className='text-base'>Email Notifications</Label>
-              <p className='text-muted-foreground mt-1 text-sm'>Select which emails you&apos;d like to receive.</p>
-            </div>
-
-            <div className='space-y-3'>
-              <div className='flex items-center space-x-2'>
+          <FieldSet className='gap-4'>
+            <FieldLegend className='mb-1.5' variant='legend'>
+              Email Notifications
+            </FieldLegend>
+            <FieldDescription>Select which emails you&apos;d like to receive.</FieldDescription>
+            <FieldGroup className='gap-2'>
+              <Field orientation='horizontal' className='items-center'>
                 <Checkbox id='marketing' />
-                <Label htmlFor='marketing' className='cursor-pointer font-normal'>
+                <FieldLabel htmlFor='marketing' className='font-normal'>
                   Marketing and promotional emails
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
+                </FieldLabel>
+              </Field>
+              <Field orientation='horizontal' className='items-center'>
                 <Checkbox id='updates' defaultChecked />
-                <Label htmlFor='updates' className='cursor-pointer font-normal'>
+                <FieldLabel htmlFor='updates' className='font-normal'>
                   Product updates and announcements
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
+                </FieldLabel>
+              </Field>
+              <Field orientation='horizontal'>
                 <Checkbox id='security' defaultChecked />
-                <Label htmlFor='security' className='cursor-pointer font-normal'>
+                <FieldLabel htmlFor='security' className='font-normal'>
                   Security alerts and notifications
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
+                </FieldLabel>
+              </Field>
+              <Field orientation='horizontal' className='items-center'>
                 <Checkbox id='digest' />
-                <Label htmlFor='digest' className='cursor-pointer font-normal'>
+                <FieldLabel htmlFor='digest' className='font-normal'>
                   Weekly digest of activity
-                </Label>
-              </div>
-            </div>
-          </div>
+                </FieldLabel>
+              </Field>
+            </FieldGroup>
+          </FieldSet>
 
-          <div className='space-y-4'>
-            <div>
-              <Label className='text-base'>Notification Frequency</Label>
-              <p className='text-muted-foreground mt-1 text-sm'>How often would you like to receive notifications?</p>
-            </div>
+          <FieldSet className='gap-4'>
+            <FieldLegend className='mb-1.5' variant='legend'>
+              Notification Frequency
+            </FieldLegend>
+            <FieldDescription>How often would you like to receive notifications?</FieldDescription>
             <RadioGroup defaultValue='realtime'>
-              <div className='flex items-center space-x-2'>
-                <RadioGroupItem value='realtime' id='realtime' />
-                <Label htmlFor='realtime' className='cursor-pointer font-normal'>
-                  Real-time notifications
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
-                <RadioGroupItem value='daily' id='daily' />
-                <Label htmlFor='daily' className='cursor-pointer font-normal'>
-                  Daily digest
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
-                <RadioGroupItem value='weekly' id='weekly' />
-                <Label htmlFor='weekly' className='cursor-pointer font-normal'>
-                  Weekly digest
-                </Label>
-              </div>
-              <div className='flex items-center space-x-2'>
-                <RadioGroupItem value='never' id='never' />
-                <Label htmlFor='never' className='cursor-pointer font-normal'>
-                  Never
-                </Label>
-              </div>
+              <FieldGroup className='gap-2'>
+                <Field orientation='horizontal'>
+                  <RadioGroupItem value='realtime' id='realtime' />
+                  <FieldLabel htmlFor='realtime' className='font-normal'>
+                    Real-time notifications
+                  </FieldLabel>
+                </Field>
+                <Field orientation='horizontal'>
+                  <RadioGroupItem value='daily' id='daily' />
+                  <FieldLabel htmlFor='daily' className='font-normal'>
+                    Daily digest
+                  </FieldLabel>
+                </Field>
+                <Field orientation='horizontal'>
+                  <RadioGroupItem value='weekly' id='weekly' />
+                  <FieldLabel htmlFor='weekly' className='font-normal'>
+                    Weekly digest
+                  </FieldLabel>
+                </Field>
+                <Field orientation='horizontal'>
+                  <RadioGroupItem value='never' id='never' />
+                  <FieldLabel htmlFor='never' className='font-normal'>
+                    Never
+                  </FieldLabel>
+                </Field>
+              </FieldGroup>
             </RadioGroup>
-          </div>
+          </FieldSet>
         </div>
-      </div>
+      </FieldSet>
 
       <Separator className='my-10' />
 

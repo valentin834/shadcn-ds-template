@@ -1,8 +1,7 @@
-import { BriefcaseIcon, PiggyBankIcon, ReceiptIcon, WalletIcon } from 'lucide-react'
-
 import StatisticsWithStatus, {
   type StatisticsCardProps
 } from '@/components/shadcn-studio/blocks/statistics-with-status'
+import { BriefcaseIcon, ReceiptIcon, PiggyBankIcon, WalletIcon } from 'lucide-react'
 
 const statisticsData: StatisticsCardProps[] = [
   {

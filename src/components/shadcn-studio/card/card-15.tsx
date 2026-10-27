@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
@@ -20,7 +19,7 @@ const CardGroupDemo = () => {
             mesmerizing flow of colors.
           </CardDescription>
         </CardHeader>
-        <CardFooter className='gap-3 max-sm:flex-col max-sm:items-stretch'>
+        <CardFooter className='gap-3 rounded-none max-sm:flex-col max-sm:items-stretch'>
           <Button>Explore More</Button>
           <Button variant={'outline'}>Download Now</Button>
         </CardFooter>
@@ -40,7 +39,7 @@ const CardGroupDemo = () => {
             effortlessly in an abstract glow.
           </CardDescription>
         </CardHeader>
-        <CardFooter className='gap-3 max-sm:flex-col max-sm:items-stretch'>
+        <CardFooter className='gap-3 rounded-none max-sm:flex-col max-sm:items-stretch'>
           <Button>Explore More</Button>
           <Button variant={'outline'}>Download Now</Button>
         </CardFooter>
@@ -60,7 +59,7 @@ const CardGroupDemo = () => {
             and infinite space.
           </CardDescription>
         </CardHeader>
-        <CardFooter className='gap-3 max-sm:flex-col max-sm:items-stretch'>
+        <CardFooter className='gap-3 rounded-none max-sm:flex-col max-sm:items-stretch'>
           <Button>Explore More</Button>
           <Button variant={'outline'}>Download Now</Button>
         </CardFooter>

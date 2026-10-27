@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -15,7 +14,7 @@ const TextareaWithOverlappingLabelDemo = () => {
       >
         Textarea with overlapping label
       </Label>
-      <Textarea id={id} className='!bg-background' />
+      <Textarea id={id} className='bg-background!' />
     </div>
   )
 }

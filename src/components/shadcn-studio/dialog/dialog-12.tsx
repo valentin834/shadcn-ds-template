@@ -1,12 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
 
-import { CheckIcon, MailIcon } from 'lucide-react'
-
 import { OTPInput, type SlotProps } from 'input-otp'
-
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -19,6 +15,7 @@ import {
 } from '@/components/ui/dialog'
 
 import { cn } from '@/lib/utils'
+import { CheckIcon, MailIcon } from 'lucide-react'
 
 const CORRECT_CODE = '11208'
 
@@ -55,22 +52,20 @@ const DialogOTPVerificationDemo = () => {
         <div className='flex flex-col items-center gap-2'>
           <div
             className={cn(
-              'flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-600/10 dark:bg-sky-400/100',
+              'flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-600/10 dark:bg-sky-400/10',
               { 'bg-green-600/10 dark:bg-green-400/10': hasGuessed }
             )}
             aria-hidden='true'
           >
             {hasGuessed ? (
-              <CheckIcon className='text-green-600 dark:text-green-400' strokeWidth={1} />
+              <CheckIcon className='size-6 text-green-600 dark:text-green-400' strokeWidth={1} />
             ) : (
-              <MailIcon className='text-sky-600 dark:text-sky-400' strokeWidth={1} />
+              <MailIcon className='size-6 text-sky-600 dark:text-sky-400' strokeWidth={1} />
             )}
           </div>
           <DialogHeader>
-            <DialogTitle className='sm:text-center'>
-              {hasGuessed ? 'Account verified!' : 'Check Your Email'}
-            </DialogTitle>
-            <DialogDescription className='sm:text-center'>
+            <DialogTitle className='text-center'>{hasGuessed ? 'Account verified!' : 'Check Your Email'}</DialogTitle>
+            <DialogDescription className='text-center'>
               {hasGuessed ? (
                 <span>
                   Congratulations! your email account <strong>exa**le@gmail.com</strong> has been verified
@@ -87,8 +82,7 @@ const DialogOTPVerificationDemo = () => {
 
         {hasGuessed ? (
           <div className='text-center'>
-            <DialogClose render={<Button type='button' ref={closeButtonRef} />}>Continue
-                                    </DialogClose>
+            <DialogClose render={<Button type='button' ref={closeButtonRef} />}>Continue</DialogClose>
           </div>
         ) : (
           <div className='space-y-4'>
@@ -133,8 +127,8 @@ function Slot(props: SlotProps) {
   return (
     <div
       className={cn(
-        'border-input bg-background text-foreground flex size-9 items-center justify-center rounded-md border font-medium shadow-xs transition-[color,box-shadow]',
-        { 'border-ring ring-ring/50 z-10 ring-[3px]': props.isActive }
+        'border-input bg-background text-foreground flex size-8 items-center justify-center rounded-lg border text-sm transition-colors',
+        { 'border-ring ring-ring/50 z-10 ring-3': props.isActive }
       )}
     >
       {props.char !== null && <div>{props.char}</div>}

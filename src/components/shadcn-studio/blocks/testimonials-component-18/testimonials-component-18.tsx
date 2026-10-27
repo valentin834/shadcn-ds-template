@@ -1,13 +1,6 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 export type TestimonialItem = {
   name: string
@@ -35,7 +28,7 @@ const TestimonialsComponent = ({ testimonials }: TestimonialsComponentProps) => 
         {/* Left Content */}
         <div className='space-y-4 md:space-y-16'>
           <div className='space-y-4'>
-            <Badge variant='outline' className='text-sm font-normal'>
+            <Badge variant='outline' className='h-auto text-sm font-normal'>
               Testimonials
             </Badge>
             <h2 className='text-2xl font-semibold sm:text-3xl lg:text-4xl'>
@@ -48,12 +41,14 @@ const TestimonialsComponent = ({ testimonials }: TestimonialsComponentProps) => 
 
           <div className='flex items-center gap-5'>
             <CarouselPrevious
+              size='icon'
               variant='default'
-              className='disabled:bg-primary/10 disabled:text-primary static size-9 translate-y-0 disabled:opacity-100'
+              className='disabled:bg-primary/10 disabled:text-primary static translate-y-0 disabled:opacity-100'
             />
             <CarouselNext
+              size='icon'
               variant='default'
-              className='disabled:bg-primary/10 disabled:text-primary static size-9 translate-y-0 disabled:opacity-100'
+              className='disabled:bg-primary/10 disabled:text-primary static translate-y-0 disabled:opacity-100'
             />
           </div>
         </div>
@@ -71,9 +66,9 @@ const TestimonialsComponent = ({ testimonials }: TestimonialsComponentProps) => 
                     </p>
                   </div>
                   <div className='flex items-center gap-2'>
-                    <Avatar className='size-12 rounded-full'>
+                    <Avatar className='size-12'>
                       <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                      <AvatarFallback className='rounded-full text-sm'>
+                      <AvatarFallback className='text-sm'>
                         {testimonial.name
                           .split(' ', 2)
                           .map(n => n[0])

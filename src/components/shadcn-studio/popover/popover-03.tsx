@@ -1,16 +1,17 @@
-// @ts-nocheck
-import { DollarSignIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { DollarSignIcon } from 'lucide-react'
 
 const PopoverPricingDemo = () => {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><DollarSignIcon /><span className='sr-only'>Pricing details</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <DollarSignIcon />
+        <span className='sr-only'>Pricing details</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
-        <div className='grid gap-2.5'>
+        <div className='flex flex-col gap-2.5'>
           <div className='flex items-center justify-between'>
             <span className='text-lg font-semibold'>Enterprise Plan</span>
             <span className='text-sm font-medium'>$49.99/month</span>

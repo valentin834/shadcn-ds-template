@@ -1,18 +1,15 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ClockIcon, Trash2Icon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { ClockIcon, Trash2Icon } from 'lucide-react'
 
 const FREE_DELIVERY_THRESHOLD = 50
 const DELIVERY_FEE = 60
@@ -28,6 +25,13 @@ type ShoppingCartProps = {
   }[]
   taxPercentage?: number
 }
+
+const quantityItems = [
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' }
+]
 
 const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: ShoppingCartProps) => {
   const [quantities, setQuantities] = useState<Record<number, number>>(() => {
@@ -76,7 +80,7 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
           {/* Left Column - cartItems */}
           <div className='space-y-3 px-6 lg:col-span-2'>
             <div className='flex w-full items-center justify-between'>
-              <div className='text-2xl font-semibold'>Your Cart</div>
+              <h2 className='text-2xl font-semibold'>Your Cart</h2>
               <div className='text-muted-foreground'>{activeCartItems.length} Items in cart</div>
             </div>
             {activeCartItems.length === 0 ? (
@@ -91,14 +95,14 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
                     <Label className='group relative cursor-pointer'>
                       <Checkbox
                         defaultChecked
-                        className='absolute start-2 top-2 hidden size-6 group-hover:block hover:border-black data-[state=checked]:block'
+                        className='absolute top-2 left-2 hidden size-4 group-hover:block hover:border-black data-checked:block **:[svg]:size-3!'
                       />
                       <div className='size-25'>
                         <img src={item.image} alt={item.name} className='rounded-md object-cover' />
                       </div>
                     </Label>
 
-                    <div className='space-y-4'>
+                    <div className='flex flex-col justify-between gap-4'>
                       <div className='flex flex-col gap-2'>
                         <h3 className='font-medium'>{item.name}</h3>
                         <p className='text-muted-foreground'>Size: {item.size}</p>
@@ -111,17 +115,21 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
                   </div>
                   <div className='flex items-center gap-12'>
                     <Select
+                      items={quantityItems}
                       value={quantities[item.id]?.toString() || '1'}
-                      onValueChange={value => handleQuantityChange(item.id, value)}
+                      onValueChange={(value: string | null) => value && handleQuantityChange(item.id, value)}
                     >
                       <SelectTrigger className='w-25 shadow-none'>
-                        <SelectValue placeholder='Quantity' />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value='1'>1</SelectItem>
-                        <SelectItem value='2'>2</SelectItem>
-                        <SelectItem value='3'>3</SelectItem>
-                        <SelectItem value='4'>4</SelectItem>
+                        <SelectGroup>
+                          {quantityItems.map(q => (
+                            <SelectItem key={q.value} value={q.value}>
+                              {q.label}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
                       </SelectContent>
                     </Select>
                     <p className='text-lg font-semibold'>${(item.price * (quantities[item.id] || 1)).toFixed(2)}</p>
@@ -129,7 +137,10 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
                       open={openPopovers[item.id] || false}
                       onOpenChange={open => setOpenPopovers(prev => ({ ...prev, [item.id]: open }))}
                     >
-                      <PopoverTrigger render={<Button variant='ghost' size='icon' className='cursor-pointer' />}><Trash2Icon className='size-6' /><span className='sr-only'>Delete Item</span></PopoverTrigger>
+                      <PopoverTrigger render={<Button variant='ghost' size='icon' className='cursor-pointer' />}>
+                        <Trash2Icon className='size-6' />
+                        <span className='sr-only'>Delete Item</span>
+                      </PopoverTrigger>
                       <PopoverContent className='w-80'>
                         <div className='flex flex-col items-center gap-4'>
                           <div className='flex aspect-square size-12 items-center justify-center rounded-full bg-red-500/10'>
@@ -149,6 +160,7 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
                             <Button
                               variant='destructive'
                               size='sm'
+                              className='bg-destructive! dark:bg-destructive! text-white'
                               onClick={() => {
                                 handleDeleteItem(item.id)
                                 setOpenPopovers(prev => ({ ...prev, [item.id]: false }))
@@ -167,52 +179,50 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
           </div>
           {/* Right Column - Payment */}
           <div className='space-y-6'>
-            <Card className='w-full max-w-md border-0 shadow-none'>
-              <CardHeader>
-                <CardTitle className='text-xl'>Apply Coupon</CardTitle>
+            <Card className='w-full max-w-md shadow-none ring-0'>
+              <CardHeader className='gap-2'>
+                <CardTitle className='text-xl font-semibold'>Apply Coupon</CardTitle>
                 <CardDescription className='text-base'>Using a Promo Code ?</CardDescription>
               </CardHeader>
               <CardContent>
                 <form>
-                  <div className='flex grow gap-3 sm:justify-end'>
-                    <Input type='text' placeholder='Coupon Code' className='w-full max-w-xs' />
-                    <Button className='rounded-lg' type='submit'>
+                  <div className='flex grow gap-2.5 sm:justify-end'>
+                    <Input type='text' placeholder='Coupon Code' className='input-lg w-full' />
+                    <Button type='submit' size='lg'>
                       Apply
                     </Button>
                   </div>
                 </form>
               </CardContent>
             </Card>
-            <Card className='w-full max-w-md gap-8 border-0 shadow-none'>
-              <CardContent>
-                <div className='space-y-6'>
-                  <h5 className='text-xl font-semibold'> Price Details</h5>
-                  <div className='space-y-5'>
-                    <Separator />
-                    <div className='flex items-center justify-between'>
-                      <span className='text-muted-foreground'>Subtotal</span>
-                      <span className='font-medium'>${subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <span className='text-muted-foreground'>
-                        Tax<span className='text-muted-foreground ms-0.5 text-xs'>{taxPercentage}%</span>
-                      </span>
-                      <span className='font-medium'>+${tax.toFixed(2)}</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <span className='text-muted-foreground'>Shipping</span>
-                      <span className='font-medium'>{deliveryLabel}</span>
-                    </div>
-                    <Separator />
-                    <div className='flex items-center justify-between'>
-                      <span className='text-lg font-semibold'>Total</span>
-                      <span className='font-medium'>${total.toFixed(2)}</span>
-                    </div>
-                  </div>
+            <Card className='w-full max-w-md text-base shadow-none ring-0'>
+              <CardHeader>
+                <CardTitle className='text-xl font-semibold'> Price Details</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-5'>
+                <Separator />
+                <div className='flex items-center justify-between'>
+                  <span className='text-muted-foreground'>Subtotal</span>
+                  <span className='font-medium'>${subtotal.toFixed(2)}</span>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <span className='text-muted-foreground'>
+                    Tax<span className='text-muted-foreground ms-0.5 text-xs'>{taxPercentage}%</span>
+                  </span>
+                  <span className='font-medium'>+${tax.toFixed(2)}</span>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <span className='text-muted-foreground'>Shipping</span>
+                  <span className='font-medium'>{deliveryLabel}</span>
+                </div>
+                <Separator />
+                <div className='flex items-center justify-between text-lg font-semibold'>
+                  <span>Total</span>
+                  <span>${total.toFixed(2)}</span>
                 </div>
               </CardContent>
-              <CardFooter className='flex-col items-start gap-3.5'>
-                <Button type='submit' className='w-full'>
+              <CardContent className='flex flex-col items-start gap-3.5'>
+                <Button type='submit' size='lg' className='w-full'>
                   Confirm Payment
                 </Button>
                 <div className='flex items-center gap-2'>
@@ -231,7 +241,7 @@ const ShoppingCart = ({ cartItems, taxPercentage = DEFAULT_TAX_PERCENTAGE }: Sho
                     />
                   </div>
                 </div>
-              </CardFooter>
+              </CardContent>
             </Card>
           </div>
         </div>

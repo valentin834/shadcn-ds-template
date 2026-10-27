@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MatterButton } from '@/components/ui/matter-button'
 
 const MatterButtonDemo = () => {

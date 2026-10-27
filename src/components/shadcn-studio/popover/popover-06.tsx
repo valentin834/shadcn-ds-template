@@ -1,15 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { DownloadIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Progress } from '@/components/ui/progress'
 
 import { cn } from '@/lib/utils'
+import { DownloadIcon } from 'lucide-react'
 
 const PopoverDownloadDemo = () => {
   const [isPaused, setIsPaused] = useState(false)
@@ -54,14 +51,17 @@ const PopoverDownloadDemo = () => {
 
   return (
     <Popover onOpenChange={setOpen} open={open}>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><DownloadIcon /><span className='sr-only'>Download File</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <DownloadIcon />
+        <span className='sr-only'>Download File</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
         <div className='grid gap-4'>
           <div className='flex items-center gap-2'>
             <div className='relative flex size-6 items-center justify-center'>
               <span
                 className={cn('border-primary absolute inset-0 rounded-full border border-dashed', {
-                  'animate-spin [animation-duration:3s]': value < 100 && !isPaused && !isCanceled
+                  'animation-duration-[3s] animate-spin': value < 100 && !isPaused && !isCanceled
                 })}
               />
               <DownloadIcon className='z-1 size-3' />

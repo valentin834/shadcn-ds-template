@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { CalendarClockIcon, MenuIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import MenuDropdown from '@/components/shadcn-studio/blocks/menu-dropdown'
@@ -14,6 +10,7 @@ import type { NavigationSection } from '@/components/shadcn-studio/blocks/menu-n
 import { cn } from '@/lib/utils'
 
 import BistroLogo from '@/assets/svg/bistro-logo'
+import { MenuIcon } from 'lucide-react'
 
 type HeaderProps = {
   navigationData: NavigationSection[]
@@ -60,24 +57,22 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         />
 
         {/* Actions */}
-        <div className='flex gap-4'>
-          <Button className='rounded-full max-sm:hidden' render={<a href='#' />} nativeButton={false}>Book table</Button>
+        {/* Navigation for small screens */}
+        <div className='flex gap-3'>
+          <Button size='lg' className='rounded-full' render={<a href='#' />} nativeButton={false}>
+            Book table
+          </Button>
 
-          {/* Navigation for small screens */}
-          <div className='flex gap-3'>
-            <Button size='icon' className='rounded-full sm:hidden' render={<a href='#' />} nativeButton={false}><CalendarClockIcon /><span className='sr-only'>Book table</span></Button>
-
-            <MenuDropdown
-              align='end'
-              navigationData={navigationData}
-              trigger={
-                <Button variant='outline' size='icon' className='rounded-full lg:hidden'>
-                  <MenuIcon />
-                  <span className='sr-only'>Menu</span>
-                </Button>
-              }
-            />
-          </div>
+          <MenuDropdown
+            align='end'
+            navigationData={navigationData}
+            trigger={
+              <Button variant='outline' size='icon-lg' className='rounded-full lg:hidden'>
+                <MenuIcon />
+                <span className='sr-only'>Menu</span>
+              </Button>
+            }
+          />
         </div>
       </div>
     </header>

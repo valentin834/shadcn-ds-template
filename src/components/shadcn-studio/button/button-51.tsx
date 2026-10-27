@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { PrimaryFlowButton } from '@/components/ui/flow-button'
 
 const PrimaryFlowButtonDemo = () => {

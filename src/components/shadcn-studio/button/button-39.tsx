@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { RippleButton } from '@/components/ui/ripple-button'
 
 const ButtonRippleEffectDemo = () => {

@@ -2,35 +2,27 @@
 
 import * as React from 'react'
 
-import type { VariantProps } from 'class-variance-authority'
+import { Button } from '@/components/ui/button'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-
+// BorderBeam is a standalone animation component
 import { BorderBeam } from '@/components/ui/border-beam'
 
 import { cn } from '@/lib/utils'
 
-interface NeuralButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: VariantProps<typeof buttonVariants>['size']
+interface NeuralButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {
   children?: React.ReactNode
-  asChild?: boolean
+  render?: React.ReactElement
 }
 
-function NeuralButton(props: NeuralButtonProps) {
-  const { children, asChild = false, size, className, ...rest } = props
-
+function NeuralButton({ children, render, className, ...rest }: NeuralButtonProps) {
   const neuralStyles = cn(
-    'relative z-1  overflow-hidden rounded-xl bg-sky-600! text-white ring-2 ring-sky-600/60! transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95 dark:bg-sky-400/60! dark:ring-sky-400/60!',
-
-    // size-based adjustments
-    size === 'lg' && 'text-base has-[>svg]:px-6',
-
+    'relative z-1 h-10 overflow-hidden rounded-xl border-0 bg-sky-600! px-6 text-base text-white ring-2 ring-sky-600/60! transition-transform duration-200 ease-in-out hover:scale-105 active:translate-y-0 active:scale-95 dark:bg-sky-400/60! dark:ring-sky-400/60! focus-visible:ring-3 focus-visible:ring-sky-600 dark:focus-visible:ring-sky-400/60!',
     className
   )
 
   const backgroundDecorations = (
     <>
-      <span className='pointer-events-none absolute inset-0 -z-1 bg-gradient-to-r from-neutral-900/20 to-white/20'>
+      <span className='pointer-events-none absolute inset-0 -z-1 bg-linear-to-r from-neutral-900/20 to-white/20'>
         <span className='absolute inset-px rounded-[calc(var(--radius-xl)-1px)] bg-sky-600 dark:bg-sky-400/60' />
       </span>
 
@@ -70,29 +62,12 @@ function NeuralButton(props: NeuralButtonProps) {
   const overlayDecorations = (
     <>
       <span className='pointer-events-none absolute inset-0 z-1 rounded-xl [box-shadow:0px_1px_1.6px_0px_color-mix(in_oklab,white_68%,transparent)_inset]' />
-
       <BorderBeam colorFrom='white' colorTo='white' size={35} />
     </>
   )
 
-  if (asChild && React.isValidElement(children)) {
-    const childProps = children.props as any
-
-    return React.cloneElement(children, {
-      className: cn(buttonVariants({ variant: 'default', size: size }), neuralStyles, childProps.className),
-      ...rest,
-      children: (
-        <>
-          {backgroundDecorations}
-          {childProps.children}
-          {overlayDecorations}
-        </>
-      )
-    } as any)
-  }
-
   return (
-    <Button size={size} className={neuralStyles} {...rest}>
+    <Button render={render} nativeButton={!render} className={neuralStyles} {...rest}>
       {backgroundDecorations}
       {children}
       {overlayDecorations}

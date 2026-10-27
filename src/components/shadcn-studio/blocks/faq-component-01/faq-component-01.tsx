@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 type FAQs = {
@@ -18,11 +17,11 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
           </p>
         </div>
 
-        <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+        <Accordion className='w-full' defaultValue={['item-1']}>
           {faqItems.map((item, index) => (
             <AccordionItem key={index} value={`item-${index + 1}`}>
               <AccordionTrigger className='text-lg'>{item.question}</AccordionTrigger>
-              <AccordionContent className='text-muted-foreground'>{item.answer}</AccordionContent>
+              <AccordionContent className='text-muted-foreground text-base'>{item.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

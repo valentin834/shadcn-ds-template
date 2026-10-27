@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
@@ -28,12 +27,12 @@ const items = [
 
 const AccordionAvatarDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+    <Accordion className='w-full border-0 [&>*>[data-slot="accordion-content"]]:px-0' defaultValue={['item-1']}>
       {items.map((item, index) => (
-        <AccordionItem key={index} value={`item-${index + 1}`}>
-          <AccordionTrigger className='items-center hover:no-underline'>
+        <AccordionItem key={index} value={`item-${index + 1}`} className='bg-transparent'>
+          <AccordionTrigger className='items-center px-0 hover:no-underline'>
             <span className='flex items-center gap-4'>
-              <Avatar className='size-10.5 rounded-sm'>
+              <Avatar className='size-10.5 rounded-sm after:border-0'>
                 <AvatarImage src={item.avatarImage} alt={item.name} className='rounded-sm' />
                 <AvatarFallback className='rounded-sm text-xs'>
                   {item.name.split(/\s/).reduce((response, word) => (response += word.slice(0, 1)), '')}

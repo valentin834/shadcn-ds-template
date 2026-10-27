@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 import Logo from '@/components/shadcn-studio/logo'
@@ -12,19 +11,19 @@ const TwoFactorAuthentication = () => {
         <AuthBackgroundShape />
       </div>
 
-      <Card className='z-1 w-full border-none shadow-md sm:max-w-md'>
-        <CardHeader className='gap-6'>
+      <Card className='z-1 w-full gap-6 overflow-clip py-6 sm:max-w-md'>
+        <CardHeader className='px-6'>
           <Logo className='gap-3' />
+        </CardHeader>
 
+        <CardContent className='space-y-6 px-6'>
           <div>
-            <CardTitle className='mb-1.5 text-2xl'>Two Factor Authentication</CardTitle>
+            <CardTitle className='mb-2 text-2xl font-semibold'>Two Factor Authentication</CardTitle>
             <CardDescription className='text-base'>
               Please confirm access to your account by entering the code provided by your authenticator application
             </CardDescription>
           </div>
-        </CardHeader>
 
-        <CardContent>
           {/* TwoFactorAuthentication Form */}
           <TwoFactorAuthenticationForm />
         </CardContent>

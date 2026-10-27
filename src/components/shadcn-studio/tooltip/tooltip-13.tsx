@@ -1,10 +1,8 @@
-// @ts-nocheck
-import { CalendarIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { Progress } from '@/components/ui/progress'
+import { CalendarIcon } from 'lucide-react'
 
 const avatars = [
   {
@@ -26,8 +24,8 @@ const avatars = [
 
 const HoverCardProjectDemo = () => {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
-      <HoverCardTrigger render={<Button variant='link' />}>Hover Card Project</HoverCardTrigger>
+    <HoverCard>
+      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Project</Button>} />
       <HoverCardContent>
         <div className='space-y-3'>
           <div className='flex items-center justify-between gap-2 text-sm font-semibold'>

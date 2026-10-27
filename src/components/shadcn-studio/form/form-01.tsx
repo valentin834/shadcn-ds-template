@@ -1,41 +1,37 @@
-// @ts-nocheck
 'use client'
 
-import { CheckCheckIcon } from 'lucide-react'
+import * as React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { z } from 'zod'
-
+import * as z from 'zod'
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
+import { Field, FieldDescription, FieldError, FieldLabel, FieldLegend, FieldSet } from '@/components/ui/field'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { CheckCheckIcon } from 'lucide-react'
+
+// Define the form schema
+const formSchema = z.object({
+  selectedOption: z.enum(['share-data', 'do-not-share', 'customize'], {
+    required_error: 'You must select an option.'
+  })
+})
+
+type FormValues = z.infer<typeof formSchema>
 
 const RadioGroupFormDemo = () => {
-  const FormSchema = z.object({
-    selectedOption: z.string().nonempty({
-      message: 'You must select an option.'
-    })
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      selectedOption: undefined
+    }
   })
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: { selectedOption: '' }
-  })
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof formSchema>) {
     toast.custom(() => (
-      <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400'>
+      <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400 *:[svg]:row-span-1'>
         <CheckCheckIcon />
         <AlertTitle>Selected Option: {data.selectedOption}</AlertTitle>
       </Alert>
@@ -43,44 +39,42 @@ const RadioGroupFormDemo = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>
-        <FormField
-          control={form.control}
-          name='selectedOption'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
-              <FormLabel>Manage data sharing preferences</FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} value={field.value}>
-                  <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='share data' id='share-option' />
-                    <FormLabel htmlFor='share-option' className='font-normal'>
-                      Share Data for Personalized Experience
-                    </FormLabel>
-                  </div>
-                  <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='do not share' id='no-share-option' />
-                    <FormLabel htmlFor='no-share-option' className='font-normal'>
-                      Do Not Share Any Data
-                    </FormLabel>
-                  </div>
-                  <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='customize' id='customize-option' />
-                    <FormLabel htmlFor='customize-option' className='font-normal'>
-                      Customize Data Sharing Preferences
-                    </FormLabel>
-                  </div>
-                </RadioGroup>
-              </FormControl>
-              <FormDescription>Please select one of the options to proceed.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type='submit'>Update Preferences</Button>
-      </form>
-    </Form>
+    <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>
+      <Controller
+        name='selectedOption'
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <FieldSet>
+            <FieldLegend variant='label' className='mb-4'>
+              Manage data sharing preferences
+            </FieldLegend>
+            <RadioGroup name={field.name} value={field.value} onValueChange={field.onChange} className='mb-3'>
+              <Field orientation='horizontal' data-invalid={fieldState.invalid}>
+                <RadioGroupItem value='share-data' id='share-option' aria-invalid={fieldState.invalid} />
+                <FieldLabel htmlFor='share-option' className='font-normal'>
+                  Share Data for Personalized Experience
+                </FieldLabel>
+              </Field>
+              <Field orientation='horizontal' data-invalid={fieldState.invalid}>
+                <RadioGroupItem value='do-not-share' id='no-share-option' aria-invalid={fieldState.invalid} />
+                <FieldLabel htmlFor='no-share-option' className='font-normal'>
+                  Do Not Share Any Data
+                </FieldLabel>
+              </Field>
+              <Field orientation='horizontal' data-invalid={fieldState.invalid}>
+                <RadioGroupItem value='customize' id='customize-option' aria-invalid={fieldState.invalid} />
+                <FieldLabel htmlFor='customize-option' className='font-normal'>
+                  Customize Data Sharing Preferences
+                </FieldLabel>
+              </Field>
+            </RadioGroup>
+            <FieldDescription className='mt-0'>Please select one of the options to proceed.</FieldDescription>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </FieldSet>
+        )}
+      />
+      <Button type='submit'>Update Preferences</Button>
+    </form>
   )
 }
 

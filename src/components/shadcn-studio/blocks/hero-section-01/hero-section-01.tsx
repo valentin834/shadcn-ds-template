@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
@@ -7,8 +6,8 @@ const HeroSection = () => {
     <section className='flex min-h-[calc(100dvh-4rem)] flex-1 flex-col justify-between gap-12 overflow-x-hidden pt-8 sm:gap-16 sm:pt-16 lg:gap-24 lg:pt-24'>
       {/* Hero Content */}
       <div className='mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-center sm:px-6 lg:px-8'>
-        <div className='bg-muted flex items-center gap-2.5 rounded-full border px-3 py-2'>
-          <Badge>AI-Powered</Badge>
+        <div className='bg-muted flex items-center gap-2.5 rounded-full border px-2 py-1 text-sm'>
+          <Badge>AI-Powered Base</Badge>
           <span className='text-muted-foreground'>Solution for client-facing businesses</span>
         </div>
 
@@ -55,7 +54,9 @@ const HeroSection = () => {
           From refreshing appetizers to delightful desserts
         </p>
 
-        <Button size='lg' render={<a href='#' />} nativeButton={false}>Try It Now</Button>
+        <Button size='lg' render={<a href='#' />} nativeButton={false}>
+          Try It Now
+        </Button>
       </div>
 
       {/* Image */}

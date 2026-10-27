@@ -1,14 +1,11 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
-
-import { ClockIcon } from 'lucide-react'
-
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ClockIcon } from 'lucide-react'
 
 const CalendarWithTimeInput = () => {
   const id = useId()

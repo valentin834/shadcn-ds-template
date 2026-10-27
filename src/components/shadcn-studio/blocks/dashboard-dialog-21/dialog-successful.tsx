@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
-import { useState, type ReactNode } from 'react'
-
-import { CheckIcon } from 'lucide-react'
-
+import { useState, type ReactElement } from 'react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,16 +8,16 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
 
 import { cn } from '@/lib/utils'
+import { CheckIcon } from 'lucide-react'
 
 type Props = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   className?: string
 }
@@ -42,7 +38,7 @@ const SuccessfulDialog = ({ defaultOpen = false, trigger, className }: Props) =>
             </AvatarFallback>
           </Avatar>
           <div className='space-y-3.5 text-center'>
-            <DialogTitle className='leading-7'>Payment Successful</DialogTitle>
+            <DialogTitle className='text-lg leading-7 font-semibold'>Payment Successful</DialogTitle>
             <DialogDescription className='max-w-sm'>
               Your payment was successful 🎉 A confirmation email with your purchase details will be sent to you
               shortly.
@@ -50,11 +46,11 @@ const SuccessfulDialog = ({ defaultOpen = false, trigger, className }: Props) =>
           </div>
         </DialogHeader>
 
-        <p className='text-center font-medium'>Thank you for joining our community!</p>
+        <p className='text-center text-base font-medium'>Thank you for joining our community!</p>
 
-        <DialogFooter className='flex-row !justify-center'>
+        <div className='flex flex-row justify-center'>
           <DialogClose render={<Button size='lg' />}>Go to Dashboard</DialogClose>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   )

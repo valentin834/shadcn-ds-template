@@ -1,15 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useId } from 'react'
 
-import { CreditCardIcon } from 'lucide-react'
-
 import { usePaymentInputs } from 'react-payment-inputs'
 import images, { type CardImages } from 'react-payment-inputs/images'
-
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
+import { CreditCardIcon } from 'lucide-react'
 
 const InputCardNumberDemo = () => {
   const id = useId()
@@ -18,12 +15,12 @@ const InputCardNumberDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Card number</Label>
-      <div className='relative'>
-        <Input {...getCardNumberProps()} id={id} className='peer pr-11' />
-        <div className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>
+      <InputGroup>
+        <InputGroupInput {...getCardNumberProps()} id={id} />
+        <InputGroupAddon align='inline-end' className='pointer-events-none'>
           {meta.cardType ? (
             <svg
-              className='w-6 overflow-hidden'
+              className='size-6 overflow-hidden'
               {...getCardImageProps({
                 images: images as unknown as CardImages
               })}
@@ -32,8 +29,8 @@ const InputCardNumberDemo = () => {
             <CreditCardIcon className='size-4' />
           )}
           <span className='sr-only'>Card Provider</span>
-        </div>
-      </div>
+        </InputGroupAddon>
+      </InputGroup>
       <p className='text-muted-foreground text-xs'>
         Built with{' '}
         <a

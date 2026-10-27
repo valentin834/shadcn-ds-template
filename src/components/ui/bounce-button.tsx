@@ -2,11 +2,11 @@
 
 import * as React from 'react'
 
-import { motion, type HTMLMotionProps } from 'motion/react'
 import type { VariantProps } from 'class-variance-authority'
+import { motion, type HTMLMotionProps } from 'motion/react'
 
-import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 interface BounceButtonProps extends HTMLMotionProps<'button'>, VariantProps<typeof buttonVariants> {
   children: React.ReactNode
@@ -15,8 +15,9 @@ interface BounceButtonProps extends HTMLMotionProps<'button'>, VariantProps<type
 function BounceButton({ children, className, size, variant, ...props }: BounceButtonProps) {
   return (
     <motion.button
+      data-slot='button'
       whileHover={{ scale: 1.1 }}
-      className={cn(buttonVariants({ variant, size }), 'transition-none', className)}
+      className={cn(buttonVariants({ variant, size }), 'transition-none active:translate-y-0', className)}
       transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       {...props}
     >

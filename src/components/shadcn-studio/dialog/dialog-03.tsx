@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { TriangleAlertIcon } from 'lucide-react'
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { TriangleAlertIcon } from 'lucide-react'
 
 const AlertDialogDestructiveDemo = () => {
   return (

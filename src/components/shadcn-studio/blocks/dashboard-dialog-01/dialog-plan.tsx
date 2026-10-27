@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
-import { useState, type ReactNode } from 'react'
-
-import { CircleCheckIcon, DollarSignIcon, MessageSquareTextIcon } from 'lucide-react'
-
+import { useState, type ReactElement } from 'react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,7 +8,6 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -21,9 +16,10 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 import { cn } from '@/lib/utils'
+import { DollarSignIcon, CircleCheckIcon, MessageSquareTextIcon } from 'lucide-react'
 
 type Props = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   className?: string
   data: {
@@ -44,7 +40,7 @@ const PlanDialog = ({ defaultOpen = false, trigger, data, className }: Props) =>
       <DialogTrigger render={trigger} onClick={() => setOpen(true)} />
       <DialogContent className={cn('sm:max-w-155 [&>[data-slot=dialog-close]>svg]:size-5', className)}>
         <DialogHeader className='flex-row items-center gap-4'>
-          <Avatar className='size-11 rounded-md'>
+          <Avatar className='size-11 rounded-md after:rounded-md'>
             <AvatarFallback className='shrink-0 rounded-md border bg-transparent'>
               <DollarSignIcon className='size-6' />
             </AvatarFallback>
@@ -56,21 +52,21 @@ const PlanDialog = ({ defaultOpen = false, trigger, data, className }: Props) =>
         </DialogHeader>
 
         {/* Plan selection */}
-        <RadioGroup className='w-full gap-6 sm:grid-cols-2' defaultValue={plan} onValueChange={setPlan}>
+        <RadioGroup className='w-full gap-6 sm:grid-cols-2' value={plan} onValueChange={setPlan}>
           {data.map(planData => (
             <div
               key={planData.id}
-              className='border-input has-data-[state=checked]:border-primary relative flex w-full flex-col gap-4 rounded-md border px-5 py-6 outline-none'
+              className='border-input has-data-checked:border-primary relative flex w-full flex-col gap-4 rounded-md border px-5 py-6 outline-none'
             >
               <div className='flex flex-col gap-1'>
                 <div className='flex items-center justify-between gap-2'>
-                  <Label htmlFor={planData.id} className='text-base'>
+                  <Label htmlFor={planData.id} className='text-base after:absolute after:inset-0'>
                     {planData.title}
                   </Label>
                   <RadioGroupItem
                     value={planData.id}
                     id={planData.id}
-                    className='size-5 after:absolute after:inset-0 [&_svg]:size-3'
+                    className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'
                     aria-label={`plan-radio-${planData.title.toLowerCase().replace(/\s+/g, '-')}`}
                   />
                 </div>
@@ -93,17 +89,16 @@ const PlanDialog = ({ defaultOpen = false, trigger, data, className }: Props) =>
           ))}
         </RadioGroup>
 
-        <DialogFooter className='gap-4 max-sm:flex-col sm:justify-between'>
+        <div className='flex flex-col-reverse gap-4 max-sm:flex-col sm:flex-row sm:justify-between'>
           <Button size='lg' className='bg-primary/10 text-primary hover:bg-primary/20'>
             <MessageSquareTextIcon />
             Chat with us
           </Button>
           <div className='flex justify-between gap-4'>
-            <DialogClose render={<Button variant='outline' size='lg' />}>Cancel
-                                    </DialogClose>
+            <DialogClose render={<Button variant='outline' size='lg' />}>Cancel</DialogClose>
             <Button size='lg'>Purchase now</Button>
           </div>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   )

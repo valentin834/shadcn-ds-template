@@ -1,12 +1,11 @@
-// @ts-nocheck
-import type { ComponentType } from 'react'
+import type { ReactElement } from 'react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 type ContactInfo = {
   title: string
-  icon: ComponentType
+  icon: ReactElement
   description: string
 }[]
 
@@ -37,11 +36,11 @@ const ContactUs = ({ contactInfo }: { contactInfo: ContactInfo }) => {
             {/* Contact Info Grid */}
             <div className='grid gap-6 sm:grid-cols-2'>
               {contactInfo.map((info, index) => (
-                <Card className='border-none shadow-none' key={index}>
-                  <CardContent className='flex flex-col items-center gap-4 text-center'>
-                    <Avatar className='size-9 border'>
-                      <AvatarFallback className='bg-transparent [&>svg]:size-5'>
-                        <info.icon />
+                <Card className='shadow-none' key={index}>
+                  <CardContent className='flex flex-col items-center gap-2 text-center'>
+                    <Avatar className='size-9'>
+                      <AvatarFallback className='text-card-foreground bg-transparent [&>svg]:size-5'>
+                        {info.icon}
                       </AvatarFallback>
                     </Avatar>
                     <div className='space-y-3'>

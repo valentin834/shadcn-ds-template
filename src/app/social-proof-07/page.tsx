@@ -1,25 +1,24 @@
-import { BookOpenIcon, FoldersIcon, TicketIcon, UsersIcon } from 'lucide-react'
-
 import SocialProof from '@/components/shadcn-studio/blocks/social-proof-07/social-proof-07'
+import { BookOpenIcon, FoldersIcon, UsersIcon, TicketIcon } from 'lucide-react'
 
 const metricsData = [
   {
-    icon: BookOpenIcon,
+    icon: <BookOpenIcon />,
     value: '110+',
     label: 'Blocks'
   },
   {
-    icon: FoldersIcon,
+    icon: <FoldersIcon />,
     value: '29',
     label: 'Template'
   },
   {
-    icon: UsersIcon,
+    icon: <UsersIcon />,
     value: '3400',
     label: 'Customers'
   },
   {
-    icon: TicketIcon,
+    icon: <TicketIcon />,
     value: '2844+',
     label: 'Support Ticket'
   }

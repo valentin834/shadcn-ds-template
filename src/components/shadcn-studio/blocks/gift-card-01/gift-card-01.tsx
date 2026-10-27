@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
-
-import { GiftIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,37 +10,38 @@ import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent } from '@/components/ui/card'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { GiftIcon } from 'lucide-react'
 
 const countries = [
-  { value: '1', label: 'India' },
-  { value: '2', label: 'China' },
-  { value: '3', label: 'Monaco' },
-  { value: '4', label: 'Serbia' },
-  { value: '5', label: 'Romania' },
-  { value: '6', label: 'Mayotte' },
-  { value: '7', label: 'Iraq' },
-  { value: '8', label: 'Syria' },
-  { value: '9', label: 'Korea' },
-  { value: '10', label: 'Zimbabwe' }
+  { value: 'India', label: 'India' },
+  { value: 'China', label: 'China' },
+  { value: 'Monaco', label: 'Monaco' },
+  { value: 'Serbia', label: 'Serbia' },
+  { value: 'Romania', label: 'Romania' },
+  { value: 'Mayotte', label: 'Mayotte' },
+  { value: 'Iraq', label: 'Iraq' },
+  { value: 'Syria', label: 'Syria' },
+  { value: 'Korea', label: 'Korea' },
+  { value: 'Zimbabwe', label: 'Zimbabwe' }
 ]
 
 const cities = [
-  { value: '1', label: 'New York' },
-  { value: '2', label: 'Los Angeles' },
-  { value: '3', label: 'London' },
-  { value: '4', label: 'Paris' },
-  { value: '5', label: 'Tokyo' },
-  { value: '6', label: 'Sydney' },
-  { value: '7', label: 'Dubai' },
-  { value: '8', label: 'Singapore' },
-  { value: '9', label: 'Mumbai' },
-  { value: '10', label: 'Berlin' }
+  { value: 'New York', label: 'New York' },
+  { value: 'Los Angeles', label: 'Los Angeles' },
+  { value: 'London', label: 'London' },
+  { value: 'Paris', label: 'Paris' },
+  { value: 'Tokyo', label: 'Tokyo' },
+  { value: 'Sydney', label: 'Sydney' },
+  { value: 'Dubai', label: 'Dubai' },
+  { value: 'Singapore', label: 'Singapore' },
+  { value: 'Mumbai', label: 'Mumbai' },
+  { value: 'Berlin', label: 'Berlin' }
 ]
 
 const GiftCard = () => {
   const id = useId()
   const [selectedAmount, setSelectedAmount] = useState('50')
-  const [currency, setCurrency] = useState('usd')
+  const [currency, setCurrency] = useState<string | null>('USD')
   const [deliveryMethod, setDeliveryMethod] = useState('immediately')
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [deliveryType, setDeliveryType] = useState('email')
@@ -52,9 +49,9 @@ const GiftCard = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
 
   const currencySymbols = {
-    usd: '$',
-    eur: '€',
-    gbp: '£'
+    USD: '$',
+    EUR: '€',
+    GBP: '£'
   }
 
   return (
@@ -63,7 +60,7 @@ const GiftCard = () => {
         <div className='bg-muted mb-6 flex items-center overflow-hidden rounded-sm p-4 max-sm:flex-col sm:max-md:gap-6 lg:h-50'>
           <div className='space-y-2'>
             <h4 className='text-2xl font-semibold'>Give the Perfect Gift Anytime, Anywhere</h4>
-            <p className='text-muted-foreground word-wrap max-w-lg'>
+            <p className='text-muted-foreground word-wrap mb-4 max-w-lg text-base'>
               Surprise someone special with the freedom to choose what they really want.
             </p>
             <Button size='lg' className='text-base'>
@@ -87,15 +84,15 @@ const GiftCard = () => {
               value={deliveryType}
               onValueChange={setDeliveryType}
             >
-              <div className='border-input has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-muted relative flex w-full items-start gap-2 rounded-lg border p-3 shadow-xs outline-none'>
+              <div className='border-input has-data-checked:border-primary/50 has-data-checked:bg-muted relative flex w-full items-start gap-2 rounded-lg border p-3 shadow-xs outline-none'>
                 <RadioGroupItem
                   value='email'
                   id={`${id}-email`}
                   aria-describedby={`${id}-email-description`}
                   className='mt-1 size-4 after:absolute after:inset-0 [&_svg]:size-2.5'
                 />
-                <div className='grid grow gap-2'>
-                  <Label htmlFor={`${id}-email`} className='text-base'>
+                <div className='grid grow gap-0.5'>
+                  <Label htmlFor={`${id}-email`} className='leading-5'>
                     Email
                   </Label>
                   <p id={`${id}-email-description`} className='text-muted-foreground text-sm'>
@@ -104,15 +101,15 @@ const GiftCard = () => {
                 </div>
               </div>
 
-              <div className='border-input has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-muted relative flex w-full items-start gap-2 rounded-lg border p-3 shadow-xs outline-none'>
+              <div className='border-input has-data-checked:border-primary/50 has-data-checked:bg-muted relative flex w-full items-start gap-2 rounded-lg border p-3 shadow-xs outline-none'>
                 <RadioGroupItem
                   value='physical'
                   id={`${id}-physical`}
                   aria-describedby={`${id}-physical-description`}
                   className='mt-1 size-4 after:absolute after:inset-0 [&_svg]:size-2.5'
                 />
-                <div className='grid grow gap-2'>
-                  <Label htmlFor={`${id}-physical`} className='text-base'>
+                <div className='grid grow gap-0.5'>
+                  <Label htmlFor={`${id}-physical`} className='leading-5'>
                     Physical
                   </Label>
                   <p id={`${id}-physical-description`} className='text-muted-foreground text-sm'>
@@ -127,13 +124,13 @@ const GiftCard = () => {
             <div className='mb-4 flex items-center gap-2 max-sm:flex-col max-sm:items-start'>
               <h4 className='text-xl font-semibold'>Choose your amount</h4>
               <Select value={currency} onValueChange={setCurrency}>
-                <SelectTrigger className='h-7! w-18 px-2 py-1 text-xs leading-4' size='sm'>
+                <SelectTrigger className='h-6! w-18 px-2 py-1 text-xs leading-4' size='sm'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent align='start'>
-                  <SelectItem value='usd'>USD</SelectItem>
-                  <SelectItem value='eur'>EUR</SelectItem>
-                  <SelectItem value='gbp'>GBP</SelectItem>
+                  <SelectItem value='USD'>USD</SelectItem>
+                  <SelectItem value='EUR'>EUR</SelectItem>
+                  <SelectItem value='GBP'>GBP</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -143,7 +140,7 @@ const GiftCard = () => {
                   key={amount}
                   type='button'
                   variant={selectedAmount === amount ? 'default' : 'secondary'}
-                  className='h-6.5 px-2 text-xs'
+                  className='h-6 rounded-md px-2! text-xs'
                   onClick={() => setSelectedAmount(amount)}
                 >
                   {currencySymbols[currency as keyof typeof currencySymbols]} {amount}
@@ -152,7 +149,7 @@ const GiftCard = () => {
               <Button
                 type='button'
                 variant={selectedAmount === 'custom' ? 'default' : 'secondary'}
-                className='h-6.5 px-2'
+                className='h-6 rounded-md px-2! text-xs'
                 onClick={() => setSelectedAmount('custom')}
               >
                 Custom
@@ -165,7 +162,7 @@ const GiftCard = () => {
                   placeholder='Enter custom amount'
                   value={customAmount}
                   onChange={e => setCustomAmount(e.target.value)}
-                  className='h-9 max-w-82'
+                  className='input-lg max-w-82'
                 />
               </div>
             )}
@@ -176,14 +173,23 @@ const GiftCard = () => {
             <div className='flex gap-3'>
               <Button
                 variant={deliveryMethod === 'immediately' ? 'default' : 'secondary'}
-                className='h-6.5 px-2 text-xs'
+                className='h-6 rounded-md px-3 text-xs'
                 onClick={() => setDeliveryMethod('immediately')}
               >
                 Immediately
               </Button>
               <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                <PopoverTrigger render={<Button variant={deliveryMethod === 'schedule' ? 'default' : 'secondary'} className='h-6.5 px-2 text-xs' onClick={() => setDeliveryMethod('schedule')} />}>Schedule
-                                                </PopoverTrigger>
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant={deliveryMethod === 'schedule' ? 'default' : 'secondary'}
+                      className='h-6 rounded-md px-2 text-xs'
+                      onClick={() => setDeliveryMethod('schedule')}
+                    />
+                  }
+                >
+                  Schedule
+                </PopoverTrigger>
                 <PopoverContent className='w-auto p-0' align='center'>
                   <Calendar
                     mode='single'
@@ -222,7 +228,7 @@ const GiftCard = () => {
                       <Label htmlFor='country' className='text-base'>
                         Country
                       </Label>
-                      <Select defaultValue='1' required>
+                      <Select defaultValue='India' required>
                         <SelectTrigger
                           id='country'
                           className='w-full [&>span]:flex [&>span]:items-center [&>span]:gap-2'
@@ -242,7 +248,7 @@ const GiftCard = () => {
                       <Label htmlFor='city' className='text-base'>
                         City
                       </Label>
-                      <Select defaultValue='1' required>
+                      <Select defaultValue='New York' required>
                         <SelectTrigger id='city' className='w-full [&>span]:flex [&>span]:items-center [&>span]:gap-2'>
                           <SelectValue placeholder='Select Country' />
                         </SelectTrigger>

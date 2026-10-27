@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 
 const Error = () => {
@@ -10,7 +9,9 @@ const Error = () => {
         <p className='text-muted-foreground mb-6 max-w-sm'>
           The page you&apos;re looking for isn&apos;t found, we suggest you back to home.
         </p>
-        <Button size='lg' className='rounded-lg text-base' render={<a href='#' />} nativeButton={false}>Back to home page</Button>
+        <Button render={<a href='#' />} nativeButton={false} size='lg'>
+          Back to home page
+        </Button>
       </div>
 
       {/* Right Section: Illustration */}

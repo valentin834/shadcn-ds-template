@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -104,32 +103,42 @@ const EditableTextCell = ({ getValue, row: { index }, column: { id }, table }: C
       value={value}
       onChange={e => setValue(e.target.value)}
       onBlur={onBlur}
-      className='focus-visible:ring-ring h-8 w-full border-0 bg-transparent p-1 focus-visible:ring-1'
+      className='focus-visible:ring-ring h-8 w-full bg-transparent px-2 focus-visible:ring-1 dark:bg-transparent'
       aria-label='editable-text-input'
     />
   )
 }
 
+const statusItems = [
+  { label: 'Active', value: 'active' },
+  { label: 'Inactive', value: 'inactive' },
+  { label: 'Pending', value: 'pending' }
+]
+
 // Editable cell component for select inputs
 const EditableSelectCell = ({ getValue, row: { index }, column: { id }, table }: CellContext<Person, unknown>) => {
   const initialValue = getValue() as string
 
-  const handleValueChange = (newValue: string) => {
-    table.options.meta?.updateData(index, id, newValue)
+  const handleValueChange = (newValue: string | null) => {
+    if (newValue) {
+      table.options.meta?.updateData(index, id, newValue)
+    }
   }
 
   return (
-    <Select value={initialValue} onValueChange={handleValueChange}>
+    <Select items={statusItems} value={initialValue} onValueChange={handleValueChange}>
       <SelectTrigger
-        className='focus:ring-ring h-8 w-full border-0 bg-transparent p-1 focus:ring-1'
+        className='focus:ring-ring h-8 w-full bg-transparent px-2 focus:ring-1 dark:bg-transparent'
         aria-label={`select-status-${id}`}
       >
         <SelectValue />
       </SelectTrigger>
-      <SelectContent>
-        <SelectItem value='active'>Active</SelectItem>
-        <SelectItem value='inactive'>Inactive</SelectItem>
-        <SelectItem value='pending'>Pending</SelectItem>
+      <SelectContent className='p-1'>
+        {statusItems.map(item => (
+          <SelectItem key={item.value} value={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   )
@@ -160,7 +169,7 @@ const EditableProgressCell = ({ getValue, row: { index }, column: { id }, table 
         value={value}
         onChange={e => setValue(e.target.value)}
         onBlur={onBlur}
-        className='focus-visible:ring-ring h-8 w-20 border-0 bg-transparent p-1 focus-visible:ring-1'
+        className='focus-visible:ring-ring h-8 w-20 bg-transparent px-2 focus-visible:ring-1 dark:bg-transparent'
         aria-label='editable-progress-input'
       />
       <span className='text-muted-foreground text-sm'>%</span>
@@ -174,7 +183,8 @@ export const columns: ColumnDef<Person>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -298,13 +308,11 @@ const EditableDataTableDemo = () => {
         </Table>
       </div>
 
-      <div className='text-muted-foreground flex items-center justify-between gap-2 text-sm max-md:flex-col'>
-        <div>{table.getRowModel().rows.length} rows total</div>
-        <div className='flex items-center space-x-2'>
-          <Button variant='outline' size='sm' onClick={refreshData}>
-            Refresh Data
-          </Button>
-        </div>
+      <div className='flex items-center justify-between gap-2 text-sm max-md:flex-col'>
+        <span className='text-muted-foreground'>{table.getRowModel().rows.length} rows total</span>
+        <Button variant='outline' size='sm' onClick={refreshData}>
+          Refresh Data
+        </Button>
       </div>
 
       <p className='text-muted-foreground mt-4 text-center text-sm'>

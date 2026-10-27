@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -13,7 +12,7 @@ import {
 const DropdownMenuAlignEndDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Align End</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Align End</Button>} />
       <DropdownMenuContent align='end' className='w-66'>
         <DropdownMenuGroup>
           <DropdownMenuItem>

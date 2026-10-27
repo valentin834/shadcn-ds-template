@@ -1,90 +1,45 @@
-// @ts-nocheck
 'use client'
 
-import { useId, useState } from 'react'
+import { useId } from 'react'
 
-import { CircleCheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
+import { Combobox as ComboboxPrimitive } from '@base-ui/react'
+import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxList } from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { CircleCheckIcon } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
-
-const frameworks = [
-  {
-    value: 'next.js',
-    label: 'Next.js'
-  },
-  {
-    value: 'sveltekit',
-    label: 'SvelteKit'
-  },
-  {
-    value: 'nuxt.js',
-    label: 'Nuxt.js'
-  },
-  {
-    value: 'remix',
-    label: 'Remix'
-  },
-  {
-    value: 'astro',
-    label: 'Astro'
-  }
-]
+const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'] as const
 
 const ComboboxCustomCheckIconDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Combobox with custom check icon</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='w-full max-w-xs justify-between' />}>{value ? (
-                            frameworks.find(framework => framework.value === value)?.label
-                          ) : (
-                            <span className='text-muted-foreground'>Select industry category</span>
-                          )}<ChevronsUpDownIcon className='opacity-50' /></PopoverTrigger>
-        <PopoverContent className='p-0'>
-          <Command>
-            <CommandInput placeholder='Search framework...' className='h-9' />
-            <CommandList>
-              <CommandEmpty>No framework found.</CommandEmpty>
-              <CommandGroup>
-                {frameworks.map(framework => (
-                  <CommandItem
-                    key={framework.value}
-                    value={framework.value}
-                    onSelect={currentValue => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                  >
-                    {framework.label}
-                    <CircleCheckIcon
-                      className={cn(
-                        'ml-auto fill-blue-500 stroke-white',
-                        value === framework.value ? 'opacity-100' : 'opacity-0'
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={frameworks}>
+        <ComboboxInput placeholder='Select a framework' />
+        <ComboboxContent>
+          <ComboboxEmpty>No items found.</ComboboxEmpty>
+          <ComboboxList>
+            {item => (
+              <ComboboxPrimitive.Item
+                key={item}
+                value={item}
+                className='data-highlighted:bg-accent data-highlighted:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none [&_svg]:pointer-events-none [&_svg]:shrink-0'
+              >
+                {item}
+                <ComboboxPrimitive.ItemIndicator
+                  data-slot='combobox-item-indicator'
+                  render={
+                    <span className='pointer-events-none absolute right-2 flex size-4 items-center justify-center' />
+                  }
+                >
+                  <CircleCheckIcon className='pointer-events-none size-4 fill-blue-500 stroke-white pointer-coarse:size-5' />
+                </ComboboxPrimitive.ItemIndicator>
+              </ComboboxPrimitive.Item>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

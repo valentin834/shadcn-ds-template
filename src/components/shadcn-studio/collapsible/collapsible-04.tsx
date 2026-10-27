@@ -1,9 +1,7 @@
-// @ts-nocheck
-import { ChevronRightIcon, PanelsTopLeftIcon, PlusIcon, UserIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { ChevronRightIcon, UserIcon, PanelsTopLeftIcon, PlusIcon } from 'lucide-react'
 
 const users = [
   {
@@ -35,44 +33,47 @@ const users = [
 
 const CollapsibleProfileDemo = () => {
   return (
-    <ul className='flex w-full max-w-[350px] flex-col gap-4'>
+    <ul className='flex w-full max-w-87.5 flex-col gap-4'>
       {users.map(user => (
-        <Collapsible key={user.name} render={<li className='flex flex-col gap-2' />}><CollapsibleTrigger className='flex w-full items-center justify-between gap-4'>
-                        <div className='flex items-center gap-2'>
-                          <Avatar>
-                            <AvatarImage src={user.image} alt={user.fallback} />
-                            <AvatarFallback>{user.fallback}</AvatarFallback>
-                          </Avatar>
-                          <span className='font-medium'>{user.name}</span>
-                        </div>
-                        <ChevronRightIcon className='size-4 transition-transform [[data-state=open]_&]:rotate-90' />
-                      </CollapsibleTrigger><CollapsibleContent>
-                        <div className='flex flex-col gap-2'>
-                          <p className='text-muted-foreground text-sm'>{user.bio}</p>
-                          <div className='flex items-center justify-between gap-2'>
-                            <div className='flex items-center gap-4'>
-                              <span className='flex items-center gap-2'>
-                                <UserIcon className='size-4' />
-                                <span className='text-sm'>{user.followers}</span>
-                              </span>
-                              <span className='flex items-center gap-2'>
-                                <PanelsTopLeftIcon className='size-4' />
-                                <span className='text-sm'>{user.projects}</span>
-                              </span>
-                            </div>
-                            {user.followed ? (
-                              <Button variant='outline' className='h-7 rounded-full px-3 py-1 text-xs'>
-                                Following
-                              </Button>
-                            ) : (
-                              <Button className='h-7 rounded-full px-3 py-1 text-xs'>
-                                Follow
-                                <PlusIcon />
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      </CollapsibleContent></Collapsible>
+        <Collapsible key={user.name} render={<li className='flex flex-col gap-2'></li>}>
+          <CollapsibleTrigger className='group/button flex w-full items-center justify-between gap-4'>
+            <div className='flex items-center gap-2'>
+              <Avatar>
+                <AvatarImage src={user.image} alt={user.fallback} />
+                <AvatarFallback>{user.fallback}</AvatarFallback>
+              </Avatar>
+              <span className='font-medium'>{user.name}</span>
+            </div>
+            <ChevronRightIcon className='size-4 transition-transform in-data-open:rotate-90' />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className='flex flex-col gap-2'>
+              <p className='text-muted-foreground text-sm'>{user.bio}</p>
+              <div className='flex items-center justify-between gap-2'>
+                <div className='flex items-center gap-4'>
+                  <span className='flex items-center gap-2'>
+                    <UserIcon className='size-4' />
+                    <span className='text-sm'>{user.followers}</span>
+                  </span>
+                  <span className='flex items-center gap-2'>
+                    <PanelsTopLeftIcon className='size-4' />
+                    <span className='text-sm'>{user.projects}</span>
+                  </span>
+                </div>
+                {user.followed ? (
+                  <Button variant='outline' className='h-7 rounded-full px-3 py-1 text-xs'>
+                    Following
+                  </Button>
+                ) : (
+                  <Button className='h-7 rounded-full px-3 py-1 text-xs'>
+                    Follow
+                    <PlusIcon className='text-white' />
+                  </Button>
+                )}
+              </div>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       ))}
     </ul>
   )

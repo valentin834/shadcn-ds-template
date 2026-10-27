@@ -1,8 +1,7 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
-import { SelectNative } from '@/components/ui/select-native'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
 const NativeSelectRequiredDemo = () => {
   const id = useId()
@@ -12,12 +11,12 @@ const NativeSelectRequiredDemo = () => {
       <Label htmlFor={id} className='gap-1'>
         Required native select <span className='text-destructive'>*</span>
       </Label>
-      <SelectNative id={id} required>
-        <option value='1'>Action</option>
-        <option value='2'>Comedy</option>
-        <option value='3'>Romance</option>
-        <option value='4'>Thriller</option>
-      </SelectNative>
+      <NativeSelect id={id} required>
+        <NativeSelectOption value='1'>Action</NativeSelectOption>
+        <NativeSelectOption value='2'>Comedy</NativeSelectOption>
+        <NativeSelectOption value='3'>Romance</NativeSelectOption>
+        <NativeSelectOption value='4'>Thriller</NativeSelectOption>
+      </NativeSelect>
     </div>
   )
 }

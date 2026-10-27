@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { XIcon, PlusIcon } from 'lucide-react'
-
 import {
   Dialog,
   DialogContent,
@@ -17,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { XIcon, PlusIcon } from 'lucide-react'
 
 interface ConnectedAccount {
   id: string
@@ -87,7 +84,7 @@ const ConnectedAccount = () => {
       <div className='space-y-4 lg:col-span-2'>
         <div className='flex flex-wrap items-center gap-4'>
           {connectedAccounts.map(account => (
-            <div key={account.id} className='flex w-fit items-center gap-3 rounded-md border p-2'>
+            <div key={account.id} className='flex h-9 w-fit items-center gap-2 rounded-md border px-2.5 text-sm'>
               {account.iconUrl ? (
                 <img src={account.iconUrl} alt={account.name} className='size-4 rounded' />
               ) : (
@@ -98,9 +95,9 @@ const ConnectedAccount = () => {
 
               <p className='text-sm font-medium'>{account.name}</p>
               <Button
-                size='xs'
+                size='icon-xs'
                 variant='ghost'
-                className='text-primary bg-primary/10 rounded-md transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none'
+                className='text-primary bg-primary/10 size-5 shrink-0 rounded-md transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none'
                 aria-label={`Remove ${account.name}`}
                 onClick={() => handleRemoveAccount(account.id)}
               >
@@ -111,8 +108,18 @@ const ConnectedAccount = () => {
 
           {/* Add App Button + Modal */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger render={<Button variant='outline' className='h-10.5' onClick={() => setIsDialogOpen(true)} />}><PlusIcon className='size-4' />Add App
-                                    </DialogTrigger>
+            <DialogTrigger
+              render={
+                <Button
+                  variant='outline'
+                  className='bg-background h-9 gap-2 rounded-md px-3'
+                  onClick={() => setIsDialogOpen(true)}
+                />
+              }
+            >
+              <PlusIcon className='size-4' />
+              Add App
+            </DialogTrigger>
 
             <DialogContent>
               <DialogHeader>

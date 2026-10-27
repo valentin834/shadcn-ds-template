@@ -1,19 +1,16 @@
-// @ts-nocheck
-import { DownloadIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
+import { DownloadIcon } from 'lucide-react'
 
 const ButtonGroupDownloadDemo = () => {
   return (
-    <div className='inline-flex w-fit -space-x-px rounded-md shadow-xs rtl:space-x-reverse'>
-      <Button variant='outline' className='rounded-none rounded-l-md shadow-none focus-visible:z-10'>
+    <ButtonGroup>
+      <Button variant='outline'>
         <DownloadIcon />
         Download
       </Button>
-      <span className='bg-background dark:border-input dark:bg-input/30 flex items-center rounded-r-md border px-3 text-sm font-medium'>
-        15k
-      </span>
-    </div>
+      <Button variant='outline'>15K</Button>
+    </ButtonGroup>
   )
 }
 

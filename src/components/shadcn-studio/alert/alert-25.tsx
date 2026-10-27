@@ -1,7 +1,5 @@
-// @ts-nocheck
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { TriangleAlertIcon } from 'lucide-react'
-
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
 const AlertSoftDestructiveDemo = () => {
   return (

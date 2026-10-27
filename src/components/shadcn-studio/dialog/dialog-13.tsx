@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -22,7 +21,7 @@ const DialogSignUpDemo = () => {
     <Dialog>
       <form>
         <DialogTrigger render={<Button variant='outline' />}>Sign Up</DialogTrigger>
-        <DialogContent className='to-card bg-gradient-to-b from-green-100 to-40% [background-size:100%_101%] sm:max-w-sm dark:from-green-900'>
+        <DialogContent className='to-card bg-linear-to-b from-green-100 to-40% bg-size-[100%_101%] dark:from-green-900'>
           <DialogHeader className='items-center'>
             <DialogTitle>Sign Up</DialogTitle>
             <DialogDescription>Start your 60-day free trial now.</DialogDescription>
@@ -49,7 +48,7 @@ const DialogSignUpDemo = () => {
             <div className='flex items-center gap-2'>
               <Checkbox
                 id={id}
-                className='focus-visible:ring-green-600/20 data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 dark:text-white dark:focus-visible:ring-green-400/40 dark:data-[state=checked]:border-green-400 dark:data-[state=checked]:bg-green-400'
+                className='focus-visible:ring-green-600/20 data-checked:border-green-600 data-checked:bg-green-600 dark:text-white dark:focus-visible:ring-green-400/40 dark:data-checked:border-green-400 dark:data-checked:bg-green-400'
                 defaultChecked
               />
               <Label htmlFor={id} className='gap-1'>

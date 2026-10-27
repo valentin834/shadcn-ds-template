@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { ListBox, ListBoxItem } from 'react-aria-components'
@@ -16,9 +15,9 @@ const ListboxSingleOptionDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label>Listbox with single option selectable</Label>
-      <div className='border-input overflow-hidden rounded-md border'>
+      <div className='border-input overflow-hidden rounded-lg border'>
         <ListBox
-          className='bg-background space-y-1 p-1 text-sm shadow-xs transition-[color,box-shadow]'
+          className='bg-background space-y-1 p-1 text-sm transition-colors'
           aria-label='Select framework'
           selectionMode='single'
           defaultSelectedKeys={['svelte']}
@@ -26,7 +25,7 @@ const ListboxSingleOptionDemo = () => {
           {listitems.map(item => (
             <ListBoxItem
               key={item.id}
-              className='data-[disabled]:text-muted-foreground data-[selected]:bg-accent data-[selected]:text-accent-foreground flex items-center justify-between rounded-sm px-2 py-1.5'
+              className='data-selected:bg-muted data-selected:text-foreground data-disabled:text-muted-foreground flex items-center justify-between rounded-md px-2 py-1.5'
               textValue={item.label}
               isDisabled={item.isDisabled}
             >

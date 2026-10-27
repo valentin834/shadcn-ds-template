@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 
 const ButtonShimmerEffectDemo = () => {

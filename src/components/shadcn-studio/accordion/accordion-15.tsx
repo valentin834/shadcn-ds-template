@@ -1,15 +1,12 @@
-// @ts-nocheck
-import { ChevronDownIcon, HeadsetIcon, PackageIcon, PlusIcon, RefreshCwIcon } from 'lucide-react'
-
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
-
 import { Accordion, AccordionContent, AccordionItem } from '@/components/ui/accordion'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { PackageIcon, RefreshCwIcon, HeadsetIcon, PlusIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
 const items = [
   {
     category: 'Shipping & Delivery',
-    icon: PackageIcon,
+    icon: <PackageIcon />,
     faqs: [
       {
         title: 'How do I track my order?',
@@ -29,7 +26,7 @@ const items = [
   },
   {
     category: 'Returns & Refunds',
-    icon: RefreshCwIcon,
+    icon: <RefreshCwIcon />,
     faqs: [
       {
         title: 'What is your return policy?',
@@ -50,7 +47,7 @@ const items = [
   },
   {
     category: 'Help & Support',
-    icon: HeadsetIcon,
+    icon: <HeadsetIcon />,
     faqs: [
       {
         title: 'How can I contact customer support?',
@@ -73,31 +70,37 @@ const items = [
 
 const AccordionMultilevelDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full rounded-md border' defaultValue='item-1'>
+    <Accordion
+      className='w-full rounded-lg border [&>*>[data-slot="accordion-content"]]:px-0'
+      defaultValue={['item-1']}
+    >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='has-focus-visible:border-ring has-focus-visible:ring-ring/50 outline-none first:rounded-t-md last:rounded-b-md has-focus-visible:z-10 has-focus-visible:ring-[3px]'
+          className='has-focus-visible:border-ring has-focus-visible:ring-ring/50 outline-none first:rounded-t-lg last:rounded-b-lg has-focus-visible:z-10 has-focus-visible:ring-3'
         >
-          <AccordionPrimitive.Trigger
-            data-slot='accordion-trigger'
-            className='flex w-full flex-1 items-start justify-between gap-4 rounded-md px-5 py-4 text-left text-sm font-medium transition-all outline-none hover:underline disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-135'
-          >
-            <span className='flex items-center gap-4'>
-              <item.icon className='size-4 shrink-0' />
-              <span>{item.category}</span>
-            </span>
-            <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200' />
-          </AccordionPrimitive.Trigger>
-          <AccordionContent className='pb-0'>
+          <AccordionPrimitive.Header className='flex'>
+            <AccordionPrimitive.Trigger
+              data-slot='accordion-trigger'
+              className='flex w-full flex-1 items-start justify-between gap-4 rounded-lg px-5 py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline disabled:pointer-events-none disabled:opacity-50'
+            >
+              <span className='flex items-center gap-4 *:[svg]:size-4 *:[svg]:shrink-0'>
+                {item.icon}
+                <span>{item.category}</span>
+              </span>
+              <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 in-data-open:rotate-45' />
+            </AccordionPrimitive.Trigger>
+          </AccordionPrimitive.Header>
+          <AccordionContent className='h-auto pb-0'>
             {item.faqs.map((faq, i) => (
               <Collapsible key={i} className='bg-accent border-t px-5' defaultOpen={i === 0}>
-                <CollapsibleTrigger className='focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-sm py-4 font-medium outline-none focus-visible:z-10 focus-visible:ring-[3px] [&[data-state=open]>svg]:rotate-180'>
-                  <ChevronDownIcon className='text-muted-foreground pointer-events-none size-4 shrink-0' />
+                <CollapsibleTrigger className='group/collapsible focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-sm py-2.5 font-medium outline-none focus-visible:z-10 focus-visible:ring-3'>
+                  <ChevronDownIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 group-aria-expanded/collapsible:hidden' />
+                  <ChevronUpIcon className='text-muted-foreground pointer-events-none hidden size-4 shrink-0 group-aria-expanded/collapsible:inline' />
                   {faq.title}
                 </CollapsibleTrigger>
-                <CollapsibleContent className='text-muted-foreground overflow-hidden pb-4'>
+                <CollapsibleContent className='text-muted-foreground overflow-hidden pb-2.5'>
                   {faq.content}
                 </CollapsibleContent>
               </Collapsible>

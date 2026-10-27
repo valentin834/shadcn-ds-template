@@ -1,12 +1,11 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 
 const HoverCardStatsDemo = () => {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
-      <HoverCardTrigger render={<Button variant='link' />}>Hover Card Stats</HoverCardTrigger>
+    <HoverCard>
+      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Stats</Button>} />
       <HoverCardContent className='w-fit'>
         <div className='flex items-center gap-1.5'>
           <div className='flex flex-col gap-1'>

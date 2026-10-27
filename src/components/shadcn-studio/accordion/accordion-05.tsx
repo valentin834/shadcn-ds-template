@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const items = [
@@ -20,14 +19,14 @@ const items = [
 
 const AccordionActiveItemDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+    <Accordion className='w-full border-0 [&>*>[data-slot="accordion-content"]]:px-0' defaultValue={['item-1']}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='data-[state=open]:border-amber-600 not-last:data-[state=open]:border-b-2 dark:data-[state=open]:border-amber-400'
+          className='bg-transparent data-open:border-amber-600 not-last:data-open:border-b-2 dark:data-open:border-amber-400'
         >
-          <AccordionTrigger className='data-[state=open]:text-amber-600 dark:data-[state=open]:text-amber-400 [&[data-state=open]>svg]:text-amber-600 dark:[&[data-state=open]>svg]:text-amber-400'>
+          <AccordionTrigger className='px-0 in-data-open:text-amber-600 in-data-open:**:data-[slot=accordion-trigger-icon]:text-amber-600 dark:in-data-open:text-amber-400 dark:in-data-open:**:data-[slot=accordion-trigger-icon]:text-amber-400'>
             {item.title}
           </AccordionTrigger>
           <AccordionContent className='text-muted-foreground'>{item.content}</AccordionContent>

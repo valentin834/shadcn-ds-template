@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -29,15 +28,17 @@ const CardDemo = () => {
             </div>
           </div>
         </form>
+        <div className='mt-6 flex flex-col gap-2'>
+          <Button type='submit' className='w-full'>
+            Login
+          </Button>
+          <Button variant='outline' className='w-full'>
+            Continue with Google
+          </Button>
+        </div>
       </CardContent>
-      <CardFooter className='flex-col gap-2'>
-        <Button type='submit' className='w-full'>
-          Login
-        </Button>
-        <Button variant='outline' className='w-full'>
-          Continue with Google
-        </Button>
-        <div className='mt-4 text-center text-sm'>
+      <CardFooter className='justify-center'>
+        <div className='text-sm'>
           Don&apos;t have an account?{' '}
           <a href='#' className='underline underline-offset-4'>
             Sign up

@@ -1,11 +1,9 @@
-// @ts-nocheck
-import { UserPlusIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { UserPlusIcon } from 'lucide-react'
 
 const friends = [
   {
@@ -51,7 +49,7 @@ const DialogInviteFriendsDemo = () => {
     <Dialog>
       <DialogTrigger render={<Button variant='outline' />}>Invite</DialogTrigger>
       <DialogContent className='sm:max-w-lg'>
-        <DialogHeader className='text-center'>
+        <DialogHeader>
           <DialogTitle className='text-xl'>Invite new members </DialogTitle>
         </DialogHeader>
         <form className='flex gap-4 max-sm:flex-col'>

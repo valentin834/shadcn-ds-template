@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
@@ -10,11 +9,19 @@ const RadioGroupSizesDemo = () => {
         <Label htmlFor='size-default'>Default</Label>
       </div>
       <div className='flex items-center gap-2'>
-        <RadioGroupItem value='medium' id='size-medium' className='size-5 [&_svg]:size-3' />
+        <RadioGroupItem
+          value='medium'
+          id='size-medium'
+          className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'
+        />
         <Label htmlFor='size-medium'>Medium</Label>
       </div>
       <div className='flex items-center gap-2'>
-        <RadioGroupItem value='large' id='size-large' className='size-6 [&_svg]:size-3.5' />
+        <RadioGroupItem
+          value='large'
+          id='size-large'
+          className='size-6 [&_[data-slot=radio-group-indicator]>span]:size-3'
+        />
         <Label htmlFor='size-large'>Large</Label>
       </div>
     </RadioGroup>

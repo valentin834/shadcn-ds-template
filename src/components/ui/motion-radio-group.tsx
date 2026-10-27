@@ -1,23 +1,19 @@
-// @ts-nocheck
-// 40-60: Radix primitives compose with `asChild`, not with the Base UI `render`
-// prop (with `render` the motion element and its styles were dropped).
 'use client'
 
-import * as React from 'react'
+import { Radio as RadioPrimitive } from '@base-ui/react/radio'
+import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'
 
-import { RadioGroup as RadioGroupPrimitive } from 'radix-ui'
 import { AnimatePresence, motion, type HTMLMotionProps, type Transition } from 'motion/react'
+import { cn } from '@/lib/utils'
 import { CircleIcon } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
-
-type RadioGroupItemProps = React.ComponentProps<typeof RadioGroupPrimitive.Item> &
-  HTMLMotionProps<'button'> & {
+type RadioGroupItemProps = RadioPrimitive.Root.Props &
+  HTMLMotionProps<'span'> & {
     transition?: Transition
   }
 
-function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
-  return <RadioGroupPrimitive.Root data-slot='radio-group' className={cn('grid gap-3', className)} {...props} />
+function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
+  return <RadioGroupPrimitive data-slot='radio-group' className={cn('grid gap-2', className)} {...props} />
 }
 
 function RadioGroupItem({
@@ -26,26 +22,38 @@ function RadioGroupItem({
   ...props
 }: RadioGroupItemProps) {
   return (
-    <RadioGroupPrimitive.Item {...props} asChild><motion.button data-slot='radio-group-item' className={cn(
-                'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-5 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-                className
-              )} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><RadioGroupPrimitive.Indicator
-                data-slot='radio-group-indicator'
-                className='relative flex items-center justify-center'
-              >
-                <AnimatePresence>
-                  <motion.div
-                    key='radio-group-indicator-circle'
-                    data-slot='radio-group-indicator-circle'
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={transition}
-                  >
-                    <CircleIcon className='size-3 fill-current text-current' />
-                  </motion.div>
-                </AnimatePresence>
-              </RadioGroupPrimitive.Indicator></motion.button></RadioGroupPrimitive.Item>
+    <RadioPrimitive.Root
+      {...props}
+      render={
+        <motion.span
+          data-slot='radio-group-item'
+          className={cn(
+            'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40 aspect-square size-5 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+            className
+          )}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        />
+      }
+    >
+      <RadioPrimitive.Indicator
+        data-slot='radio-group-indicator'
+        className='relative flex h-full items-center justify-center'
+      >
+        <AnimatePresence>
+          <motion.div
+            key='radio-group-indicator-circle'
+            data-slot='radio-group-indicator-circle'
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={transition}
+          >
+            <CircleIcon className='size-3 fill-current text-current' />
+          </motion.div>
+        </AnimatePresence>
+      </RadioPrimitive.Indicator>
+    </RadioPrimitive.Root>
   )
 }
 

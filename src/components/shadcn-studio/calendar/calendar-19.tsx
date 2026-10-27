@@ -1,15 +1,13 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useId, useState } from 'react'
 
 import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
-
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { CalendarIcon } from 'lucide-react'
 
 const CalendarWithDateInput = () => {
   const id = useId()

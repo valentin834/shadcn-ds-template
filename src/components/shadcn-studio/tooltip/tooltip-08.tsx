@@ -1,24 +1,51 @@
-// @ts-nocheck
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-const TooltipAvatarDemo = () => {
+const TooltipDirectionsDemo = () => {
   return (
-    <Tooltip>
-      <TooltipTrigger render={<Button variant='outline' size='sm' />}>Avatar
-                  </TooltipTrigger>
-      <TooltipContent>
-        <div className='flex items-center gap-1.5'>
-          <Avatar className='size-5'>
-            <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />
-            <AvatarFallback className='text-xs'>HR</AvatarFallback>
-          </Avatar>
-          <p className='font-medium'>Hallie Richards</p>
-        </div>
-      </TooltipContent>
-    </Tooltip>
+    <div className='flex flex-wrap gap-2'>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button variant='outline' size='sm'>
+              Left
+            </Button>
+          }
+        />
+        <TooltipContent side='left'>Tooltip on left</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button variant='outline' size='sm'>
+              Top
+            </Button>
+          }
+        />
+        <TooltipContent side='top'>Tooltip on top</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button variant='outline' size='sm'>
+              Bottom
+            </Button>
+          }
+        />
+        <TooltipContent side='bottom'>Tooltip on bottom</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button variant='outline' size='sm'>
+              Right
+            </Button>
+          }
+        />
+        <TooltipContent side='right'>Tooltip on right</TooltipContent>
+      </Tooltip>
+    </div>
   )
 }
 
-export default TooltipAvatarDemo
+export default TooltipDirectionsDemo

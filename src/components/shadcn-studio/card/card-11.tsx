@@ -1,23 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import {
-  BadgeCheckIcon,
-  EllipsisIcon,
-  HeartIcon,
-  MessageCircleIcon,
-  RepeatIcon,
-  SendIcon,
-  UserPlusIcon
-} from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-
-import { cn } from '@/lib/utils'
+import BadgeCheck from '@/assets/svg/badge-check'
+import Heart from '@/assets/svg/heart'
+import { UserPlusIcon, EllipsisIcon, MessageCircleIcon, RepeatIcon, SendIcon } from 'lucide-react'
 
 const CardTweetDemo = () => {
   const [liked, setLiked] = useState<boolean>(true)
@@ -32,7 +21,7 @@ const CardTweetDemo = () => {
           </Avatar>
           <div className='flex flex-col gap-0.5'>
             <CardTitle className='flex items-center gap-1 text-sm'>
-              Philip George <BadgeCheckIcon className='size-4 fill-sky-600 stroke-white dark:fill-sky-400' />
+              Philip George <BadgeCheck className='text-background size-4 fill-sky-600 dark:fill-sky-400' />
             </CardTitle>
             <CardDescription>@philip20</CardDescription>
           </div>
@@ -67,19 +56,24 @@ const CardTweetDemo = () => {
         </p>
       </CardContent>
       <CardFooter className='flex items-center gap-1'>
-        <Button variant='ghost' size='sm' onClick={() => setLiked(!liked)}>
-          <HeartIcon className={cn(liked && 'fill-destructive stroke-destructive')} />
+        <Button
+          variant='ghost'
+          size='sm'
+          className='hover:bg-primary/10 dark:hover:bg-primary/20'
+          onClick={() => setLiked(!liked)}
+        >
+          {liked ? <Heart className='fill-destructive stroke-destructive' /> : <Heart />}
           2.1K
         </Button>
-        <Button variant='ghost' size='sm'>
+        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>
           <MessageCircleIcon />
           1.4K
         </Button>
-        <Button variant='ghost' size='sm'>
+        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>
           <RepeatIcon />
           669
         </Button>
-        <Button variant='ghost' size='sm'>
+        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>
           <SendIcon />
           1.1K
         </Button>

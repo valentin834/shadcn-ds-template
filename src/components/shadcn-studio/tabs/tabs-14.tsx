@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -28,8 +27,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   },
@@ -68,7 +67,7 @@ const tabs = [
     value: 'community',
     content: (
       <>
-        Connect with the <span className='text-foreground font-semibold'>community</span>—share your thoughts, ask
+        Connect with the <span className='text-foreground font-semibold'>community</span> - share your thoughts, ask
         questions, and join discussions with like-minded individuals.
       </>
     )

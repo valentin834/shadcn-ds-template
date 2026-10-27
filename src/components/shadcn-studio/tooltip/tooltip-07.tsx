@@ -1,14 +1,17 @@
-// @ts-nocheck
-import { InfoIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { InfoIcon } from 'lucide-react'
 
 const TooltipContentDemo = () => {
   return (
     <Tooltip>
-      <TooltipTrigger render={<Button variant='outline' size='sm' />}>Content
-                  </TooltipTrigger>
+      <TooltipTrigger
+        render={
+          <Button variant='outline' size='sm'>
+            Content
+          </Button>
+        }
+      />
       <TooltipContent className='max-w-64 py-3 text-pretty'>
         <div className='space-y-1'>
           <div className='flex items-center gap-2'>

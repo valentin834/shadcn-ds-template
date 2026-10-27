@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon } from 'lucide-react'
 
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
 import {
@@ -13,7 +10,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -24,6 +20,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { usePagination } from '@/hooks/use-pagination'
 
 import { cn } from '@/lib/utils'
+import { ChevronUpIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
 type Item = {
   product_name: string
@@ -36,7 +33,8 @@ const columns: ColumnDef<Item>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -76,11 +74,16 @@ const columns: ColumnDef<Item>[] = [
           'bg-amber-600/10 text-amber-600 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:focus-visible:ring-amber-400/40 [a&]:hover:bg-amber-600/5 dark:[a&]:hover:bg-amber-400/5'
       }[availability]
 
-      return (
-        <Badge className={(cn('border-none focus-visible:outline-none'), styles)}>{row.getValue('availability')}</Badge>
-      )
+      return <Badge className={styles}>{row.getValue('availability')}</Badge>
     }
   }
+]
+
+const pageSizeItems = [
+  { label: '5 / page', value: '5' },
+  { label: '10 / page', value: '10' },
+  { label: '25 / page', value: '25' },
+  { label: '50 / page', value: '50' }
 ]
 
 const DataTableWithPaginationDemo = () => {
@@ -268,18 +271,19 @@ const DataTableWithPaginationDemo = () => {
 
         <div className='flex flex-1 justify-end'>
           <Select
+            items={pageSizeItems}
             value={table.getState().pagination.pageSize.toString()}
             onValueChange={value => {
               table.setPageSize(Number(value))
             }}
           >
             <SelectTrigger id='results-per-page' className='w-fit whitespace-nowrap' aria-label='Results per page'>
-              <SelectValue placeholder='Select number of results' />
+              <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              {[5, 10, 25, 50].map(pageSize => (
-                <SelectItem key={pageSize} value={pageSize.toString()}>
-                  {pageSize} / page
+            <SelectContent className='p-1'>
+              {pageSizeItems.map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
                 </SelectItem>
               ))}
             </SelectContent>

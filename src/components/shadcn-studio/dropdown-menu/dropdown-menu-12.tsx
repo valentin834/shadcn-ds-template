@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { CircleHelpIcon, DollarSignIcon, ReceiptIcon, SettingsIcon, UserIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,13 +7,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { UserIcon, SettingsIcon, ReceiptIcon, DollarSignIcon, CircleHelpIcon } from 'lucide-react'
 
 const DropdownMenuItemIconDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Menu item with icon</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Menu item with icon</Button>} />
       <DropdownMenuContent className='w-56'>
-        <DropdownMenuLabel>User Profile</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>User Profile</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <UserIcon />

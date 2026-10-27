@@ -1,21 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useEffect, useState } from 'react'
 
-import {
-  StarIcon,
-  TruckIcon,
-  BadgePercentIcon,
-  StoreIcon,
-  MapPinIcon,
-  ChevronDownIcon,
-  MinusIcon,
-  PlusIcon
-} from 'lucide-react'
-
 import { Button as AriaButton, Group, Input as AriaInput, NumberField } from 'react-aria-components'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -32,14 +19,17 @@ import { Rating } from '@/components/ui/rating'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+  StoreIcon,
+  BadgePercentIcon,
+  StarIcon,
+  MapPinIcon,
+  TruckIcon,
+  ChevronDownIcon,
+  MinusIcon,
+  PlusIcon
+} from 'lucide-react'
 
 type ProductOverviewProps = {
   productItems: {
@@ -87,6 +77,11 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
   const [selectedColor, setSelectedColor] = useState(productItems[0]?.defaultColorOption || colorsChart[0]?.value || '')
   const [selectedSize, setSelectedSize] = useState(productItems[0]?.defaultSize || sizesChart[0]?.value || '')
   const [deliveryOption, setDeliveryOption] = useState('regular')
+
+  const deliveryOptions = [
+    { label: 'Regular', value: 'regular' },
+    { label: '1 Day (+$10)', value: '1 day' }
+  ]
 
   // Sync carousel with thumbnail selection
   useEffect(() => {
@@ -202,7 +197,9 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                     <div className='flex items-center gap-2 py-4'>
                       <MapPinIcon className='text-foreground size-5.5' />
                       <p className='text-muted-foreground grow font-medium'>{item.address}</p>
-                      <Button variant='outline' size='sm' render={<a href={item.storeLink} />} nativeButton={false}>Visit Store</Button>
+                      <Button variant='outline' size='sm' render={<a href={item.storeLink} />} nativeButton={false}>
+                        Visit Store
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -226,11 +223,11 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                   {/* Price */}
                   {!hasDiscount ? (
                     <div className='w-fit rounded-lg border px-4 py-1.5'>
-                      <h4 className='text-muted-foreground text-3xl font-bold'>${finalPrice.toFixed(2)}</h4>
+                      <p className='text-muted-foreground text-3xl font-bold'>${finalPrice.toFixed(2)}</p>
                     </div>
                   ) : (
                     <div className='flex w-fit items-center gap-2 rounded-lg border px-4 py-1.5'>
-                      <h4 className='text-muted-foreground text-3xl font-bold'>${finalPrice.toFixed(2)}</h4>
+                      <p className='text-muted-foreground text-3xl font-bold'>${finalPrice.toFixed(2)}</p>
                       <span className='text-muted-foreground line-through'>${originalPrice.toFixed(2)}</span>
                       <span className='text-destructive font-medium'>( {discountPercentage}% OFF )</span>
                     </div>
@@ -238,24 +235,20 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                   {/* Color Selection */}
                   <div className='flex flex-col gap-3'>
                     <h4 className='font-semibold'>Select Color :</h4>
-                    <RadioGroup
-                      className='flex'
-                      defaultValue={item.defaultColorOption}
-                      onValueChange={setSelectedColor}
-                    >
+                    <RadioGroup className='flex gap-4!' value={selectedColor} onValueChange={setSelectedColor}>
                       {colorsChart.map(colorItem => (
                         <label
                           key={`${id}-${colorItem.value}`}
-                          className='has-focus-visible:ring-ring/50 has-data-[state=checked]:border-primary relative size-15 cursor-pointer overflow-hidden rounded-lg text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 has-data-[state=checked]:border'
+                          className='has-focus-visible:ring-ring/50 has-data-checked:border-primary relative size-15 cursor-pointer overflow-hidden rounded-lg text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-checked:border has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50'
                         >
                           <RadioGroupItem
                             id={`${id}-${colorItem.value}`}
                             value={colorItem.value}
-                            className='sr-only after:absolute after:inset-0'
+                            className='absolute inset-0 opacity-0'
                             aria-label={`color-radio-${colorItem.value}`}
                             disabled={colorItem.disabled}
                           />
-                          <img src={colorItem.src} alt={colorItem.value} className='object-cover' />
+                          <img src={colorItem.src} alt={colorItem.value} className='pointer-events-none object-cover' />
                         </label>
                       ))}
                     </RadioGroup>
@@ -263,20 +256,20 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                   {/* Size Selection */}
                   <div className='flex flex-col gap-3'>
                     <h4 className='font-semibold'>Select Size </h4>
-                    <RadioGroup className='flex' defaultValue={item.defaultSize} onValueChange={setSelectedSize}>
+                    <RadioGroup className='flex gap-4!' value={selectedSize} onValueChange={setSelectedSize}>
                       {sizesChart.map(sizeItem => (
                         <label
                           key={`${id}-${sizeItem.value}`}
-                          className='border-input group has-data-[state=checked]:bg-primary has-focus-visible:border-ring has-focus-visible:ring-ring/50 bg-background relative flex cursor-pointer flex-col items-center gap-3 rounded-md border px-3 py-1.5 text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50'
+                          className='border-input group has-data-checked:bg-primary has-focus-visible:border-ring has-focus-visible:ring-ring/50 bg-background relative flex cursor-pointer flex-col items-center gap-3 rounded-md border px-2.5 py-1 text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50'
                         >
                           <RadioGroupItem
                             id={`${id}-${sizeItem.value}`}
                             value={sizeItem.value}
-                            className='sr-only after:absolute after:inset-0'
+                            className='absolute inset-0 opacity-0'
                             aria-label={`size-radio-${sizeItem.value}`}
                             disabled={sizeItem.disabled}
                           />
-                          <p className='text-foreground group-has-data-[state=checked]:text-primary-foreground text-sm leading-none font-medium'>
+                          <p className='text-foreground group-has-data-checked:text-primary-foreground pointer-events-none text-sm font-medium'>
                             {sizeItem.label}
                           </p>
                         </label>
@@ -313,11 +306,11 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
 
                         <CollapsibleTrigger className='flex items-center justify-between gap-1 text-sm'>
                           Shipping Details
-                          <ChevronDownIcon className='size-4 transition-transform [[data-state=open]_&]:rotate-180' />
+                          <ChevronDownIcon className='size-4 transition-transform in-data-open:rotate-180' />
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent>
-                        <p className='text-muted-foreground'>
+                        <p className='text-muted-foreground text-sm'>
                           To track your order, simply log in to your account and navigate to the order history section.
                           You&apos;ll find detailed information about your order status and tracking number there.
                         </p>
@@ -332,11 +325,11 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                     <div className='flex items-center gap-4'>
                       <span className='text-muted-foreground grow text-lg font-semibold'>Quantity</span>
                       <NumberField
-                        aria-label='Quantity'
                         className='w-full max-w-32 space-y-2'
                         value={quantity}
                         onChange={setQuantity}
                         minValue={1}
+                        aria-label='Quantity'
                         formatOptions={{
                           useGrouping: false
                         }}
@@ -344,7 +337,7 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                         <Group className='dark:bg-input/30 border-input data-focus-within:border-ring data-focus-within:ring-ring/50 data-focus-within:has-aria-invalid:ring-destructive/20 dark:data-focus-within:has-aria-invalid:ring-destructive/40 data-focus-within:has-aria-invalid:border-destructive relative inline-flex h-9 w-full min-w-0 items-center overflow-hidden rounded-lg border bg-transparent text-base whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-focus-within:ring-[3px] md:text-sm'>
                           <AriaButton
                             slot='decrement'
-                            className='bg-primary/10 text-muted-foreground hover:bg-accent hover:text-foreground ms-2 flex aspect-square h-5.5 items-center justify-center rounded text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                            className='bg-primary/10 text-muted-foreground hover:bg-primary/20 hover:text-foreground ms-2 flex aspect-square h-5.5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
                           >
                             <MinusIcon className='size-3.5' />
                             <span className='sr-only'>Decrement</span>
@@ -352,7 +345,7 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                           <AriaInput className='selection:bg-primary selection:text-primary-foreground w-full grow px-3 py-2 text-center tabular-nums outline-none' />
                           <AriaButton
                             slot='increment'
-                            className='bg-primary/10 text-muted-foreground hover:bg-accent hover:text-foreground me-2 flex aspect-square h-5.5 items-center justify-center rounded text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                            className='bg-primary/10 text-muted-foreground hover:bg-primary/20 hover:text-foreground me-2 flex aspect-square h-5.5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
                           >
                             <PlusIcon className='size-3.5' />
                             <span className='sr-only'>Increment</span>
@@ -380,18 +373,25 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                       <div className='flex items-center gap-3'>
                         <div className='flex items-center gap-2'>
                           <span className='text-muted-foreground grow'>Delivery</span>
-                          <Select defaultValue='regular' onValueChange={setDeliveryOption}>
+                          <Select
+                            items={deliveryOptions}
+                            defaultValue='regular'
+                            onValueChange={value => value && setDeliveryOption(value)}
+                          >
                             <SelectTrigger
                               id={id}
                               size='sm'
-                              className='bg-primary/10 !h-auto w-auto rounded-full px-2 py-1 text-xs'
+                              className='bg-primary/10 h-auto! w-auto rounded-full! px-2 py-1 text-xs'
                             >
-                              <SelectValue placeholder='Select delivery option' />
+                              <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
-                                <SelectItem value='regular'>Regular</SelectItem>
-                                <SelectItem value='1 day'>1 Day (+$10)</SelectItem>
+                                {deliveryOptions.map(item => (
+                                  <SelectItem key={item.value} value={item.value}>
+                                    {item.label}
+                                  </SelectItem>
+                                ))}
                               </SelectGroup>
                             </SelectContent>
                           </Select>
@@ -400,8 +400,18 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                       </div>
                     </div>
                     <Collapsible>
-                      <Button className='w-full bg-amber-600/10 text-amber-600 hover:bg-amber-600/20 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:hover:bg-amber-400/20 dark:focus-visible:ring-amber-400/40' size='lg' render={<CollapsibleTrigger />}>Apply Coupon
-                                                            <BadgePercentIcon className='size-4' /></Button>
+                      <CollapsibleTrigger
+                        render={
+                          <Button
+                            className='w-full cursor-pointer bg-amber-600/10 text-amber-600 hover:bg-amber-600/20 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:hover:bg-amber-400/20 dark:focus-visible:ring-amber-400/40'
+                            size='lg'
+                            render={<CollapsibleTrigger />}
+                          />
+                        }
+                      >
+                        Apply Coupon
+                        <BadgePercentIcon className='size-4' />
+                      </CollapsibleTrigger>
                       <CollapsibleContent className='mt-3'>
                         <div className='flex items-center gap-3'>
                           <Input type='text' placeholder='Apply Coupon' />

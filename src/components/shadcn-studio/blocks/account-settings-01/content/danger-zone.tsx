@@ -1,17 +1,7 @@
-// @ts-nocheck
-import { Trash2Icon } from 'lucide-react'
-
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogClose
-} from '@/components/ui/dialog'
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog'
+import { Trash2Icon } from 'lucide-react'
 
 const DangerZone = () => {
   return (
@@ -31,7 +21,7 @@ const DangerZone = () => {
       <div className='space-y-6 lg:col-span-2'>
         <Card>
           <CardContent>
-            <div className='flex items-center justify-between gap-4 max-lg:flex-col'>
+            <div className='flex justify-between gap-4 max-lg:flex-col lg:items-center'>
               <div className='space-y-1'>
                 <h3 className='text-sm font-medium'>Delete account</h3>
                 <p className='text-muted-foreground text-sm'>
@@ -39,8 +29,17 @@ const DangerZone = () => {
                 </p>
               </div>
               <Dialog>
-                <DialogTrigger render={<Button variant='outline' className='hover:bg-destructive/10! text-destructive! border-destructive! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 max-lg:w-full' />}><Trash2Icon />Delete
-                                                </DialogTrigger>
+                <DialogTrigger
+                  render={
+                    <Button
+                      variant='outline'
+                      className='border-destructive! text-destructive! hover:bg-destructive/10! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 max-lg:w-full'
+                    />
+                  }
+                >
+                  <Trash2Icon />
+                  Delete
+                </DialogTrigger>
                 <DialogContent className='sm:max-w-md'>
                   <DialogHeader className='space-y-2'>
                     <DialogTitle>Delete account</DialogTitle>
@@ -48,10 +47,10 @@ const DangerZone = () => {
                       Delete your account permanently. This action will remove all your data and cannot be undone.
                     </div>
                   </DialogHeader>
-                  <DialogFooter className='mt-4 gap-4 sm:justify-end'>
+                  <div className='flex flex-col-reverse gap-4 sm:flex-row sm:justify-end'>
                     <DialogClose render={<Button variant='outline' />}>Cancel</DialogClose>
                     <DialogClose render={<Button variant='destructive' />}>Delete</DialogClose>
-                  </DialogFooter>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>

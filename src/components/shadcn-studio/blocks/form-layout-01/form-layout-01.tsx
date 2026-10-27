@@ -1,7 +1,6 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 
 const FormLayout = () => {
   return (
@@ -14,40 +13,47 @@ const FormLayout = () => {
         </p>
       </div>
 
-      <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-first-name'>First Name</Label>
+      <FieldGroup className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-first-name'>First Name</FieldLabel>
           <Input id='multi-step-personal-info-first-name' placeholder='John' />
-        </div>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-last-name'>Last Name</Label>
+        </Field>
+
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-last-name'>Last Name</FieldLabel>
           <Input id='multi-step-personal-info-last-name' placeholder='Doe' />
-        </div>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-mobile'>Mobile</Label>
+        </Field>
+
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-mobile'>Mobile</FieldLabel>
           <Input id='multi-step-personal-info-mobile' placeholder='+1 (555) 123-4567' />
-        </div>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-pincode'>Pincode</Label>
+        </Field>
+
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-pincode'>Pincode</FieldLabel>
           <Input id='multi-step-personal-info-pincode' placeholder='Postal Code' />
-        </div>
-        <div className='flex flex-col items-start gap-2 sm:col-span-2'>
-          <Label htmlFor='multi-step-personal-info-address'>Address</Label>
+        </Field>
+
+        <Field className='gap-2 sm:col-span-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-address'>Address</FieldLabel>
           <Input id='multi-step-personal-info-address' placeholder='123 Main St' />
-        </div>
-        <div className='flex flex-col items-start gap-2 sm:col-span-2'>
-          <Label htmlFor='multi-step-personal-info-landmark'>Landmark</Label>
+        </Field>
+
+        <Field className='gap-2 sm:col-span-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-landmark'>Landmark</FieldLabel>
           <Input id='multi-step-personal-info-landmark' placeholder='Near Central Park, New York' />
-        </div>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-city'>City</Label>
+        </Field>
+
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-city'>City</FieldLabel>
           <Input id='multi-step-personal-info-city' placeholder='New York' />
-        </div>
-        <div className='flex flex-col items-start gap-2'>
-          <Label htmlFor='multi-step-personal-info-state'>State</Label>
+        </Field>
+
+        <Field className='gap-2'>
+          <FieldLabel htmlFor='multi-step-personal-info-state'>State</FieldLabel>
           <Input id='multi-step-personal-info-state' placeholder='NY' />
-        </div>
-      </div>
+        </Field>
+      </FieldGroup>
 
       <div className='mt-8 flex justify-end'>
         <Button type='submit'>Save Information</Button>

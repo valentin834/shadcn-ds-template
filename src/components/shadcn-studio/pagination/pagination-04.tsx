@@ -1,4 +1,5 @@
-// @ts-nocheck
+'use client'
+
 import { buttonVariants } from '@/components/ui/button'
 import {
   Pagination,
@@ -26,7 +27,7 @@ const PaginationWithSecondaryButtonDemo = () => {
             href='#'
             isActive
             className={cn(
-              'hover:!text-secondary-foreground !border-none !shadow-none',
+              'hover:text-secondary-foreground! border-none! shadow-none!',
               buttonVariants({
                 variant: 'secondary',
                 size: 'icon'

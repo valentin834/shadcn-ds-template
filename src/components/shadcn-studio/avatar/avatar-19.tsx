@@ -1,13 +1,6 @@
-// @ts-nocheck
+import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { PlusIcon } from 'lucide-react'
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 
 const avatars = [
   {
@@ -44,28 +37,38 @@ const avatars = [
 
 const AvatarGroupDropdownDemo = () => {
   return (
-    <div className='flex -space-x-2'>
+    <AvatarGroup>
       {avatars.slice(0, 3).map((avatar, index) => (
-        <Avatar key={index} className='ring-background ring-2'>
+        <Avatar key={index}>
           <AvatarImage src={avatar.src} alt={avatar.name} />
-          <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>
+          <AvatarFallback>{avatar.fallback}</AvatarFallback>
         </Avatar>
       ))}
       <DropdownMenu>
-        <DropdownMenuTrigger render={<button className='bg-muted has-focus-visible:ring-ring/50 ring-background flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full ring-2' />}><PlusIcon className='size-4' /><span className='sr-only'>Add</span></DropdownMenuTrigger>
+        <DropdownMenuTrigger
+          render={
+            <button
+              type='button'
+              className='bg-muted has-focus-visible:ring-ring/50 ring-background flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full ring-2'
+            >
+              <PlusIcon className='size-4' />
+              <span className='sr-only'>Add</span>
+            </button>
+          }
+        />
         <DropdownMenuContent>
           {avatars.slice(3).map((avatar, index) => (
             <DropdownMenuItem key={index}>
               <Avatar>
                 <AvatarImage src={avatar.src} alt={avatar.name} />
-                <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>
+                <AvatarFallback>{avatar.fallback}</AvatarFallback>
               </Avatar>
               <span>{avatar.name}</span>
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
+    </AvatarGroup>
   )
 }
 

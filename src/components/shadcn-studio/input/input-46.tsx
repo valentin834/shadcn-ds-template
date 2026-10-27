@@ -1,15 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useMemo, useState } from 'react'
-
-import { CheckIcon, EyeIcon, EyeOffIcon, XIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
 
 import { cn } from '@/lib/utils'
+import { EyeOffIcon, EyeIcon, CheckIcon, XIcon } from 'lucide-react'
 
 const requirements = [
   { regex: /.{12,}/, text: 'At least 12 characters' },
@@ -61,25 +58,26 @@ const InputPasswordStrengthDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with password strength</Label>
-      <div className='relative mb-3'>
-        <Input
+      <InputGroup className='relative mb-3'>
+        <InputGroupInput
           id={id}
           type={isVisible ? 'text' : 'password'}
           placeholder='Password'
           value={password}
           onChange={e => setPassword(e.target.value)}
-          className='pr-9'
         />
-        <Button
-          variant='ghost'
-          size='icon'
-          onClick={toggleVisibility}
-          className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-        >
-          {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-          <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
-        </Button>
-      </div>
+        <InputGroupAddon align='inline-end'>
+          <Button
+            variant='ghost'
+            size='icon'
+            onClick={toggleVisibility}
+            className='text-muted-foreground hover:bg-transparent'
+          >
+            {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+            <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
+          </Button>
+        </InputGroupAddon>
+      </InputGroup>
 
       <div className='mb-4 flex h-1 w-full gap-1'>
         {Array.from({ length: 5 }).map((_, index) => (
