@@ -22,7 +22,7 @@ const DatePickerWithIconDemo = () => {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger render={<Button variant='outline' id='date' className='w-full justify-between font-normal' />}><span className='flex items-center'>
                             <CalendarIcon className='mr-2' />
-                            {date ? date.toLocaleDateString() : 'Pick a date'}
+                            {date ? date.toLocaleDateString('en-US') : 'Pick a date'}
                           </span><ChevronDownIcon /></PopoverTrigger>
         <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
           <Calendar

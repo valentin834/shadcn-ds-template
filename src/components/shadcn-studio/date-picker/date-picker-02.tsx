@@ -21,7 +21,7 @@ const DatePickerRangeDemo = () => {
       </Label>
       <Popover>
         <PopoverTrigger render={<Button variant='outline' id='dates' className='w-full justify-between font-normal' />}>{range?.from && range?.to
-                            ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
+                            ? `${range.from.toLocaleDateString('en-US')} - ${range.to.toLocaleDateString('en-US')}`
                             : 'Pick a date'}<ChevronDownIcon /></PopoverTrigger>
         <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
           <Calendar

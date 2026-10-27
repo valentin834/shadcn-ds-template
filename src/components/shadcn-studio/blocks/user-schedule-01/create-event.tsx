@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client'
 
-import { useState, useEffect, type ReactNode } from 'react'
+import { useState, useEffect, type ReactElement, type ReactNode } from 'react'
 
 import { CalendarIcon, AlertCircleIcon, UploadIcon, Clock8Icon, Trash2Icon, CircleCheckIcon } from 'lucide-react'
 
@@ -68,9 +68,7 @@ const ScheduleMeetingDialog = ({ defaultOpen = false, trigger, className }: Prop
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger onClick={() => setOpen(true)}>
-        {trigger}
-      </DialogTrigger>
+      <DialogTrigger render={trigger as ReactElement} onClick={() => setOpen(true)} />
       <DialogContent
         className={cn(
           'flex max-h-[min(800px,80vh)] flex-col gap-0 p-0 focus-visible:outline-0 sm:max-w-[700px] [&>[data-slot=dialog-close]>svg]:size-5',

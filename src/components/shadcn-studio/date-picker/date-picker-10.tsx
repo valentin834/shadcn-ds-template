@@ -22,7 +22,7 @@ const DatePickerAndTimePickerDemo = () => {
           Date picker
         </Label>
         <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger render={<Button variant='outline' id='date-picker' className='justify-between font-normal' />}>{date ? date.toLocaleDateString() : 'Pick a date'}<ChevronDownIcon /></PopoverTrigger>
+          <PopoverTrigger render={<Button variant='outline' id='date-picker' className='justify-between font-normal' />}>{date ? date.toLocaleDateString('en-US') : 'Pick a date'}<ChevronDownIcon /></PopoverTrigger>
           <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
             <Calendar
               mode='single'

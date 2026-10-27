@@ -1,4 +1,6 @@
 // @ts-nocheck
+// 40-60: Radix primitives compose with `asChild`, not with the Base UI `render`
+// prop (with `render` the motion element and its styles were dropped).
 'use client'
 
 import * as React from 'react'
@@ -24,10 +26,10 @@ function RadioGroupItem({
   ...props
 }: RadioGroupItemProps) {
   return (
-    <RadioGroupPrimitive.Item {...props} render={<motion.button data-slot='radio-group-item' className={cn(
+    <RadioGroupPrimitive.Item {...props} asChild><motion.button data-slot='radio-group-item' className={cn(
                 'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-5 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
                 className
-              )} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} />}><RadioGroupPrimitive.Indicator
+              )} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><RadioGroupPrimitive.Indicator
                 data-slot='radio-group-indicator'
                 className='relative flex items-center justify-center'
               >
@@ -43,7 +45,7 @@ function RadioGroupItem({
                     <CircleIcon className='size-3 fill-current text-current' />
                   </motion.div>
                 </AnimatePresence>
-              </RadioGroupPrimitive.Indicator></RadioGroupPrimitive.Item>
+              </RadioGroupPrimitive.Indicator></motion.button></RadioGroupPrimitive.Item>
   )
 }
 

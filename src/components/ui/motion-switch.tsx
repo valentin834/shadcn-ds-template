@@ -1,4 +1,6 @@
 // @ts-nocheck
+// 40-60: Radix primitives compose with `asChild`, not with the Base UI `render`
+// prop (with `render` the motion element and its styles were dropped).
 'use client'
 
 import * as React from 'react'
@@ -63,7 +65,7 @@ function Switch({ className, size = 'md', ...props }: SwitchProps) {
       onCheckedChange={handleCheckedChange}
       {...props}
     >
-      <SwitchPrimitive.Thumb render={<motion.span data-slot='switch-thumb' className={cn(
+      <SwitchPrimitive.Thumb asChild><motion.span data-slot='switch-thumb' className={cn(
                       'bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none absolute block rounded-full ring-0'
                     )} animate={{
                       width: thumbWidth,
@@ -73,7 +75,7 @@ function Switch({ className, size = 'md', ...props }: SwitchProps) {
                       height: THUMB_SIZE,
                       minWidth: THUMB_SIZE,
                       maxWidth: THUMB_STRETCH
-                    }} />}></SwitchPrimitive.Thumb>
+                    }} /></SwitchPrimitive.Thumb>
     </SwitchPrimitive.Root>
   )
 }

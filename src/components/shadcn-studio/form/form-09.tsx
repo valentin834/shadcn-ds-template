@@ -55,13 +55,19 @@ const DatePickerFormDemo = () => {
             <FormItem className='flex flex-col'>
               <FormLabel>Timeless Trends for You</FormLabel>
               <Popover>
-                <PopoverTrigger render={<FormControl />}><Button
-                                            variant={'outline'}
-                                            className={cn('pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                                          >
-                                            {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
-                                            <CalendarIcon className='ml-auto opacity-50' />
-                                          </Button></PopoverTrigger>
+                <FormControl>
+                  <PopoverTrigger
+                    render={
+                      <Button
+                        variant={'outline'}
+                        className={cn('pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
+                      />
+                    }
+                  >
+                    {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
+                    <CalendarIcon className='ml-auto opacity-50' />
+                  </PopoverTrigger>
+                </FormControl>
                 <PopoverContent className='w-auto p-0' align='start'>
                   <Calendar
                     mode='single'

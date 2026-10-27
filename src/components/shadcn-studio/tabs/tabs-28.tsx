@@ -75,7 +75,7 @@ const ExpandableTabsDemo = () => {
                   damping: 25
                 }}
               >
-                <TabsTrigger value={value} render={<motion.div className='flex h-8 w-full items-center justify-center' animate={{ filter: 'blur(0px)' }} exit={{ filter: 'blur(2px)' }} transition={{ duration: 0.25, ease: 'easeOut' }} />}><Icon className='aspect-square size-4 shrink-0' /><AnimatePresence initial={false}>
+                <TabsTrigger value={value} render={<motion.button className='flex h-8 w-full items-center justify-center' animate={{ filter: 'blur(0px)' }} exit={{ filter: 'blur(2px)' }} transition={{ duration: 0.25, ease: 'easeOut' }} />}><Icon className='aspect-square size-4 shrink-0' /><AnimatePresence initial={false}>
                                           {isActive && (
                                             <motion.span
                                               className='font-medium max-sm:hidden'

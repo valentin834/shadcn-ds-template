@@ -332,6 +332,7 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                     <div className='flex items-center gap-4'>
                       <span className='text-muted-foreground grow text-lg font-semibold'>Quantity</span>
                       <NumberField
+                        aria-label='Quantity'
                         className='w-full max-w-32 space-y-2'
                         value={quantity}
                         onChange={setQuantity}

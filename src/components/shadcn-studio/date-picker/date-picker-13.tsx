@@ -91,7 +91,7 @@ const ChartFilterDemo = () => {
         <CardAction className='mt-2 @md/card:mt-0'>
           <Popover>
             <PopoverTrigger render={<Button variant='outline' />}><CalendarIcon />{range?.from && range?.to
-                                        ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
+                                        ? `${range.from.toLocaleDateString('en-US')} - ${range.to.toLocaleDateString('en-US')}`
                                         : 'January 2025'}</PopoverTrigger>
             <PopoverContent className='w-auto overflow-hidden p-0' align='end'>
               <Calendar
@@ -158,7 +158,7 @@ const ChartFilterDemo = () => {
       </CardContent>
       <CardFooter className='border-t'>
         <div className='text-sm'>
-          You had <span className='font-semibold'>{total.toLocaleString()}</span> visitors for the month of January.
+          You had <span className='font-semibold'>{total.toLocaleString('en-US')}</span> visitors for the month of January.
         </div>
       </CardFooter>
     </Card>

@@ -142,6 +142,7 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
                           </div>
                           <div className='flex items-center gap-12'>
                             <NumberField
+                              aria-label='Quantity'
                               value={quantities[item.id] || 1}
                               onChange={value => handleQuantityChange(item.id, value)}
                               minValue={1}
