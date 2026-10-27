@@ -83,7 +83,7 @@ const ChartFilterDemo = () => {
             <PopoverTrigger render={<Button variant='outline' />}>
               <CalendarIcon />
               {range?.from && range?.to
-                ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
+                ? `${range.from.toLocaleDateString('en-US')} - ${range.to.toLocaleDateString('en-US')}`
                 : 'January 2025'}
             </PopoverTrigger>
             <PopoverContent className='w-auto overflow-hidden p-0' align='end'>
@@ -136,7 +136,8 @@ const ChartFilterDemo = () => {
                   className='w-37.5'
                   nameKey='visitors'
                   labelFormatter={value => {
-                    return new Date(value).toLocaleDateString('en-US', {
+                    // 40-60: recharts 3.10 types the label as ReactNode
+                    return new Date(String(value)).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric'
@@ -151,7 +152,7 @@ const ChartFilterDemo = () => {
       </CardContent>
       <CardFooter className='border-t'>
         <div className='text-sm'>
-          You had <span className='font-semibold'>{total.toLocaleString()}</span> visitors for the month of January.
+          You had <span className='font-semibold'>{total.toLocaleString('en-US')}</span> visitors for the month of January.
         </div>
       </CardFooter>
     </Card>

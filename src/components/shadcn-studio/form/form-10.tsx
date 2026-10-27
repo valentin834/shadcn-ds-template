@@ -23,7 +23,8 @@ const formSchema = z.object({
     message: 'Kindly select an issue.'
   }),
   selectedOption: z.enum(['replace', 'refund', 'support'], {
-    required_error: 'Selection of an option is required.'
+    // 40-60: zod 4 API (`error`), the registry still targets zod 3
+    error: 'Selection of an option is required.'
   }),
   message: z.string().min(50, 'Describe your issue using at least 50 characters.')
 })

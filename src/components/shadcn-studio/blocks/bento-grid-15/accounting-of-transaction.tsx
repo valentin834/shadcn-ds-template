@@ -56,13 +56,13 @@ const AccountingOfTransaction = ({ transactions }: { transactions: TransactionRo
                 <div className='grid'>
                   <span className='text-muted-foreground text-xs'>{transaction.title}</span>
                   <div className='flex items-center gap-1'>
-                    <span className='text-base font-medium'>{`$${transaction.amount.toLocaleString()}`}</span>
+                    <span className='text-base font-medium'>{`$${transaction.amount.toLocaleString('en-US')}`}</span>
                     <span
                       className={cn('text-xs', {
                         'text-destructive': transaction.type === 'debit',
                         'text-green-600 dark:text-green-400': transaction.type === 'credit'
                       })}
-                    >{`${transaction.type === 'debit' ? '-' : '+'}$${transaction.difference.toLocaleString()}`}</span>
+                    >{`${transaction.type === 'debit' ? '-' : '+'}$${transaction.difference.toLocaleString('en-US')}`}</span>
                   </div>
                 </div>
               </div>

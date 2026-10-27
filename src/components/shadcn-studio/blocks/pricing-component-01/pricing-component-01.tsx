@@ -49,7 +49,7 @@ const PricingCards = ({ pricingData }: { pricingData: PricingPlan }) => {
                   <span className='text-muted-foreground ml-1 text-lg'>/{period}</span>
                 </div>
                 {savings && (
-                  <span className='mt-1 text-sm font-medium text-green-600'>Save ${savings.toLocaleString()}/year</span>
+                  <span className='mt-1 text-sm font-medium text-green-600'>Save ${savings.toLocaleString('en-US')}/year</span>
                 )}
               </div>
             )

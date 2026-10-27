@@ -19,7 +19,8 @@ import { CheckCheckIcon, CalendarIcon } from 'lucide-react'
 // Define the form schema
 const formSchema = z.object({
   dob: z.date({
-    required_error: 'A date of birth is required.'
+    // 40-60: zod 4 API (`error`), the registry still targets zod 3
+    error: 'A date of birth is required.'
   })
 })
 

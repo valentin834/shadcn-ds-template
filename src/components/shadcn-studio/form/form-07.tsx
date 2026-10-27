@@ -16,7 +16,8 @@ import { CheckCheckIcon } from 'lucide-react'
 const formSchema = z.object({
   email: z
     .string({
-      required_error: 'Please select an email.'
+      // 40-60: zod 4 API (`error`), the registry still targets zod 3
+      error: 'Please select an email.'
     })
     .email()
 })
