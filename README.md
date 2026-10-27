@@ -66,6 +66,19 @@ npm run lint    # ESLint — registry code is reported as warnings, app code as 
 
 ---
 
+## Mockups in Claude Design
+
+Mockups and wireframes are made on Claude Design canvases with the **40-60 · shadcn DS** design system: https://claude.ai/artifact/Bb9RN7fVcuHY63aQwaC3uD. It carries this repo's tokens (light and dark) and its components as a live bundle (`window.Ds4060`), so mockups use the real shadcn components, not look-alikes:
+
+- the 65 official components, the 11 ReUI / Dice UI components and the 28 shadcnstudio primitives, each with a live preview;
+- the 87 shadcnstudio blocks (`Ds4060.BlockHeroSection01`…) and the 608 variants (`Ds4060.Variants.Button22`…).
+
+`CLAUDE.md` tells Claude Code to use it for every mockup request in this repo and in the client projects cloned from it. To make it the default everywhere (claude.ai included), share it with the organization and set it as the organization's default design system from its page in claude.ai.
+
+When components or tokens change here, the design system has to be published again.
+
+---
+
 ## shadcn/ui official components (65)
 
 `accordion` · `alert` · `alert-dialog` · `aspect-ratio` · `attachment` · `avatar` · `badge` · `breadcrumb` · `bubble` · `button` · `button-group` · `calendar` · `card` · `carousel` · `chart` · `checkbox` · `code-block` · `collapsible` · `combobox` · `command` · `context-menu` · `dialog` · `direction` · `drawer` · `dropdown-menu` · `empty` · `field` · `form` · `hover-card` · `input` · `input-group` · `input-otp` · `item` · `kbd` · `label` · `marker` · `menubar` · `message` · `message-scroller` · `native-select` · `navigation-menu` · `pagination` · `popover` · `progress` · `questionnaire` · `radio-group` · `resizable` · `scroll-area` · `select` · `separator` · `sheet` · `sidebar` · `skeleton` · `slider` · `sonner` · `spinner` · `switch` · `table` · `tabs` · `textarea` · `toast` · `toggle` · `toggle-group` · `tooltip` · `trace`

@@ -2,6 +2,8 @@
 > Référence complète pour Claude Design et tout agent IA qui compose des écrans.
 > Stack : Next.js 16.4 (App Router) · React 19.3 · TypeScript · Tailwind CSS v4 · shadcn/ui (style `base-nova`, primitives Base UI) · shadcnstudio Pro · ReUI · Dice UI
 > Inventaire vérifié le 27/10/2026 : **65** composants shadcn officiels · **11** composants ReUI / Dice UI · **28** primitives shadcnstudio · **608** variantes shadcnstudio · **87** blocs shadcnstudio · **3** blocs shadcn officiels.
+>
+> **Maquettes** : sur un canevas Claude Design, avec le design system **40-60 · shadcn DS** (https://claude.ai/artifact/Bb9RN7fVcuHY63aQwaC3uD). Il porte les mêmes tokens et les mêmes composants que ce repo, montés en vrai (`window.Ds4060`, par exemple `<x-import component-from-global-scope="Ds4060.Button">`). `CLAUDE.md` impose de l'utiliser pour toute demande de maquette.
 
 ---
 
