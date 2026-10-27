@@ -24,11 +24,11 @@
 - **Thème** : `neutral`, variables CSS oklch, **niveaux de gris uniquement** — aucune personnalisation. Ne pas ajouter de tokens colorés (`--success`, `--info`, `--warning`…) : certains registres tiers en installent, ils ont été écartés. Seul `--destructive` est coloré (rouge shadcn par défaut).
 - **Primitives** : Base UI (`@base-ui/react`). Différences avec l'API Radix qu'on trouve dans beaucoup d'exemples en ligne :
   - pas d'`asChild` → prop `render` : `<DialogTrigger render={<Button variant="outline" />}>Ouvrir</DialogTrigger>` ; un `Button` rendu en lien prend aussi `nativeButton={false}`
-  - `Accordion` : `multiple` (booléen) et valeurs en tableau (une couche de compatibilité accepte aussi `type="single"` pour les variantes shadcnstudio)
+  - `Accordion` : `multiple` (booléen) et valeurs en tableau (`defaultValue={['item-1']}`) ; pas de `type="single"` ni de `collapsible`
   - `ToggleGroup` : `value` / `defaultValue` en `string[]`
   - `Select`, `Slider`, `Combobox` : `onValueChange(value, eventDetails)`
   - `Drawer` : `swipeDirection="down" | "right" | "left" | "up"` (plus de prop `direction`, plus de Vaul)
-- `radix-ui` reste installé : seules certaines variantes shadcnstudio l'utilisent. Ne pas l'utiliser pour du nouveau code.
+- **Pas de Radix** : `radix-ui` n'est plus installé. Les variantes et blocs shadcnstudio viennent eux aussi du registre `base-nova` (Base UI natif). Un exemple trouvé en ligne avec `asChild` est à adapter avec `render`.
 - **Icônes** : `lucide-react` exclusivement.
 - **Charts** : `recharts` via le composant `chart` (`ChartContainer`, `ChartTooltip`). Les couleurs `--chart-1..5` sont des gris.
 - **Animations** : `motion` (`import { motion } from "motion/react"`), utilisé par shadcnstudio.
@@ -121,7 +121,7 @@ Import : `@/components/ui/[name]`. Exports et variantes extraits du code.
 | `chart` | `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, `ChartLegendContent` | `indicator`: `line` · `dot` · `dashed` | Graphiques recharts avec tokens de couleur (`ChartContainer`, `ChartTooltip`, `ChartLegend`). |
 | `avatar` | `Avatar`, `AvatarImage`, `AvatarFallback`, `AvatarGroup`, `AvatarGroupCount`, `AvatarBadge` | `size`: `default` · `sm` · `lg` | Photo avec initiales en fallback, groupes et badge. |
 | `carousel` | `Carousel`, `CarouselContent`, `CarouselItem`, `CarouselPrevious`, `CarouselNext`, `useCarousel` | `orientation`: `horizontal` · `vertical` | Carrousel (Embla). |
-| `accordion` | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent` | — | Sections dépliables (Base UI : `multiple`, valeurs en tableau). **Modif locale** : accepte aussi `type="single" | "multiple"`, `collapsible` et une valeur string, pour les variantes shadcnstudio. |
+| `accordion` | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent` | — | Sections dépliables (Base UI : `multiple`, valeurs en tableau). |
 | `collapsible` | `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent` | — | Section unique dépliable. |
 
 ### Actions
@@ -190,10 +190,10 @@ Installées par les variantes et blocs shadcnstudio, à côté des composants of
 | Composant | Exports |
 |---|---|
 | Boutons animés : `bounce-button`, `craft-button`, `flow-button`, `glass-button`, `grow-button`, `magnetic-button`, `matter-button`, `neural-button`, `orion-button`, `ripple-button`, `shimmer-button`, `swipe-button` | `BounceButton`, `CraftButton` (+ `CraftButtonLabel`, `CraftButtonIcon`), `PrimaryFlowButton` / `SecondaryFlowButton`, `GlassButton`, `PrimaryGrowButton` / `SecondaryGrowButton`, `MagneticButton`, `MatterButton`, `NeuralButton`, `PrimaryOrionButton` / `SecondaryOrionButton`, `RippleButton`, `ShimmerButton`, `PrimarySwipeButton` / `SecondarySwipeButton` |
-| `motion-checkbox`, `motion-radio-group`, `motion-switch` (primitives Radix, composition `asChild`), `motion-tabs`, `motion-tooltip`, `motion-highlight`, `motion-preset` | `Checkbox`, `RadioGroup` / `RadioGroupItem`, `Switch`, `Tabs` / `TabsList` / `TabsTrigger` / `TabsContents` / `TabsContent`, `AnimatedTooltip`, `MotionHighlight` / `MotionHighlightItem`, `MotionPreset` |
+| `motion-checkbox`, `motion-radio-group`, `motion-switch` (primitives Base UI animées avec `motion`), `motion-tabs`, `motion-tooltip`, `motion-highlight`, `motion-preset` | `Checkbox`, `RadioGroup` / `RadioGroupItem`, `Switch`, `Tabs` / `TabsList` / `TabsTrigger` / `TabsContents` / `TabsContent`, `AnimatedTooltip`, `MotionHighlight` / `MotionHighlightItem`, `MotionPreset` |
 | `global-tooltip` | `TooltipProvider`, `Tooltip`, `TooltipTrigger`, `TooltipContent`, `useGlobalTooltip`, `useTooltip` |
 | `multi-select` | default export (+ `useDebounce`) |
-| `select-native` | `SelectNative` |
+| `select-native` | `SelectNative` — ancienne primitive, plus utilisée par shadcnstudio : préférer `native-select` (officiel) |
 | `rating` | `Rating`, `ratingVariants` — `variant`: `default` · `destructive` · `outline` · `secondary` · `yellow` · `dark` |
 | `marquee`, `number-ticker`, `orbiting`, `border-beam`, `copy-code` | `Marquee`, `NumberTicker`, `Orbiting`, `BorderBeam`, `CopyCode` |
 
@@ -206,7 +206,7 @@ Installées par les variantes et blocs shadcnstudio, à côté des composants of
 Import : `import Component from "@/components/shadcn-studio/[category]/[category]-[01]"`
 Galerie visuelle : `/gallery/studio/[category]`
 
-> Tous ces composants sont des **default exports**. Ils utilisent les composants shadcn officiels comme base. Leur code porte `// @ts-nocheck` (voir § 12).
+> Tous ces composants sont des **default exports**. Ils utilisent les composants shadcn officiels comme base et sont vérifiés par TypeScript comme le reste du repo.
 
 ### Accordion (16 variants) — `/gallery/studio/accordion`
 - `accordion-01` : Basic FAQ collapsible
@@ -650,13 +650,15 @@ Définies dans `src/app/globals.css` (`:root` et `.dark`), toutes en niveaux de 
 
 ## 12. Limites connues
 
-- **Code shadcnstudio non vérifié par TypeScript** : 722 fichiers (variantes, blocs et 6 primitives `motion-*`) commencent par `// @ts-nocheck`. Sans cette ligne, 51 erreurs de type apparaissent dans 45 fichiers. Ce sont surtout des écarts d'API Radix → Base UI : signatures de `onValueChange`, `checked="indeterminate"`, `openDelay` sur `Tooltip`, `required_error` de zod 3. Elles ne bloquent pas l'affichage, mais certaines changent un comportement. Exemple : la case « tout sélectionner » des data-tables ne passe pas en état indéterminé.
+- **shadcnstudio en Base UI natif** : variantes, blocs et primitives viennent du registre `base-nova` de shadcnstudio (réinstallés en octobre 2026). Plus aucun fichier ne porte `// @ts-nocheck` : tout le repo est vérifié par TypeScript.
 - **Lint** : les règles qui échouent dans le code copié des registres (`src/components/**`, `src/hooks/**`) sont des avertissements, pas des erreurs (voir `eslint.config.mjs`). Le code de l'app (`src/app`, `src/lib`) reste en erreur.
 - **Locale fixée à `en-US`** : `ui/progress`, `ui/slider` et `reui/number-field` passent `locale="en-US"` à Base UI, et les variantes et blocs shadcnstudio appellent `toLocaleString('en-US')` / `toLocaleDateString('en-US')`. Sans locale explicite, le serveur (Node, en-US) et un navigateur français formatent différemment (« 75% » / « 75 % », « 1,234 » / « 1 234 »), ce qui casse l'hydratation. Pour un projet en français, passer `locale="fr-FR"` partout : il suffit que la valeur soit la même côté serveur et côté client.
-- **Modifications locales des composants officiels** : `accordion` (compatibilité Radix), `progress` et `slider` (locale), `chart-area-interactive` (type du `labelFormatter` avec recharts 3.10) et `data-table` (drawer Base UI, TanStack Table v8 conservé, alors que le bloc officiel est passé en v9). À vérifier avant toute réinstallation avec `--overwrite`.
-- **Corrections dans le code shadcnstudio** (bugs trouvés à l'audit navigateur, à refaire si ces fichiers sont réinstallés) :
-  - `motion-checkbox`, `motion-switch`, `motion-radio-group` reposent sur Radix (`radix-ui`) : ils composent avec `asChild`, pas avec `render`. Avec `render`, l'élément animé et ses styles étaient perdus (variantes checkbox-17/18, switch-19/20, radio-group-14).
-  - Déclencheurs rendus via `render={<Button … />}` au lieu d'envelopper un `<Button>` dans le déclencheur : `datatable-transaction` (menu de ligne), `user-schedule-01` (« Create event »), `form-09` (date). Sinon : bouton dans un bouton, et erreur d'hydratation.
-  - `menu-navigation` (hero-section-35/41) : prop Radix `viewport={false}` retirée.
-  - `checkout-page-01`, `product-overview-02` : `aria-label` sur les champs de quantité react-aria.
+- **Modifications locales des composants officiels** : `progress` et `slider` (locale), `chart-area-interactive` (type du `labelFormatter` avec recharts 3.10) et `data-table` (drawer Base UI, TanStack Table v8 conservé, alors que le bloc officiel est passé en v9). À vérifier avant toute réinstallation avec `--overwrite`.
+- **Corrections dans le code shadcnstudio** (à refaire si ces fichiers sont réinstallés avec `--overwrite`) :
+  - Locale `en-US` explicite (voir ci-dessus) : `blocks/bento-grid-15/accounting-of-transaction`, `blocks/pricing-component-01`, `date-picker-01`, `-02`, `-03`, `-07`, `-10`, `-11`, `-13`.
+  - API zod 4 : `required_error` / `invalid_type_error` (zod 3) remplacés par `error` dans `form-01`, `form-07`, `form-08`, `form-09`, `form-10` et `sheet-05`. Le registre réclame `zod@3.25.76`, le repo reste en zod 4.
+  - `date-picker-13` : `labelFormatter` du graphique typé avec recharts 3.10 (`String(value)`).
+  - Mise en forme : après l'installation, les fichiers ont été reformatés avec le style Prettier de shadcnstudio (guillemets simples, sans point-virgule, 120 colonnes). La CLI laisse sinon des icônes coupées sur deux lignes. Commande : `npx prettier@3.6.2 --no-semi --single-quote --jsx-single-quote --print-width 120 --trailing-comma none --arrow-parens avoid --write <fichiers>`.
+- **Contenu shadcnstudio non neutre** : le thème est gris, mais 122 fichiers de variantes et blocs gardent des classes Tailwind colorées codées en dur (montants verts et rouges, `checkbox-10` / `-12`, alertes…). 138 fichiers chargent aussi des images ou avatars depuis `cdn.shadcnstudio.com`. C'est le contenu d'exemple livré par le registre, pas un réglage du thème. Pour un wireframe en gris, préférer les composants officiels ou retirer ces classes dans le projet.
+- **Dépendances** : après un `shadcn add @ss-…`, vérifier `git diff package.json`. La CLI ajoute le paquet `cn`, passe zod en 3.25 et peut rétrograder `recharts` : ne pas garder ces changements.
 - **`cn`** : le paquet `cn` proposé par la CLI shadcn 4.22 n'est pas adopté. Sur les combinaisons de classes du repo, il donne un résultat différent de tailwind-merge dans environ 0,3 % des cas (dégradés, ombres des variantes shadcnstudio).

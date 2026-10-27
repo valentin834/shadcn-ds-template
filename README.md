@@ -93,11 +93,14 @@ Plus 28 shadcnstudio primitives in `src/components/ui/` (animated buttons, `moti
 npx shadcn@latest add <name>            # shadcn official
 npx shadcn@latest add @reui/<name>      # ReUI
 npx shadcn@latest add @diceui/<name>    # Dice UI (then move the file from ui/ to diceui/)
+npx shadcn@latest add @ss-components/<name>   # shadcnstudio variant (e.g. button-01)
+npx shadcn@latest add @ss-blocks/<name>       # shadcnstudio block (e.g. hero-section-01)
 ```
 
 After each `add`:
-- answer **no** when the CLI offers to overwrite an existing `ui/` file — `accordion.tsx` carries a local Radix-compatibility layer for the shadcnstudio variants;
-- replace `import { cn } from "cn"` with `import { cn } from "@/lib/utils"` (shadcn CLI 4.22 imports the new `cn` package, which is not used here);
+- answer **no** when the CLI offers to overwrite an existing official `ui/` file — `progress.tsx` and `slider.tsx` carry a local fix (fixed locale), and the CLI would switch every file to the `cn` package;
+- replace `import { cn } from "cn"` with `import { cn } from "@/lib/utils"` (shadcn CLI 4.22+ imports the new `cn` package, which is not used here);
+- check `git diff package.json`: shadcnstudio items ask for `zod@3.25.76` and the CLI can downgrade `recharts` — the repo stays on zod 4 and recharts 3.10;
 - check that `src/app/globals.css` gained no colored token (`--success`, `--info`, `--warning`…): the theme must stay grayscale.
 
-shadcnstudio Pro (`@ss-components`, `@ss-blocks`, `@ss-themes`) needs `EMAIL` and `LICENSE_KEY`. Put them in `.env.local` (gitignored), never in a committed file.
+shadcnstudio registries (`@ss-components`, `@ss-blocks`, `@ss-pages`, `@ss-illustrations`, `@ss-themes`) are declared in `components.json` and point at the `base-nova` (Base UI) version of each item. Premium items need `EMAIL` and `LICENSE_KEY`: put them in `.env.local` (gitignored), never in a committed file.
