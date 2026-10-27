@@ -63,6 +63,9 @@ async function render(target, wrap) {
   await new Promise((r) => (ws.onopen = r))
   const send = (method, params = {}) => new Promise((r) => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })) })
   await send("Runtime.enable"); await send("Page.enable")
+  // No remote images or fonts: they arrive at different times in the two renders
+  // and change the layout. Both renders get the same fallbacks.
+  await send("Network.enable"); await send("Network.setBlockedURLs", { urls: ["https://*"] })
   await send("Emulation.setDeviceMetricsOverride", { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false })
   await send("Page.navigate", { url: `http://localhost:4063/wrap.html?c=${encodeURIComponent(target)}&wrap=${wrap ? 1 : 0}` })
   const t0 = Date.now(); while (!loaded && Date.now() - t0 < 30000) await sleep(50)

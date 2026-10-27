@@ -27,6 +27,7 @@ if (!fs.existsSync(path.join(here, "harness/bundle-test.js"))) {
 // Accepted differences, each checked by hand (see README).
 const KNOWN = {
   wrap: {
+    "Examples.ChartExample": "animations JS de recharts: le nombre d'éléments dépend du moment de la mesure",
     "Examples.ExtendedMessageScroller": "content-visibility: les hauteurs dépendent du moment de la mesure",
     "Examples.ExtendedSortable": "régions cachées de dnd-kit (annonces lecteur d'écran) comptées comme enfants",
     "Examples.FieldExample": "inputs cachés: 4 px de marge de description",

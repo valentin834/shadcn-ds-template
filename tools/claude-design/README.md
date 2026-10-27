@@ -99,7 +99,7 @@ voir plus bas.
 | Test | Vérifie |
 | --- | --- |
 | `test-mount.mjs` | chaque exemple et chaque bloc se monte sous React 18 sans erreur. `npm run ds:test -- --all` ajoute les 608 variantes |
-| `test-wrap.mjs` | chaque exemple rendu à plat et enveloppé comme sur un canevas a les mêmes styles calculés |
+| `test-wrap.mjs` | chaque exemple rendu à plat et enveloppé comme sur un canevas a les mêmes styles calculés (images et polices distantes bloquées, pour des rendus comparables) |
 | `test-anchor.mjs` | menus, popovers et tooltips s'ouvrent à côté de leur déclencheur |
 | `test-previews.mjs` | chaque carte du design system s'affiche, en clair et en sombre |
 | `test-canvas.mjs` | les artboards de `canvas/` avec le vrai runtime Design, si `.cache/dc-runtime.js` existe |
@@ -109,6 +109,7 @@ le fichier `artifact-type/dc-runtime.js` d'un canevas Design, puis copier le fic
 
 Écarts connus et acceptés (liste `KNOWN` de `test-all.mjs`) :
 
+- `ChartExample` : les animations JS de recharts font dépendre le nombre d'éléments du moment de la mesure ;
 - `ExtendedMessageScroller` : `content-visibility` fait dépendre les hauteurs du moment de la mesure ;
 - `ExtendedSortable` : les régions cachées de dnd-kit comptent comme des enfants ;
 - `FieldExample` et `InputOtpExample` : 4 px d'écart sur la marge des descriptions, à cause des inputs cachés ;
