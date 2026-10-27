@@ -1,183 +1,204 @@
+"use client"
+
 import * as React from "react"
 
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
+import { NavDocuments } from "@/components/nav-documents"
+import { NavMain } from "@/components/nav-main"
+import { NavSecondary } from "@/components/nav-secondary"
+import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@/components/ui/sidebar"
+import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
 
-// This is sample data.
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
   navMain: [
     {
-      title: "Getting Started",
+      title: "Dashboard",
+      url: "#",
+      icon: (
+        <LayoutDashboardIcon
+        />
+      ),
+    },
+    {
+      title: "Lifecycle",
+      url: "#",
+      icon: (
+        <ListIcon
+        />
+      ),
+    },
+    {
+      title: "Analytics",
+      url: "#",
+      icon: (
+        <ChartBarIcon
+        />
+      ),
+    },
+    {
+      title: "Projects",
+      url: "#",
+      icon: (
+        <FolderIcon
+        />
+      ),
+    },
+    {
+      title: "Team",
+      url: "#",
+      icon: (
+        <UsersIcon
+        />
+      ),
+    },
+  ],
+  navClouds: [
+    {
+      title: "Capture",
+      icon: (
+        <CameraIcon
+        />
+      ),
+      isActive: true,
       url: "#",
       items: [
         {
-          title: "Installation",
+          title: "Active Proposals",
           url: "#",
         },
         {
-          title: "Project Structure",
+          title: "Archived",
           url: "#",
         },
       ],
     },
     {
-      title: "Build Your Application",
+      title: "Proposal",
+      icon: (
+        <FileTextIcon
+        />
+      ),
       url: "#",
       items: [
         {
-          title: "Routing",
+          title: "Active Proposals",
           url: "#",
         },
         {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
+          title: "Archived",
           url: "#",
         },
       ],
     },
     {
-      title: "API Reference",
+      title: "Prompts",
+      icon: (
+        <FileTextIcon
+        />
+      ),
       url: "#",
       items: [
         {
-          title: "Components",
+          title: "Active Proposals",
           url: "#",
         },
         {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
+          title: "Archived",
           url: "#",
         },
       ],
     },
   ],
+  navSecondary: [
+    {
+      title: "Settings",
+      url: "#",
+      icon: (
+        <Settings2Icon
+        />
+      ),
+    },
+    {
+      title: "Get Help",
+      url: "#",
+      icon: (
+        <CircleHelpIcon
+        />
+      ),
+    },
+    {
+      title: "Search",
+      url: "#",
+      icon: (
+        <SearchIcon
+        />
+      ),
+    },
+  ],
+  documents: [
+    {
+      name: "Data Library",
+      url: "#",
+      icon: (
+        <DatabaseIcon
+        />
+      ),
+    },
+    {
+      name: "Reports",
+      url: "#",
+      icon: (
+        <FileChartColumnIcon
+        />
+      ),
+    },
+    {
+      name: "Word Assistant",
+      url: "#",
+      icon: (
+        <FileIcon
+        />
+      ),
+    },
+  ],
 }
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar {...props}>
+    <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              render={<a href="#" />}
+            >
+              <CommandIcon className="size-5!" />
+              <span className="text-base font-semibold">Acme Inc.</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      isActive={item.isActive}
-                      render={<a href={item.url} />}
-                    >
-                      {item.title}
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+        <NavMain items={data.navMain} />
+        <NavDocuments items={data.documents} />
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarRail />
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
     </Sidebar>
   )
 }
