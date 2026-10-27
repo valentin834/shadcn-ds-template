@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -10,7 +9,7 @@ const TextareaNoResizeDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>No resize textarea</Label>
-      <Textarea id={id} placeholder='Type your feedback here' className='[resize:none]' />
+      <Textarea id={id} placeholder='Type your feedback here' className='resize-none' />
     </div>
   )
 }

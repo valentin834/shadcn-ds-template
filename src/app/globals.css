@@ -3,6 +3,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* The Claude Design build keeps its own copies of examples: not part of the app. */
+@source not "../../tools";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

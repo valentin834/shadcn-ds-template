@@ -1,6 +1,4 @@
-// @ts-nocheck
-import { BadgeCheckIcon } from 'lucide-react'
-
+import BadgeCheck from '@/assets/svg/badge-check'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Breadcrumb,
@@ -44,22 +42,23 @@ const ProductList = ({ products }: ProductProps) => {
               transition={{ duration: 0.45 }}
               delay={index * 0.05}
             >
-              <Card className='border-none shadow-none'>
+              <Card className='ring-0'>
+                <CardContent>
+                  <img src={product.productSrc} alt={product.productAlt} className='w-full rounded-md' />
+                </CardContent>
                 <CardContent className='flex flex-col justify-between gap-6'>
-                  <img src={product.productSrc} alt={product.productAlt} className='rounded-md' />
-
                   <div className='flex flex-col gap-2'>
                     <div className='flex items-center justify-between'>
-                      <span>{product.name}</span>
-                      <span className='font-semibold'>${product.price}</span>
+                      <h4 className='text-base'>{product.name}</h4>
+                      <span className='text-base font-semibold'>${product.price}</span>
                     </div>
 
                     <div className='flex items-center justify-between'>
                       <Breadcrumb>
                         <BreadcrumbList className='sm:gap-1.5'>
                           <BreadcrumbItem>
-                            <BreadcrumbLink href='#' className='text-muted-foreground flex items-center gap-1.5'>
-                              <Avatar className='size-5.5'>
+                            <BreadcrumbLink href='#' className='flex items-center gap-1.5'>
+                              <Avatar className='size-6'>
                                 <AvatarImage src={product.avatarSrc} alt={product.avatarAlt} />
                                 <AvatarFallback className='text-xs'>{product.avatarFallback}</AvatarFallback>
                               </Avatar>
@@ -68,14 +67,12 @@ const ProductList = ({ products }: ProductProps) => {
                           </BreadcrumbItem>
                           <BreadcrumbSeparator className='text-card-foreground' />
                           <BreadcrumbItem>
-                            <BreadcrumbLink href='#' className='text-muted-foreground'>
-                              {product.category}
-                            </BreadcrumbLink>
+                            <BreadcrumbLink href='#'>{product.category}</BreadcrumbLink>
                           </BreadcrumbItem>
                         </BreadcrumbList>
                       </Breadcrumb>
 
-                      <BadgeCheckIcon className='stroke-card size-4 fill-green-600 dark:fill-green-400' />
+                      <BadgeCheck className='text-background size-5 fill-green-600 dark:fill-green-400' />
                     </div>
                   </div>
                 </CardContent>

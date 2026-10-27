@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Separator } from '@/components/ui/separator'
 
 import PersonalInfo from '@/components/shadcn-studio/blocks/account-settings-01/content/personal-info'

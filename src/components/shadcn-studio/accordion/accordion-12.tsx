@@ -1,9 +1,6 @@
-// @ts-nocheck
-import { PlusIcon } from 'lucide-react'
-
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
-
 import { Accordion, AccordionContent, AccordionItem } from '@/components/ui/accordion'
+import { PlusIcon } from 'lucide-react'
 
 const items = [
   {
@@ -24,20 +21,23 @@ const items = [
 
 const AccordionTabsOutlineDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+    <Accordion
+      className='w-full overflow-visible border-0 [&>*>[data-slot="accordion-content"]]:px-0'
+      defaultValue={['item-1']}
+    >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='data-[state=open]:border-border rounded-md border border-transparent px-5 transition-colors duration-200 data-[state=open]:border data-[state=open]:shadow-md'
+          className='data-open:border-border bg-background rounded-lg border border-transparent px-5 transition-colors duration-200 data-open:border data-open:shadow-md'
         >
           <AccordionPrimitive.Header className='flex'>
             <AccordionPrimitive.Trigger
               data-slot='accordion-trigger'
-              className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0'
+              className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-center justify-between gap-4 rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50'
             >
               {item.title}
-              <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200' />
+              <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 in-data-open:rotate-180 [&>path:last-child]:origin-center [&>path:last-child]:transition-all [&>path:last-child]:duration-200 in-data-open:[&>path:last-child]:rotate-90 in-data-open:[&>path:last-child]:opacity-0' />
             </AccordionPrimitive.Trigger>
           </AccordionPrimitive.Header>
           <AccordionContent className='text-muted-foreground'>{item.content}</AccordionContent>

@@ -1,22 +1,14 @@
-// @ts-nocheck
 'use client'
 
 import type { CSSProperties } from 'react'
 import { useState } from 'react'
 
-import { ArrowLeftFromLineIcon, ArrowRightFromLineIcon, EllipsisIcon, PinOffIcon } from 'lucide-react'
-
 import type { Column, ColumnDef, SortingState } from '@tanstack/react-table'
 import { flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
-
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { PinOffIcon, EllipsisIcon, ArrowLeftFromLineIcon, ArrowRightFromLineIcon } from 'lucide-react'
 
 type Product = {
   productId: number
@@ -197,7 +189,19 @@ const DataTablePinnableColumnDemo = () => {
                             </Button>
                           ) : (
                             <DropdownMenu>
-                              <DropdownMenuTrigger render={<Button size='icon' variant='ghost' className='-mr-1 size-7' aria-label={`Pin options for ${header.column.columnDef.header as string} column`} title={`Pin options for ${header.column.columnDef.header as string} column`} />}><EllipsisIcon className='opacity-60' aria-hidden='true' /></DropdownMenuTrigger>
+                              <DropdownMenuTrigger
+                                render={
+                                  <Button
+                                    size='icon'
+                                    variant='ghost'
+                                    className='-mr-1 size-7'
+                                    aria-label={`Pin options for ${header.column.columnDef.header as string} column`}
+                                    title={`Pin options for ${header.column.columnDef.header as string} column`}
+                                  >
+                                    <EllipsisIcon className='opacity-60' aria-hidden='true' />
+                                  </Button>
+                                }
+                              />
                               <DropdownMenuContent align='end'>
                                 <DropdownMenuItem onClick={() => header.column.pin('left')}>
                                   <ArrowLeftFromLineIcon size={16} className='opacity-60' aria-hidden='true' />

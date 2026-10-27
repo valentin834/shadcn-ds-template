@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { PrimaryGrowButton } from '@/components/ui/grow-button'
 
 const PrimaryGrowButtonDemo = () => {

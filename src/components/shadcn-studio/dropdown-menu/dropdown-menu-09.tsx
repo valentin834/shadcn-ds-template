@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { PencilLineIcon, UploadIcon, Trash2Icon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,12 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { PencilLineIcon, UploadIcon, Trash2Icon } from 'lucide-react'
 
 const DropdownMenuAlignStartDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Align Start</DropdownMenuTrigger>
-      <DropdownMenuContent align='start' className='w-34'>
+      <DropdownMenuTrigger render={<Button variant='outline'>Align Start</Button>} />
+      <DropdownMenuContent className='w-34'>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <PencilLineIcon />

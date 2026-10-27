@@ -1,15 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { FunnelPlusIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Slider } from '@/components/ui/slider'
+import { FunnelPlusIcon } from 'lucide-react'
 
 const filters = ['Most liked', 'Highest reviewed', 'Newest', 'Most popular']
 
@@ -19,7 +16,10 @@ const PopoverFilterDemo = () => {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><FunnelPlusIcon /><span className='sr-only'>Filter</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <FunnelPlusIcon />
+        <span className='sr-only'>Filter</span>
+      </PopoverTrigger>
       <PopoverContent>
         <div className='grid gap-4'>
           <div className='flex items-center justify-between gap-2'>
@@ -52,7 +52,13 @@ const PopoverFilterDemo = () => {
           <div className='grid gap-3'>
             <Label>Price range</Label>
             <div className='space-y-2'>
-              <Slider value={price} onValueChange={setPrice} step={50} max={1000} aria-label='Price range' />
+              <Slider
+                value={price}
+                onValueChange={value => setPrice(value as number[])}
+                step={50}
+                max={1000}
+                aria-label='Price range'
+              />
               <span className='text-muted-foreground flex w-full items-center justify-between gap-1 text-xs font-medium'>
                 <span>0</span>
                 <span>500</span>

@@ -1,43 +1,12 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
-
 import { cn } from "@/lib/utils"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
-// Radix→base-ui compatibility shim
-// (legacy shadcnstudio variants use Radix API: type='single'/'multiple', collapsible,
-//  and pass `value`/`defaultValue` as strings instead of arrays)
-type AccordionRootProps = Omit<AccordionPrimitive.Root.Props, "value" | "defaultValue"> & {
-  type?: "single" | "multiple"
-  collapsible?: boolean
-  value?: string | string[] | (string | number)[]
-  defaultValue?: string | string[] | (string | number)[]
-}
-
-function Accordion({
-  className,
-  type,
-  collapsible,
-  value,
-  defaultValue,
-  ...props
-}: AccordionRootProps) {
-  const normalizedValue =
-    value !== undefined ? (Array.isArray(value) ? value : [value]) : undefined
-  const normalizedDefault =
-    defaultValue !== undefined
-      ? Array.isArray(defaultValue)
-        ? defaultValue
-        : [defaultValue]
-      : undefined
-  const conditionalProps: Record<string, unknown> = {}
-  if (type === "multiple") conditionalProps.multiple = true
-  if (normalizedValue) conditionalProps.value = normalizedValue
-  if (normalizedDefault) conditionalProps.defaultValue = normalizedDefault
+function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
       className={cn("flex w-full flex-col", className)}
-      {...conditionalProps}
       {...props}
     />
   )

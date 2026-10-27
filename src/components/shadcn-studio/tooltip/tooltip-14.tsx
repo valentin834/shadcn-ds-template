@@ -1,17 +1,15 @@
-// @ts-nocheck
-import { FileQuestionIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+import { FileXCornerIcon } from 'lucide-react'
 
 const HoverCardAlertDemo = () => {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
-      <HoverCardTrigger render={<Button variant='link' />}>Hover Card Alert</HoverCardTrigger>
+    <HoverCard>
+      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Alert</Button>} />
       <HoverCardContent className='w-72'>
         <div className='flex flex-col items-center text-center'>
           <span className='bg-destructive/10 mb-2.5 flex size-12 items-center justify-center rounded-full'>
-            <FileQuestionIcon className='text-destructive size-6' />
+            <FileXCornerIcon className='text-destructive size-6' />
           </span>
           <div className='mb-1 text-lg font-medium'>File is corrupted</div>
           <p className='text-sm'>It might have some virus or something that might be harmful for your device. </p>

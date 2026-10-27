@@ -1,4 +1,5 @@
-// @ts-nocheck
+'use client'
+
 import { buttonVariants } from '@/components/ui/button'
 import {
   Pagination,
@@ -32,7 +33,7 @@ const BorderedPaginationDemo = () => {
                     [buttonVariants({
                       variant: 'default',
                       className:
-                        'hover:!text-primary-foreground dark:bg-primary dark:text-primary-foreground dark:hover:text-primary-foreground dark:hover:bg-primary/90 dark:border-transparent'
+                        'hover:text-primary-foreground! dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 dark:hover:text-primary-foreground dark:border-transparent'
                     })]: isActive
                   },
                   'rounded-none border-none'

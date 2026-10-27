@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -17,8 +16,8 @@ const AlertTaskDemo = () => {
   }, [])
 
   return (
-    <Alert className='flex gap-3'>
-      <Avatar className='rounded-sm'>
+    <Alert className='grid-cols-[auto_1fr] gap-x-2'>
+      <Avatar className='row-span-2 rounded-sm'>
         <AvatarImage
           src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png'
           alt='Hallie Richards'
@@ -26,17 +25,15 @@ const AlertTaskDemo = () => {
         />
         <AvatarFallback className='text-xs'>HR</AvatarFallback>
       </Avatar>
-      <div className='flex flex-1 flex-col gap-2'>
-        <div className='flex-1 flex-col justify-center gap-1'>
-          <AlertTitle>@Rocky</AlertTitle>
-          <AlertDescription>this projects task is remaining, deadline is near.</AlertDescription>
-        </div>
+      <AlertTitle>@Rocky</AlertTitle>
+      <AlertDescription>
+        <p className='mb-2!'>this projects task is remaining, deadline is near.</p>
         <Progress
           value={progress}
-          className='bg-amber-600/20 *:bg-amber-600 dark:bg-amber-400/20 dark:*:bg-amber-400'
+          className='**:data-[slot=progress-indicator]:bg-amber-600 *:data-[slot=progress-track]:h-1.5 *:data-[slot=progress-track]:bg-amber-600/20 dark:**:data-[slot=progress-indicator]:bg-amber-400 dark:*:data-[slot=progress-track]:bg-amber-400/20'
           aria-label='Task progress'
         />
-      </div>
+      </AlertDescription>
     </Alert>
   )
 }

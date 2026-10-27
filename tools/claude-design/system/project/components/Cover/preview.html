@@ -1,0 +1,40 @@
+<!-- @dsCard height=288 -->
+<style>
+  html, body { margin: 0; background: var(--background); }
+  .cover { position: relative; width: 960px; height: 288px; background: var(--background); overflow: hidden; font-family: var(--font-geist-sans); }
+  .cover svg { position: absolute; left: 480px; top: 0; }
+  .ink { fill: var(--primary); }
+  .mid { fill: var(--chart-3); }
+  .grey { fill: var(--chart-2); }
+  .pale { fill: var(--chart-1); }
+  .soft { fill: var(--muted); }
+  .danger { fill: var(--destructive); }
+  .r-lg { rx: var(--radius-lg); }
+  .r-xl { rx: var(--radius-xl); }
+  .pill { rx: 12px; }
+  .name { position: absolute; left: 40px; bottom: 64px; margin: 0; max-width: 440px; font-size: 80px; line-height: 0.95; font-weight: 600; letter-spacing: -0.03em; color: var(--foreground); }
+  .tagline { position: absolute; left: 40px; bottom: 32px; margin: 0; max-width: 440px; font-size: 14px; line-height: 20px; color: var(--muted-foreground); }
+</style>
+<div class="cover">
+  <svg width="480" height="288" viewBox="0 0 480 288" aria-hidden="true">
+    <!--
+      blocks: primary (ink) 2 tiles, chart-3 + chart-2 (mid greys), chart-1 (pale), muted (relief), destructive kept to one 24px pill
+      arrangement: a flush dashboard grid bleeding off the top and right edges, some tiles merged two-wide like cards and tables
+      pattern: modular tiles cut by the radius scale — "geometric, modular, dense UI": shadcn screens are cards, tables and fields on a grid
+      scales: 16px gutters (spacing step 4), tiles 96 / 208 wide (6 and 13 steps), radius-lg and radius-xl corners, a 24px pill
+    -->
+    <rect class="ink r-xl" x="16" y="-24" width="208" height="96" />
+    <rect class="soft r-xl" x="240" y="-24" width="96" height="96" />
+    <rect class="pale r-xl" x="352" y="-24" width="152" height="96" />
+    <rect class="soft r-lg" x="16" y="88" width="96" height="88" />
+    <rect class="mid r-xl" x="128" y="88" width="208" height="88" />
+    <rect class="ink r-lg" x="352" y="88" width="96" height="88" />
+    <rect class="soft r-lg" x="464" y="88" width="40" height="88" />
+    <rect class="pale r-xl" x="16" y="192" width="320" height="112" />
+    <rect class="grey r-lg" x="352" y="192" width="152" height="112" />
+    <rect class="soft pill" x="40" y="216" width="152" height="24" />
+    <rect class="danger pill" x="208" y="216" width="24" height="24" />
+  </svg>
+  <h1 class="name">40-60 ·<br>shadcn DS</h1>
+  <p class="tagline">Wireframes en niveaux de gris, avec les vrais composants shadcn du template.</p>
+</div>

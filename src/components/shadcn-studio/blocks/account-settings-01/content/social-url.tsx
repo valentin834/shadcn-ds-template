@@ -1,12 +1,9 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { PlusIcon } from 'lucide-react'
-
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { PlusIcon } from 'lucide-react'
 
 const SocialUrl = () => {
   const [urls, setUrls] = useState<string[]>(['', '', ''])

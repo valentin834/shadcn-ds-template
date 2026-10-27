@@ -1,14 +1,11 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { BellIcon, CircleIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { BellIcon } from 'lucide-react'
 
 const notifications = [
   {
@@ -39,7 +36,10 @@ const PopoverNotificationsDemo = () => {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><BellIcon /><span className='sr-only'>Notifications</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <BellIcon />
+        <span className='sr-only'>Notifications</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80 p-0'>
         <div className='grid'>
           <div className='flex items-center justify-between gap-2 px-4 py-2.5'>
@@ -52,7 +52,7 @@ const PopoverNotificationsDemo = () => {
               Mark as all read
             </Button>
           </div>
-          <Separator className='' />
+          <Separator />
           <ul className='grid gap-4 p-2'>
             {notifications.map(item => (
               <li
@@ -69,7 +69,7 @@ const PopoverNotificationsDemo = () => {
                   <p className='text-muted-foreground text-xs'>{`${item.time} ago`}</p>
                 </div>
                 {!readMessages.includes(item.id) && (
-                  <CircleIcon className='fill-primary text-primary size-2 self-center' />
+                  <span className='bg-primary block size-2 self-center rounded-full' />
                 )}
               </li>
             ))}

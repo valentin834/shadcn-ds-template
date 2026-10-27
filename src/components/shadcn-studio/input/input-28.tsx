@@ -1,9 +1,18 @@
-// @ts-nocheck
 import { useId } from 'react'
 
+import { ButtonGroup } from '@/components/ui/button-group'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'https://', value: 'https://' },
+  { label: 'http://', value: 'http://' },
+  { label: 'ftp://', value: 'ftp://' },
+  { label: 'sftp://', value: 'sftp://' },
+  { label: 'ws://', value: 'ws://' },
+  { label: 'wss://', value: 'wss://' }
+]
 
 const InputStartSelectDemo = () => {
   const id = useId()
@@ -11,34 +20,21 @@ const InputStartSelectDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with start select</Label>
-      <div className='flex rounded-md shadow-xs'>
-        <Select defaultValue='https://'>
-          <SelectTrigger id={id} className='rounded-r-none shadow-none focus-visible:z-1'>
+      <ButtonGroup className='w-full'>
+        <Select items={items} defaultValue='https://'>
+          <SelectTrigger id={id}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='https://' className='pr-2 [&_svg]:hidden'>
-              https://
-            </SelectItem>
-            <SelectItem value='http://' className='pr-2 [&_svg]:hidden'>
-              http://
-            </SelectItem>
-            <SelectItem value='ftp://' className='pr-2 [&_svg]:hidden'>
-              ftp://
-            </SelectItem>
-            <SelectItem value='sftp://' className='pr-2 [&_svg]:hidden'>
-              sftp://
-            </SelectItem>
-            <SelectItem value='ws://' className='pr-2 [&_svg]:hidden'>
-              ws://
-            </SelectItem>
-            <SelectItem value='wss://' className='pr-2 [&_svg]:hidden'>
-              wss://
-            </SelectItem>
+            {items.map(item => (
+              <SelectItem key={item.value} value={item.value} className='pr-2 [&_svg]:hidden'>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
-        <Input id={id} type='text' placeholder='shadcnstudio.com' className='-ms-px rounded-l-none shadow-none' />
-      </div>
+        <Input id={id} type='text' placeholder='shadcnstudio.com' />
+      </ButtonGroup>
     </div>
   )
 }

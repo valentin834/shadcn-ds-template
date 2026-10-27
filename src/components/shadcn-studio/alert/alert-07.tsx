@@ -1,13 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useEffect } from 'react'
-
-import { UploadIcon, XIcon } from 'lucide-react'
-
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Alert, AlertAction, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { UploadIcon, XIcon } from 'lucide-react'
 
 const AlertFileUploadDemo = () => {
   const [isActive, setIsActive] = useState(true)
@@ -23,35 +20,36 @@ const AlertFileUploadDemo = () => {
   if (!isActive) return null
 
   return (
-    <Alert className='flex justify-between'>
+    <Alert>
       <UploadIcon />
-      <div className='flex flex-1 flex-col gap-4'>
-        <div className='flex-1 flex-col justify-center gap-1'>
-          <AlertTitle>Uploading your &apos;Img-234.png&apos;</AlertTitle>
-          <AlertDescription>Please wait While we upload your image.</AlertDescription>
-        </div>
+      <AlertTitle>Uploading your &apos;Img-234.png&apos;</AlertTitle>
+      <AlertDescription>
+        <p className='mb-2!'>Please wait While we upload your image.</p>
         <Progress
           value={progress}
-          className='bg-sky-600/20 *:bg-sky-600 dark:bg-sky-400/20 dark:*:bg-sky-400'
+          className='**:data-[slot=progress-indicator]:bg-sky-600 *:data-[slot=progress-track]:h-1.5 *:data-[slot=progress-track]:bg-sky-600/20 dark:**:data-[slot=progress-indicator]:bg-sky-400 dark:*:data-[slot=progress-track]:bg-sky-400/20'
           aria-label='Upload Progress'
         />
-        <div className='flex items-center gap-4'>
-          <Button variant='ghost' className='h-7 cursor-pointer rounded-md px-2'>
+        <div className='mt-2 flex items-center gap-3'>
+          <Button variant='ghost' size='sm' className='cursor-pointer'>
             Cancel
           </Button>
           <Button
             variant='ghost'
+            size='sm'
             disabled
-            className='h-7 cursor-pointer rounded-md px-2 text-sky-600 hover:bg-sky-600/10 hover:text-sky-600 dark:text-sky-400 dark:hover:bg-sky-400/10 dark:hover:text-sky-400'
+            className='cursor-pointer text-sky-600 hover:bg-sky-600/10 hover:text-sky-600 dark:text-sky-400 dark:hover:bg-sky-400/10 dark:hover:text-sky-400'
           >
             Upload another
           </Button>
         </div>
-      </div>
-      <button className='size-5 cursor-pointer' onClick={() => setIsActive(false)}>
-        <XIcon className='size-5' />
-        <span className='sr-only'>Close</span>
-      </button>
+      </AlertDescription>
+      <AlertAction>
+        <button className='cursor-pointer' onClick={() => setIsActive(false)}>
+          <XIcon className='size-4' />
+          <span className='sr-only'>Close</span>
+        </button>
+      </AlertAction>
     </Alert>
   )
 }

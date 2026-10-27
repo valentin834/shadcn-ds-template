@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const CardOverlayDemo = () => {
@@ -8,11 +7,11 @@ const CardOverlayDemo = () => {
         <img
           src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-8.png?widht=448&height=280&format=auto'
           alt='Banner'
-          className='h-70 w-112 rounded-xl'
+          className='h-50 w-md rounded-xl'
         />
       </CardContent>
       <div className='absolute'>
-        <CardHeader className='text-primary-foreground w-full pt-6'>
+        <CardHeader className='text-primary-foreground mb-2 w-full pt-4'>
           <CardTitle>Creative Catalyst</CardTitle>
         </CardHeader>
         <CardContent className='text-primary-foreground/80'>

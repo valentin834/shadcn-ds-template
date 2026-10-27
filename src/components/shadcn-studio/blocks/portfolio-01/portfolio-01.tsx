@@ -1,8 +1,10 @@
-// @ts-nocheck
-import { Globe, Code2, Camera, MessageCircle } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import GithubIcon from '@/assets/svg/github-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
 
 const Portfolio = ({ images }: { images: string[] }) => {
   return (
@@ -10,7 +12,7 @@ const Portfolio = ({ images }: { images: string[] }) => {
       <div className='mx-auto max-w-7xl space-y-12 px-4 sm:space-y-16 sm:px-6 lg:space-y-24 lg:px-8'>
         {/* Section Header */}
         <div className='space-y-4'>
-          <Badge variant='outline' className='text-sm font-normal'>
+          <Badge variant='outline' className='h-auto text-sm font-normal'>
             Our portfolio
           </Badge>
 
@@ -67,16 +69,16 @@ const Portfolio = ({ images }: { images: string[] }) => {
               <span className='w-21 text-lg font-medium'>Share:</span>
               <div className='flex gap-2'>
                 <a href='#'>
-                  <Globe className='size-5.5 text-sky-600' />
+                  <FacebookIcon className='size-5.5 text-sky-600' />
                 </a>
                 <a href='#'>
-                  <Camera className='text-destructive size-5.5' />
+                  <InstagramIcon className='text-destructive size-5.5' />
                 </a>
                 <a href='#'>
-                  <Code2 className='text-primary size-5.5' />
+                  <GithubIcon className='text-primary size-5.5' />
                 </a>
                 <a href='#'>
-                  <MessageCircle className='size-5.5 text-sky-600' />
+                  <TwitterIcon className='size-5.5 text-sky-600' />
                 </a>
               </div>
             </div>

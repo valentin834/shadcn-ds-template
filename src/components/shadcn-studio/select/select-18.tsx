@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -12,24 +11,33 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+const items = [
+  { label: 'Select a fruit', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
+
 const SelectGhostDemo = () => {
   const id = useId()
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Ghost Select</Label>
-      <Select defaultValue='apple'>
-        <SelectTrigger className='hover:bg-accent w-full border-none shadow-none dark:bg-transparent'>
-          <SelectValue placeholder='Select a fruit' />
+      <Select items={items} defaultValue='apple'>
+        <SelectTrigger className='hover:bg-muted w-full border-none shadow-none dark:bg-transparent'>
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
+            {items.slice(1).map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

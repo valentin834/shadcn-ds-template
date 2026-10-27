@@ -1,20 +1,17 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { MinusIcon, PlusIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { ButtonGroup, ButtonGroupText } from '@/components/ui/button-group'
+import { MinusIcon, PlusIcon } from 'lucide-react'
 
 const ButtonGroupNumberDemo = () => {
   const [value, setValue] = useState(216)
 
   return (
-    <div className='divide-primary-foreground/30 inline-flex w-fit divide-x rounded-md shadow-xs'>
+    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>
       <Button
         size='icon'
-        className='rounded-none rounded-l-full focus-visible:z-10'
         onClick={() => {
           setValue(value - 1)
         }}
@@ -22,12 +19,9 @@ const ButtonGroupNumberDemo = () => {
         <MinusIcon />
         <span className='sr-only'>Minus</span>
       </Button>
-      <span className='bg-primary text-primary-foreground inline-flex items-center px-3 py-2 text-sm font-medium'>
-        {`${value}px`}
-      </span>
+      <ButtonGroupText className='bg-primary text-primary-foreground'>{`${value}px`}</ButtonGroupText>
       <Button
         size='icon'
-        className='rounded-none rounded-r-full focus-visible:z-10'
         onClick={() => {
           setValue(value + 1)
         }}
@@ -35,7 +29,7 @@ const ButtonGroupNumberDemo = () => {
         <PlusIcon />
         <span className='sr-only'>Plus</span>
       </Button>
-    </div>
+    </ButtonGroup>
   )
 }
 

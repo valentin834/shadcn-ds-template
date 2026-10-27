@@ -1,20 +1,16 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
 
 import { motion, AnimatePresence } from 'motion/react'
-import { BookIcon, GiftIcon, HeartIcon } from 'lucide-react'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-import { cn } from '@/lib/utils'
+import { BookIcon, HeartIcon, GiftIcon } from 'lucide-react'
 
 const tabs = [
   {
     name: 'Explore',
     value: 'explore',
-    icon: BookIcon,
+    icon: <BookIcon />,
     content: (
       <>
         Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending topics, and hidden gems
@@ -25,7 +21,7 @@ const tabs = [
   {
     name: 'Favorites',
     value: 'favorites',
-    icon: HeartIcon,
+    icon: <HeartIcon />,
     content: (
       <>
         All your <span className='text-foreground font-semibold'>favorites</span> are saved here. Revisit articles,
@@ -36,11 +32,11 @@ const tabs = [
   {
     name: 'Surprise Me',
     value: 'surprise',
-    icon: GiftIcon,
+    icon: <GiftIcon />,
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -52,42 +48,52 @@ const ExpandableTabsDemo = () => {
   return (
     <div className='w-full max-w-md'>
       <Tabs value={activeTab} onValueChange={setActiveTab} className='gap-4'>
-        <TabsList className='h-auto gap-2 rounded-xl p-1'>
-          {tabs.map(({ icon: Icon, name, value }) => {
+        <TabsList className='gap-2 rounded-lg group-data-horizontal/tabs:h-fit'>
+          {tabs.map(({ icon, name, value }) => {
             const isActive = activeTab === value
 
             return (
               <motion.div
                 key={value}
-                layout
-                className={cn(
-                  'flex h-8 items-center justify-center overflow-hidden rounded-md',
-                  isActive ? 'flex-1' : 'flex-none'
-                )}
+                className='flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md'
                 onClick={() => setActiveTab(value)}
                 initial={false}
                 animate={{
                   width: isActive ? 120 : 32
                 }}
                 transition={{
-                  type: 'tween',
+                  type: 'spring',
                   stiffness: 400,
-                  damping: 25
+                  damping: 30
                 }}
               >
-                <TabsTrigger value={value} render={<motion.div className='flex h-8 w-full items-center justify-center' animate={{ filter: 'blur(0px)' }} exit={{ filter: 'blur(2px)' }} transition={{ duration: 0.25, ease: 'easeOut' }} />}><Icon className='aspect-square size-4 shrink-0' /><AnimatePresence initial={false}>
-                                          {isActive && (
-                                            <motion.span
-                                              className='font-medium max-sm:hidden'
-                                              initial={{ opacity: 0, scaleX: 0.8 }}
-                                              animate={{ opacity: 1, scaleX: 1 }}
-                                              transition={{ duration: 0.25, ease: 'easeOut' }}
-                                              style={{ originX: 0 }}
-                                            >
-                                              {name}
-                                            </motion.span>
-                                          )}
-                                        </AnimatePresence></TabsTrigger>
+                <TabsTrigger
+                  nativeButton={false}
+                  value={value}
+                  render={
+                    <motion.div
+                      className='h-8 w-full justify-center *:[svg]:aspect-square *:[svg]:size-4 *:[svg]:shrink-0'
+                      animate={{ filter: 'blur(0px)' }}
+                      exit={{ filter: 'blur(2px)' }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                    >
+                      {icon}
+                      <AnimatePresence initial={false}>
+                        {isActive && (
+                          <motion.span
+                            className='font-medium max-sm:hidden'
+                            initial={{ opacity: 0, scaleX: 0.8 }}
+                            animate={{ opacity: 1, scaleX: 1 }}
+                            transition={{ duration: 0.25, ease: 'easeOut' }}
+                            style={{ originX: 0 }}
+                          >
+                            {name}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  }
+                />
               </motion.div>
             )
           })}

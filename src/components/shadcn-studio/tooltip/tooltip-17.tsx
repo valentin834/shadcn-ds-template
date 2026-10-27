@@ -1,4 +1,5 @@
-// @ts-nocheck
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/global-tooltip'
 
@@ -33,7 +34,10 @@ const GlobalTooltipDemo = () => {
           {avatars.map((avatar, index) => (
             <Tooltip key={index}>
               <TooltipTrigger>
-                <Avatar className='ring-background size-10 ring-2 transition-all duration-300 ease-in-out hover:z-1 hover:scale-105'>
+                <Avatar
+                  size='lg'
+                  className='ring-background ring-2 transition-all duration-300 ease-in-out hover:z-1 hover:scale-105'
+                >
                   <AvatarImage src={avatar.src} alt={avatar.name} />
                   <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>
                 </Avatar>

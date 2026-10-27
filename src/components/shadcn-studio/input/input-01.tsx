@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Input } from '@/components/ui/input'
 
 const InputDemo = () => {

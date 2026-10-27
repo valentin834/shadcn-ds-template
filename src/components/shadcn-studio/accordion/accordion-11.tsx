@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const items = [
@@ -20,14 +19,14 @@ const items = [
 
 const AccordionTabsDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+    <Accordion className='w-full border-0 [&>*>[data-slot="accordion-content"]]:px-0' defaultValue={['item-1']}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='data-[state=open]:bg-accent rounded-md border-none px-5 transition-colors duration-200'
+          className='data-open:bg-accent rounded-lg border-none px-5 transition-colors duration-200'
         >
-          <AccordionTrigger>{item.title}</AccordionTrigger>
+          <AccordionTrigger className='px-0'>{item.title}</AccordionTrigger>
           <AccordionContent className='text-muted-foreground'>{item.content}</AccordionContent>
         </AccordionItem>
       ))}

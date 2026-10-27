@@ -16,14 +16,14 @@ const navigationData: NavigationSection[] = [
     href: '#'
   },
   {
-    title: 'Contacts',
+    title: 'Contact Us',
     href: '#'
   }
 ]
 
 const HeroSectionPage = () => {
   return (
-    <div className='relative'>
+    <>
       {/* Header Section */}
       <Header navigationData={navigationData} />
 
@@ -31,7 +31,7 @@ const HeroSectionPage = () => {
       <main className='flex flex-col'>
         <HeroSection />
       </main>
-    </div>
+    </>
   )
 }
 

@@ -1,13 +1,4 @@
-// @ts-nocheck
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table'
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 const invoices = [
   {
@@ -78,7 +69,7 @@ const StickyHeaderTableDemo = () => {
       <div className='[&>div]:max-h-70 [&>div]:rounded-sm [&>div]:border'>
         <Table>
           <TableHeader>
-            <TableRow className='bg-background sticky top-0'>
+            <TableRow className='hover:bg-muted bg-background sticky top-0'>
               <TableHead className='w-25'>Invoice</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Method</TableHead>

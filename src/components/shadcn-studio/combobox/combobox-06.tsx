@@ -1,26 +1,27 @@
-// @ts-nocheck
 'use client'
 
-import { useId, useState } from 'react'
-
-import { CheckIcon, ChevronsUpDownIcon, PlusIcon } from 'lucide-react'
-
+import { useId } from 'react'
 import { Button } from '@/components/ui/button'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator
-} from '@/components/ui/command'
+  Combobox,
+  ComboboxCollection,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  ComboboxSeparator,
+  ComboboxTrigger,
+  ComboboxValue
+} from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-
-import { cn } from '@/lib/utils'
+import { PlusIcon } from 'lucide-react'
 
 const universities = [
+  {
+    value: '',
+    label: 'Select university'
+  },
   {
     value: 'harvard',
     label: 'Harvard University'
@@ -41,51 +42,37 @@ const universities = [
 
 const ComboboxWithSearchAndButtonDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState<boolean>(false)
-  const [value, setValue] = useState<string>('harvard')
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Combobox with search and add button</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]' />}><span className={cn('truncate', !value && 'text-muted-foreground')}>
-                            {value ? (
-                              universities.find(university => university.value === value)?.label
-                            ) : (
-                              <span className='text-muted-foreground'>Select university</span>
-                            )}
-                          </span><ChevronsUpDownIcon className='text-muted-foreground/80 shrink-0' aria-hidden='true' /></PopoverTrigger>
-        <PopoverContent className='border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0' align='start'>
-          <Command>
-            <CommandInput placeholder='Find university' />
-            <CommandList>
-              <CommandEmpty>No university found.</CommandEmpty>
-              <CommandGroup>
-                {universities.map(university => (
-                  <CommandItem
-                    key={university.value}
-                    value={university.value}
-                    onSelect={currentValue => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                  >
-                    {university.label}
-                    {value === university.value && <CheckIcon size={16} className='ml-auto' />}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup>
-                <Button variant='ghost' className='w-full justify-start font-normal'>
-                  <PlusIcon className='-ms-2 opacity-60' aria-hidden='true' />
-                  New university
-                </Button>
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={universities} defaultValue={universities[0].value}>
+        <ComboboxTrigger
+          render={
+            <Button variant='outline' className='w-full justify-between font-normal'>
+              <ComboboxValue />
+            </Button>
+          }
+        />
+        <ComboboxContent>
+          <ComboboxInput showTrigger={false} className='max-w-full' placeholder='Select university' />
+          <ComboboxEmpty>No items found.</ComboboxEmpty>
+          <ComboboxList>
+            <ComboboxCollection>
+              {item => (
+                <ComboboxItem key={item.value} value={item.value}>
+                  {item.label}
+                </ComboboxItem>
+              )}
+            </ComboboxCollection>
+            <ComboboxSeparator />
+            <Button variant='ghost' className='w-full justify-start font-normal'>
+              <PlusIcon className='-ms-2 opacity-60' aria-hidden='true' />
+              New university
+            </Button>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

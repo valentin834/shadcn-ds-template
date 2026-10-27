@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { CircleFadingPlusIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CircleFadingPlusIcon } from 'lucide-react'
 
 const CardInviteCardDemo = () => {
   return (
@@ -12,7 +10,7 @@ const CardInviteCardDemo = () => {
       </CardHeader>
       <CardContent className='grid gap-4 sm:grid-cols-2'>
         <div className='flex items-center gap-4'>
-          <CircleFadingPlusIcon />
+          <CircleFadingPlusIcon className='size-6' />
           <span className='text-sm font-semibold'>Invite Member </span>
         </div>
         <div className='flex items-center gap-4'>

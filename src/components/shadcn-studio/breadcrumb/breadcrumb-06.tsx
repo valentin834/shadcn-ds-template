@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { ChevronDownIcon, HomeIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import {
   Breadcrumb,
@@ -10,12 +7,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { HomeIcon, ChevronDownIcon } from 'lucide-react'
 
 const BreadcrumbWithDropdownDemo = () => {
   return (
@@ -45,7 +38,7 @@ const BreadcrumbWithDropdownDemo = () => {
                 Add Document
                 <ChevronDownIcon className='size-4' />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align='start'>
+              <DropdownMenuContent>
                 <DropdownMenuItem>Documentation</DropdownMenuItem>
                 <DropdownMenuItem>Themes</DropdownMenuItem>
                 <DropdownMenuItem>GitHub</DropdownMenuItem>

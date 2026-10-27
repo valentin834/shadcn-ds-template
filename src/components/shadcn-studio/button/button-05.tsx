@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { Redo2Icon, Undo2Icon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { Undo2Icon, Redo2Icon } from 'lucide-react'
 
 const ButtonIconDemo = () => {
   return (

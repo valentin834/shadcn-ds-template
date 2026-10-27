@@ -1,10 +1,35 @@
-// @ts-nocheck
-import { useId } from 'react'
+'use client'
 
-import { CircleIcon } from 'lucide-react'
+import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
+
+const statusColors: Record<string, string> = {
+  '1': 'bg-violet-500',
+  '2': 'bg-amber-500',
+  '3': 'bg-emerald-600',
+  '4': 'bg-gray-500',
+  '5': 'bg-red-500'
+}
+
+const statusLabels: Record<string, string> = {
+  '1': 'In Progress',
+  '2': 'Pending',
+  '3': 'Completed',
+  '4': 'Cancelled',
+  '5': 'Rejected'
+}
+
+const items = [
+  { label: 'Select status', value: null },
+  { label: 'In Progress', value: '1' },
+  { label: 'Pending', value: '2' },
+  { label: 'Completed', value: '3' },
+  { label: 'Cancelled', value: '4' },
+  { label: 'Rejected', value: '5' }
+]
 
 const SelectStatusDemo = () => {
   const id = useId()
@@ -12,44 +37,30 @@ const SelectStatusDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Status select</Label>
-      <Select defaultValue='1'>
-        <SelectTrigger
-          id={id}
-          className='w-full [&>span]:flex [&>span]:items-center [&>span]:gap-2 [&>span_svg]:shrink-0'
-        >
-          <SelectValue placeholder='Select status' />
+      <Select items={items} defaultValue='1'>
+        <SelectTrigger id={id} className='w-full'>
+          <SelectValue>
+            {(value: string) => (
+              <span className='flex items-center gap-1.5'>
+                <span className={cn('block size-2 rounded-full', statusColors[value])}></span>
+                <span className='truncate'>{statusLabels[value]}</span>
+              </span>
+            )}
+          </SelectValue>
         </SelectTrigger>
-        <SelectContent className='[&_*[role=option]>span>svg]:text-muted-foreground/80 [&_*[role=option]]:pr-8 [&_*[role=option]]:pl-2 [&_*[role=option]>span]:right-2 [&_*[role=option]>span]:left-auto [&_*[role=option]>span]:flex [&_*[role=option]>span]:items-center [&_*[role=option]>span]:gap-2 [&_*[role=option]>span>svg]:shrink-0'>
-          <SelectItem value='1'>
-            <span className='flex items-center gap-2'>
-              <CircleIcon className='size-2 fill-violet-500 text-violet-500' />
-              <span className='truncate'>In Progress</span>
-            </span>
-          </SelectItem>
-          <SelectItem value='2'>
-            <span className='flex items-center gap-2'>
-              <CircleIcon className='size-2 fill-amber-500 text-amber-500' />
-              <span className='truncate'>Pending</span>
-            </span>
-          </SelectItem>
-          <SelectItem value='3'>
-            <span className='flex items-center gap-2'>
-              <CircleIcon className='size-2 fill-emerald-600 text-emerald-600' />
-              <span className='truncate'>Completed</span>
-            </span>
-          </SelectItem>
-          <SelectItem value='4'>
-            <span className='flex items-center gap-2'>
-              <CircleIcon className='size-2 fill-gray-500 text-gray-500' />
-              <span className='truncate'>Cancelled</span>
-            </span>
-          </SelectItem>
-          <SelectItem value='5'>
-            <span className='flex items-center gap-2'>
-              <CircleIcon className='size-2 fill-red-500 text-red-500' />
-              <span className='truncate'>Rejected</span>
-            </span>
-          </SelectItem>
+        <SelectContent className='p-1'>
+          {items.slice(1).map(item => {
+            if (!item.value) return null
+
+            return (
+              <SelectItem key={item.value} value={item.value}>
+                <span className='flex items-center gap-1.5'>
+                  <span className={cn('block size-2 rounded-full', statusColors[item.value])}></span>
+                  <span className='truncate'>{item.label}</span>
+                </span>
+              </SelectItem>
+            )
+          })}
         </SelectContent>
       </Select>
     </div>

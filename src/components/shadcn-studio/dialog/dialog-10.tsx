@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -47,7 +46,7 @@ const DialogReferAndEarnDemo = () => {
             </DialogDescription>
           </DialogHeader>
           <form className='flex flex-col gap-4 pt-4'>
-            <div className='grid grow-1 gap-3'>
+            <div className='grid grow gap-3'>
               <Label htmlFor='email'>Refer by email</Label>
               <Input type='text' id='email' name='email' placeholder='Emails, separated by comas or tab' required />
             </div>

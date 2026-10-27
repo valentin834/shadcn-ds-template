@@ -134,7 +134,7 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Password</CardTitle>
-              <CardDescription>Use a strong, unique password you don't use elsewhere.</CardDescription>
+              <CardDescription>Use a strong, unique password you don&apos;t use elsewhere.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">

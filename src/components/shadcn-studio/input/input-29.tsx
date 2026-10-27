@@ -1,9 +1,15 @@
-// @ts-nocheck
 import { useId } from 'react'
 
+import { ButtonGroup } from '@/components/ui/button-group'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: '.com', value: '.com' },
+  { label: '.org', value: '.org' },
+  { label: '.net', value: '.net' }
+]
 
 const InputEndSelectDemo = () => {
   const id = useId()
@@ -11,30 +17,21 @@ const InputEndSelectDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with end select</Label>
-      <div className='flex rounded-md shadow-xs'>
-        <Input
-          id={id}
-          type='text'
-          placeholder='shadcnstudio'
-          className='-me-px rounded-r-none shadow-none focus-visible:z-1'
-        />
-        <Select defaultValue='.com'>
-          <SelectTrigger id={id} className='rounded-l-none shadow-none'>
+      <ButtonGroup className='w-full'>
+        <Input id={id} type='text' placeholder='shadcnstudio' />
+        <Select items={items} defaultValue='.com'>
+          <SelectTrigger id={id}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='.com' className='pr-2 [&_svg]:hidden'>
-              .com
-            </SelectItem>
-            <SelectItem value='.org' className='pr-2 [&_svg]:hidden'>
-              .org
-            </SelectItem>
-            <SelectItem value='.net' className='pr-2 [&_svg]:hidden'>
-              .net
-            </SelectItem>
+            {items.map(item => (
+              <SelectItem key={item.value} value={item.value} className='pr-2 [&_svg]:hidden'>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
-      </div>
+      </ButtonGroup>
     </div>
   )
 }

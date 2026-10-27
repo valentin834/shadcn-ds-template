@@ -1,25 +1,24 @@
-import { MedalIcon, SparklesIcon, StarIcon, TargetIcon } from 'lucide-react'
-
 import AboutUs from '@/components/shadcn-studio/blocks/about-us-page-01/about-us-page-01'
+import { SparklesIcon, TargetIcon, StarIcon, MedalIcon } from 'lucide-react'
 
 const stats = [
   {
-    icon: SparklesIcon,
+    icon: <SparklesIcon />,
     value: '20+',
     description: 'Years of Experience'
   },
   {
-    icon: TargetIcon,
+    icon: <TargetIcon />,
     value: '70+',
     description: 'Successful Projects'
   },
   {
-    icon: StarIcon,
+    icon: <StarIcon />,
     value: '550+',
     description: 'Customer Reviews'
   },
   {
-    icon: MedalIcon,
+    icon: <MedalIcon />,
     value: '25',
     description: 'Achieve Awards'
   }

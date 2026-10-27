@@ -2,26 +2,23 @@
 
 import * as React from 'react'
 
-import type { VariantProps } from 'class-variance-authority'
-
 import { cn } from '@/lib/utils'
 
-import { Button, type buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: VariantProps<typeof buttonVariants>['size']
+interface GlassButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {
   children: React.ReactNode
   className?: string
-  asChild?: boolean
+  render?: React.ReactElement
 }
 
-function GlassButton({ children, size, asChild = false, className, ...props }: GlassButtonProps) {
+function GlassButton({ children, render, className, ...props }: GlassButtonProps) {
   return (
     <Button
-      size={size}
+      render={render}
+      nativeButton={!render}
       className={cn(
-        size === 'lg' && 'text-base has-[>svg]:px-6',
-        'relative inline-flex shrink-0 rounded-lg !bg-transparent bg-clip-padding text-white!',
+        'relative inline-flex h-10 shrink-0 rounded-xl bg-transparent! bg-clip-padding px-6 text-base text-white! active:translate-y-0',
 
         // Glass effect
         'bg-linear-to-l from-white/15 to-white/25 backdrop-blur-xs',
@@ -31,8 +28,8 @@ function GlassButton({ children, size, asChild = false, className, ...props }: G
         // Conic gradient
         'before:bg-[conic-gradient(from_var(--button-angle)_at_50%_50%,rgba(255,255,255,0.5),rgba(255,255,255,0)_10%_43%,rgba(255,255,255,0.5)_50%,rgba(255,255,255,0)_73%_93%,rgba(255,255,255,0.5))]',
 
-        //masking
-        'before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:mask-exclude before:[mask-clip:content-box,border-box]',
+        // masking
+        'before:mask-[linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:mask-exclude before:[mask-clip:content-box,border-box]',
 
         // Hover
         'before:transition-[--button-angle] before:duration-500 before:ease-in-out hover:before:[--button-angle:-125deg]',

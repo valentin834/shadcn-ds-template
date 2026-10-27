@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useLayoutEffect, useRef, useState } from 'react'
@@ -33,8 +32,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -70,16 +69,15 @@ const AnimatedUnderlineTabsDemo = () => {
               ref={el => {
                 tabRefs.current[index] = el
               }}
-              className='bg-background dark:data-[state=active]:bg-background relative z-10 rounded-none border-0 data-[state=active]:shadow-none!'
+              className='relative z-10 rounded-none border-0 bg-transparent! data-active:shadow-none!'
             >
               {tab.name}
             </TabsTrigger>
           ))}
 
           <motion.div
-            className='bg-primary absolute bottom-0 z-20 h-0.5'
-            layoutId='underline'
-            style={{
+            className='bg-primary absolute bottom-0 h-0.5'
+            animate={{
               left: underlineStyle.left,
               width: underlineStyle.width
             }}

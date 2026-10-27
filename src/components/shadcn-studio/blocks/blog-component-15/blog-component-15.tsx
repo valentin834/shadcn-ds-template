@@ -1,12 +1,10 @@
-// @ts-nocheck
-import { SearchIcon, ArrowRightIcon, CalendarDaysIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CalendarDaysIcon, ArrowRightIcon, SearchIcon } from 'lucide-react'
 
 export type BlogPost = {
   title: string
@@ -29,35 +27,44 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   return (
     <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
       {posts.map((post, index) => (
-        <Card key={index} className='group h-full overflow-hidden shadow-none transition-all duration-300'>
+        <Card key={index} className='group h-full transition-all duration-300'>
+          <CardHeader>
+            <a href={post.blogLink} className='overflow-hidden rounded-lg'>
+              <img
+                src={post.imageUrl}
+                alt={post.imageAlt}
+                className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
+              />
+            </a>
+          </CardHeader>
           <CardContent className='space-y-3.5'>
-            <div className='mb-6 overflow-hidden rounded-lg sm:mb-12'>
-              <a href={post.blogLink}>
-                <img
-                  src={post.imageUrl}
-                  alt={post.imageAlt}
-                  className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                />
-              </a>
-            </div>
             <div className='flex items-center justify-between gap-1.5'>
               <div className='text-muted-foreground flex items-center gap-1.5'>
                 <CalendarDaysIcon className='size-6' />
-                <span>{post.date}</span>
+                <span className='text-base'>{post.date}</span>
               </div>
               <a href={post.categoryLink}>
-                <Badge className='bg-primary/10 text-primary rounded-full border-0 text-sm'>{post.category}</Badge>
+                <Badge className='bg-primary/10 text-primary h-auto border-0 text-sm'>{post.category}</Badge>
               </a>
             </div>
             <h3 className='line-clamp-2 text-lg font-medium md:text-xl'>
               <a href={post.blogLink}>{post.title}</a>
             </h3>
-            <p className='text-muted-foreground line-clamp-2'>{post.description}</p>
+            <p className='text-muted-foreground line-clamp-2 text-base'>{post.description}</p>
             <div className='flex items-center justify-between'>
               <a href={post.authorLink} className='text-sm font-medium'>
                 {post.author}
               </a>
-              <Button size='icon' variant='outline' className='group-hover:bg-primary! group-hover:text-primary-foreground group-hover:border-primary hover:border-primary hover:bg-primary! hover:text-primary-foreground' render={<a href={post.blogLink} />} nativeButton={false}><ArrowRightIcon className='size-4 -rotate-45' /><span className='sr-only'>Read more: {post.title}</span></Button>
+              <Button
+                size='icon'
+                variant='outline'
+                className='group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground hover:border-primary hover:bg-primary hover:text-primary-foreground dark:group-hover:bg-primary dark:hover:bg-primary'
+                render={<a href={post.blogLink} />}
+                nativeButton={false}
+              >
+                <ArrowRightIcon className='size-4 -rotate-45' />
+                <span className='sr-only'>Read more: {post.title}</span>
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -88,13 +95,13 @@ const Blog = ({ blogPosts }: BlogProps) => {
         {/* Tabs and Search */}
         <Tabs defaultValue='All' className='gap-8 lg:gap-16'>
           <div className='flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center'>
-            <ScrollArea className='bg-muted w-full rounded-lg sm:w-auto'>
-              <TabsList className='gap-1 group-data-[orientation=horizontal]/tabs:h-auto'>
+            <ScrollArea className='max-md:bg-muted w-full rounded-lg sm:w-auto'>
+              <TabsList className='gap-1 group-data-horizontal/tabs:h-auto'>
                 {categories.map(category => (
                   <TabsTrigger
                     key={category}
                     value={category}
-                    className='hover:bg-primary/10 cursor-pointer rounded-lg px-4 text-base group-data-[orientation=horizontal]/tabs:after:h-0'
+                    className='not-data-active:hover:bg-primary/10 cursor-pointer px-3 text-base group-data-horizontal/tabs:after:h-0'
                   >
                     {category}
                   </TabsTrigger>
@@ -111,7 +118,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
               <Input
                 type='search'
                 placeholder='Search'
-                className='peer h-10 px-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'
+                className='peer input-lg px-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'
               />
             </div>
           </div>

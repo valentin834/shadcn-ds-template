@@ -1,5 +1,6 @@
-// @ts-nocheck
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
+import { Accordion, AccordionContent, AccordionItem } from '@/components/ui/accordion'
+import { ChevronLeftIcon } from 'lucide-react'
 
 const items = [
   {
@@ -20,16 +21,25 @@ const items = [
 
 const AccordionSplitDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full space-y-2' defaultValue='item-1'>
+    <Accordion
+      className='w-full space-y-2 overflow-visible border-0 [&>*>[data-slot="accordion-content"]]:px-0'
+      defaultValue={['item-1']}
+    >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='bg-card rounded-md border-b-0 shadow-md data-[state=open]:shadow-lg'
+          className='bg-card rounded-lg border-b-0 shadow-md data-open:shadow-lg'
         >
-          <AccordionTrigger className='px-5 [&>svg]:rotate-90 [&[data-state=open]>svg]:rotate-0'>
-            {item.title}
-          </AccordionTrigger>
+          <AccordionPrimitive.Header className='flex'>
+            <AccordionPrimitive.Trigger
+              data-slot='accordion-trigger'
+              className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-lg border border-transparent px-5 py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-3 aria-disabled:pointer-events-none aria-disabled:opacity-50'
+            >
+              {item.title}
+              <ChevronLeftIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 in-data-open:-rotate-90' />
+            </AccordionPrimitive.Trigger>
+          </AccordionPrimitive.Header>
           <AccordionContent className='text-muted-foreground px-5'>{item.content}</AccordionContent>
         </AccordionItem>
       ))}

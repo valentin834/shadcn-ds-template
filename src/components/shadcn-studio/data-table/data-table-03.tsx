@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ChevronDownIcon, Columns3Icon, RefreshCcwIcon, SearchIcon } from 'lucide-react'
 
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
@@ -14,7 +11,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -27,6 +23,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Columns3Icon, ChevronDownIcon, SearchIcon, RefreshCcwIcon } from 'lucide-react'
 
 const data: Payment[] = [
   {
@@ -79,7 +76,8 @@ export const columns: ColumnDef<Payment>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -155,11 +153,18 @@ const DataTableColumnsVisibilityDemo = () => {
     <div className='w-full'>
       <div className='py-4'>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant='outline' className='w-full max-w-3xs justify-between' />}><span className='flex items-center gap-2'>
-                                  <Columns3Icon />
-                                  Columns
-                                </span>{' '}<ChevronDownIcon className='ml-3' /></DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
+          <DropdownMenuTrigger
+            render={
+              <Button variant='outline' className='w-full max-w-3xs justify-between'>
+                <span className='flex items-center gap-2'>
+                  <Columns3Icon />
+                  Columns
+                </span>
+                <ChevronDownIcon className='ml-3' />
+              </Button>
+            }
+          />
+          <DropdownMenuContent align='end' className='w-full'>
             <div className='relative'>
               <Input
                 value={searchQuery}

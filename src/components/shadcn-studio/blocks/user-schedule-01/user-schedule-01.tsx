@@ -1,20 +1,17 @@
-// @ts-nocheck
 'use client'
 
 import React, { useState, useEffect } from 'react'
-
-import { ChevronUpIcon, MapPinIcon, PlusIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/lib/utils'
 import ScheduleMeetingDialog from '@/components/shadcn-studio/blocks/user-schedule-01/create-event'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { Calendar } from '@/components/ui/calendar'
+import { ChevronUpIcon, PlusIcon, MapPinIcon } from 'lucide-react'
 
 export type Event = {
   id: string
@@ -36,7 +33,9 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
   const [date, setDate] = useState<Date | undefined>(undefined)
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
   const [isLanguageOpen, setIsLanguageOpen] = useState(false)
+
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['All'])
+
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const [selectedPrices, setSelectedPrices] = useState<string[]>([])
   const [showAllCategories, setShowAllCategories] = useState(true)
@@ -62,6 +61,7 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
   ]
 
   const languages = ['English', 'Gujarati', 'Hindi', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Arabic']
+
   const priceRanges = ['Free', '0$-500$', '500$-2000$', 'Above 2000$']
 
   const handleCategoryToggle = (category: string) => {
@@ -133,7 +133,7 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
       onClick={toggleExpanded}
     >
       <h3 className='text-lg font-medium'>{title}</h3>
-      <Button variant='ghost' size='icon' className='size-6'>
+      <Button variant='ghost' size='icon'>
         <ChevronUpIcon className={cn('size-5 transition-transform', !isExpanded && 'rotate-180')} />
       </Button>
     </div>
@@ -157,7 +157,7 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
                 defaultMonth={date}
                 selected={date}
                 onSelect={setDate}
-                className='p-0'
+                className='w-full p-0'
                 buttonVariant='outline'
               />
             )}
@@ -192,10 +192,7 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
                         {isCategoryOpen ? 'See less' : `+${categories.length - 4} more`}
                       </span>
                     </CollapsibleTrigger>
-                    <Button
-                      className='bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 h-6.5 px-2 text-xs leading-4'
-                      onClick={() => setSelectedCategories(['All'])}
-                    >
+                    <Button onClick={() => setSelectedCategories(['All'])} variant='destructive' size='xs'>
                       Clear
                     </Button>
                   </div>
@@ -262,8 +259,16 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
 
         {/* Sidebar for responsive screen */}
         <div className='pl-3 md:hidden'>
-          <SheetContent className='max-w-64 gap-0 [&>button]:top-2.75 [&>button>svg]:size-5' side='left'>
+          <SheetContent
+            className='max-w-64 gap-0 [&>button]:top-2.75 [&>button>svg]:size-5'
+            side='left'
+            aria-describedby='Filters'
+          >
             <ScrollArea className='h-full'>
+              <SheetTitle className='sr-only'>Filters</SheetTitle>
+              <SheetDescription className='sr-only'>
+                Choose the date, category, language and price range to find events that suit your preferences.
+              </SheetDescription>
               <div className='mr-auto ml-2 border-0 p-3'>
                 <div className='space-y-3.5'>
                   <div className='border-0 border-b px-4 py-2'>
@@ -275,7 +280,7 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
                       defaultMonth={date}
                       selected={date}
                       onSelect={setDate}
-                      className='p-0'
+                      className='bg-transparent p-0'
                       buttonVariant='outline'
                     />
                   )}
@@ -384,17 +389,16 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
         {/* Main Content */}
         <div className='p-3'>
           <div className='mb-6 flex flex-wrap items-center justify-between gap-4'>
-            <h1 className='text-xl font-semibold'>Upcoming International Events</h1>
+            <h1 className='text-xl font-medium lg:text-3xl'>Upcoming International Events</h1>
             <div className='flex gap-4'>
               <div className='md:hidden'>
-                <SheetTrigger render={<Button size='lg' variant='outline' />}>Filter
-                                                </SheetTrigger>
+                <SheetTrigger render={<Button size='lg' variant='outline' />}>Filter</SheetTrigger>
               </div>
               <ScheduleMeetingDialog
                 trigger={
-                  <Button className='gap-2 has-[>svg]:px-6' size='lg'>
+                  <Button size='lg'>
                     Create event
-                    <PlusIcon />
+                    <PlusIcon />{' '}
                   </Button>
                 }
               />
@@ -403,14 +407,11 @@ const InternationalEvents: React.FC<InternationalEventsProps> = ({ events }) => 
 
           <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
             {filteredEvents.map(event => (
-              <Card
-                key={event.id}
-                className='cursor-pointer gap-0 overflow-hidden py-0 transition-shadow hover:shadow-lg'
-              >
+              <Card key={event.id} className='cursor-pointer overflow-hidden pt-0 transition-shadow hover:shadow-lg'>
                 <div className='w-full overflow-hidden'>
                   <img src={event.image} alt={event.title} className='object-cover max-sm:w-full' />
                 </div>
-                <CardContent className='py-4'>
+                <CardContent>
                   <div className='mb-2 flex items-center justify-between'>
                     <div className='text-foreground flex items-center gap-1 text-sm'>
                       <MapPinIcon className='size-4' />

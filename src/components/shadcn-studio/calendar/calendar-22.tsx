@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -14,7 +13,7 @@ const CalendarWithPresetsDemo = () => {
 
   return (
     <div>
-      <Card className='max-w-xs py-4'>
+      <Card className='max-w-xs pt-4'>
         <CardContent className='px-4'>
           <Calendar
             mode='single'
@@ -24,7 +23,7 @@ const CalendarWithPresetsDemo = () => {
             className='w-full bg-transparent p-0'
           />
         </CardContent>
-        <CardFooter className='flex flex-wrap gap-2 border-t px-4 !pt-4'>
+        <CardFooter className='flex flex-wrap gap-2 border-t px-4 pt-4!'>
           {[
             { label: 'Today', value: 0 },
             { label: 'Yesterday', value: -1 },

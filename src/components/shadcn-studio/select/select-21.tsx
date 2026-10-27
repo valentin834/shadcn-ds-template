@@ -1,8 +1,15 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'Select framework', value: null },
+  { label: 'United States', value: '1' },
+  { label: 'Japan', value: '2' },
+  { label: 'Australia', value: '3' },
+  { label: 'Brazil', value: '4' }
+]
 
 const SelectRequiredDemo = () => {
   const id = useId()
@@ -12,15 +19,16 @@ const SelectRequiredDemo = () => {
       <Label htmlFor={id} className='gap-1'>
         Required select <span className='text-destructive'>*</span>
       </Label>
-      <Select defaultValue='2' required>
+      <Select items={items} defaultValue='2' required>
         <SelectTrigger id={id} className='w-full'>
-          <SelectValue placeholder='Select framework' />
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='1'>United States</SelectItem>
-          <SelectItem value='2'>Japan</SelectItem>
-          <SelectItem value='3'>Australia</SelectItem>
-          <SelectItem value='4'>Brazil</SelectItem>
+        <SelectContent className='p-1'>
+          {items.slice(1).map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>

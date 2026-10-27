@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { ChartNoAxesColumnIncreasingIcon } from 'lucide-react'
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ChartNoAxesColumnIncreasingIcon } from 'lucide-react'
 
 function EmptyState() {
   return (

@@ -2,11 +2,11 @@
 
 import * as React from 'react'
 
-import { motion, type HTMLMotionProps, type Transition } from 'motion/react'
 import type { VariantProps } from 'class-variance-authority'
+import { motion, type HTMLMotionProps, type Transition } from 'motion/react'
 
-import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 interface Position {
   x: number
@@ -42,6 +42,7 @@ function MagneticButton({ children, className, size, variant, ...props }: Magnet
 
   return (
     <motion.button
+      data-slot='button'
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
@@ -50,7 +51,7 @@ function MagneticButton({ children, className, size, variant, ...props }: Magnet
       whileTap={{
         scale: 0.95
       }}
-      className={cn(buttonVariants({ variant, size }), 'relative transition-none', className)}
+      className={cn(buttonVariants({ variant, size }), 'relative transition-none active:translate-y-0', className)}
       {...props}
     >
       {children}

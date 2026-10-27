@@ -1,12 +1,9 @@
-// @ts-nocheck
-import type { ComponentType } from 'react'
-
+import type { ReactElement } from 'react'
+import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-
 type StatItem = {
-  icon: ComponentType
+  icon: ReactElement
   value: string
   description: string
 }[]
@@ -22,8 +19,10 @@ const AboutUs = ({ stats }: { stats: StatItem }) => {
             Our achievement story stands as a powerful testament to teamwork and perseverance. United, we have faced
             challenges, celebrated victories, and woven a narrative of growth and success.
           </p>
-          <Button size='lg' className='group rounded-lg text-base has-[>svg]:px-6' render={<a href='#' />} nativeButton={false}>Read more
-                                <ArrowRightIcon className='transition-transform duration-200 group-hover:translate-x-0.5' /></Button>
+          <Button size='lg' className='group' render={<a href='#' />} nativeButton={false}>
+            Read more
+            <ArrowRightIcon className='transition-transform duration-200 group-hover:translate-x-0.5' />
+          </Button>
         </div>
 
         {/* Video player and stats */}
@@ -35,12 +34,10 @@ const AboutUs = ({ stats }: { stats: StatItem }) => {
           />
 
           {/* Stats card overlapping the video section */}
-          <div className='bg-background grid gap-10 rounded-md border p-8 sm:max-lg:grid-cols-2 lg:absolute lg:-bottom-25 lg:left-1/2 lg:w-3/4 lg:-translate-x-1/2 lg:grid-cols-4 lg:px-10 xl:w-max'>
+          <div className='bg-background grid gap-10 rounded-lg border p-8 sm:max-lg:grid-cols-2 lg:absolute lg:-bottom-25 lg:left-1/2 lg:w-3/4 lg:-translate-x-1/2 lg:grid-cols-4 lg:px-10 xl:w-max'>
             {stats.map((stat, index) => (
               <div key={index} className='flex flex-col items-center justify-center gap-2.5 text-center'>
-                <div className='flex size-7 items-center justify-center [&>svg]:size-7'>
-                  <stat.icon />
-                </div>
+                <div className='flex size-7 items-center justify-center [&>svg]:size-7'>{stat.icon}</div>
                 <span className='text-2xl font-semibold'>{stat.value}</span>
                 <p className='text-muted-foreground text-lg'>{stat.description}</p>
               </div>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 const ButtonStitchesDemo = () => {
   return (
     <button className='group relative rounded-lg border-2 border-sky-500 bg-sky-500 px-4 py-2 text-sm font-medium text-white hover:shadow-lg'>

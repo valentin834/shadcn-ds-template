@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Label } from '@/components/ui/label'
 import type { Option } from '@/components/ui/multi-select'
 import MultipleSelector from '@/components/ui/multi-select'

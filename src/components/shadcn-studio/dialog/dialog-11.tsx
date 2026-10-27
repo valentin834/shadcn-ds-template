@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -44,19 +43,19 @@ const DialogRatingDemo = () => {
                 {ratings.map(rating => (
                   <label
                     key={`${id}-${rating.value}`}
-                    className='border-input relative flex size-9 cursor-pointer flex-col items-center justify-center rounded-full border text-center text-xl shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:border-sky-600 has-focus-visible:ring-[3px] has-focus-visible:ring-sky-600/50 has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 has-data-[state=checked]:border-sky-600 has-data-[state=checked]:bg-sky-600/10 dark:has-focus-visible:border-sky-400 dark:has-focus-visible:ring-sky-600/50 dark:has-data-[state=checked]:border-sky-400 dark:has-data-[state=checked]:bg-sky-400/10'
+                    className='border-input relative flex size-9 cursor-pointer flex-col items-center justify-center rounded-full border text-center text-xl transition-[color,box-shadow] outline-none has-focus-visible:border-sky-600 has-focus-visible:ring-3 has-focus-visible:ring-sky-600/50 has-data-checked:border-sky-600 has-data-checked:bg-sky-600/10 has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 dark:has-focus-visible:border-sky-400 dark:has-focus-visible:ring-sky-600/50 dark:has-data-checked:border-sky-400 dark:has-data-checked:bg-sky-400/10'
                   >
                     <RadioGroupItem
                       id={`${id}-${rating.value}`}
                       value={rating.value}
-                      className='sr-only after:absolute after:inset-0'
+                      className='sr-only absolute after:absolute after:inset-0'
                     />
                     {rating.icon}
                   </label>
                 ))}
               </RadioGroup>
             </fieldset>
-            <div className='grid grow-1 gap-3'>
+            <div className='grid grow gap-3'>
               <Textarea placeholder='Type your message here.' id='message-2' required />
               <p className='text-muted-foreground text-sm'>500/500 characters left</p>
             </div>

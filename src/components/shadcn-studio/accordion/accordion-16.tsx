@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { PlusIcon } from 'lucide-react'
-
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { PlusIcon } from 'lucide-react'
 
 const items = [
   {
@@ -71,22 +69,25 @@ const items = [
 
 const AccordionMultilevelIconDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full rounded-md border' defaultValue='item-1'>
+    <Accordion
+      className='w-full rounded-lg border [&>*>[data-slot="accordion-content"]]:px-0'
+      defaultValue={['item-1']}
+    >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className='has-focus-visible:border-ring has-focus-visible:ring-ring/50 outline-none first:rounded-t-md last:rounded-b-md has-focus-visible:z-10 has-focus-visible:ring-[3px]'
+          className='has-focus-visible:border-ring has-focus-visible:ring-ring/50 bg-transparent outline-none first:rounded-t-lg last:rounded-b-lg has-focus-visible:z-10 has-focus-visible:ring-3'
         >
           <AccordionTrigger className='px-5 outline-none focus-visible:ring-0'>{item.category}</AccordionTrigger>
-          <AccordionContent className='pb-0'>
+          <AccordionContent className='h-auto pb-0'>
             {item.faqs.map((faq, index) => (
               <Collapsible key={index} className='bg-muted border-t px-8' defaultOpen={faq.open}>
-                <CollapsibleTrigger className='focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-sm py-4 font-medium outline-none focus-visible:z-10 focus-visible:ring-[3px] [&>svg>path:last-child]:origin-center [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0'>
+                <CollapsibleTrigger className='focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-sm py-2.5 font-medium outline-none focus-visible:z-10 focus-visible:ring-3 aria-expanded:[&>svg]:rotate-180 [&>svg>path:last-child]:origin-center aria-expanded:[&>svg>path:last-child]:rotate-90 aria-expanded:[&>svg>path:last-child]:opacity-0'>
                   <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0' />
                   {faq.title}
                 </CollapsibleTrigger>
-                <CollapsibleContent className='text-muted-foreground overflow-hidden pb-4'>
+                <CollapsibleContent className='text-muted-foreground overflow-hidden pb-2.5'>
                   {faq.content}
                 </CollapsibleContent>
               </Collapsible>

@@ -1,18 +1,24 @@
-// @ts-nocheck
-import { ChevronUpIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { ChevronUpIcon } from 'lucide-react'
 
 const CollapsibleCardDemo = () => {
   return (
     <Card className='w-full max-w-md pb-0'>
       <Collapsible>
-        <div className='flex items-center justify-between px-6 pb-6'>
+        <div className='flex items-center justify-between gap-3 px-4 pb-4'>
           <CardTitle>How do I track my order?</CardTitle>
           <CardAction>
-            <CollapsibleTrigger render={<Button variant='outline' size='sm' />}><span className='[[data-state=open]>&]:hidden'>Show</span><span className='[[data-state=closed]>&]:hidden'>Hide</span><ChevronUpIcon className='[[data-state=closed]>&]:rotate-180' /></CollapsibleTrigger>
+            <CollapsibleTrigger
+              render={
+                <Button variant='outline' size='sm'>
+                  <span className='in-data-open:hidden'>Show</span>
+                  <span className='in-data-closed:hidden'>Hide</span>
+                  <ChevronUpIcon className='transition-transform in-data-closed:rotate-180' />
+                </Button>
+              }
+            />
           </CardAction>
         </div>
         <CollapsibleContent>

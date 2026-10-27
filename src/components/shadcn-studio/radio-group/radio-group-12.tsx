@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -9,11 +8,11 @@ const RadioGroupCardRadioWithBorderDemo = () => {
 
   return (
     <RadioGroup className='w-full max-w-96 gap-2' defaultValue='1'>
-      <div className='border-input has-data-[state=checked]:border-primary/50 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative w-full rounded-md border p-3 shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px]'>
+      <div className='border-input has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-data-checked:border-primary/50 relative w-full rounded-md border p-3 shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-3'>
         <RadioGroupItem
           value='1'
           id={`${id}-1`}
-          className='sr-only'
+          className='sr-only absolute'
           aria-label='plan-radio-basic'
           aria-describedby={`${id}-1-description`}
         />
@@ -24,16 +23,16 @@ const RadioGroupCardRadioWithBorderDemo = () => {
             <span className='text-muted-foreground text-xs leading-[inherit] font-normal'>Free</span>
           </div>
           <p id={`${id}-1-description`} className='text-muted-foreground text-xs'>
-            Get 1 project with 1 teams members.
+            Get 1 project with 1 team member.
           </p>
         </Label>
       </div>
 
-      <div className='border-input has-data-[state=checked]:border-primary/50 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative w-full rounded-md border p-3 shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px]'>
+      <div className='border-input has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-data-checked:border-primary/50 relative w-full rounded-md border p-3 shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-3'>
         <RadioGroupItem
           value='2'
           id={`${id}-2`}
-          className='sr-only'
+          className='sr-only absolute'
           aria-label='plan-radio-premium'
           aria-describedby={`${id}-2-description`}
         />

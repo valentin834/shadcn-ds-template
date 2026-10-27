@@ -5,7 +5,7 @@ import MultiStepForm from '@/components/shadcn-studio/blocks/multi-step-form-01/
 const MultiStepFormPage = () => {
   return (
     <div className='flex size-full min-h-dvh flex-col lg:grid lg:grid-cols-12'>
-      <div className='bg-muted col-span-4 flex flex-col overflow-hidden max-lg:hidden'>
+      <div className='bg-muted flex flex-col overflow-hidden max-lg:hidden lg:col-span-4'>
         <div className='flex items-start p-6'>
           <a href='#'>
             <Logo className='gap-3' />
@@ -20,7 +20,7 @@ const MultiStepFormPage = () => {
           <Logo className='gap-3' />
         </a>
       </div>
-      <div className='col-span-8 flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-8'>
+      <div className='flex flex-1 items-center justify-center p-4 sm:p-6 lg:col-span-8 lg:p-8'>
         <MultiStepForm />
       </div>
     </div>

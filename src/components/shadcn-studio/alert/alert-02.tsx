@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { CircleAlertIcon } from 'lucide-react'
-
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { CircleAlertIcon } from 'lucide-react'
 
 const AlertWithAvatarDemo = () => {
   return (

@@ -1,12 +1,9 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useId, useState } from 'react'
-
-import { LoaderCircleIcon, SearchIcon } from 'lucide-react'
-
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
+import { SearchIcon, LoaderCircleIcon } from 'lucide-react'
 
 const InputSearchLoaderDemo = () => {
   const [value, setValue] = useState('')
@@ -31,26 +28,28 @@ const InputSearchLoaderDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Search input with loader</Label>
-      <div className='relative'>
-        <div className='text-muted-foreground pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50'>
+      <InputGroup>
+        <InputGroupAddon>
           <SearchIcon className='size-4' />
           <span className='sr-only'>Search</span>
-        </div>
-        <Input
+        </InputGroupAddon>
+        <InputGroupInput
           id={id}
           type='search'
           placeholder='Search...'
           value={value}
           onChange={e => setValue(e.target.value)}
-          className='peer px-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'
+          className='[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'
         />
-        {isLoading && (
-          <div className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>
-            <LoaderCircleIcon className='size-4 animate-spin' />
-            <span className='sr-only'>Loading...</span>
-          </div>
-        )}
-      </div>
+        <InputGroupAddon align='inline-end' className='text-muted-foreground pointer-events-none'>
+          {isLoading && (
+            <>
+              <LoaderCircleIcon className='size-4 animate-spin' />
+              <span className='sr-only'>Loading...</span>
+            </>
+          )}
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   )
 }

@@ -1,18 +1,16 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { CheckIcon } from 'lucide-react'
-
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { CheckIcon } from 'lucide-react'
 
 const users = [
   {
@@ -53,8 +51,10 @@ const DropdownMenuUserSwitcherDemo = () => {
           <span className='text-muted-foreground max-w-[20ch] truncate text-xs'>{selectUser.mail}</span>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='start' className='w-66'>
-        <DropdownMenuLabel>Task Assignment</DropdownMenuLabel>
+      <DropdownMenuContent className='w-66'>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Task Assignment</DropdownMenuLabel>
+        </DropdownMenuGroup>
         {users.map(user => (
           <DropdownMenuItem key={user.id} onClick={() => setSelectUser(user)}>
             <div className='flex items-center gap-2'>

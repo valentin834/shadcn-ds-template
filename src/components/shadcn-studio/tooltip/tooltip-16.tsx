@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { AnimatedTooltip } from '@/components/ui/motion-tooltip'
 
 const avatars = [

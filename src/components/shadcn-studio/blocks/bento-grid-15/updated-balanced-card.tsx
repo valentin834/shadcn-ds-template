@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
 
 import { motion } from 'motion/react'
-import { MoveDownLeftIcon, MoveUpRightIcon } from 'lucide-react'
-
 import { Card, CardContent } from '@/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import { MotionPreset } from '@/components/ui/motion-preset'
@@ -13,6 +10,7 @@ import { NumberTicker } from '@/components/ui/number-ticker'
 import { Orbiting } from '@/components/ui/orbiting'
 
 import { cn } from '@/lib/utils'
+import { MoveDownLeftIcon, MoveUpRightIcon } from 'lucide-react'
 
 export type TransactionItem = {
   id: string
@@ -75,7 +73,7 @@ const UpdatedBalanceCard = ({
   }, [current, transactions])
 
   return (
-    <Card className='group/palette bg-muted h-full border-0 shadow-none lg:col-span-2'>
+    <Card className='group/palette bg-muted h-full shadow-none ring-0 lg:col-span-2'>
       <MotionPreset
         fade
         blur
@@ -87,8 +85,8 @@ const UpdatedBalanceCard = ({
         <div className='flex w-full flex-col items-center justify-center gap-7'>
           <div className='relative z-2 flex w-full items-center'>
             <div className='bg-border absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2' />
-            <div className='from-muted pointer-events-none absolute top-1/2 left-0 h-1 w-[calc(50%-72px)] -translate-y-1/2 bg-gradient-to-r to-transparent lg:w-[calc(50%-80px)]' />
-            <div className='from-muted pointer-events-none absolute top-1/2 right-0 h-1 w-[calc(50%-72px)] -translate-y-1/2 bg-gradient-to-l to-transparent lg:w-[calc(50%-80px)]' />
+            <div className='from-muted pointer-events-none absolute top-1/2 left-0 h-1 w-[calc(50%-72px)] -translate-y-1/2 bg-linear-to-r to-transparent lg:w-[calc(50%-80px)]' />
+            <div className='from-muted pointer-events-none absolute top-1/2 right-0 h-1 w-[calc(50%-72px)] -translate-y-1/2 bg-linear-to-l to-transparent lg:w-[calc(50%-80px)]' />
             <Carousel
               setApi={setApiLeft}
               opts={{
@@ -225,7 +223,7 @@ const UpdatedBalanceCard = ({
                 ))}
             </Orbiting>
           </div>
-          <div className='from-muted pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t to-transparent' />
+          <div className='from-muted pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t to-transparent' />
         </div>
       </MotionPreset>
 

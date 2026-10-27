@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -12,24 +11,33 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+const items = [
+  { label: 'Fruits', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
+
 const SelectDemo = () => {
   const id = useId()
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Default select</Label>
-      <Select defaultValue='apple'>
+      <Select items={items} defaultValue='apple'>
         <SelectTrigger id={id} className='w-full'>
-          <SelectValue placeholder='Select a fruit' />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
+            {items.slice(1).map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

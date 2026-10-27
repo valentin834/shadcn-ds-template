@@ -1,26 +1,16 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useMemo } from 'react'
 
-import { CalendarIcon } from 'lucide-react'
 import type { DateRange } from 'react-day-picker'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
-
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import type { ChartConfig } from '@/components/ui/chart'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { CalendarIcon } from 'lucide-react'
 
 const chartData = [
   { date: '2025-01-01', visitors: 178 },
@@ -61,7 +51,7 @@ const total = chartData.reduce((acc, curr) => acc + curr.visitors, 0)
 const chartConfig = {
   visitors: {
     label: 'Visitors',
-    color: 'var(--color-primary)'
+    color: 'var(--primary)'
   }
 } satisfies ChartConfig
 
@@ -90,9 +80,12 @@ const ChartFilterDemo = () => {
         <CardDescription>Showing total visitors for this month.</CardDescription>
         <CardAction className='mt-2 @md/card:mt-0'>
           <Popover>
-            <PopoverTrigger render={<Button variant='outline' />}><CalendarIcon />{range?.from && range?.to
-                                        ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
-                                        : 'January 2025'}</PopoverTrigger>
+            <PopoverTrigger render={<Button variant='outline' />}>
+              <CalendarIcon />
+              {range?.from && range?.to
+                ? `${range.from.toLocaleDateString('en-US')} - ${range.to.toLocaleDateString('en-US')}`
+                : 'January 2025'}
+            </PopoverTrigger>
             <PopoverContent className='w-auto overflow-hidden p-0' align='end'>
               <Calendar
                 className='w-full'
@@ -140,10 +133,11 @@ const ChartFilterDemo = () => {
             <ChartTooltip
               content={
                 <ChartTooltipContent
-                  className='w-[150px]'
+                  className='w-37.5'
                   nameKey='visitors'
                   labelFormatter={value => {
-                    return new Date(value).toLocaleDateString('en-US', {
+                    // 40-60: recharts 3.10 types the label as ReactNode
+                    return new Date(String(value)).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric'
@@ -158,7 +152,7 @@ const ChartFilterDemo = () => {
       </CardContent>
       <CardFooter className='border-t'>
         <div className='text-sm'>
-          You had <span className='font-semibold'>{total.toLocaleString()}</span> visitors for the month of January.
+          You had <span className='font-semibold'>{total.toLocaleString('en-US')}</span> visitors for the month of January.
         </div>
       </CardFooter>
     </Card>

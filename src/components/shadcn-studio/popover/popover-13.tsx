@@ -1,16 +1,20 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { CheckIcon, CopyIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription
+} from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 
 import { cn } from '@/lib/utils'
+import { CheckIcon, CopyIcon } from 'lucide-react'
 
 const PopoverSlideInLeftDemo = () => {
   const [copied, setCopied] = useState<boolean>(false)
@@ -28,12 +32,12 @@ const PopoverSlideInLeftDemo = () => {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant='outline' />}>Slide-in from left</PopoverTrigger>
-      <PopoverContent className='data-[state=open]:slide-in-from-left-20 data-[state=closed]:slide-out-to-left-20 data-[state=open]:slide-in-from-top-0 data-[state=closed]:slide-out-to-top-0 data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100 w-80 duration-400'>
+      <PopoverContent className='data-open:slide-in-from-left-20 data-closed:slide-out-to-left-20 data-open:slide-in-from-top-0 data-closed:slide-out-to-top-0 data-closed:zoom-out-100 data-open:zoom-in-100 w-80 duration-400'>
         <div className='flex flex-col items-center gap-4'>
-          <div className='space-y-1 text-center'>
-            <div className='text-lg font-semibold'>Summer Sale Discount</div>
-            <p className='text-sm'>Scan this code at checkout for 25% off</p>
-          </div>
+          <PopoverHeader className='text-center'>
+            <PopoverTitle className='text-lg font-semibold'>Summer Sale Discount</PopoverTitle>
+            <PopoverDescription>Scan this code at checkout for 25% off</PopoverDescription>
+          </PopoverHeader>
           <div className='aspect-square rounded-xl border p-2'>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/popover/qr-code.png?height=152'

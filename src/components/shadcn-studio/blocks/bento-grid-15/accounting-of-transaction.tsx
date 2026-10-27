@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import type { ReactNode } from 'react'
@@ -25,7 +24,7 @@ export type TransactionRow = {
 
 const AccountingOfTransaction = ({ transactions }: { transactions: TransactionRow[] }) => {
   return (
-    <Card className='bg-muted group/palette h-full gap-6 border-0 shadow-none lg:col-span-2'>
+    <Card className='bg-muted group/palette h-full shadow-none ring-0 lg:col-span-2'>
       <MotionPreset
         fade
         blur
@@ -57,21 +56,21 @@ const AccountingOfTransaction = ({ transactions }: { transactions: TransactionRo
                 <div className='grid'>
                   <span className='text-muted-foreground text-xs'>{transaction.title}</span>
                   <div className='flex items-center gap-1'>
-                    <span className='text-base font-medium'>{`$${transaction.amount.toLocaleString()}`}</span>
+                    <span className='text-base font-medium'>{`$${transaction.amount.toLocaleString('en-US')}`}</span>
                     <span
                       className={cn('text-xs', {
                         'text-destructive': transaction.type === 'debit',
                         'text-green-600 dark:text-green-400': transaction.type === 'credit'
                       })}
-                    >{`${transaction.type === 'debit' ? '-' : '+'}$${transaction.difference.toLocaleString()}`}</span>
+                    >{`${transaction.type === 'debit' ? '-' : '+'}$${transaction.difference.toLocaleString('en-US')}`}</span>
                   </div>
                 </div>
               </div>
             ))}
           </Marquee>
         ))}
-        <div className='from-muted pointer-events-none absolute inset-y-0 left-0 w-[15%] bg-gradient-to-r from-20% to-transparent' />
-        <div className='from-muted pointer-events-none absolute inset-y-0 right-0 w-[15%] bg-gradient-to-l from-20% to-transparent' />
+        <div className='from-muted pointer-events-none absolute inset-y-0 left-0 w-[15%] bg-linear-to-r from-20% to-transparent' />
+        <div className='from-muted pointer-events-none absolute inset-y-0 right-0 w-[15%] bg-linear-to-l from-20% to-transparent' />
       </MotionPreset>
 
       <CardContent className='flex flex-col gap-4 md:items-center'>

@@ -1,21 +1,29 @@
-// @ts-nocheck
-import { PencilRulerIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription
+} from '@/components/ui/popover'
+import { PencilRulerIcon } from 'lucide-react'
 
 const PopoverDimensionsDemo = () => {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><PencilRulerIcon /><span className='sr-only'>Dimensions</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <PencilRulerIcon />
+        <span className='sr-only'>Dimensions</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
         <div className='grid gap-4'>
-          <div className='space-y-2'>
-            <h4 className='leading-none font-medium'>Dimensions</h4>
-            <p className='text-muted-foreground text-sm'>Set the dimensions for the layer.</p>
-          </div>
+          <PopoverHeader className='gap-2'>
+            <PopoverTitle className='leading-none'>Dimensions</PopoverTitle>
+            <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>
+          </PopoverHeader>
           <div className='grid gap-2'>
             <div className='grid grid-cols-3 items-center gap-4'>
               <Label htmlFor='width'>Width</Label>

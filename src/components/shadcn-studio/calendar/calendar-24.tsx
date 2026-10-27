@@ -1,14 +1,11 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { CircleCheckIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { CircleCheckIcon } from 'lucide-react'
 
 const CalendarAppointmentBookingDemo = () => {
   const [date, setDate] = useState<Date | undefined>(new Date(2025, 5, 20))
@@ -27,11 +24,11 @@ const CalendarAppointmentBookingDemo = () => {
   return (
     <div>
       <Card className='gap-0 p-0'>
-        <CardHeader className='flex h-max justify-center border-b !p-4'>
+        <CardHeader className='flex h-max justify-center border-b p-4!'>
           <CardTitle>Book your appointment</CardTitle>
         </CardHeader>
         <CardContent className='relative p-0 md:pr-48'>
-          <div className='p-6'>
+          <div className='p-6 max-sm:flex max-sm:justify-center'>
             <Calendar
               mode='single'
               selected={date}
@@ -70,7 +67,7 @@ const CalendarAppointmentBookingDemo = () => {
             </ScrollArea>
           </div>
         </CardContent>
-        <CardFooter className='flex flex-col gap-4 border-t px-6 !py-5 md:flex-row'>
+        <CardFooter className='flex flex-col gap-4 border-t px-6 py-5! md:flex-row'>
           <div className='flex items-center gap-2 text-sm'>
             {date && selectedTime ? (
               <>

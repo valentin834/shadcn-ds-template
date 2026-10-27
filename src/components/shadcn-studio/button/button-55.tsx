@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { GlassButton } from '@/components/ui/glass-button'
 
 const GlassButtonDemo = () => {

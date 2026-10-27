@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -43,6 +42,18 @@ const PricingCards = ({ pricingData }: { pricingData: PricingPlan }) => {
             const period = isAnnual ? 'year' : 'month'
             const savings = isAnnual ? plan.monthly * 12 - plan.annual : null
 
+            const priceDisplay = (
+              <div className='flex flex-col items-end'>
+                <div className='flex items-end'>
+                  <span className='text-primary text-5xl font-bold'>${price}</span>
+                  <span className='text-muted-foreground ml-1 text-lg'>/{period}</span>
+                </div>
+                {savings && (
+                  <span className='mt-1 text-sm font-medium text-green-600'>Save ${savings.toLocaleString('en-US')}/year</span>
+                )}
+              </div>
+            )
+
             return (
               <Card key={plan.id} className='w-full shadow-none sm:w-lg'>
                 <CardContent className='flex justify-between gap-4'>
@@ -51,35 +62,15 @@ const PricingCards = ({ pricingData }: { pricingData: PricingPlan }) => {
                       <h3 className='text-3xl font-semibold'>{plan.title}</h3>
                       <p className='text-muted-foreground text-base'>{plan.description}</p>
                     </div>
-                    <div className='flex flex-col items-end sm:hidden'>
-                      <div className='flex items-end'>
-                        <span className='text-primary text-5xl font-bold'>${price}</span>
-                        <span className='text-muted-foreground ml-1 text-lg'>/{period}</span>
-                      </div>
-                      {savings && (
-                        <span className='mt-1 text-sm font-medium text-green-600'>
-                          Save ${savings.toLocaleString()}/year
-                        </span>
-                      )}
-                    </div>
-                    <Button className='w-fit'>Enterprise</Button>
+                    <div className='sm:hidden'>{priceDisplay}</div>
+                    <Button size='lg' className='w-fit'>
+                      Enterprise
+                    </Button>
                   </div>
 
-                  <Separator orientation='vertical' className='!h-[132px] max-sm:hidden' />
+                  <Separator orientation='vertical' className='max-sm:hidden' />
 
-                  <div className='flex items-end justify-end max-sm:hidden'>
-                    <div className='flex flex-col items-end'>
-                      <div className='flex items-end'>
-                        <span className='text-primary text-5xl font-bold'>${price}</span>
-                        <span className='text-muted-foreground ml-1 text-lg'>/{period}</span>
-                      </div>
-                      {savings && (
-                        <span className='mt-1 text-sm font-medium text-green-600'>
-                          Save ${savings.toLocaleString()}/year
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  <div className='flex items-center max-sm:hidden'>{priceDisplay}</div>
                 </CardContent>
               </Card>
             )

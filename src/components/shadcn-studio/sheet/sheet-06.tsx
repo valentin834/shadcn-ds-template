@@ -1,30 +1,25 @@
-// @ts-nocheck
-import type { ForwardRefExoticComponent, RefAttributes } from 'react'
-
-import {
-  BookTextIcon,
-  CalendarDaysIcon,
-  ChevronRightIcon,
-  CircleSmallIcon,
-  HeartPlusIcon,
-  HomeIcon,
-  LayoutPanelTopIcon,
-  LogInIcon,
-  LogOutIcon,
-  MailIcon,
-  MessageSquareTextIcon,
-  PanelTopIcon,
-  ShoppingCartIcon,
-  type LucideProps
-} from 'lucide-react'
-
+import type { ReactElement } from 'react'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import {
+  HomeIcon,
+  LayoutPanelTopIcon,
+  PanelTopIcon,
+  MessageSquareTextIcon,
+  MailIcon,
+  CalendarDaysIcon,
+  ShoppingCartIcon,
+  LogInIcon,
+  LogOutIcon,
+  HeadsetIcon,
+  BookTextIcon,
+  ChevronRightIcon
+} from 'lucide-react'
 
 type NavigationItem = {
   name: string
-  icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>
+  icon: ReactElement
 } & (
   | {
       type: 'page'
@@ -39,113 +34,113 @@ type NavigationItem = {
 const navigationMenu: NavigationItem[] = [
   {
     name: 'Dashboard',
-    icon: HomeIcon,
+    icon: <HomeIcon />,
     type: 'page'
   },
   {
     name: 'Layouts',
-    icon: LayoutPanelTopIcon,
+    icon: <LayoutPanelTopIcon />,
     type: 'category',
     children: [
       {
         name: 'Content Navbar',
-        icon: LayoutPanelTopIcon,
+        icon: <LayoutPanelTopIcon />,
         type: 'page'
       },
       {
         name: 'Horizontal',
-        icon: LayoutPanelTopIcon,
+        icon: <LayoutPanelTopIcon />,
         type: 'page'
       },
       {
         name: 'Without Menu',
-        icon: LayoutPanelTopIcon,
+        icon: <LayoutPanelTopIcon />,
         type: 'page'
       }
     ]
   },
   {
     name: 'Front Pages',
-    icon: PanelTopIcon,
+    icon: <PanelTopIcon />,
     type: 'category',
     children: [
       {
         name: 'Landing Page',
-        icon: PanelTopIcon,
+        icon: <PanelTopIcon />,
         type: 'page'
       },
       {
         name: 'Pricing Page',
-        icon: PanelTopIcon,
+        icon: <PanelTopIcon />,
         type: 'page'
       },
       {
         name: 'Checkout Page',
-        icon: PanelTopIcon,
+        icon: <PanelTopIcon />,
         type: 'page'
       }
     ]
   },
   {
     name: 'Chat',
-    icon: MessageSquareTextIcon,
+    icon: <MessageSquareTextIcon />,
     type: 'page'
   },
   {
     name: 'Email',
-    icon: MailIcon,
+    icon: <MailIcon />,
     type: 'page'
   },
   {
     name: 'Calendar',
-    icon: CalendarDaysIcon,
+    icon: <CalendarDaysIcon />,
     type: 'page'
   },
   {
     name: 'Ecommerce',
-    icon: ShoppingCartIcon,
+    icon: <ShoppingCartIcon />,
     type: 'category',
     children: [
       {
         name: 'Products',
-        icon: ShoppingCartIcon,
+        icon: <ShoppingCartIcon />,
         type: 'page'
       },
       {
         name: 'Categories',
-        icon: ShoppingCartIcon,
+        icon: <ShoppingCartIcon />,
         type: 'page'
       },
       {
         name: 'Shopping & Delivery',
-        icon: ShoppingCartIcon,
+        icon: <ShoppingCartIcon />,
         type: 'page'
       },
       {
         name: 'Location',
-        icon: ShoppingCartIcon,
+        icon: <ShoppingCartIcon />,
         type: 'page'
       }
     ]
   },
   {
     name: 'Sign In',
-    icon: LogInIcon,
+    icon: <LogInIcon />,
     type: 'page'
   },
   {
     name: 'Sign Out',
-    icon: LogOutIcon,
+    icon: <LogOutIcon />,
     type: 'page'
   },
   {
     name: 'Support',
-    icon: HeartPlusIcon,
+    icon: <HeadsetIcon />,
     type: 'page'
   },
   {
     name: 'Documentation',
-    icon: BookTextIcon,
+    icon: <BookTextIcon />,
     type: 'page'
   }
 ]
@@ -154,10 +149,14 @@ const NavigationMenu = ({ item, level }: { level: number; item: NavigationItem }
   if (item.type === 'page') {
     return (
       <div
-        className='focus-visible:ring-ring/50 flex items-center gap-2 rounded-md p-1 outline-none focus-visible:ring-[3px]'
+        className='focus-visible:ring-ring/50 flex items-center gap-2 rounded-lg p-1 outline-none focus-visible:ring-3'
         style={{ paddingLeft: `${level === 0 ? 0.25 : 1.75}rem` }}
       >
-        {level === 0 ? <item.icon className='size-4 shrink-0' /> : <CircleSmallIcon className='size-4 shrink-0' />}
+        {level === 0 ? (
+          <span className='*:size-4 *:shrink-0'>{item.icon}</span>
+        ) : (
+          <span className='border-primary block size-2 rounded-full border'></span>
+        )}
         <span className='text-sm'>{item.name}</span>
       </div>
     )
@@ -165,12 +164,16 @@ const NavigationMenu = ({ item, level }: { level: number; item: NavigationItem }
 
   return (
     <Collapsible className='flex flex-col gap-1.5' style={{ paddingLeft: `${level === 0 ? 0 : 1.5}rem` }}>
-      <CollapsibleTrigger className='focus-visible:ring-ring/50 flex items-center gap-2 rounded-md p-1 outline-none focus-visible:ring-[3px]'>
-        {level === 0 ? <item.icon className='size-4 shrink-0' /> : <CircleSmallIcon className='size-4 shrink-0' />}
+      <CollapsibleTrigger className='focus-visible:ring-ring/50 flex items-center gap-2 rounded-lg p-1 outline-none focus-visible:ring-3'>
+        {level === 0 ? (
+          <span className='*:size-4 *:shrink-0'>{item.icon}</span>
+        ) : (
+          <span className='border-primary block size-2 rounded-full border'></span>
+        )}
         <span className='flex-1 text-start text-sm'>{item.name}</span>
-        <ChevronRightIcon className='size-4 shrink-0 transition-transform [[data-state=open]>&]:rotate-90' />
+        <ChevronRightIcon className='size-4 shrink-0 transition-transform in-data-closed:rotate-0 in-data-open:rotate-90' />
       </CollapsibleTrigger>
-      <CollapsibleContent className='data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down flex flex-col gap-1.5 overflow-hidden transition-all duration-300'>
+      <CollapsibleContent className='flex h-(--collapsible-panel-height) flex-col gap-1.5 overflow-hidden transition-all duration-300 data-ending-style:h-0 data-starting-style:h-0'>
         {item.children.map(item => (
           <NavigationMenu key={item.name} item={item} level={level + 1} />
         ))}
@@ -183,7 +186,7 @@ const SheetWithNavigationMenuDemo = () => {
   return (
     <Sheet>
       <SheetTrigger render={<Button variant='outline' />}>Navigation Menu</SheetTrigger>
-      <SheetContent side='left' className='w-75'>
+      <SheetContent side='left' className='data-[side=left]:w-75'>
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>

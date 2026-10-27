@@ -1,12 +1,9 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { XIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { XIcon } from 'lucide-react'
 
 const CardActionDemo = () => {
   const [isActive, setIsActive] = useState(true)
@@ -14,7 +11,7 @@ const CardActionDemo = () => {
   if (!isActive) return null
 
   return (
-    <Card className='relative max-w-lg shadow-none'>
+    <Card className='relative max-w-lg'>
       <Button
         variant='ghost'
         size='icon'

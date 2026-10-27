@@ -1,10 +1,7 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { MailIcon } from 'lucide-react'
-
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
+import { MailIcon } from 'lucide-react'
 
 const InputEndIconDemo = () => {
   const id = useId()
@@ -12,13 +9,12 @@ const InputEndIconDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with end icon</Label>
-      <div className='relative'>
-        <Input id={id} type='email' placeholder='Email address' className='peer pr-9' />
-        <div className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>
+      <InputGroup>
+        <InputGroupInput id={id} placeholder='Email address' />
+        <InputGroupAddon align='inline-end'>
           <MailIcon className='size-4' />
-          <span className='sr-only'>Email</span>
-        </div>
-      </div>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   )
 }

@@ -1,13 +1,11 @@
-// @ts-nocheck
-import { BookIcon, GiftIcon, HeartIcon } from 'lucide-react'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { BookIcon, HeartIcon, GiftIcon } from 'lucide-react'
 
 const tabs = [
   {
     name: 'Explore',
     value: 'explore',
-    icon: BookIcon,
+    icon: <BookIcon />,
     content: (
       <>
         Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending topics, and hidden gems
@@ -18,7 +16,7 @@ const tabs = [
   {
     name: 'Favorites',
     value: 'favorites',
-    icon: HeartIcon,
+    icon: <HeartIcon />,
     content: (
       <>
         All your <span className='text-foreground font-semibold'>favorites</span> are saved here. Revisit articles,
@@ -29,11 +27,11 @@ const tabs = [
   {
     name: 'Surprise Me',
     value: 'surprise',
-    icon: GiftIcon,
+    icon: <GiftIcon />,
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -43,14 +41,10 @@ const TabsVerticalWithIconDemo = () => {
   return (
     <div className='w-full max-w-md'>
       <Tabs defaultValue='explore' orientation='vertical'>
-        <TabsList className='h-full flex-col'>
-          {tabs.map(({ icon: Icon, name, value }) => (
-            <TabsTrigger
-              key={value}
-              value={value}
-              className='flex w-full items-center justify-start gap-1.5 px-2.5 sm:px-3'
-            >
-              <Icon />
+        <TabsList className='h-full'>
+          {tabs.map(({ icon, name, value }) => (
+            <TabsTrigger key={value} value={value} className='w-full gap-1.5 px-2.5 sm:px-3'>
+              {icon}
               {name}
             </TabsTrigger>
           ))}

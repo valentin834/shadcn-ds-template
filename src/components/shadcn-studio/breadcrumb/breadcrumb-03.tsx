@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { ChevronsRightIcon, FileIcon, FolderIcon, HomeIcon } from 'lucide-react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,6 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { HomeIcon, ChevronsRightIcon, FolderIcon, FileIcon } from 'lucide-react'
 
 const BreadcrumbChevronsSeparatorDemo = () => {
   return (
@@ -24,7 +22,7 @@ const BreadcrumbChevronsSeparatorDemo = () => {
           <ChevronsRightIcon />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink href='#' className='flex items-center gap-2'>
+          <BreadcrumbLink href='#' className='flex items-center gap-1'>
             <FolderIcon className='size-4' />
             Documents
           </BreadcrumbLink>
@@ -33,7 +31,7 @@ const BreadcrumbChevronsSeparatorDemo = () => {
           <ChevronsRightIcon />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbPage className='flex items-center gap-2'>
+          <BreadcrumbPage className='flex items-center gap-1'>
             <FileIcon className='inline size-4' />
             Add Document
           </BreadcrumbPage>

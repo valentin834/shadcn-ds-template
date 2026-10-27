@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
 const MiniPagination = () => {
   return (
@@ -9,7 +7,7 @@ const MiniPagination = () => {
       <PaginationContent>
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to previous page' size='icon'>
-            <ChevronLeftIcon className='size-4' />
+            <ChevronLeftIcon />
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
@@ -19,7 +17,7 @@ const MiniPagination = () => {
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to next page' size='icon'>
-            <ChevronRightIcon className='size-4' />
+            <ChevronRightIcon />
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>

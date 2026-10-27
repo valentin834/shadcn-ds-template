@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -6,7 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription
+} from '@/components/ui/popover'
 
 const members = [
   {
@@ -35,14 +41,14 @@ const PopoverSlideInBottomDemo = () => {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant='outline' />}>Slide-in from bottom</PopoverTrigger>
-      <PopoverContent className='data-[state=open]:slide-in-from-bottom-20 data-[state=closed]:slide-out-to-bottom-20 data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100 w-80 duration-400'>
+      <PopoverContent className='data-open:slide-in-from-bottom-20 data-closed:slide-out-to-bottom-20 data-closed:zoom-out-100 data-open:zoom-in-100 w-80 duration-400'>
         <div className='grid gap-4'>
-          <div className='space-y-1'>
-            <div className='font-medium'>Share to team members</div>
-            <p className='text-muted-foreground text-sm'>
+          <PopoverHeader className='space-y-1'>
+            <PopoverTitle>Share to team members</PopoverTitle>
+            <PopoverDescription>
               Give your team members access to this project and start collaborating in real time
-            </p>
-          </div>
+            </PopoverDescription>
+          </PopoverHeader>
           <div className='w-full space-y-1.5'>
             <Label htmlFor={id} className='text-muted-foreground text-xs font-normal'>
               Email address

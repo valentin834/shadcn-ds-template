@@ -15,6 +15,9 @@ function Progress({
       value={value}
       data-slot="progress"
       className={cn("flex flex-wrap gap-3", className)}
+      // 40-60: fixed locale so the server and the browser format the value
+      // the same way (otherwise hydration fails for non en-US browsers)
+      locale="en-US"
       {...props}
     >
       {children}

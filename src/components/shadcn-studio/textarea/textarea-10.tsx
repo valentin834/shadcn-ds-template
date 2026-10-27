@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Textarea } from '@/components/ui/textarea'
 
 const TextareaSizesDemo = () => {

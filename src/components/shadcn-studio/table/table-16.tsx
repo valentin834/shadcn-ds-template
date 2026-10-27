@@ -1,12 +1,9 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { ArchiveIcon, PencilIcon, Trash2Icon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { PencilIcon, Trash2Icon, ArchiveIcon } from 'lucide-react'
 
 const items = [
   {
@@ -77,7 +74,7 @@ const ProductTableDemo = () => {
               <TableHead>Color</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Price</TableHead>
-              <TableHead className='w-0'>Actions</TableHead>
+              <TableHead className='w-0 pr-4 text-end'>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -88,8 +85,8 @@ const ProductTableDemo = () => {
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center gap-3'>
-                    <Avatar className='rounded-sm'>
-                      <AvatarImage src={item.src} alt={item.model} />
+                    <Avatar className='overflow-hidden rounded-sm after:rounded-[inherit]'>
+                      <AvatarImage src={item.src} alt={item.model} className='rounded-none!' />
                       <AvatarFallback className='text-xs'>{item.fallback}</AvatarFallback>
                     </Avatar>
                     <div>
@@ -101,21 +98,28 @@ const ProductTableDemo = () => {
                 <TableCell>{item.color}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.price}</TableCell>
-                <TableCell className='flex items-center gap-1'>
-                  <Button variant='ghost' size='icon' className='rounded-full' aria-label={`product-${item.id}-edit`}>
-                    <PencilIcon />
-                  </Button>
-                  <Button variant='ghost' size='icon' className='rounded-full' aria-label={`product-${item.id}-remove`}>
-                    <Trash2Icon />
-                  </Button>
-                  <Button
-                    variant='ghost'
-                    size='icon'
-                    className='rounded-full'
-                    aria-label={`product-${item.id}-archive`}
-                  >
-                    <ArchiveIcon />
-                  </Button>
+                <TableCell>
+                  <div className='flex items-center gap-1'>
+                    <Button variant='ghost' size='icon' className='rounded-full' aria-label={`product-${item.id}-edit`}>
+                      <PencilIcon />
+                    </Button>
+                    <Button
+                      variant='ghost'
+                      size='icon'
+                      className='rounded-full'
+                      aria-label={`product-${item.id}-remove`}
+                    >
+                      <Trash2Icon />
+                    </Button>
+                    <Button
+                      variant='ghost'
+                      size='icon'
+                      className='rounded-full'
+                      aria-label={`product-${item.id}-archive`}
+                    >
+                      <ArchiveIcon />
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

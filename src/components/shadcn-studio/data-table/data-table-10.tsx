@@ -1,16 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useId, useState } from 'react'
-
-import {
-  ChevronDownIcon,
-  ChevronFirstIcon,
-  ChevronLastIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronUpIcon
-} from 'lucide-react'
 
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
 import {
@@ -20,7 +10,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -30,6 +19,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { cn } from '@/lib/utils'
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  ChevronFirstIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronLastIcon
+} from 'lucide-react'
 
 type Item = {
   product_name: string
@@ -42,7 +39,8 @@ const columns: ColumnDef<Item>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -82,11 +80,16 @@ const columns: ColumnDef<Item>[] = [
           'bg-amber-600/10 text-amber-600 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:focus-visible:ring-amber-400/40 [a&]:hover:bg-amber-600/5 dark:[a&]:hover:bg-amber-400/5'
       }[availability]
 
-      return (
-        <Badge className={(cn('border-none focus-visible:outline-none'), styles)}>{row.getValue('availability')}</Badge>
-      )
+      return <Badge className={styles}>{row.getValue('availability')}</Badge>
     }
   }
+]
+
+const pageSizeItems = [
+  { label: '5', value: '5' },
+  { label: '10', value: '10' },
+  { label: '25', value: '25' },
+  { label: '50', value: '50' }
 ]
 
 const PaginatedDataTableDemo = () => {
@@ -140,7 +143,7 @@ const PaginatedDataTableDemo = () => {
   })
 
   return (
-    <div className='space-y-4 md:w-full'>
+    <div className='w-full space-y-4'>
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
@@ -205,18 +208,19 @@ const PaginatedDataTableDemo = () => {
             Rows per page
           </Label>
           <Select
+            items={pageSizeItems}
             value={table.getState().pagination.pageSize.toString()}
             onValueChange={value => {
               table.setPageSize(Number(value))
             }}
           >
             <SelectTrigger id={id} className='w-fit whitespace-nowrap'>
-              <SelectValue placeholder='Select number of results' />
+              <SelectValue />
             </SelectTrigger>
-            <SelectContent className='[&_*[role=option]]:pr-8 [&_*[role=option]]:pl-2 [&_*[role=option]>span]:right-2 [&_*[role=option]>span]:left-auto'>
-              {[5, 10, 25, 50].map(pageSize => (
-                <SelectItem key={pageSize} value={pageSize.toString()}>
-                  {pageSize}
+            <SelectContent className='p-1'>
+              {pageSizeItems.map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
                 </SelectItem>
               ))}
             </SelectContent>

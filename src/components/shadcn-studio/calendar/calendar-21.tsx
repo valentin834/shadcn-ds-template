@@ -1,16 +1,15 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
 
 import { eachMonthOfInterval, eachYearOfInterval, endOfYear, format, isAfter, isBefore, startOfYear } from 'date-fns'
-import { ChevronDownIcon } from 'lucide-react'
-import type { CaptionLabelProps, MonthGridProps } from 'react-day-picker'
 
+import type { CaptionLabelProps, MonthGridProps } from 'react-day-picker'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { ChevronDownIcon } from 'lucide-react'
 
 const CalendarWithAdvanceSelectionDemo = () => {
   const today = new Date()
@@ -177,7 +176,7 @@ function CaptionLabel({
 } & React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <Button
-      className='data-[state=open]:text-muted-foreground/80 -ms-2 flex items-center gap-2 text-sm font-medium hover:bg-transparent [&[data-state=open]>svg]:rotate-180'
+      className='data-open:text-muted-foreground/80 -ms-2 flex items-center gap-2 text-sm font-medium hover:bg-transparent'
       variant='ghost'
       size='sm'
       onClick={() => setIsYearView(prev => !prev)}
@@ -185,7 +184,7 @@ function CaptionLabel({
     >
       {children}
       <ChevronDownIcon
-        className='text-muted-foreground/80 shrink-0 transition-transform duration-200'
+        className='text-muted-foreground/80 shrink-0 transition-transform duration-200 in-data-open:rotate-180'
         aria-hidden='true'
       />
     </Button>
@@ -195,11 +194,22 @@ function CaptionLabel({
 function CollapsibleYear({ title, children, open }: { title: string; children: React.ReactNode; open?: boolean }) {
   return (
     <Collapsible className='border-t px-2 py-1.5' defaultOpen={open}>
-      <CollapsibleTrigger render={<Button className='flex w-full justify-start gap-2 text-sm font-medium hover:bg-transparent [&[data-state=open]>svg]:rotate-180' variant='ghost' size='sm' />}><ChevronDownIcon
-                      className='text-muted-foreground/80 shrink-0 transition-transform duration-200'
-                      aria-hidden='true'
-                    />{title}</CollapsibleTrigger>
-      <CollapsibleContent className='data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden px-3 py-1 text-sm transition-all'>
+      <CollapsibleTrigger
+        render={
+          <Button
+            className='flex w-full justify-start gap-2 text-sm font-medium hover:bg-transparent'
+            variant='ghost'
+            size='sm'
+          >
+            <ChevronDownIcon
+              className='text-muted-foreground/80 shrink-0 transition-transform duration-200 in-data-open:rotate-180'
+              aria-hidden='true'
+            />
+            {title}
+          </Button>
+        }
+      />
+      <CollapsibleContent className='h-(--collapsible-panel-height) overflow-hidden px-3 py-1 text-sm transition-all data-ending-style:h-0 data-starting-style:h-0'>
         {children}
       </CollapsibleContent>
     </Collapsible>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { PrimarySwipeButton } from '@/components/ui/swipe-button'
 
 const PrimarySwipeButtonDemo = () => {

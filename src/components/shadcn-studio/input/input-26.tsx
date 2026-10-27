@@ -1,13 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
-
-import { EyeIcon, EyeOffIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
+import { EyeOffIcon, EyeIcon } from 'lucide-react'
 
 const InputPasswordDemo = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -17,18 +14,20 @@ const InputPasswordDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Password input</Label>
-      <div className='relative'>
-        <Input id={id} type={isVisible ? 'text' : 'password'} placeholder='Password' className='pr-9' />
-        <Button
-          variant='ghost'
-          size='icon'
-          onClick={() => setIsVisible(prevState => !prevState)}
-          className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-        >
-          {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-          <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
-        </Button>
-      </div>
+      <InputGroup>
+        <InputGroupInput id={id} type={isVisible ? 'text' : 'password'} placeholder='Password' />
+        <InputGroupAddon align='inline-end'>
+          <Button
+            variant='ghost'
+            size='icon'
+            onClick={() => setIsVisible(prevState => !prevState)}
+            className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+          >
+            {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+            <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
+          </Button>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   )
 }

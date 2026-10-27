@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination'
+import { ChevronFirstIcon, ChevronLeftIcon, ChevronRightIcon, ChevronLastIcon } from 'lucide-react'
 
 const pages = [1, 2, 3]
 
@@ -11,12 +9,12 @@ const PaginationWithFirstAndLastPageButtonNavigation = () => {
       <PaginationContent>
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to first page' size='icon' className='rounded-full'>
-            <ChevronFirstIcon className='size-4' />
+            <ChevronFirstIcon />
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to previous page' size='icon' className='rounded-full'>
-            <ChevronLeftIcon className='size-4' />
+            <ChevronLeftIcon />
           </PaginationLink>
         </PaginationItem>
         {pages.map(page => (
@@ -28,12 +26,12 @@ const PaginationWithFirstAndLastPageButtonNavigation = () => {
         ))}
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to next page' size='icon' className='rounded-full'>
-            <ChevronRightIcon className='size-4' />
+            <ChevronRightIcon />
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href='#' aria-label='Go to last page' size='icon' className='rounded-full'>
-            <ChevronLastIcon className='size-4' />
+            <ChevronLastIcon />
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>

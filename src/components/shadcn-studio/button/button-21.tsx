@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { MailCheckIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { MailCheckIcon } from 'lucide-react'
 
 const ButtonMessagesBadgeDemo = () => {
   return (

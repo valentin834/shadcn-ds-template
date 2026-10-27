@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { ArrowRightIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { ArrowRightIcon } from 'lucide-react'
 
 const CTASection = () => {
   return (
@@ -19,8 +17,10 @@ const CTASection = () => {
               </p>
             </div>
             <div>
-              <Button size='lg' variant='secondary' className='shrink-0 rounded-lg text-base has-[>svg]:px-6' render={<a href='#' className='inline-flex items-center gap-2' />} nativeButton={false}>View Docs
-                                            <ArrowRightIcon className='size-5' /></Button>
+              <Button size='lg' variant='secondary' className='gap-2' render={<a href='#' />} nativeButton={false}>
+                View Docs
+                <ArrowRightIcon className='size-5' />
+              </Button>
             </div>
           </CardContent>
         </Card>

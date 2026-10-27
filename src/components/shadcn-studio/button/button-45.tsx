@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MagneticButton } from '@/components/ui/magnetic-button'
 
 const ButtonMagneticEffectDemo = () => {
