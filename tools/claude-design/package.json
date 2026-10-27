@@ -1,0 +1,16 @@
+{
+  "name": "ds4060-claude-design",
+  "private": true,
+  "type": "module",
+  "description": "Build of the Claude Design design system « 40-60 · shadcn DS » from this repo.",
+  "scripts": {
+    "build": "node build-all.mjs",
+    "test": "node test-all.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.5",
+    "postcss-selector-parser": "7.1.7",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}

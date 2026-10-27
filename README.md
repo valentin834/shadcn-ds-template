@@ -75,7 +75,15 @@ Mockups and wireframes are made on Claude Design canvases with the **40-60 · sh
 
 `CLAUDE.md` tells Claude Code to use it for every mockup request in this repo and in the client projects cloned from it. To make it the default everywhere (claude.ai included), share it with the organization and set it as the organization's default design system from its page in claude.ai.
 
-When components or tokens change here, the design system has to be published again.
+When components, blocks, tokens or `DESIGN-SYSTEM.md` change here, the design system has to be published again. It is built from this repo by `tools/claude-design/` (excluded from the Next build, with its own dependencies):
+
+```bash
+npm run ds:install   # once: esbuild and React 18 for the build
+npm run ds:build     # rebuild tools/claude-design/dist and list what changed since the last publish
+npm run ds:test      # mount, canvas-wrapper, anchoring and preview checks in headless Chrome
+```
+
+Publishing goes through Claude Code's Artifact tool: run `/publier-ds` in Claude Code, which builds, tests, publishes and records the published state (`tools/claude-design/published-manifest.json`). See `tools/claude-design/README.md`.
 
 ---
 
@@ -114,6 +122,7 @@ After each `add`:
 - answer **no** when the CLI offers to overwrite an existing official `ui/` file — `progress.tsx` and `slider.tsx` carry a local fix (fixed locale), and the CLI would switch every file to the `cn` package;
 - replace `import { cn } from "cn"` with `import { cn } from "@/lib/utils"` (shadcn CLI 4.22+ imports the new `cn` package, which is not used here);
 - check `git diff package.json`: shadcnstudio items ask for `zod@3.25.76` and the CLI can downgrade `recharts` — the repo stays on zod 4 and recharts 3.10;
-- check that `src/app/globals.css` gained no colored token (`--success`, `--info`, `--warning`…): the theme must stay grayscale.
+- check that `src/app/globals.css` gained no colored token (`--success`, `--info`, `--warning`…): the theme must stay grayscale;
+- republish the Claude Design design system (`/publier-ds` in Claude Code) so mockups get the new component.
 
 shadcnstudio registries (`@ss-components`, `@ss-blocks`, `@ss-pages`, `@ss-illustrations`, `@ss-themes`) are declared in `components.json` and point at the `base-nova` (Base UI) version of each item. Premium items need `EMAIL` and `LICENSE_KEY`: put them in `.env.local` (gitignored), never in a committed file.

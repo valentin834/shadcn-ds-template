@@ -28,6 +28,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Claude Design build (own dependencies, React 18), see tools/claude-design:
+    "tools/**",
   ]),
 ]);
 

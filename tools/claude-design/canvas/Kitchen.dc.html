@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kitchen sink Ds4060</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ds4060/tokens.css">
+<link rel="stylesheet" href="ds/ds4060/components/bundle.css">
+<script src="ds/ds4060/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div data-theme="light" style="box-sizing: border-box; width: 1280px; padding: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans);">
+
+  <section id="t-card">
+    <x-import component-from-global-scope="Ds4060.Card">
+      <x-import component-from-global-scope="Ds4060.CardHeader">
+        <x-import component-from-global-scope="Ds4060.CardTitle">Abonnement</x-import>
+        <x-import component-from-global-scope="Ds4060.CardDescription">Formule Pro, renouvelée le 12 novembre.</x-import>
+        <x-import component-from-global-scope="Ds4060.CardAction"><x-import component-from-global-scope="Ds4060.Badge" variant="secondary"><x-import component-from-global-scope="Ds4060.Icon" name="CircleCheck"></x-import>Actif</x-import></x-import>
+      </x-import>
+      <x-import component-from-global-scope="Ds4060.CardContent"><p style="margin: 0; font-size: 14px; color: var(--muted-foreground);">12 sièges utilisés sur 20.</p></x-import>
+      <x-import component-from-global-scope="Ds4060.CardFooter">
+        <x-import component-from-global-scope="Ds4060.Button" variant="outline">Annuler</x-import>
+        <x-import component-from-global-scope="Ds4060.Button"><x-import component-from-global-scope="Ds4060.Icon" name="Check"></x-import>Enregistrer</x-import>
+      </x-import>
+    </x-import>
+  </section>
+
+  <section id="t-buttongroup" style="display: flex; flex-direction: column; gap: 12px;">
+    <x-import component-from-global-scope="Ds4060.ButtonGroup">
+      <x-import component-from-global-scope="Ds4060.Button" variant="outline">Jour</x-import>
+      <x-import component-from-global-scope="Ds4060.Button" variant="outline">Semaine</x-import>
+      <x-import component-from-global-scope="Ds4060.Button" variant="outline">Mois</x-import>
+    </x-import>
+    <x-import component-from-global-scope="Ds4060.ToggleGroup" variant="outline" default-value="{{bold}}">
+      <x-import component-from-global-scope="Ds4060.ToggleGroupItem" value="bold" aria-label="Gras"><x-import component-from-global-scope="Ds4060.Icon" name="Bold"></x-import></x-import>
+      <x-import component-from-global-scope="Ds4060.ToggleGroupItem" value="italic" aria-label="Italique"><x-import component-from-global-scope="Ds4060.Icon" name="Italic"></x-import></x-import>
+      <x-import component-from-global-scope="Ds4060.ToggleGroupItem" value="underline" aria-label="Souligné"><x-import component-from-global-scope="Ds4060.Icon" name="Underline"></x-import></x-import>
+    </x-import>
+    <x-import component-from-global-scope="Ds4060.Alert">
+      <x-import component-from-global-scope="Ds4060.Icon" name="Info"></x-import>
+      <x-import component-from-global-scope="Ds4060.AlertTitle">Import terminé</x-import>
+      <x-import component-from-global-scope="Ds4060.AlertDescription">248 clients importés, 3 doublons ignorés.</x-import>
+    </x-import>
+  </section>
+
+  <section id="t-tabs">
+    <x-import component-from-global-scope="Ds4060.Tabs" default-value="apercu">
+      <x-import component-from-global-scope="Ds4060.TabsList">
+        <x-import component-from-global-scope="Ds4060.TabsTrigger" value="apercu">Aperçu</x-import>
+        <x-import component-from-global-scope="Ds4060.TabsTrigger" value="contacts">Contacts</x-import>
+        <x-import component-from-global-scope="Ds4060.TabsTrigger" value="factures">Factures</x-import>
+      </x-import>
+      <x-import component-from-global-scope="Ds4060.TabsContent" value="apercu"><p style="margin: 8px 0 0; font-size: 14px;">Contenu de l'aperçu.</p></x-import>
+    </x-import>
+  </section>
+
+  <section id="t-form" style="display: flex; flex-direction: column; gap: 16px;">
+    <x-import component-from-global-scope="Ds4060.Field">
+      <x-import component-from-global-scope="Ds4060.FieldLabel" html-for="nom">Nom du client</x-import>
+      <x-import component-from-global-scope="Ds4060.Input" id="nom" placeholder="[Nom du client]"></x-import>
+      <x-import component-from-global-scope="Ds4060.FieldDescription">Tel qu'il apparaît sur les factures.</x-import>
+    </x-import>
+    <x-import component-from-global-scope="Ds4060.RadioGroup" default-value="pme">
+      <div style="display: flex; align-items: center; gap: 8px;"><x-import component-from-global-scope="Ds4060.RadioGroupItem" value="pme" id="r1"></x-import><x-import component-from-global-scope="Ds4060.Label" html-for="r1">PME</x-import></div>
+      <div style="display: flex; align-items: center; gap: 8px;"><x-import component-from-global-scope="Ds4060.RadioGroupItem" value="eti" id="r2"></x-import><x-import component-from-global-scope="Ds4060.Label" html-for="r2">ETI</x-import></div>
+    </x-import>
+    <div style="display: flex; align-items: center; gap: 8px;"><x-import component-from-global-scope="Ds4060.Switch" id="s1" default-checked="{{yes}}"></x-import><x-import component-from-global-scope="Ds4060.Label" html-for="s1">Relances automatiques</x-import></div>
+    <x-import component-from-global-scope="Ds4060.Progress" value="{{sixty}}"></x-import>
+  </section>
+
+  <section id="t-accordion">
+    <x-import component-from-global-scope="Ds4060.Accordion" default-value="{{first}}">
+      <x-import component-from-global-scope="Ds4060.AccordionItem" value="a">
+        <x-import component-from-global-scope="Ds4060.AccordionTrigger">Conditions de paiement</x-import>
+        <x-import component-from-global-scope="Ds4060.AccordionContent">30 jours fin de mois.</x-import>
+      </x-import>
+      <x-import component-from-global-scope="Ds4060.AccordionItem" value="b">
+        <x-import component-from-global-scope="Ds4060.AccordionTrigger">Pénalités de retard</x-import>
+        <x-import component-from-global-scope="Ds4060.AccordionContent">Trois fois le taux légal.</x-import>
+      </x-import>
+    </x-import>
+  </section>
+
+  <section id="t-item" style="display: flex; flex-direction: column; gap: 12px;">
+    <x-import component-from-global-scope="Ds4060.Item" variant="outline">
+      <x-import component-from-global-scope="Ds4060.ItemMedia" variant="icon"><x-import component-from-global-scope="Ds4060.Icon" name="FileText"></x-import></x-import>
+      <x-import component-from-global-scope="Ds4060.ItemContent">
+        <x-import component-from-global-scope="Ds4060.ItemTitle">Devis D-2026-114</x-import>
+        <x-import component-from-global-scope="Ds4060.ItemDescription">Envoyé le 21 octobre</x-import>
+      </x-import>
+      <x-import component-from-global-scope="Ds4060.ItemActions"><x-import component-from-global-scope="Ds4060.Button" variant="outline" size="sm">Ouvrir</x-import></x-import>
+    </x-import>
+    <x-import component-from-global-scope="Ds4060.Empty">
+      <x-import component-from-global-scope="Ds4060.EmptyHeader">
+        <x-import component-from-global-scope="Ds4060.EmptyMedia" variant="icon"><x-import component-from-global-scope="Ds4060.Icon" name="Inbox"></x-import></x-import>
+        <x-import component-from-global-scope="Ds4060.EmptyTitle">Aucune facture</x-import>
+        <x-import component-from-global-scope="Ds4060.EmptyDescription">Les factures émises apparaîtront ici.</x-import>
+      </x-import>
+    </x-import>
+  </section>
+
+  <section id="t-stepper" style="grid-column: span 2;">
+    <x-import component-from-global-scope="Ds4060.Stepper" default-value="{{two}}">
+      <x-import component-from-global-scope="Ds4060.StepperNav">
+        <x-import component-from-global-scope="Ds4060.StepperItem" step="{{one}}">
+          <x-import component-from-global-scope="Ds4060.StepperTrigger"><x-import component-from-global-scope="Ds4060.StepperIndicator">1</x-import><x-import component-from-global-scope="Ds4060.StepperTitle">Société</x-import></x-import>
+          <x-import component-from-global-scope="Ds4060.StepperSeparator"></x-import>
+        </x-import>
+        <x-import component-from-global-scope="Ds4060.StepperItem" step="{{two}}">
+          <x-import component-from-global-scope="Ds4060.StepperTrigger"><x-import component-from-global-scope="Ds4060.StepperIndicator">2</x-import><x-import component-from-global-scope="Ds4060.StepperTitle">Contacts</x-import></x-import>
+          <x-import component-from-global-scope="Ds4060.StepperSeparator"></x-import>
+        </x-import>
+        <x-import component-from-global-scope="Ds4060.StepperItem" step="{{three}}">
+          <x-import component-from-global-scope="Ds4060.StepperTrigger"><x-import component-from-global-scope="Ds4060.StepperIndicator">3</x-import><x-import component-from-global-scope="Ds4060.StepperTitle">Validation</x-import></x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+  </section>
+
+  <section id="t-dialog">
+    <x-import component-from-global-scope="Ds4060.Dialog" open="{{yes}}">
+      <x-import component-from-global-scope="Ds4060.DialogContent">
+        <x-import component-from-global-scope="Ds4060.DialogHeader">
+          <x-import component-from-global-scope="Ds4060.DialogTitle">Supprimer le client ?</x-import>
+          <x-import component-from-global-scope="Ds4060.DialogDescription">Ses contacts et ses devis seront archivés.</x-import>
+        </x-import>
+        <x-import component-from-global-scope="Ds4060.DialogFooter">
+          <x-import component-from-global-scope="Ds4060.Button" variant="outline">Annuler</x-import>
+          <x-import component-from-global-scope="Ds4060.Button" variant="destructive">Supprimer</x-import>
+        </x-import>
+      </x-import>
+    </x-import>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, sixty: 60, first: ["a"], bold: ["bold"], one: 1, two: 2, three: 3 }; }
+}
+</script>
+</body>
+</html>

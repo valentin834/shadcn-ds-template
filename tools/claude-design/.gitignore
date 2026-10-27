@@ -1,0 +1,11 @@
+node_modules/
+# Build outputs (npm run ds:build)
+dist/
+out/
+harness/
+src/entry.tsx
+# Test runs (npm run ds:test)
+canvas-run/
+chrome-profile*/
+# Design canvas runtime, read from the Design artifact type (see README)
+.cache/

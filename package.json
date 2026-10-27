@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "ds:install": "npm --prefix tools/claude-design install",
+    "ds:build": "node tools/claude-design/build-all.mjs",
+    "ds:test": "node tools/claude-design/test-all.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
