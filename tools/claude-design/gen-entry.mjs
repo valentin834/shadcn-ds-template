@@ -158,7 +158,8 @@ body.push(`{
   }) as any
   FiltersFr.displayName = "Filters"
   NS.Filters = FiltersFr
-  ;((window as any).__DS_SWAP ||= new Map()).set(FiltersBase, FiltersFr)
+  // the repo's Filters is still "Filters" for gen-gabarits.mjs and stays public for the wrap test
+  ;((window as any).__DS_ALIAS ||= new Map()).set(FiltersBase, "Filters")
 }`)
 
 // Gabarits: page templates in French (src/components/gabarits), under NS.Gabarits.
@@ -203,7 +204,7 @@ NS.Icon = function Icon({ name, ...props }) {
   return C ? React.createElement(C, { "aria-hidden": props["aria-label"] ? undefined : true, ...props }) : null
 }`)
 
-const out = `${lines.join("\n")}\n\nconst NS: any = {}\n${body.join("\n")}\n\n;(window as any).Ds4060 = NS\n// The public components (used by the wrap test to mimic x-import wrappers)\n;(window as any).__DS_PUBLIC = new Set([...Object.values(NS), ...(((window as any).__DS_SWAP || new Map()).keys())].filter((v: any) => typeof v === "function" || (v && v.$$typeof)))\n`
+const out = `${lines.join("\n")}\n\nconst NS: any = {}\n${body.join("\n")}\n\n;(window as any).Ds4060 = NS\n// The public components (used by the wrap test to mimic x-import wrappers)\n;(window as any).__DS_PUBLIC = new Set([...Object.values(NS), ...(((window as any).__DS_SWAP || new Map()).keys()), ...(((window as any).__DS_ALIAS || new Map()).keys())].filter((v: any) => typeof v === "function" || (v && v.$$typeof)))\n`
 fs.writeFileSync(path.join(here, "src/entry.tsx"), out)
 fs.writeFileSync(path.join(here, "out/meta.json"), JSON.stringify(meta, null, 1))
 console.log(`families ${meta.families.length} (exports ${taken.size - meta.blocks.length}), blocks ${meta.blocks.length}, variants ${meta.variants.length}, examples ${exampleFiles.length}, gabarits ${gabarits.length}`)

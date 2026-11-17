@@ -28,6 +28,7 @@ const SERIALIZE = String.raw`(name) => {
   const names = new Map()
   for (const [k, v] of Object.entries(NS)) if ((typeof v === "function" || (v && v.$$typeof)) && /^[A-Z]/.test(k) && !names.has(v)) names.set(v, k)
   for (const [orig, swapped] of window.__DS_SWAP || new Map()) if (names.has(swapped)) names.set(orig, names.get(swapped))
+  for (const [orig, name] of window.__DS_ALIAS || new Map()) names.set(orig, name)
   const icons = new Map()
   for (const [k, v] of Object.entries(NS.Icons)) if (!icons.has(v)) icons.set(v, k)
   const vals = {}, keyOf = new Map()
