@@ -153,7 +153,7 @@ function InputGroupWithAddons() {
               <MicIcon className="text-muted-foreground" />
             </InputGroupAddon>
             <InputGroupAddon align="inline-end">
-              <RadioIcon className="animate-pulse text-red-500" />
+              <RadioIcon className="animate-pulse text-destructive" />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -193,7 +193,7 @@ function InputGroupWithAddons() {
               </InputGroupButton>
             </InputGroupAddon>
             <InputGroupAddon>
-              <RadioIcon className="animate-pulse text-red-500" />
+              <RadioIcon className="animate-pulse text-destructive" />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -463,12 +463,12 @@ function InputGroupWithKbd() {
           <InputGroup>
             <InputGroupInput id="input-username-26" defaultValue="shadcn" />
             <InputGroupAddon align="inline-end">
-              <div className="flex size-4 items-center justify-center rounded-full bg-green-500 dark:bg-green-800">
-                <CheckIcon className="size-3 text-white" />
+              <div className="flex size-4 items-center justify-center rounded-full bg-primary">
+                <CheckIcon className="size-3 text-primary-foreground" />
               </div>
             </InputGroupAddon>
           </InputGroup>
-          <FieldDescription className="text-green-700">
+          <FieldDescription>
             This username is available.
           </FieldDescription>
         </Field>
