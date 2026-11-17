@@ -1,7 +1,7 @@
 {
  "artifact": "https://claude.ai/artifact/Bb9RN7fVcuHY63aQwaC3uD",
- "ref": "maj-composants-2026-10@5634829",
- "version": "1794913149-d0c6",
+ "ref": "maj-composants-2026-10@04d827b",
+ "version": "1794913211-0fbd",
  "publishedAt": "2026-11-17",
  "files": {
   "project/components/Accordion/preview.html": "d21cd38ffa826d1b9c506e5afc5ee278ade4fc6a4878f0e4380d579e66fe03f4",
