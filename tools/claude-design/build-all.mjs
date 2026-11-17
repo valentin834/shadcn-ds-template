@@ -46,9 +46,19 @@ process.stdout.write(node("build-css.mjs", repo))
 // 3. Design system files
 node("gen-tokens.mjs", repo, path.join(project, "tokens.json"), ref)
 process.stdout.write(node("gen-docs.mjs", repo))
-copy(path.join(here, "system/project/README.md"), path.join(project, "README.md"))
+// README: the gabarits list comes from src/components/gabarits/gabarits.json
+{
+  const gabarits = JSON.parse(fs.readFileSync(path.join(repo, "src/components/gabarits/gabarits.json"), "utf8"))
+  const groups = [...new Set(gabarits.map((g) => g.group))]
+  const list = groups.map((grp) => `**${grp}**\n\n${gabarits.filter((g) => g.group === grp).map((g) => `- \`${g.name}\` (${g.width} × ${g.height}) : ${g.summary} Quand : ${g.when.replace(/^./, (c) => c.toLowerCase())}`).join("\n")}`).join("\n\n")
+  const readme = fs.readFileSync(path.join(here, "system/project/README.md"), "utf8")
+  if (!readme.includes("<!-- gabarits -->")) throw new Error("system/project/README.md : repère <!-- gabarits --> absent")
+  fs.writeFileSync(path.join(project, "README.md"), readme.replace("<!-- gabarits -->", list))
+}
 copy(path.join(here, "system/project/components/Cover/preview.html"), path.join(project, "components/Cover/preview.html"))
 node("gen-harness.mjs")
+// Gabarits as Design artboards (headless Chrome, the bundle loaded)
+process.stdout.write(node("gen-gabarits.mjs"))
 copy(path.join(here, "harness/tokens.css"), path.join(project, "tokens.css"))
 copy(path.join(here, "out/bundle-test.js"), path.join(here, "harness/bundle-test.js"))
 copy(path.join(here, "out/bundle.js"), path.join(project, "components/bundle.js"))

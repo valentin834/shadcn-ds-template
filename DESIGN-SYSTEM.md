@@ -20,10 +20,12 @@
 | Variantes shadcnstudio | `src/components/shadcn-studio/[category]/` | `import Button22 from "@/components/shadcn-studio/button/button-22"` | **default** |
 | Blocs shadcnstudio | `src/components/shadcn-studio/blocks/[block]/` | `import HeroSection01 from "@/components/shadcn-studio/blocks/hero-section-01/hero-section-01"` | **default** |
 | Blocs shadcn officiels | `src/components/` | `import { AppSidebar } from "@/components/app-sidebar"` | nommé |
+| Composants 40-60 | `src/components/ds/` | `import { SimpleChart } from "@/components/ds/simple-chart"` | nommé |
+| Gabarits de page 40-60 | `src/components/gabarits/` (liste : `gabarits.json`) | `import { Liste } from "@/components/gabarits/liste"` | nommé |
 
 ### Règles
 
-- **Thème** : `neutral`, variables CSS oklch, **niveaux de gris uniquement** — aucune personnalisation. Ne pas ajouter de tokens colorés (`--success`, `--info`, `--warning`…) : certains registres tiers en installent, ils ont été écartés. Seul `--destructive` est coloré (rouge shadcn par défaut).
+- **Thème** : `neutral`, variables CSS oklch, **niveaux de gris uniquement**. Écarts au thème shadcn, pour tenir 4.5:1 sur le texte et rester en gris : `--muted-foreground` 0.54 (au lieu de 0.556) en clair, `--destructive` `oklch(0.53 0.21 27.325)` en clair, `--sidebar-primary` gris en sombre (le bleu de shadcn est retiré), `--chart-1..5` réétalés pour tenir 3:1. Ne pas ajouter de tokens colorés (`--success`, `--info`, `--warning`…) : certains registres tiers en installent, ils ont été écartés. Seul `--destructive` est coloré (rouge shadcn par défaut).
 - **Primitives** : Base UI (`@base-ui/react`). Différences avec l'API Radix qu'on trouve dans beaucoup d'exemples en ligne :
   - pas d'`asChild` → prop `render` : `<DialogTrigger render={<Button variant="outline" />}>Ouvrir</DialogTrigger>` ; un `Button` rendu en lien prend aussi `nativeButton={false}`
   - `Accordion` : `multiple` (booléen) et valeurs en tableau (`defaultValue={['item-1']}`) ; pas de `type="single"` ni de `collapsible`
@@ -32,7 +34,8 @@
   - `Drawer` : `swipeDirection="down" | "right" | "left" | "up"` (plus de prop `direction`, plus de Vaul)
 - **Pas de Radix** : `radix-ui` n'est plus installé. Les variantes et blocs shadcnstudio viennent eux aussi du registre `base-nova` (Base UI natif). Un exemple trouvé en ligne avec `asChild` est à adapter avec `render`.
 - **Icônes** : `lucide-react` exclusivement.
-- **Charts** : `recharts` via le composant `chart` (`ChartContainer`, `ChartTooltip`). Les couleurs `--chart-1..5` sont des gris.
+- **Charts** : `recharts` via le composant `chart` (`ChartContainer`, `ChartTooltip`), ou `SimpleChart` (`src/components/ds/simple-chart.tsx`) pour un graphique en aires, barres ou courbes à partir de props simples. Les couleurs `--chart-1..5` sont des gris, de la série la plus discrète à la plus marquée, toutes à 3:1 au moins sur le fond.
+- **Filters en français** : `src/components/ds/filters-fr.ts` donne `filtersLabelsFr` et `filtersOperatorLabelsFr`, à passer à `<Filters labels operatorLabels>`. Le design system Claude Design les applique par défaut.
 - **Animations** : `motion` (`import { motion } from "motion/react"`), utilisé par shadcnstudio.
 - **Police** : Geist Sans (`--font-geist-sans`) et Geist Mono.
 - **`cn()`** : toujours `import { cn } from "@/lib/utils"` (clsx + tailwind-merge). La CLI shadcn 4.22 écrit `import { cn } from "cn"` : remplacer cet import après chaque `shadcn add` (voir README).
@@ -639,6 +642,7 @@ Définies dans `src/app/globals.css` (`:root` et `.dark`), toutes en niveaux de 
 
 ## 11. Quickstart pour créer un écran
 
+0. **Gabarit** : partir d'un gabarit de `src/components/gabarits/` (shell applicatif, liste, états vides, fiche détail, formulaire en étapes, tableau de bord, paramètres, connexion, site vitrine ; en 1440 et en 390). Sur un canevas Claude Design, ce sont les artboards `project/gabarits/<Nom>.dc.html` du design system.
 1. **Structure** : choisir un layout (sidebar, centré, pleine largeur)
 2. **Navigation** : `Sidebar` pour une app, `NavigationMenu` pour un site, `Breadcrumb` pour les pages internes
 3. **Contenu** : composer avec `Card`, `Table`, `Chart`, `Kanban`, `Timeline`, `Tree` selon les données

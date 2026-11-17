@@ -111,6 +111,8 @@ function addFamily(kind, slug, importPath, file, group) {
 for (const o of official) addFamily("shadcn", o, `@/components/ui/${o}`, src(`components/ui/${o}.tsx`), "shadcn")
 for (const [kind, slug, p] of tiers) addFamily(kind, slug, `@/components/${kind}/${p}`, src(`components/${kind}/${p}.tsx`), kind)
 for (const p of primitives) addFamily("studio", p, `@/components/ui/${p}`, src(`components/ui/${p}.tsx`), "studio")
+// 40-60's own components (src/components/ds), built on the official ones
+for (const p of ["simple-chart"]) addFamily("maison", p, `@/components/ds/${p}`, src(`components/ds/${p}.tsx`), "maison")
 
 body.push("NS.Examples = {}")
 // Theme: sets data-theme on the artboard document too, so portaled overlays
@@ -147,6 +149,29 @@ for (const b of blocks) {
   meta.blocks.push({ slug: b, name })
 }
 
+// Filters speaks French on a canvas: its labels default to src/components/ds/filters-fr.ts.
+lines.push('import { filtersLabelsFr, filtersOperatorLabelsFr } from "@/components/ds/filters-fr"')
+body.push(`{
+  const FiltersBase = NS.Filters
+  const FiltersFr = React.forwardRef(function Filters(props: any, ref: any) {
+    return <FiltersBase {...props} ref={ref} labels={{ ...filtersLabelsFr, ...props.labels }} operatorLabels={{ ...filtersOperatorLabelsFr, ...props.operatorLabels }} />
+  }) as any
+  FiltersFr.displayName = "Filters"
+  NS.Filters = FiltersFr
+  ;((window as any).__DS_SWAP ||= new Map()).set(FiltersBase, FiltersFr)
+}`)
+
+// Gabarits: page templates in French (src/components/gabarits), under NS.Gabarits.
+// gen-gabarits.mjs writes each one as a Design artboard (.dc.html).
+const gabarits = JSON.parse(fs.readFileSync(src("components/gabarits/gabarits.json"), "utf8"))
+body.push("NS.Gabarits = {}")
+for (const file of [...new Set(gabarits.map((g) => g.file))]) {
+  const id = `g${n++}`
+  lines.push(`import * as ${id} from ${JSON.stringify(`@/components/gabarits/${file}`)}`)
+  for (const g of gabarits.filter((x) => x.file === file)) body.push(`NS.Gabarits[${JSON.stringify(g.name)}] = ${id}[${JSON.stringify(g.name)}]`)
+}
+meta.gabarits = gabarits
+
 // Variants: default exports, under NS.Variants.
 body.push("NS.Variants = {}")
 for (const c of variantCats) {
@@ -181,4 +206,4 @@ NS.Icon = function Icon({ name, ...props }) {
 const out = `${lines.join("\n")}\n\nconst NS: any = {}\n${body.join("\n")}\n\n;(window as any).Ds4060 = NS\n// The public components (used by the wrap test to mimic x-import wrappers)\n;(window as any).__DS_PUBLIC = new Set([...Object.values(NS), ...(((window as any).__DS_SWAP || new Map()).keys())].filter((v: any) => typeof v === "function" || (v && v.$$typeof)))\n`
 fs.writeFileSync(path.join(here, "src/entry.tsx"), out)
 fs.writeFileSync(path.join(here, "out/meta.json"), JSON.stringify(meta, null, 1))
-console.log(`families ${meta.families.length} (exports ${taken.size - meta.blocks.length}), blocks ${meta.blocks.length}, variants ${meta.variants.length}, examples ${exampleFiles.length}`)
+console.log(`families ${meta.families.length} (exports ${taken.size - meta.blocks.length}), blocks ${meta.blocks.length}, variants ${meta.variants.length}, examples ${exampleFiles.length}, gabarits ${gabarits.length}`)

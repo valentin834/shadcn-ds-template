@@ -16,6 +16,7 @@ let targets = [
   ...Object.values(meta.examples).map((n) => `Examples.${n}`),
   ...["Attachment", "Bubble", "CodeBlock", "Drawer", "Marker", "Message", "MessageScroller", "Questionnaire", "Toast", "Trace", "Filters", "Filters2", "Kanban", "NumberField", "Sortable", "Stepper", "Stepper2", "TimePicker", "Timeline", "Tree", "ActionBar", "Editable", "TagsInput"].map((n) => `Examples.Extended${n}`),
   ...meta.blocks.map((b) => b.name),
+  ...(meta.gabarits || []).map((g) => `Gabarits.${g.name}`),
   ...meta.variants.map((v) => `Variants.${v.name}`),
 ]
 if (filter) targets = targets.filter((t) => new RegExp(filter).test(t))

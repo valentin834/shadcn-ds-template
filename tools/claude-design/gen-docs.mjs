@@ -99,10 +99,13 @@ const notes = {
   filters: "**Sur un canevas** : `Filters` attend une configuration `fields` (`[{ id, label, type: \"select\" | \"multiselect\" | \"text\" | \"date\" …, options }]`), un `query` et `onQueryChange`, à fournir depuis `renderVals()`. Pour une maquette statique, une barre `InputGroup` + `Select` + `Button` suffit. `Ds4060.Examples.ExtendedFilters` monte un exemple complet.",
   theme: "**Sur un canevas** : `<x-import component-from-global-scope=\"Ds4060.Theme\" theme=\"dark\" style=\"min-height: 100%\">…tout l'écran…</x-import>`. Accepte `theme` = `light` (défaut) ou `dark`, et `style` pour la mise en page.",
   sidebar: "**Mise en page** : `SidebarProvider` enveloppe `Sidebar` et `SidebarInset` (le contenu de la page). La largeur de la sidebar est 16rem.",
+  "simple-chart": "**Sur un canevas** : `<x-import component-from-global-scope=\"Ds4060.SimpleChart\" type=\"bar\" data=\"{{ventes}}\" index=\"mois\" series=\"{{series}}\" height=\"{{h240}}\"></x-import>` avec, dans `renderVals()`, `ventes: [{ mois: \"Janv.\", ca: 182000 }, …]` et `series: [{ key: \"ca\", label: \"Chiffre d’affaires\" }]`. Props : `type` (`area` par défaut, `bar`, `line`), `height` (240), `legend`, `yAxis`, `stacked`. La première série est la plus marquée. `ChartContainer` seul attend des enfants recharts qu'un canevas ne peut pas monter : passer par `SimpleChart`.",
+  chart: "**Sur un canevas** : `ChartContainer` attend des enfants recharts (AreaChart, Bar…) que le namespace n'expose pas. Pour un graphique sur un canevas, utiliser `Ds4060.SimpleChart`.",
 }
-const groupOf = (f) => f.kind === "ds" ? "Thème" : f.kind === "shadcn" ? officialGroup[f.slug] || "Utilitaires" : f.kind === "studio" ? "shadcnstudio · primitives animées" : "Données & BtoB (ReUI, Dice UI)"
-const descOf = (f) => f.kind === "ds" ? "Thème clair ou sombre d'un artboard : à mettre autour de tout le contenu, il applique aussi le thème aux menus, listes et popovers ouverts, rendus hors de l'artboard" : f.kind === "shadcn" ? officialDesc[f.slug] : f.kind === "studio" ? studioDesc[f.slug] : tierDesc[f.slug]
-const sourceOf = (f) => f.kind === "ds" ? "composant du design system (bundle)" : f.kind === "shadcn" ? "shadcn/ui (style base-nova, Base UI)" : f.kind === "studio" ? "shadcnstudio Pro (registre base-nova)" : f.kind === "reui" ? "ReUI (reui.io, base-nova)" : "Dice UI (diceui.com, base-nova)"
+const ownDesc = { "simple-chart": "Graphique prêt à l'emploi (aires, barres ou courbes) bâti sur ChartContainer : `type`, `data`, `index` et `series` en props simples, séries en gris" }
+const groupOf = (f) => f.kind === "maison" ? "Data display" : f.kind === "ds" ? "Thème" : f.kind === "shadcn" ? officialGroup[f.slug] || "Utilitaires" : f.kind === "studio" ? "shadcnstudio · primitives animées" : "Données & BtoB (ReUI, Dice UI)"
+const descOf = (f) => f.kind === "maison" ? ownDesc[f.slug] : f.kind === "ds" ? "Thème clair ou sombre d'un artboard : à mettre autour de tout le contenu, il applique aussi le thème aux menus, listes et popovers ouverts, rendus hors de l'artboard" : f.kind === "shadcn" ? officialDesc[f.slug] : f.kind === "studio" ? studioDesc[f.slug] : tierDesc[f.slug]
+const sourceOf = (f) => f.kind === "maison" ? "composant 40-60, bâti sur les composants officiels" : f.kind === "ds" ? "composant du design system (bundle)" : f.kind === "shadcn" ? "shadcn/ui (style base-nova, Base UI)" : f.kind === "studio" ? "shadcnstudio Pro (registre base-nova)" : f.kind === "reui" ? "ReUI (reui.io, base-nova)" : "Dice UI (diceui.com, base-nova)"
 const fileOf = (f) => (f.kind === "ds" ? "components/bundle.js" : f.importPath.replace("@/", "src/") + ".tsx")
 
 const previewHtml = (group, target, { width, height, subtitle }) => `<!-- @dsCard group="${group}" height=${height} width=${width}${subtitle ? ` subtitle="${subtitle.replace(/"/g, "'")}"` : ""} -->
@@ -163,7 +166,27 @@ for (const b of meta.blocks) {
   write(`components/${b.name}/preview.html`, previewHtml(group, b.name, { width: 1280, height: 720 }))
   dts.push(`/** ${desc} (bloc, sans props) */\nexport interface ${b.name}Props {}\n`)
 }
+// Gabarits: one card per page template, previewing Ds4060.Gabarits.<Nom>; the
+// editable artboard is gabarits/<Nom>.dc.html (gen-gabarits.mjs).
+for (const g of meta.gabarits || []) {
+  const card = `Gabarit${g.name}`
+  write(`components/${card}/README.md`, [
+    `${g.summary}`,
+    "",
+    `**Quand le prendre** : ${g.when}`,
+    "",
+    `**Sur un canevas** : partir de l'artboard \`gabarits/${g.name}.dc.html\` du design system (outil Artifact, \`read\` avec \`path\` = \`project/gabarits/${g.name}.dc.html\`). L'écrire tel quel comme artboard du canevas, en ${g.width} × ${g.height}, puis remplacer les textes et les données. Tout y est éditable : du markup en styles en ligne avec les variables du thème et les vrais composants en \`x-import\`, les valeurs qui ne sont pas du texte dans \`renderVals()\`. En sombre, passer \`theme="dark"\` au \`Ds4060.Theme\` qui l'enveloppe.`,
+    "",
+    `**Composé de** : ${g.parts}`,
+    "",
+    `**À éviter** : monter \`Ds4060.Gabarits.${g.name}\` sur un canevas. C'est l'aperçu de cette carte, un bloc qu'on ne peut pas éditer.`,
+    "",
+    `**Source** : \`src/components/gabarits/${g.file}.tsx\` — dépôt \`valentin834/shadcn-ds-template\`.`,
+  ].join("\n") + "\n")
+  write(`components/${card}/preview.html`, previewHtml(`Gabarits · ${g.group}`, `Gabarits.${g.name}`, { width: g.width, height: g.height, subtitle: `${g.width} × ${g.height}` }))
+}
+
 dts.push(`/** Lucide icon by name (\"Search\", \"ChevronRight\", \"CircleCheck\"…). 24px alone; 16px inside a Button or a menu item, 12px in a Badge. */\nexport interface IconProps {\n  name: string\n  size?: number | string\n  strokeWidth?: number | string\n  className?: string\n  \"aria-label\"?: string\n}\n`)
 write("components/index.d.ts", dts.join("\n"))
-console.log(`families ${meta.families.length}, blocks ${meta.blocks.length}, static previews: ${missing.join(", ") || "none"}`)
+console.log(`families ${meta.families.length}, blocks ${meta.blocks.length}, gabarits ${(meta.gabarits || []).length}, static previews: ${missing.join(", ") || "none"}`)
 console.log(`no description: ${meta.families.filter((f) => !descOf(f)).map((f) => f.slug).join(", ") || "none"}; blocks without description: ${meta.blocks.filter((b) => !blockDesc[b.slug]).map((b) => b.slug).join(", ") || "none"}`)

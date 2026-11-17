@@ -17,6 +17,8 @@ function withRef(type) {
       return type(ref == null ? props : Object.assign({}, props, { ref }))
     })
     wrapper.displayName = type.displayName || type.name
+    // gen-gabarits.mjs reads the component back from its wrapper
+    wrapper.__dsOrig = type
     wrappers.set(type, wrapper)
   }
   return wrapper

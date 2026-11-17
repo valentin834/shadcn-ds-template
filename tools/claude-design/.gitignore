@@ -9,3 +9,5 @@ canvas-run/
 chrome-profile*/
 # Design canvas runtime, read from the Design artifact type (see README)
 .cache/
+audit-run*/
+gabarits-run/

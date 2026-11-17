@@ -41,6 +41,7 @@ fs.writeFileSync(path.join(h, "index.html"), `<!doctype html>
 <div id="root"></div>
 <script>
 const q = new URLSearchParams(location.search)
+if (q.get("pad") === "0") document.body.style.padding = "0"
 const pathName = q.get("c")
 const C = pathName.split(".").reduce((o, k) => (o ? o[k] : undefined), window.Ds4060)
 window.__ds = { status: "pending", error: null }

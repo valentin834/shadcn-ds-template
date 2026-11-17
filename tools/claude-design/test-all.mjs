@@ -5,6 +5,7 @@
 //   anchor    menus, popovers, tooltips open next to their trigger
 //   previews  each component card of the design system renders, light and dark
 //   canvas    a real artboard with dc-runtime.js, if .cache/dc-runtime.js exists
+//   gabarits  each gabarit renders the same as React and as its .dc.html artboard (real runtime)
 // Usage: node test-all.mjs [--all]
 import fs from "node:fs"
 import path from "node:path"
@@ -40,7 +41,7 @@ const problems = []
 const flag = (test, id, what) => (KNOWN[test]?.[id] ? console.log(`  connu  ${id} : ${KNOWN[test][id]}`) : problems.push(`${test} ${id} : ${what}`))
 
 // mount
-run("test-mount.mjs", out("test-mount.json"), "6", process.argv.includes("--all") ? "" : "^(Examples\\.|Block)")
+run("test-mount.mjs", out("test-mount.json"), "6", process.argv.includes("--all") ? "" : "^(Examples\\.|Block|Gabarits\\.)")
 for (const r of JSON.parse(fs.readFileSync(out("test-mount.json"), "utf8"))) {
   const err = r.status !== "ok" ? r.error || r.status : r.exceptions[0] || r.console.find((c) => c.startsWith("error"))
   if (err) flag("mount", r.target, err)
@@ -89,6 +90,17 @@ if (fs.existsSync(runtime)) {
   }
   console.log("  captures : canvas-run/out/canvas-<artboard>-fix.png")
 } else console.log("\n(canvas ignoré : pas de .cache/dc-runtime.js, voir README)")
+
+// gabarits: React (the card) and the artboard with the real runtime must match
+if (fs.existsSync(runtime)) {
+  run("test-gabarits.mjs", out("test-gabarits.json"))
+  for (const r of JSON.parse(fs.readFileSync(out("test-gabarits.json"), "utf8"))) {
+    if (r.errors.length) flag("gabarits", r.gabarit, r.errors[0])
+    else if (r.diffs.length) flag("gabarits", r.gabarit, `${r.diffs.length} écart(s) entre React et le canevas : ${r.diffs[0]}`)
+    if (r.height) flag("gabarits", `${r.gabarit} (hauteur)`, `${r.height} : corriger height dans gabarits.json`)
+  }
+  console.log("  captures : gabarits-run/shots/<Nom>-react.jpg et -canvas.jpg")
+}
 
 console.log(problems.length ? `\n✗ ${problems.length} problème(s) :\n  ${problems.join("\n  ")}` : "\n✓ Tous les tests passent (écarts connus listés ci-dessus).")
 process.exit(problems.length ? 1 : 0)

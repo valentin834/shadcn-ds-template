@@ -13,6 +13,7 @@ Après toute modification de ce que les maquettes utilisent :
 
 - les composants de `src/components/` (`ui`, `reui`, `diceui`, `shadcn-studio`) et `src/hooks/` ;
 - les blocs `src/app/<bloc>-NN/` ;
+- les gabarits `src/components/gabarits/` (et leur liste `gabarits.json`) et les composants 40-60 `src/components/ds/` ;
 - les tokens de `src/app/globals.css` ;
 - les descriptions de `DESIGN-SYSTEM.md` (elles deviennent les README des composants) ;
 - les consignes de `system/project/README.md` (le README du design system lu par Claude Design).
@@ -53,10 +54,32 @@ commande) et demande les droits d'édition sur l'artifact. La procédure détail
 | Tokens | `gen-tokens.mjs` | `dist/project/tokens.json` (depuis `globals.css`) |
 | Docs | `gen-docs.mjs` | `README.md` et `preview.html` par composant et par bloc, `components/index.d.ts` |
 | Harnais | `gen-harness.mjs` | `harness/` (page de test) et `tokens.css` tel que la page le compile |
+| Gabarits | `gen-gabarits.mjs` | `gabarits/<Nom>.dc.html` : chaque gabarit écrit en artboard Design (Chrome headless) |
 | Diff | `build-all.mjs` | `out/manifest.json`, `out/publish-plan.json` (fichiers modifiés et appels de publication) |
 
 `build-all.mjs` enchaîne tout. `index.mjs` écrit `design-system.json` au moment de publier, à partir de l'index en
 ligne, et `mark-published.mjs` met à jour `published-manifest.json` après la publication.
+
+## Gabarits
+
+Les gabarits sont des pages entières (shell applicatif, liste et états vides, fiche détail, formulaire en étapes,
+tableau de bord, paramètres, connexion, site vitrine ; en 1440 et en 390), écrites en React dans
+`src/components/gabarits/` et listées dans `gabarits.json` (nom, fichier, groupe, taille, résumé, quand le prendre,
+composition). Le build en tire trois choses :
+
+- `Ds4060.Gabarits.<Nom>` dans le bundle, monté par la carte `components/Gabarit<Nom>/` du design system ;
+- `gabarits/<Nom>.dc.html` (`gen-gabarits.mjs`) : l'arbre React du gabarit, parcouru sans être rendu, réécrit en
+  artboard. Le markup garde ses styles en ligne, les composants deviennent des `x-import`, les icônes Lucide des
+  `Ds4060.Icon`, les fonctions d'aide du gabarit sont dépliées et les valeurs qui ne sont pas du texte vont dans
+  `renderVals()`, nommées d'après leur prop. C'est ce fichier que Claude Design copie sur un canevas ;
+- la liste « Gabarits » du README du design system (repère `<!-- gabarits -->` de `system/project/README.md`).
+
+Règles d'écriture d'un gabarit (le sérialiseur signale les écarts) : composants du design system et markup en styles en
+ligne avec les variables du thème ; pas de hook, pas de `className`, pas d'élément React en prop (`render`,
+`indicators`) ; un `style` sur un composant ne sert qu'à le placer ou le dimensionner (sur un canevas, il va au slot),
+jamais sur `TableRow`, `TableHead` ou `TableCell`. Pour ajouter un gabarit : l'écrire, l'ajouter à `gabarits.json`,
+lancer `npm run ds:build` puis `npm run ds:test` : `test-gabarits.mjs` vérifie que l'artboard rend comme le React et
+que la hauteur déclarée tient le contenu.
 
 ## Ajouter un composant
 
@@ -68,6 +91,9 @@ Le build trouve seul la plupart des composants :
 - **primitives shadcnstudio** : les autres fichiers de `src/components/ui/`. Leur description est dans `studioDesc`
   (`gen-docs.mjs`), leur aperçu est la première variante ou le premier bloc qui les utilise ;
 - **ReUI et Dice UI** : à ajouter à la liste `tiers` de `gen-entry.mjs` ;
+- **composants 40-60** (`src/components/ds/`, bâtis sur les officiels, comme `SimpleChart`) : à ajouter à la liste
+  `maison` de `gen-entry.mjs`, avec leur description dans `ownDesc` (`gen-docs.mjs`) et un exemple dans
+  `src/examples/<nom>-example.tsx` ;
 - **blocs** : chaque `src/app/<nom>-NN/page.tsx` (description dans la section 6 de `DESIGN-SYSTEM.md`) ;
 - **variantes** : chaque `src/components/shadcn-studio/<catégorie>/*.tsx`.
 
@@ -103,6 +129,13 @@ voir plus bas.
 | `test-anchor.mjs` | menus, popovers et tooltips s'ouvrent à côté de leur déclencheur |
 | `test-previews.mjs` | chaque carte du design system s'affiche, en clair et en sombre |
 | `test-canvas.mjs` | les artboards de `canvas/` avec le vrai runtime Design, si `.cache/dc-runtime.js` existe |
+| `test-gabarits.mjs` | chaque gabarit rendu en React et en artboard avec le vrai runtime : mêmes éléments aux mêmes places (2 px près), hauteur d'artboard juste. Captures dans `gabarits-run/shots/` |
+
+**Audit visuel** (hors `ds:test`, plusieurs minutes) : `node tools/claude-design/audit-canvas.mjs [regex]` monte chaque
+exemple, bloc et gabarit en artboard avec le vrai runtime, en 1440 et 390, clair et sombre, et relève erreurs,
+débordements, textes coupés, icônes à 24 px dans un bouton ou un menu, couleurs hors gris et contrastes sous 4.5:1.
+`--boards=<dossier>` audite des artboards tels quels (par exemple `dist/project/gabarits` ou un canevas téléchargé).
+Rapport dans `audit-run/report.json`, planche dans `audit-run/index.html`.
 
 Pour le test canevas, enregistrer le runtime dans `.cache/dc-runtime.js`. Dans Claude Code, lire avec l'outil Artifact
 le fichier `artifact-type/dc-runtime.js` d'un canevas Design, puis copier le fichier obtenu.
