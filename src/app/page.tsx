@@ -51,13 +51,14 @@ export default function HomePage() {
           <Badge variant="secondary">Design System</Badge>
         </div>
         <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-          Component vitrine for <strong className="text-foreground">40-60 Studio</strong> — built with shadcn/ui + shadcnstudio Pro, Tailwind CSS v4, Next.js 15.
+          Component vitrine for <strong className="text-foreground">40-60 Studio</strong> — built with shadcn/ui + shadcnstudio Pro, ReUI and Dice UI, Tailwind CSS v4, Next.js 16.
           Shared with Claude Design as reference for AI-composed screens.
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
-          <span className="text-muted-foreground"><strong className="text-foreground">55</strong> shadcn official components</span>
+          <span className="text-muted-foreground"><strong className="text-foreground">65</strong> shadcn official components</span>
+          <span className="text-muted-foreground"><strong className="text-foreground">11</strong> ReUI / Dice UI components</span>
           <span className="text-muted-foreground"><strong className="text-foreground">608</strong> shadcnstudio variants</span>
-          <span className="text-muted-foreground"><strong className="text-foreground">85</strong> shadcnstudio blocks</span>
+          <span className="text-muted-foreground"><strong className="text-foreground">87</strong> shadcnstudio blocks</span>
         </div>
       </div>
 
@@ -65,7 +66,14 @@ export default function HomePage() {
       <Link href="/gallery" className="group block">
         <div className="rounded-xl border-2 border-dashed border-border bg-muted/30 px-8 py-6 text-center transition-colors group-hover:border-foreground/40 group-hover:bg-muted/60">
           <p className="text-lg font-semibold">→ Browse Component Gallery</p>
-          <p className="text-sm text-muted-foreground mt-1">See all 748 components and blocks organized by category</p>
+          <p className="text-sm text-muted-foreground mt-1">See all 771 components and blocks organized by category</p>
+        </div>
+      </Link>
+
+      <Link href="/gallery/extended" className="group block">
+        <div className="rounded-xl border bg-card px-8 py-5 transition-colors group-hover:border-foreground/30">
+          <p className="font-semibold">→ Extended components</p>
+          <p className="text-sm text-muted-foreground mt-1">New official shadcn components (message, bubble, toast, trace…) and ReUI / Dice UI components: kanban, tree, filters, stepper, timeline, tags input…</p>
         </div>
       </Link>
 
@@ -122,7 +130,7 @@ export default function HomePage() {
       <section className="space-y-4">
         <div>
           <h2 className="text-xl font-semibold">shadcnstudio Pro Blocks — Highlights</h2>
-          <p className="text-sm text-muted-foreground mt-1">85 blocks total. <Link href="/gallery" className="underline underline-offset-2">See all in gallery →</Link></p>
+          <p className="text-sm text-muted-foreground mt-1">87 blocks total. <Link href="/gallery" className="underline underline-offset-2">See all in gallery →</Link></p>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {studioHighlights.map((b) => (

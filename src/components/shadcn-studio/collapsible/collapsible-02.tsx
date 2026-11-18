@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { ChevronRightIcon, FileIcon, FolderIcon, FolderOpenIcon } from 'lucide-react'
-
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { FileIcon, ChevronRightIcon, FolderIcon, FolderOpenIcon } from 'lucide-react'
 
 type FileTreeItem = {
   name: string
@@ -65,9 +63,9 @@ const FileTree = ({ item, level }: { level: number; item: FileTreeItem }) => {
   return (
     <Collapsible className='flex flex-col gap-1.5' style={{ paddingLeft: `${level === 0 ? 0 : 1.5}rem` }}>
       <CollapsibleTrigger className='focus-visible:ring-ring/50 flex items-center gap-2 rounded-md p-1 outline-none focus-visible:ring-[3px]'>
-        <ChevronRightIcon className='size-4 shrink-0 transition-transform [[data-state=open]>&]:rotate-90' />
-        <FolderIcon className='size-4 shrink-0 [[data-state=open]>&]:hidden' />
-        <FolderOpenIcon className='size-4 shrink-0 [[data-state=closed]>&]:hidden' />
+        <ChevronRightIcon className='size-4 shrink-0 transition-transform in-data-closed:rotate-0 in-data-open:rotate-90' />
+        <FolderIcon className='size-4 shrink-0 in-data-closed:block in-data-open:hidden' />
+        <FolderOpenIcon className='in-data-open:block: size-4 shrink-0 in-data-closed:hidden' />
         <span className='text-sm'>{item.name}</span>
       </CollapsibleTrigger>
       <CollapsibleContent className='flex flex-col gap-1.5'>

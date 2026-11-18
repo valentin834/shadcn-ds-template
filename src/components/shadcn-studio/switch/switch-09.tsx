@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
@@ -15,7 +14,7 @@ const SwitchDualToggleLabelDemo = () => {
     <div className='group inline-flex items-center gap-2' data-state={checked ? 'checked' : 'unchecked'}>
       <span
         id={`${id}-yes`}
-        className='group-data-[state=checked]:text-muted-foreground/70 cursor-pointer text-right text-sm font-medium'
+        className='group-data-checked:text-muted-foreground/70 cursor-pointer text-right text-sm font-medium'
         aria-controls={id}
         onClick={() => setChecked(false)}
       >
@@ -24,7 +23,7 @@ const SwitchDualToggleLabelDemo = () => {
       <Switch id={id} checked={checked} onCheckedChange={toggleSwitch} aria-labelledby={`${id}-yes ${id}-no`} />
       <span
         id={`${id}-no`}
-        className='group-data-[state=unchecked]:text-muted-foreground/70 cursor-pointer text-left text-sm font-medium'
+        className='group-data-unchecked:text-muted-foreground/70 cursor-pointer text-left text-sm font-medium'
         aria-controls={id}
         onClick={() => setChecked(true)}
       >

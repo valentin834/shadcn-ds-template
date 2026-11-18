@@ -1,122 +1,90 @@
-// @ts-nocheck
 'use client'
 
-import { useState } from 'react'
-
-import { CheckCheckIcon, CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+
+import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { z } from 'zod'
+import * as z from 'zod'
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList
+} from '@/components/ui/combobox'
 
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-
-import { cn } from '@/lib/utils'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
+import { CheckCheckIcon } from 'lucide-react'
 
 const paymentMethod = [
-  { value: 'credit-card', label: 'Credit Card' },
-  { value: 'paypal', label: 'PayPal' },
-  { value: 'apple-pay', label: 'Apple Pay' },
-  { value: 'google-pay', label: 'Google Pay' },
-  { value: 'bank_transfer', label: 'Bank Transfer' },
-  { value: 'bitcoin', label: 'Bitcoin' },
-  { value: 'cash-on-delivery', label: 'Cash on Delivery' }
+  'Credit Card',
+  'PayPal',
+  'Apple Pay',
+  'Google Pay',
+  'Bank Transfer',
+  'Bitcoin',
+  'Cash on Delivery'
 ]
 
-const FormSchema = z.object({
-  method: z.string({ required_error: 'Payment method is required.' })
+// Define the form schema
+const formSchema = z.object({
+  // 40-60: zod 4 API (`error`), the registry still targets zod 3
+  method: z.string({ error: 'Payment method is required.' })
 })
 
+type FormValues = z.infer<typeof formSchema>
+
 const ComboboxFormDemo = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema)
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      method: undefined
+    }
   })
 
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  function onSubmit(data: FormValues) {
+    const selectedMethod = paymentMethod.find(method => method === data.method)
 
-  function onSubmit() {
     toast.custom(() => (
-      <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400'>
+      <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400 *:[svg]:row-span-1'>
         <CheckCheckIcon />
-        <AlertTitle>You select &quot;{value}&quot; for payment</AlertTitle>
+        <AlertTitle>You selected &quot;{selectedMethod}&quot; for payment</AlertTitle>
       </Alert>
     ))
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-md space-y-6'>
-        <FormField
-          control={form.control}
-          name='method'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Select your payment method</FormLabel>
-              <Popover open={open} onOpenChange={setOpen}>
-                <FormControl>
-                  <PopoverTrigger render={<Button variant='outline' role='combobox' aria-expanded={open} className='w-full max-w-xs justify-between' aria-label='Payment method combobox' />}>{field.value ? (
-                                                  paymentMethod.find(method => method.value === field.value)?.label
-                                                ) : (
-                                                  <span className='text-muted-foreground'>Select a payment method...</span>
-                                                )}<ChevronsUpDownIcon className='opacity-50' /></PopoverTrigger>
-                </FormControl>
-                <PopoverContent className='w-(--radix-popper-anchor-width) p-0'>
-                  <Command>
-                    <CommandInput placeholder='Search payment method...' />
-                    <CommandList>
-                      <CommandEmpty>No payment method found.</CommandEmpty>
-                      <CommandGroup>
-                        {paymentMethod.map(method => (
-                          <CommandItem
-                            key={method.value}
-                            value={method.value}
-                            onSelect={() => {
-                              setValue(method.value)
-                              field.onChange(method.value)
-                              setOpen(false)
-                            }}
-                          >
-                            {method.label}
-                            <CheckIcon
-                              className={cn('ml-auto', value === method.value ? 'opacity-100' : 'opacity-0')}
-                            />
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              <FormDescription>Select your preferred payment method.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-md space-y-6'>
+      <Controller
+        name='method'
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor='method'>Select your payment method</FieldLabel>
+            <Combobox items={paymentMethod} onValueChange={field.onChange}>
+              <ComboboxInput aria-invalid={fieldState.invalid} placeholder='Select a payment method' />
+              <ComboboxContent>
+                <ComboboxEmpty>No items found.</ComboboxEmpty>
+                <ComboboxList>
+                  {item => (
+                    <ComboboxItem key={item} value={item} onSelect={() => field.onChange(item)}>
+                      {item}
+                    </ComboboxItem>
+                  )}
+                </ComboboxList>
+              </ComboboxContent>
+            </Combobox>
+            <FieldDescription>Select your preferred payment method.</FieldDescription>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
 
-        <Button type='submit'>Continue</Button>
-      </form>
-    </Form>
+      <Button type='submit'>Continue</Button>
+    </form>
   )
 }
 

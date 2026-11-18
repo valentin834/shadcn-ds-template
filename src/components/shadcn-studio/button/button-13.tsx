@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { CopyIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { CopyIcon } from 'lucide-react'
 
 const ButtonDuplicateDemo = () => {
   return (

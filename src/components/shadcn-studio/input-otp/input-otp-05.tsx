@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
@@ -11,7 +10,7 @@ const InputOTPOutlinedDemo = () => {
     <div className='space-y-3'>
       <Label htmlFor={id}>Input OTP outlined</Label>
       <InputOTP id={id} maxLength={4}>
-        <InputOTPGroup className='gap-2 *:data-[slot=input-otp-slot]:rounded-md *:data-[slot=input-otp-slot]:border'>
+        <InputOTPGroup className='gap-2 *:data-[slot=input-otp-slot]:rounded-lg *:data-[slot=input-otp-slot]:border'>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
           <InputOTPSlot index={2} />

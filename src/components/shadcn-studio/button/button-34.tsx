@@ -1,13 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { SunIcon, MoonIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import { MoonIcon, SunIcon } from 'lucide-react'
 
 const IconButtonModeDemo = () => {
   const [isDark, setIsDark] = useState(false)

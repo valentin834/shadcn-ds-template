@@ -25,6 +25,9 @@ function Slider({
       min={min}
       max={max}
       thumbAlignment="edge"
+      // 40-60: fixed locale so the server and the browser format the value
+      // the same way (otherwise hydration fails for non en-US browsers)
+      locale="en-US"
       {...props}
     >
       <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col">

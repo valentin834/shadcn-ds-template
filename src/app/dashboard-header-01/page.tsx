@@ -1,5 +1,3 @@
-import { LanguagesIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent } from '@/components/ui/card'
@@ -16,6 +14,7 @@ import {
 
 import LanguageDropdown from '@/components/shadcn-studio/blocks/dropdown-language'
 import ProfileDropdown from '@/components/shadcn-studio/blocks/dropdown-profile'
+import { LanguagesIcon } from 'lucide-react'
 
 const Header = () => {
   return (
@@ -28,8 +27,8 @@ const Header = () => {
           <header className='bg-card sticky top-0 z-50 border-b'>
             <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6'>
               <div className='flex items-center gap-4'>
-                <SidebarTrigger className='[&_svg]:!size-5' />
-                <Separator orientation='vertical' className='hidden !h-4 sm:block' />
+                <SidebarTrigger className='[&_svg]:size-5!' />
+                <Separator orientation='vertical' className='hidden h-4! data-vertical:self-center sm:block' />
                 <Breadcrumb className='hidden sm:block'>
                   <BreadcrumbList>
                     <BreadcrumbItem>
@@ -49,17 +48,20 @@ const Header = () => {
               <div className='flex items-center gap-1.5'>
                 <LanguageDropdown
                   trigger={
-                    <Button variant='ghost' size='icon'>
+                    <Button variant='ghost' size='icon-lg'>
                       <LanguagesIcon />
                     </Button>
                   }
                 />
                 <ProfileDropdown
                   trigger={
-                    <Button variant='ghost' size='icon' className='size-9.5'>
-                      <Avatar className='size-9.5 rounded-md'>
-                        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
-                        <AvatarFallback>JD</AvatarFallback>
+                    <Button variant='ghost' size='icon-lg'>
+                      <Avatar className='size-[inherit] rounded-[inherit] after:rounded-[inherit]'>
+                        <AvatarImage
+                          src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png'
+                          className='rounded-[inherit]'
+                        />
+                        <AvatarFallback className='rounded-[inherit]'>JD</AvatarFallback>
                       </Avatar>
                     </Button>
                   }

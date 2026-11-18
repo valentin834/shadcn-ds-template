@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import * as React from 'react'
@@ -480,7 +479,7 @@ function MotionHighlightItem({
             )}
           </AnimatePresence>
 
-          <div data-slot='motion-highlight-item' className={cn('relative z-[1]', className)} {...dataAttributes}>
+          <div data-slot='motion-highlight-item' className={cn('relative z-1', className)} {...dataAttributes}>
             {children}
           </div>
         </>

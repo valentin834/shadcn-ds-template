@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -18,7 +17,7 @@ const DialogZoomInDemo = () => {
     <Dialog>
       <form>
         <DialogTrigger render={<Button variant='outline' />}>Zoom in</DialogTrigger>
-        <DialogContent className='data-[state=open]:!zoom-in-0 data-[state=open]:duration-600 sm:max-w-[425px]'>
+        <DialogContent className='data-open:zoom-in-0! data-open:duration-600 sm:max-w-106.25'>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>

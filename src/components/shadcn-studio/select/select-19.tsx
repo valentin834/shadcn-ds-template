@@ -1,16 +1,16 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'Select a fruit', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
 
 const SelectDisabledDemo = () => {
   const id = useId()
@@ -18,19 +18,16 @@ const SelectDisabledDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Disabled select</Label>
-      <Select defaultValue='apple' disabled>
+      <Select items={items} defaultValue='apple' disabled>
         <SelectTrigger id={id} className='w-full'>
-          <SelectValue placeholder='Select a fruit' />
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
-          </SelectGroup>
+        <SelectContent className='p-1'>
+          {items.slice(1).map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>

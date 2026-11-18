@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const tabs = [
@@ -27,8 +26,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -43,7 +42,7 @@ const TabsOutlinedPillsDemo = () => {
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='data-[state=active]:border-border data-[state=active]:shadow-none!'
+              className='data-active:border-border data-active:shadow-none!'
             >
               {tab.name}
             </TabsTrigger>

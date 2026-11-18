@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
@@ -36,8 +35,8 @@ const tasks = [
 
 const HoverCardTasksDemo = () => {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
-      <HoverCardTrigger render={<Button variant='link' />}>Hover Card Tasks</HoverCardTrigger>
+    <HoverCard>
+      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Tasks</Button>} />
       <HoverCardContent className='w-72'>
         <div className='space-y-4'>
           <p className='text-lg font-semibold'>Today&apos;s task completion</p>

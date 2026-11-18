@@ -1,14 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
 
 import { formatDateRange } from 'little-date'
-import { PlusIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { PlusIcon } from 'lucide-react'
 
 const events = [
   {
@@ -33,7 +31,7 @@ const CalendarEventListDemo = () => {
 
   return (
     <div>
-      <Card className='w-2xs py-4'>
+      <Card className='w-2xs pt-4'>
         <CardContent className='px-4'>
           <Calendar mode='single' selected={date} onSelect={setDate} className='w-full bg-transparent p-0' required />
         </CardContent>

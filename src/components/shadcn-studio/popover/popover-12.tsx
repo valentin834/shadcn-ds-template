@@ -1,20 +1,28 @@
-// @ts-nocheck
-import { ChevronRightIcon, MapPinIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription
+} from '@/components/ui/popover'
+import { MapPinIcon, ChevronRightIcon } from 'lucide-react'
 
 const PopoverAboutHimalayasDemo = () => {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><MapPinIcon /><span className='sr-only'>About Himalayas</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <MapPinIcon />
+        <span className='sr-only'>About Himalayas</span>
+      </PopoverTrigger>
       <PopoverContent className='w-85 p-0'>
         <div className='flex'>
-          <div className='space-y-2 p-4'>
-            <p className='font-medium'>About Himalayas</p>
-            <p className='text-muted-foreground text-xs'>
+          <PopoverHeader className='gap-2 p-4'>
+            <PopoverTitle className='text-base'>About Himalayas</PopoverTitle>
+            <PopoverDescription className='text-xs'>
               The Great Himalayan mountain ranges in the Indian sub-continent region.{' '}
-            </p>
+            </PopoverDescription>
             <a
               href='https://en.wikipedia.org/wiki/Himalayas'
               target='_blank'
@@ -24,7 +32,7 @@ const PopoverAboutHimalayasDemo = () => {
               Read more
               <ChevronRightIcon className='size-4' />
             </a>
-          </div>
+          </PopoverHeader>
           <img
             src='https://lp-cms-production.imgix.net/2021-01/GettyRF_450207051.jpg?height=136'
             alt='the himalayas'

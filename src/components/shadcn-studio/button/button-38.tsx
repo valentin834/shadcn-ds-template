@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { BellIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { BellIcon } from 'lucide-react'
 
 const IconButtonNotificationDotDemo = () => {
   return (

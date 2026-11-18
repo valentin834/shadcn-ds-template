@@ -1,27 +1,3 @@
-import {
-  ArrowRightLeftIcon,
-  CalendarClockIcon,
-  CalendarX2Icon,
-  ChartNoAxesCombinedIcon,
-  ChartPieIcon,
-  ChartSplineIcon,
-  ClipboardListIcon,
-  Clock9Icon,
-  CrownIcon,
-  Globe,
-  HashIcon,
-  Camera,
-  LanguagesIcon,
-  Briefcase,
-  SettingsIcon,
-  SquareActivityIcon,
-  TriangleAlertIcon,
-  TruckIcon,
-  MessageCircle,
-  Undo2Icon,
-  UsersIcon
-} from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Breadcrumb,
@@ -55,6 +31,30 @@ import SalesMetricsCard from '@/components/shadcn-studio/blocks/chart-sales-metr
 import StatisticsCard from '@/components/shadcn-studio/blocks/statistics-card-01'
 import TotalEarningCard from '@/components/shadcn-studio/blocks/widget-total-earning'
 import TransactionDatatable, { type Item } from '@/components/shadcn-studio/blocks/datatable-transaction'
+
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import LinkedinIcon from '@/assets/svg/linkedin-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
+import {
+  TruckIcon,
+  TriangleAlertIcon,
+  CalendarX2Icon,
+  ChartNoAxesCombinedIcon,
+  ChartSplineIcon,
+  UsersIcon,
+  ChartPieIcon,
+  HashIcon,
+  ArrowRightLeftIcon,
+  Clock9Icon,
+  ClipboardListIcon,
+  CrownIcon,
+  SquareActivityIcon,
+  CalendarClockIcon,
+  Undo2Icon,
+  SettingsIcon,
+  LanguagesIcon
+} from 'lucide-react'
 
 // Statistics card data
 const StatisticsCardData = [
@@ -300,7 +300,7 @@ const transactionData: Item[] = [
   },
   {
     id: '21',
-    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-21.png',
+    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png',
     avatarFallback: 'TY',
     name: 'Thomas Young',
     amount: 543.6,
@@ -310,7 +310,7 @@ const transactionData: Item[] = [
   },
   {
     id: '22',
-    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-22.png',
+    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-2.png',
     avatarFallback: 'SB',
     name: 'Stephanie Brown',
     amount: 789.3,
@@ -320,7 +320,7 @@ const transactionData: Item[] = [
   },
   {
     id: '23',
-    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-23.png',
+    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
     avatarFallback: 'BM',
     name: 'Brandon Moore',
     amount: 425.75,
@@ -330,7 +330,7 @@ const transactionData: Item[] = [
   },
   {
     id: '24',
-    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-24.png',
+    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-4.png',
     avatarFallback: 'KT',
     name: 'Kelly Taylor',
     amount: 1203.5,
@@ -340,7 +340,7 @@ const transactionData: Item[] = [
   },
   {
     id: '25',
-    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-25.png',
+    avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
     avatarFallback: 'MA',
     name: 'Mark Anderson',
     amount: 356.2,
@@ -360,8 +360,13 @@ const DashboardShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartNoAxesCombinedIcon /><span>Dashboard</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>5</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartNoAxesCombinedIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      5
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -371,29 +376,55 @@ const DashboardShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartSplineIcon /><span>Content Performance</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartSplineIcon />
+                      <span>Content Performance</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>Audience Insight</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>Audience Insight</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartPieIcon /><span>Engagement Metrics</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartPieIcon />
+                      <span>Engagement Metrics</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><HashIcon /><span>Hashtag Performance</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>3</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <HashIcon />
+                      <span>Hashtag Performance</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      3
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ArrowRightLeftIcon /><span>Competitor Analysis</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ArrowRightLeftIcon />
+                      <span>Competitor Analysis</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Clock9Icon /><span>Campaign Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Clock9Icon />
+                      <span>Campaign Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ClipboardListIcon /><span>Sentiment Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ClipboardListIcon />
+                      <span>Sentiment Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CrownIcon /><span>Influencer</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CrownIcon />
+                      <span>Influencer</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -403,19 +434,34 @@ const DashboardShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SquareActivityIcon /><span>Real Time Monitoring</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SquareActivityIcon />
+                      <span>Real Time Monitoring</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CalendarClockIcon /><span>Schedule Post & Calendar</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CalendarClockIcon />
+                      <span>Schedule Post & Calendar</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Undo2Icon /><span>Report & Export</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Undo2Icon />
+                      <span>Report & Export</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SettingsIcon /><span>Settings & Integrations</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SettingsIcon />
+                      <span>Settings & Integrations</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>User Management</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>User Management</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -426,8 +472,8 @@ const DashboardShell = () => {
           <header className='bg-card sticky top-0 z-50 border-b'>
             <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6'>
               <div className='flex items-center gap-4'>
-                <SidebarTrigger className='[&_svg]:!size-5' />
-                <Separator orientation='vertical' className='hidden !h-4 sm:block' />
+                <SidebarTrigger className='[&_svg]:size-5!' />
+                <Separator orientation='vertical' className='hidden h-4! data-vertical:self-center sm:block' />
                 <Breadcrumb className='hidden sm:block'>
                   <BreadcrumbList>
                     <BreadcrumbItem>
@@ -447,17 +493,20 @@ const DashboardShell = () => {
               <div className='flex items-center gap-1.5'>
                 <LanguageDropdown
                   trigger={
-                    <Button variant='ghost' size='icon'>
+                    <Button variant='ghost' size='icon-lg'>
                       <LanguagesIcon />
                     </Button>
                   }
                 />
                 <ProfileDropdown
                   trigger={
-                    <Button variant='ghost' size='icon' className='size-9.5'>
-                      <Avatar className='size-9.5 rounded-md'>
-                        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
-                        <AvatarFallback>JD</AvatarFallback>
+                    <Button variant='ghost' size='icon-lg'>
+                      <Avatar className='size-[inherit] rounded-[inherit] after:rounded-[inherit]'>
+                        <AvatarImage
+                          src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png'
+                          className='rounded-[inherit]'
+                        />
+                        <AvatarFallback className='rounded-[inherit]'>JD</AvatarFallback>
                       </Avatar>
                     </Button>
                   }
@@ -482,7 +531,7 @@ const DashboardShell = () => {
 
               <div className='grid gap-6 max-xl:col-span-full lg:max-xl:grid-cols-2'>
                 {/* Product Insights Card */}
-                <ProductInsightsCard className='justify-between gap-3 [&>[data-slot=card-content]]:space-y-5' />
+                <ProductInsightsCard className='justify-between gap-3 *:data-[slot=card-content]:space-y-5' />
 
                 {/* Total Earning Card */}
                 <TotalEarningCard
@@ -492,11 +541,11 @@ const DashboardShell = () => {
                   percentage={10}
                   comparisonText='Compare to last year ($84,325)'
                   earningData={earningData}
-                  className='justify-between gap-5 sm:min-w-0 [&>[data-slot=card-content]]:space-y-7'
+                  className='justify-between gap-5 sm:min-w-0'
                 />
               </div>
 
-              <SalesMetricsCard className='col-span-full xl:col-span-2 [&>[data-slot=card-content]]:space-y-6' />
+              <SalesMetricsCard className='col-span-full *:data-[slot=card-content]:space-y-6 xl:col-span-2' />
 
               <Card className='col-span-full w-full py-0'>
                 <TransactionDatatable data={transactionData} />
@@ -512,18 +561,18 @@ const DashboardShell = () => {
                 </a>
                 , Made for better web design
               </p>
-              <div className='flex items-center gap-5'>
+              <div className='text-muted-foreground *:hover:text-primary flex items-center gap-5'>
                 <a href='#'>
-                  <Globe className='size-4' />
+                  <FacebookIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <Camera className='size-4' />
+                  <InstagramIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <Briefcase className='size-4' />
+                  <LinkedinIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <MessageCircle className='size-4' />
+                  <TwitterIcon className='size-4' />
                 </a>
               </div>
             </div>

@@ -1,14 +1,12 @@
-// @ts-nocheck
-import { BookIcon, GiftIcon, HeartIcon } from 'lucide-react'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { BookIcon, HeartIcon, GiftIcon } from 'lucide-react'
 
 const tabs = [
   {
     name: 'Explore',
     value: 'explore',
-    icon: BookIcon,
+    icon: <BookIcon />,
     content: (
       <>
         Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending topics, and hidden gems
@@ -19,7 +17,7 @@ const tabs = [
   {
     name: 'Favorites',
     value: 'favorites',
-    icon: HeartIcon,
+    icon: <HeartIcon />,
     content: (
       <>
         All your <span className='text-foreground font-semibold'>favorites</span> are saved here. Revisit articles,
@@ -30,11 +28,11 @@ const tabs = [
   {
     name: 'Surprise Me',
     value: 'surprise',
-    icon: GiftIcon,
+    icon: <GiftIcon />,
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -44,16 +42,22 @@ const TabsVerticalWithTooltipDemo = () => {
   return (
     <div className='w-full max-w-md'>
       <Tabs defaultValue='explore' orientation='vertical' className='gap-4'>
-        <TabsList className='h-full flex-col gap-2'>
-          {tabs.map(({ icon: Icon, name, value }) => (
+        <TabsList className='flex-col gap-2 group-data-vertical/tabs:h-auto'>
+          {tabs.map(({ icon, name, value }) => (
             <Tooltip key={value}>
-              <TooltipTrigger render={<span />}><TabsTrigger
-                                      value={value}
-                                      className='flex w-full flex-col items-center gap-1'
-                                      aria-label='tab-trigger'
-                                    >
-                                      <Icon />
-                                    </TabsTrigger></TooltipTrigger>
+              <TooltipTrigger
+                render={
+                  <span className='h-[stretch]'>
+                    <TabsTrigger
+                      value={value}
+                      className='w-full flex-col gap-1 group-data-vertical/tabs:justify-center'
+                      aria-label='tab-trigger'
+                    >
+                      {icon}
+                    </TabsTrigger>
+                  </span>
+                }
+              />
               <TooltipContent className='px-2 py-1 text-xs' side='left'>
                 {name}
               </TooltipContent>

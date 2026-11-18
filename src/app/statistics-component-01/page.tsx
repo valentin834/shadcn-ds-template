@@ -1,6 +1,5 @@
-import { CalendarX2Icon, Clock8Icon, TriangleAlertIcon, TruckIcon } from 'lucide-react'
-
 import StatisticsCard from '@/components/shadcn-studio/blocks/statistics-card-01'
+import { TruckIcon, TriangleAlertIcon, CalendarX2Icon, Clock8Icon } from 'lucide-react'
 
 // Statistics card data
 const StatisticsCardData = [

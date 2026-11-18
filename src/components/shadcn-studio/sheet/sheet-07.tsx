@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { PlusIcon } from 'lucide-react'
 
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
@@ -14,12 +11,11 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   Sheet,
   SheetClose,
@@ -31,6 +27,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { PlusIcon } from 'lucide-react'
 
 const data: Payment[] = [
   {
@@ -83,7 +80,8 @@ export const columns: ColumnDef<Payment>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -205,8 +203,10 @@ const DataTableDensityDemo = () => {
           className='max-w-2xs'
         />
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          <SheetTrigger render={<Button variant='outline' />}><PlusIcon />Add Users
-                              </SheetTrigger>
+          <SheetTrigger render={<Button variant='outline' />}>
+            <PlusIcon />
+            Add Users
+          </SheetTrigger>
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Add New User</SheetTitle>
@@ -246,16 +246,20 @@ const DataTableDensityDemo = () => {
                 <Label htmlFor='user-status'>Status</Label>
                 <Select
                   value={newUser.status}
-                  onValueChange={(value: Payment['status']) => setNewUser({ ...newUser, status: value })}
+                  onValueChange={(value: Payment['status'] | null) =>
+                    value && setNewUser({ ...newUser, status: value })
+                  }
                 >
                   <SelectTrigger className='w-full'>
                     <SelectValue placeholder='Select status' />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value='pending'>Pending</SelectItem>
-                    <SelectItem value='processing'>Processing</SelectItem>
-                    <SelectItem value='success'>Success</SelectItem>
-                    <SelectItem value='failed'>Failed</SelectItem>
+                    <SelectGroup>
+                      <SelectItem value='pending'>Pending</SelectItem>
+                      <SelectItem value='processing'>Processing</SelectItem>
+                      <SelectItem value='success'>Success</SelectItem>
+                      <SelectItem value='failed'>Failed</SelectItem>
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
@@ -269,7 +273,7 @@ const DataTableDensityDemo = () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className='rounded-md border'>
+      <div className='rounded-lg border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (

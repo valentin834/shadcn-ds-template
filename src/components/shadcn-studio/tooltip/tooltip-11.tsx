@@ -1,18 +1,16 @@
-// @ts-nocheck
-import { ChevronRightIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+import { ChevronRightIcon } from 'lucide-react'
 
 const HoverCardMediaDemo = () => {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
-      <HoverCardTrigger render={<Button variant='link' />}>Hover Card Media</HoverCardTrigger>
+    <HoverCard>
+      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Media</Button>} />
       <HoverCardContent>
         <div className='space-y-2'>
           <img
             src='https://lp-cms-production.imgix.net/2021-01/GettyRF_450207051.jpg?width=232'
-            alt='Content image'
+            alt='Content'
             className='w-full rounded'
           />
           <div className='space-y-1'>

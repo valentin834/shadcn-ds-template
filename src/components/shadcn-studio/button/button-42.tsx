@@ -1,11 +1,16 @@
-// @ts-nocheck
 import * as motion from 'motion/react-client'
 
 import { Button } from '@/components/ui/button'
 
 const ButtonTapAnimationDemo = () => {
   return (
-    <Button className='transition-none' render={<motion.button whileTap={{ scale: 0.85 }} />}>Tap Animation</Button>
+    <Button
+      render={<motion.button whileTap={{ scale: 0.85 }} />}
+      className='transition-none active:translate-y-0'
+      nativeButton={true}
+    >
+      Tap Animation
+    </Button>
   )
 }
 

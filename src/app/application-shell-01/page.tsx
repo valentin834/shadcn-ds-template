@@ -1,24 +1,3 @@
-import {
-  ArrowRightLeftIcon,
-  CalendarClockIcon,
-  ChartNoAxesCombinedIcon,
-  ChartPieIcon,
-  ChartSplineIcon,
-  ClipboardListIcon,
-  Clock9Icon,
-  CrownIcon,
-  Globe,
-  HashIcon,
-  Camera,
-  LanguagesIcon,
-  Briefcase,
-  SettingsIcon,
-  SquareActivityIcon,
-  MessageCircle,
-  Undo2Icon,
-  UsersIcon
-} from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent } from '@/components/ui/card'
@@ -48,6 +27,27 @@ import {
 import LanguageDropdown from '@/components/shadcn-studio/blocks/dropdown-language'
 import ProfileDropdown from '@/components/shadcn-studio/blocks/dropdown-profile'
 
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import LinkedinIcon from '@/assets/svg/linkedin-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
+import {
+  ChartNoAxesCombinedIcon,
+  ChartSplineIcon,
+  UsersIcon,
+  ChartPieIcon,
+  HashIcon,
+  ArrowRightLeftIcon,
+  Clock9Icon,
+  ClipboardListIcon,
+  CrownIcon,
+  SquareActivityIcon,
+  CalendarClockIcon,
+  Undo2Icon,
+  SettingsIcon,
+  LanguagesIcon
+} from 'lucide-react'
+
 const ApplicationShell = () => {
   return (
     <div className='flex min-h-dvh w-full'>
@@ -58,8 +58,13 @@ const ApplicationShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartNoAxesCombinedIcon /><span>Dashboard</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>5</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartNoAxesCombinedIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      5
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -69,29 +74,55 @@ const ApplicationShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartSplineIcon /><span>Content Performance</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartSplineIcon />
+                      <span>Content Performance</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>Audience Insight</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>Audience Insight</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartPieIcon /><span>Engagement Metrics</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartPieIcon />
+                      <span>Engagement Metrics</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><HashIcon /><span>Hashtag Performance</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>3</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <HashIcon />
+                      <span>Hashtag Performance</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      3
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ArrowRightLeftIcon /><span>Competitor Analysis</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ArrowRightLeftIcon />
+                      <span>Competitor Analysis</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Clock9Icon /><span>Campaign Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Clock9Icon />
+                      <span>Campaign Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ClipboardListIcon /><span>Sentiment Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ClipboardListIcon />
+                      <span>Sentiment Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CrownIcon /><span>Influencer</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CrownIcon />
+                      <span>Influencer</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -101,19 +132,34 @@ const ApplicationShell = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SquareActivityIcon /><span>Real Time Monitoring</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SquareActivityIcon />
+                      <span>Real Time Monitoring</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CalendarClockIcon /><span>Schedule Post & Calendar</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CalendarClockIcon />
+                      <span>Schedule Post & Calendar</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Undo2Icon /><span>Report & Export</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Undo2Icon />
+                      <span>Report & Export</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SettingsIcon /><span>Settings & Integrations</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SettingsIcon />
+                      <span>Settings & Integrations</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>User Management</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>User Management</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -124,8 +170,8 @@ const ApplicationShell = () => {
           <header className='bg-card sticky top-0 z-50 border-b'>
             <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6'>
               <div className='flex items-center gap-4'>
-                <SidebarTrigger className='[&_svg]:!size-5' />
-                <Separator orientation='vertical' className='hidden !h-4 sm:block' />
+                <SidebarTrigger className='[&_svg]:size-5!' />
+                <Separator orientation='vertical' className='hidden h-4! data-vertical:self-center sm:block' />
                 <Breadcrumb className='hidden sm:block'>
                   <BreadcrumbList>
                     <BreadcrumbItem>
@@ -145,17 +191,20 @@ const ApplicationShell = () => {
               <div className='flex items-center gap-1.5'>
                 <LanguageDropdown
                   trigger={
-                    <Button variant='ghost' size='icon'>
+                    <Button variant='ghost' size='icon-lg'>
                       <LanguagesIcon />
                     </Button>
                   }
                 />
                 <ProfileDropdown
                   trigger={
-                    <Button variant='ghost' size='icon' className='size-9.5'>
-                      <Avatar className='size-9.5 rounded-md'>
-                        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
-                        <AvatarFallback>JD</AvatarFallback>
+                    <Button variant='ghost' size='icon-lg'>
+                      <Avatar className='size-[inherit] rounded-[inherit] after:rounded-[inherit]'>
+                        <AvatarImage
+                          src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png'
+                          className='rounded-[inherit]'
+                        />
+                        <AvatarFallback className='rounded-[inherit]'>JD</AvatarFallback>
                       </Avatar>
                     </Button>
                   }
@@ -181,16 +230,16 @@ const ApplicationShell = () => {
               </p>
               <div className='flex items-center gap-5'>
                 <a href='#'>
-                  <Globe className='size-4' />
+                  <FacebookIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <Camera className='size-4' />
+                  <InstagramIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <Briefcase className='size-4' />
+                  <LinkedinIcon className='size-4' />
                 </a>
                 <a href='#'>
-                  <MessageCircle className='size-4' />
+                  <TwitterIcon className='size-4' />
                 </a>
               </div>
             </div>

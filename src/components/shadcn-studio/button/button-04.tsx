@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { ArrowRightIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { ArrowRightIcon } from 'lucide-react'
 
 const ButtonIconHoverDemo = () => {
   return (

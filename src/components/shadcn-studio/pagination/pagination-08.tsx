@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Pagination,
   PaginationContent,
@@ -8,7 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const PaginationWithEllipsisDemo = () => {
   return (
@@ -26,12 +25,20 @@ const PaginationWithEllipsisDemo = () => {
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <Tooltip>
-            <TooltipTrigger render={<PaginationEllipsis />}></TooltipTrigger>
-            <TooltipContent>
-              <p>8 other pages</p>
-            </TooltipContent>
-          </Tooltip>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <span tabIndex={0}>
+                    <PaginationEllipsis />
+                  </span>
+                }
+              />
+              <TooltipContent>
+                <p>8 other pages</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </PaginationItem>
         <PaginationItem>
           <PaginationNext href='#' />

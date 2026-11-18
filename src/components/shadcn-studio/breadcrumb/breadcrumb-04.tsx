@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { DotIcon } from 'lucide-react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,13 +15,13 @@ const BreadcrumbDotSeparatorDemo = () => {
           <BreadcrumbLink href='#'>Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <DotIcon className='size-4' />
+          <span className='bg-muted-foreground block h-1 w-1 rounded-full'></span>
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink href='#'>Documents</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <DotIcon className='size-4' />
+          <span className='bg-muted-foreground block h-1 w-1 rounded-full'></span>
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Add Document</BreadcrumbPage>

@@ -1,10 +1,7 @@
-// @ts-nocheck
 'use client'
 
 import type { CSSProperties } from 'react'
 import { useState, useId } from 'react'
-
-import { ChevronDownIcon, ChevronUpIcon, GripVerticalIcon } from 'lucide-react'
 
 import {
   closestCenter,
@@ -21,9 +18,9 @@ import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable 
 import { CSS } from '@dnd-kit/utilities'
 import type { Cell, ColumnDef, Header, SortingState } from '@tanstack/react-table'
 import { flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
-
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { GripVerticalIcon, ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 
 type Employee = {
   employeeId: number

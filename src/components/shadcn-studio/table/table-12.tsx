@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 
 const VerticalTableDemo = () => {

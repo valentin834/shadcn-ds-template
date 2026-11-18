@@ -1,8 +1,11 @@
-// @ts-nocheck
-import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ChevronFirstIcon, ChevronLeftIcon, ChevronRightIcon, ChevronLastIcon } from 'lucide-react'
+
+const pageItems = Array.from({ length: 10 }, (_, i) => ({
+  label: `Page ${i + 1}`,
+  value: String(i + 1)
+}))
 
 const PaginationWithSelectDemo = () => {
   return (
@@ -20,16 +23,18 @@ const PaginationWithSelectDemo = () => {
         </PaginationItem>
 
         <PaginationItem>
-          <Select defaultValue={String(1)} aria-label='Select page'>
+          <Select items={pageItems} defaultValue={String(1)} aria-label='Select page'>
             <SelectTrigger id='select-page' className='w-fit whitespace-nowrap' aria-label='Select page'>
-              <SelectValue placeholder='Select page' />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {Array.from({ length: 10 }, (_, i) => i + 1).map(page => (
-                <SelectItem key={page} value={String(page)}>
-                  Page {page}
-                </SelectItem>
-              ))}
+              <SelectGroup>
+                {pageItems.map(item => (
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
         </PaginationItem>

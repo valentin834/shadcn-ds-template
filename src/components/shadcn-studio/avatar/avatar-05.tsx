@@ -1,10 +1,9 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 const AvatarFallbackDemo = () => {
   return (
     <Avatar>
-      <AvatarFallback className='text-xs'>HR</AvatarFallback>
+      <AvatarFallback>HR</AvatarFallback>
     </Avatar>
   )
 }

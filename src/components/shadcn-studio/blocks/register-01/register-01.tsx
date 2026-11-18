@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -14,17 +13,17 @@ const Register = () => {
         <AuthBackgroundShape />
       </div>
 
-      <Card className='z-1 w-full border-none shadow-md sm:max-w-lg'>
-        <CardHeader className='gap-6'>
+      <Card className='z-1 w-full gap-6 py-6 sm:max-w-lg'>
+        <CardHeader className='gap-6 px-6'>
           <Logo className='gap-3' />
 
           <div>
-            <CardTitle className='mb-1.5 text-2xl'>Sign Up to Shadcn studio</CardTitle>
+            <CardTitle className='mb-2 text-2xl font-semibold'>Sign Up to Shadcn studio</CardTitle>
             <CardDescription className='text-base'>Ship Faster and Focus on Growth.</CardDescription>
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className='px-6'>
           {/* Register Form */}
           <div className='space-y-4'>
             <RegisterForm />
@@ -38,11 +37,13 @@ const Register = () => {
 
             <div className='flex items-center gap-4'>
               <Separator className='flex-1' />
-              <p>or</p>
+              <p className='text-base'>or</p>
               <Separator className='flex-1' />
             </div>
 
-            <Button variant='ghost' className='w-full' render={<a href='#' />} nativeButton={false}>Sign in with google</Button>
+            <Button variant='ghost' className='w-full' render={<a href='#' />} nativeButton={false}>
+              Sign in with google
+            </Button>
           </div>
         </CardContent>
       </Card>

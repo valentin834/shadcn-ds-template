@@ -1,22 +1,21 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
 
-import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
+import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
+  Combobox,
+  ComboboxContent,
+  ComboboxTrigger,
+  ComboboxEmpty,
+  ComboboxItem,
+  ComboboxList
+} from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
 
 const users = [
   {
@@ -69,61 +68,76 @@ const users = [
   }
 ]
 
+const ComboboxInput = ({
+  className,
+  children,
+  disabled = false,
+  showTrigger = true,
+  avatarSrc,
+  fallback,
+
+  ...props
+}: ComboboxPrimitive.Input.Props & {
+  showTrigger?: boolean
+  avatarSrc?: string
+  fallback?: string
+}) => {
+  return (
+    <InputGroup className={cn('w-auto', className)}>
+      {avatarSrc && (
+        <InputGroupAddon>
+          <Avatar className='size-5'>
+            <AvatarImage src={avatarSrc} alt='User Avatar' />
+            <AvatarFallback>{fallback}</AvatarFallback>
+          </Avatar>
+        </InputGroupAddon>
+      )}
+      <ComboboxPrimitive.Input render={<InputGroupInput disabled={disabled} />} {...props} />
+      <InputGroupAddon align='inline-end'>
+        {showTrigger && (
+          <InputGroupButton
+            size='icon-xs'
+            variant='ghost'
+            render={<ComboboxTrigger />}
+            data-slot='input-group-button'
+            className='data-pressed:bg-transparent'
+            disabled={disabled}
+          />
+        )}
+      </InputGroupAddon>
+      {children}
+    </InputGroup>
+  )
+}
+
 const ComboboxUserDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
-
-  const selectedUser = users.find(user => user.name === value)
+  const [value, setValue] = useState<string>('')
+  const selectedUser = users.find(u => u.name === value)
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>User combobox</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='w-full justify-between' />}>{selectedUser ? (
-                            <span className='flex gap-2'>
-                              <Avatar className='size-6'>
-                                <AvatarImage src={selectedUser.avatar} alt={selectedUser.name} />
-                                <AvatarFallback>{selectedUser.name[0]}</AvatarFallback>
-                              </Avatar>
-                              <span className='font-medium'>{selectedUser.name}</span>
-                            </span>
-                          ) : (
-                            <span className='text-muted-foreground'>Select user</span>
-                          )}<ChevronsUpDownIcon className='text-muted-foreground/80 shrink-0' aria-hidden='true' /></PopoverTrigger>
-        <PopoverContent className='w-[300px] p-0'>
-          <Command>
-            <CommandInput placeholder='Search user...' />
-            <CommandList>
-              <CommandEmpty>No users found.</CommandEmpty>
-              <CommandGroup>
-                {users.map(user => (
-                  <CommandItem
-                    key={user.name}
-                    value={user.name}
-                    onSelect={currentValue => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                  >
-                    <span className='flex items-center gap-2'>
-                      <Avatar className='size-7'>
-                        <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback>{user.name[0]}</AvatarFallback>
-                      </Avatar>
-                      <span className='flex flex-col'>
-                        <span className='font-medium'>{user.name}</span>
-                        <span className='text-muted-foreground text-sm'>{user.email}</span>
-                      </span>
-                    </span>
-                    {value === user.name && <CheckIcon size={16} className='ml-auto' />}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={users} value={value} onValueChange={v => setValue(v ?? '')}>
+        <ComboboxInput placeholder='Select a user' avatarSrc={selectedUser?.avatar} fallback={selectedUser?.name[0]} />
+        <ComboboxContent>
+          <ComboboxEmpty>No users found.</ComboboxEmpty>
+          <ComboboxList>
+            {item => (
+              <ComboboxItem key={item.name} value={item.name} className='flex items-center gap-2'>
+                <Avatar className='size-7'>
+                  <AvatarImage src={item.avatar} alt={item.name} />
+                  <AvatarFallback>{item.name[0]}</AvatarFallback>
+                </Avatar>
+                <span className='flex flex-col'>
+                  <span className='font-medium'>{item.name}</span>
+                  <span className='text-muted-foreground text-sm'>{item.email}</span>
+                </span>
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

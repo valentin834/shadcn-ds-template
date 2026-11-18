@@ -1,19 +1,3 @@
-import {
-  ArrowRightLeftIcon,
-  CalendarClockIcon,
-  ChartNoAxesCombinedIcon,
-  ChartPieIcon,
-  ChartSplineIcon,
-  ClipboardListIcon,
-  Clock9Icon,
-  CrownIcon,
-  HashIcon,
-  SettingsIcon,
-  SquareActivityIcon,
-  Undo2Icon,
-  UsersIcon
-} from 'lucide-react'
-
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Sidebar,
@@ -28,6 +12,21 @@ import {
   SidebarProvider,
   SidebarTrigger
 } from '@/components/ui/sidebar'
+import {
+  ChartNoAxesCombinedIcon,
+  ChartSplineIcon,
+  UsersIcon,
+  ChartPieIcon,
+  HashIcon,
+  ArrowRightLeftIcon,
+  Clock9Icon,
+  ClipboardListIcon,
+  CrownIcon,
+  SquareActivityIcon,
+  CalendarClockIcon,
+  Undo2Icon,
+  SettingsIcon
+} from 'lucide-react'
 
 const SidebarPage = () => {
   return (
@@ -39,8 +38,13 @@ const SidebarPage = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartNoAxesCombinedIcon /><span>Dashboard</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>5</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartNoAxesCombinedIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      5
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -50,29 +54,55 @@ const SidebarPage = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartSplineIcon /><span>Content Performance</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartSplineIcon />
+                      <span>Content Performance</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>Audience Insight</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>Audience Insight</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ChartPieIcon /><span>Engagement Metrics</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ChartPieIcon />
+                      <span>Engagement Metrics</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><HashIcon /><span>Hashtag Performance</span></SidebarMenuButton>
-                    <SidebarMenuBadge className='bg-primary/10 rounded-full'>3</SidebarMenuBadge>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <HashIcon />
+                      <span>Hashtag Performance</span>
+                    </SidebarMenuButton>
+                    <SidebarMenuBadge className='bg-primary/10 top-1/2! right-2 -translate-y-1/2! rounded-full'>
+                      3
+                    </SidebarMenuBadge>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ArrowRightLeftIcon /><span>Competitor Analysis</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ArrowRightLeftIcon />
+                      <span>Competitor Analysis</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Clock9Icon /><span>Campaign Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Clock9Icon />
+                      <span>Campaign Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><ClipboardListIcon /><span>Sentiment Tracking</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <ClipboardListIcon />
+                      <span>Sentiment Tracking</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CrownIcon /><span>Influencer</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CrownIcon />
+                      <span>Influencer</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -82,19 +112,34 @@ const SidebarPage = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SquareActivityIcon /><span>Real Time Monitoring</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SquareActivityIcon />
+                      <span>Real Time Monitoring</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><CalendarClockIcon /><span>Schedule Post & Calendar</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <CalendarClockIcon />
+                      <span>Schedule Post & Calendar</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><Undo2Icon /><span>Report & Export</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <Undo2Icon />
+                      <span>Report & Export</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><SettingsIcon /><span>Settings & Integrations</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <SettingsIcon />
+                      <span>Settings & Integrations</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton render={<a href='#' />}><UsersIcon /><span>User Management</span></SidebarMenuButton>
+                    <SidebarMenuButton render={<a href='#' />}>
+                      <UsersIcon />
+                      <span>User Management</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -103,7 +148,7 @@ const SidebarPage = () => {
         </Sidebar>
         <div className='flex flex-1 flex-col'>
           <header className='bg-card sticky top-0 z-50 flex h-13.75 items-center justify-between gap-6 border-b px-4 py-2 sm:px-6'>
-            <SidebarTrigger className='[&_svg]:!size-5' />
+            <SidebarTrigger className='[&_svg]:size-5!' />
           </header>
           <main className='size-full flex-1 px-4 py-6 sm:px-6'>
             <Card className='h-250'>

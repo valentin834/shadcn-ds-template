@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -7,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -19,9 +19,11 @@ const DropdownMenuRadioGroupDemo = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>With radio</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>With radio</Button>} />
       <DropdownMenuContent className='w-56'>
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
           <DropdownMenuRadioItem value='top'>Top</DropdownMenuRadioItem>

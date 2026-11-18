@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
@@ -14,11 +11,11 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { cn } from '@/lib/utils'
+import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 
 const data: Payment[] = [
   {
@@ -71,7 +68,8 @@ export const columns: ColumnDef<Payment>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />

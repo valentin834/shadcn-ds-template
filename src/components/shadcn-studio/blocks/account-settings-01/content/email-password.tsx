@@ -1,15 +1,12 @@
-// @ts-nocheck
 'use client'
 
 import { useMemo, useState } from 'react'
-
-import { CheckIcon, MailIcon, XIcon, EyeIcon, EyeOffIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { cn } from '@/lib/utils'
+import { MailIcon, EyeOffIcon, EyeIcon, CheckIcon, XIcon } from 'lucide-react'
 
 const requirements = [
   { regex: /.{12,}/, text: 'At least 12 characters' },
@@ -72,61 +69,63 @@ const EmailPass = () => {
             <Label htmlFor='email' className='gap-1'>
               Email<span className='text-destructive'>*</span>
             </Label>
-            <div className='relative'>
-              <Input id='email' type='email' placeholder='Email address' className='peer pr-9' required />
-              <div className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>
+            <InputGroup>
+              <InputGroupInput id='email' type='email' placeholder='Email address' required />
+              <InputGroupAddon align='inline-end' className='pr-2.75'>
                 <MailIcon className='size-4' />
                 <span className='sr-only'>Email</span>
-              </div>
-            </div>
+              </InputGroupAddon>
+            </InputGroup>
           </div>
           <div className='w-full space-y-2'>
             <Label htmlFor='current-password' className='gap-1'>
               Current Password<span className='text-destructive'>*</span>
             </Label>
-            <div className='relative'>
-              <Input
+            <InputGroup>
+              <InputGroupInput
                 id='current-password'
                 type={isVisible ? 'text' : 'password'}
                 placeholder='Password'
-                className='pr-9'
                 required
               />
-              <Button
-                variant='ghost'
-                size='icon'
-                onClick={() => setIsVisible(prevState => !prevState)}
-                className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-              >
-                {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-                <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
-              </Button>
-            </div>
+              <InputGroupAddon align='inline-end' className='pr-1.5'>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  onClick={() => setIsVisible(prevState => !prevState)}
+                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+                >
+                  {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+                  <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
           </div>
           <div className='w-full space-y-2'>
             <Label htmlFor='new-password' className='gap-1'>
-              New PasswordCurrent Password<span className='text-destructive'>*</span>
+              New Password<span className='text-destructive'>*</span>
             </Label>
-            <div className='relative mb-3'>
-              <Input
+            <InputGroup className='mb-3'>
+              <InputGroupInput
                 id='new-password'
                 type={isVisible ? 'text' : 'password'}
                 placeholder='Password'
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                className='pr-9'
                 required
               />
-              <Button
-                variant='ghost'
-                size='icon'
-                onClick={toggleVisibility}
-                className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-              >
-                {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-                <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
-              </Button>
-            </div>
+              <InputGroupAddon align='inline-end' className='pr-1.5'>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  onClick={toggleVisibility}
+                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+                >
+                  {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+                  <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
 
             <div className='mb-4 flex h-1 w-full gap-1'>
               {Array.from({ length: 5 }).map((_, index) => (

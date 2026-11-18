@@ -1,16 +1,3 @@
-// @ts-nocheck
-import {
-  BusIcon,
-  ChartSplineIcon,
-  CircleDollarSignIcon,
-  CoffeeIcon,
-  DollarSignIcon,
-  HandCoinsIcon,
-  HouseIcon,
-  PlaneIcon,
-  ShoppingCartIcon
-} from 'lucide-react'
-
 import { Card, CardContent } from '@/components/ui/card'
 import { MotionPreset } from '@/components/ui/motion-preset'
 
@@ -19,6 +6,17 @@ import type { TransactionItem } from '@/components/shadcn-studio/blocks/bento-gr
 import AccountingOfTransaction from '@/components/shadcn-studio/blocks/bento-grid-15/accounting-of-transaction'
 import type { TransactionRow } from '@/components/shadcn-studio/blocks/bento-grid-15/accounting-of-transaction'
 import ExchangeCurrencyCard from '@/components/shadcn-studio/blocks/bento-grid-15/exchange-currency-card'
+import {
+  ShoppingCartIcon,
+  CircleDollarSignIcon,
+  CoffeeIcon,
+  ChartSplineIcon,
+  BusIcon,
+  HandCoinsIcon,
+  HouseIcon,
+  PlaneIcon,
+  DollarSignIcon
+} from 'lucide-react'
 
 const transactions: TransactionItem[] = [
   {
@@ -263,7 +261,7 @@ const BentoGrid = () => {
               transition={{ duration: 0.5 }}
               className='min-h-140 sm:min-h-130 md:min-h-97.5 xl:col-span-3'
             >
-              <Card className='group bg-muted relative h-full overflow-hidden border-0 shadow-none'>
+              <Card className='group bg-muted relative h-full overflow-hidden shadow-none ring-0'>
                 <CardContent className='flex h-full items-center justify-between gap-6 max-md:flex-col'>
                   <div className='flex flex-col gap-4 md:max-w-70.25'>
                     <MotionPreset

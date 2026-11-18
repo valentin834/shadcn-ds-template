@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -28,12 +27,12 @@ const CardWithTabsDemo = () => {
     <Card className='w-max'>
       <CardContent>
         <Tabs defaultValue={tabs[0].value} className='w-full max-w-sm'>
-          <TabsList className='bg-background w-full justify-start rounded-none border-b p-0'>
+          <TabsList variant='line' className='w-full rounded-none border-b p-0'>
             {tabs.map(tab => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className='bg-background data-[state=active]:border-b-primary h-full rounded-none border-b-2 border-transparent data-[state=active]:shadow-none'
+                className='border-0 group-data-horizontal/tabs:after:-bottom-[0.5px]'
               >
                 {tab.name}
               </TabsTrigger>

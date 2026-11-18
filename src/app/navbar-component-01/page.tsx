@@ -14,17 +14,13 @@ const navigationData = [
     href: '#'
   },
   {
-    title: 'Contacts',
+    title: 'Contact Us',
     href: '#'
   }
 ]
 
 const NavbarPage = () => {
-  return (
-    <div className='h-60'>
-      <Navbar navigationData={navigationData} />
-    </div>
-  )
+  return <Navbar navigationData={navigationData} />
 }
 
 export default NavbarPage

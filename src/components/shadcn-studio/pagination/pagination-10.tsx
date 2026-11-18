@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Pagination,
   PaginationContent,
@@ -11,7 +10,7 @@ import {
 const CardPaginationDemo = () => {
   return (
     <Pagination>
-      <PaginationContent className='rounded-md border p-1 shadow-xs'>
+      <PaginationContent className='rounded-lg border p-1'>
         <PaginationItem>
           <PaginationPrevious href='#' />
         </PaginationItem>

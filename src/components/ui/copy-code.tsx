@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-
-import { Copy, Check } from 'lucide-react'
+import { CheckIcon, CopyIcon } from 'lucide-react'
 
 type CopyCodeProps = {
   code: string
@@ -68,10 +67,10 @@ function CopyCode({ code = 'javascript' }: CopyCodeProps) {
         </pre>
         <button
           onClick={handleCopy}
-          className='bg-muted absolute end-0 bottom-0 rounded-md p-1.5 transition-colors'
+          className='bg-muted absolute inset-e-0 bottom-0 rounded-md p-1.5 transition-colors'
           aria-label={copied ? 'Copied' : 'Copy code'}
         >
-          {copied ? <Check className='size-4' /> : <Copy className='size-4' />}
+          {copied ? <CheckIcon className='size-3' /> : <CopyIcon className='size-3' />}
         </button>
       </div>
     </div>

@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { LogInIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -13,13 +10,14 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { LogInIcon } from 'lucide-react'
 
 const DialogSignInDemo = () => {
   return (
     <Dialog>
       <form>
         <DialogTrigger render={<Button variant='outline' />}>Sign In</DialogTrigger>
-        <DialogContent className='to-card bg-gradient-to-b from-sky-100 to-40% [background-size:100%_101%] sm:max-w-sm dark:from-sky-900'>
+        <DialogContent className='to-card bg-linear-to-b from-sky-100 to-40% bg-size-[100%_101%] dark:from-sky-900'>
           <DialogHeader className='items-center'>
             <div className='mb-4 flex size-12 items-center justify-center rounded-full bg-sky-600/10 sm:mx-0 dark:bg-sky-400/10'>
               <LogInIcon className='size-6 text-sky-600 dark:text-sky-400' />
@@ -39,7 +37,7 @@ const DialogSignInDemo = () => {
               <Input type='password' id='password' name='userpassword' placeholder='Password' />
             </div>
           </form>
-          <DialogFooter className='space-y-2 pt-4 sm:flex-col'>
+          <DialogFooter className='flex-col! space-y-2 pt-4'>
             <Button className='bg-sky-600 text-white hover:bg-sky-600 focus-visible:ring-sky-600 dark:bg-sky-400 dark:hover:bg-sky-400 dark:focus-visible:ring-sky-400'>
               Get Started
             </Button>

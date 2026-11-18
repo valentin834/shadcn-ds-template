@@ -1,11 +1,9 @@
-// @ts-nocheck
-import { ShieldCheckIcon, MapPinIcon, PhoneCallIcon, MailIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 
 import Logo from '@/components/shadcn-studio/logo'
+import { MapPinIcon, PhoneCallIcon, MailIcon, ShieldCheckIcon } from 'lucide-react'
 
 const MegaFooter = () => {
   return (
@@ -33,7 +31,7 @@ const MegaFooter = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <div className='text-xl font-semibold'>My Account</div>
-            <ul className='text-muted-foreground space-y-3'>
+            <ul className='text-muted-foreground **:[a:hover]:text-primary space-y-3'>
               <li>
                 <a href='#'>My Profile</a>
               </li>
@@ -50,7 +48,7 @@ const MegaFooter = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <div className='text-xl font-semibold'>Shop Departments</div>
-            <ul className='text-muted-foreground space-y-3'>
+            <ul className='text-muted-foreground **:[a:hover]:text-primary space-y-3'>
               <li>
                 <a href='#'>Computer & Accessories</a>
               </li>
@@ -68,34 +66,53 @@ const MegaFooter = () => {
           <div className='flex flex-col gap-4'>
             <div className='text-xl font-semibold'>Download App</div>
             <div className='flex flex-col items-center gap-6'>
-              <Button className='rounded-sm bg-black px-6 py-3 hover:bg-black' render={<a href='#' className='flex h-16 w-full max-w-87 items-center gap-4' />} nativeButton={false}><img
-                                              src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/apple-icon.png'
-                                              className='size-8.5 invert'
-                                              alt='App Store'
-                                            /><div>
-                                              <div className='text-xs font-normal text-white'>Download on the</div>
-                                              <div className='text-base font-medium text-white'>App Store</div>
-                                            </div></Button>
-              <Button className='rounded-sm bg-black px-6 py-3 hover:bg-black' render={<a href='#' className='flex h-16 w-full max-w-87 items-center gap-4' />} nativeButton={false}><img
-                                              src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/google-play-icon.png'
-                                              className='size-8.5'
-                                              alt='Google Play Store'
-                                            /><div>
-                                              <div className='text-xs font-normal text-white'>Download on the</div>
-                                              <div className='text-base font-medium text-white'>Google Play</div>
-                                            </div></Button>
+              <Button
+                render={<a href='#' />}
+                className='bg-card-foreground hover:bg-card-foreground! h-16 w-full max-w-87 items-center gap-4 rounded-sm px-6 py-3'
+                nativeButton={false}
+              >
+                <img
+                  src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/apple-icon.png'
+                  className='size-8.5 invert dark:invert-0'
+                  alt='App Store'
+                />
+                <div>
+                  <div className='text-card text-xs font-normal'>Download on the</div>
+                  <div className='text-card text-base font-medium'>App Store</div>
+                </div>
+              </Button>
+              <Button
+                render={<a href='#' />}
+                className='bg-card-foreground hover:bg-card-foreground! h-16 w-full max-w-87 items-center gap-4 rounded-sm px-6 py-3'
+                nativeButton={false}
+              >
+                <img
+                  src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/google-play-icon.png'
+                  className='size-8.5'
+                  alt='Google Play Store'
+                />
+                <div>
+                  <div className='text-card text-xs font-normal'>Download on the</div>
+                  <div className='text-card text-base font-medium'>Google Play</div>
+                </div>
+              </Button>
             </div>
           </div>
         </div>
         <Separator />
         <div className='flex flex-wrap items-center justify-center gap-4 px-24 py-6'>
-          <Badge variant='outline' className='text-base font-normal'>
-            <ShieldCheckIcon className='!size-4.5 text-green-600' /> Secure Payment
+          <Badge variant='outline' className='h-auto py-1 text-base font-normal [&>svg]:size-5!'>
+            <ShieldCheckIcon className='shrink-0 fill-green-600 text-white' /> Secure Payment
           </Badge>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/lemon-squeezy.png'
             alt='Lemon Squeezy'
-            className='h-6'
+            className='h-6 dark:hidden'
+          />
+          <img
+            src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/lemon-squeezy-white.png'
+            alt='Lemon Squeezy'
+            className='hidden h-6 dark:inline-block'
           />
           <img src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/visa.png' alt='Visa' className='h-5' />
           <img src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/paypal.png' alt='Paypal' className='h-5' />

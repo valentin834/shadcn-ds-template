@@ -1,11 +1,10 @@
-// @ts-nocheck
-import { ChevronLeftIcon } from 'lucide-react'
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 import Logo from '@/components/shadcn-studio/logo'
 import AuthBackgroundShape from '@/assets/svg/auth-background-shape'
 import ResetPasswordForm from '@/components/shadcn-studio/blocks/reset-password-01/reset-password-form'
+import { ChevronLeftIcon } from 'lucide-react'
 
 const ResetPassword = () => {
   return (
@@ -14,26 +13,26 @@ const ResetPassword = () => {
         <AuthBackgroundShape />
       </div>
 
-      <Card className='z-1 w-full border-none shadow-md sm:max-w-md'>
-        <CardHeader className='gap-6'>
+      <Card className='z-1 w-full gap-6 py-6 sm:max-w-md'>
+        <CardHeader className='gap-6 px-6'>
           <Logo className='gap-3' />
 
           <div>
-            <CardTitle className='mb-1.5 text-2xl'>Reset Password</CardTitle>
+            <CardTitle className='mb-2 text-2xl font-semibold'>Reset Password</CardTitle>
             <CardDescription className='text-base'>
               Please enter your current password and choose a new password to update your account security.
             </CardDescription>
           </div>
         </CardHeader>
 
-        <CardContent className='space-y-4'>
+        <CardContent className='space-y-4 px-6'>
           {/* ResetPassword Form */}
           <ResetPasswordForm />
 
-          <a href='#' className='group mx-auto flex w-fit items-center gap-2'>
+          <Button variant='ghost' className='group w-full' render={<a href='#' />} nativeButton={false}>
             <ChevronLeftIcon className='size-5 transition-transform duration-200 group-hover:-translate-x-0.5' />
-            <span>Back to login</span>
-          </a>
+            Back to login
+          </Button>
         </CardContent>
       </Card>
     </div>

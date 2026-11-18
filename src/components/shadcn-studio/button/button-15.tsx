@@ -1,13 +1,11 @@
-// @ts-nocheck
-import { Trash2Icon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { Trash2Icon } from 'lucide-react'
 
 const ButtonDiscardDemo = () => {
   return (
     <Button
       variant='outline'
-      className='hover:bg-destructive/10! text-destructive! border-destructive! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40'
+      className='border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive focus-visible:border-destructive focus-visible:ring-destructive/20 dark:border-destructive dark:hover:bg-destructive/10 dark:focus-visible:ring-destructive/40'
     >
       <Trash2Icon />
       Discard

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { BounceButton } from '@/components/ui/bounce-button'
 
 const ButtonBounceHoverDemo = () => {

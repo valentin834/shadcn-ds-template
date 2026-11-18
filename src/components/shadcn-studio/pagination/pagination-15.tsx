@@ -1,8 +1,4 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-
 import { Label } from '@/components/ui/label'
 import {
   Pagination,
@@ -11,26 +7,37 @@ import {
   PaginationItem,
   PaginationLink
 } from '@/components/ui/pagination'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { ChevronFirstIcon, ChevronLeftIcon, ChevronRightIcon, ChevronLastIcon } from 'lucide-react'
 
 const pages = [1, 2, 3]
 
 const TablePaginationDemo = () => {
   const id = useId()
 
+  const selectItems = [
+    { label: '10', value: '10' },
+    { label: '25', value: '25' },
+    { label: '50', value: '50' }
+  ]
+
   return (
     <div className='flex w-full flex-wrap items-center justify-between gap-6 max-sm:justify-center'>
       <div className='flex shrink-0 items-center gap-3'>
         <Label htmlFor={id}>Rows per page</Label>
-        <Select defaultValue='10'>
+        <Select items={selectItems} defaultValue='10'>
           <SelectTrigger id={id} className='w-fit whitespace-nowrap'>
-            <SelectValue placeholder='Select number of results' />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent className='[&_*[role=option]]:pr-8 [&_*[role=option]]:pl-2 [&_*[role=option]>span]:right-2 [&_*[role=option]>span]:left-auto'>
-            <SelectItem value='10'>10</SelectItem>
-            <SelectItem value='25'>25</SelectItem>
-            <SelectItem value='50'>50</SelectItem>
+            <SelectGroup>
+              {selectItems.map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
           </SelectContent>
         </Select>
       </div>
@@ -60,12 +67,20 @@ const TablePaginationDemo = () => {
             </PaginationItem>
           ))}
           <PaginationItem>
-            <Tooltip>
-              <TooltipTrigger render={<PaginationEllipsis />}></TooltipTrigger>
-              <TooltipContent>
-                <p>2 other pages</p>
-              </TooltipContent>
-            </Tooltip>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <span tabIndex={0}>
+                      <PaginationEllipsis />
+                    </span>
+                  }
+                />
+                <TooltipContent>
+                  <p>2 other pages</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </PaginationItem>
           <PaginationItem>
             <PaginationLink href='#' aria-label='Go to next page' size='icon' className='rounded-full'>

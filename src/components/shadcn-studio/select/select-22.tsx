@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -12,34 +11,60 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+const northAmerica = [
+  { label: 'United States', value: '1' },
+  { label: 'Canada', value: '2' },
+  { label: 'Mexico', value: '3' }
+]
+
+const europe = [
+  { label: 'United Kingdom', value: '4' },
+  { label: 'Germany', value: '5' },
+  { label: 'France', value: '6' }
+]
+
+const asia = [
+  { label: 'India', value: '7' },
+  { label: 'Japan', value: '8' },
+  { label: 'China', value: '9' }
+]
+
+const items = [{ label: 'Select framework', value: null }, ...northAmerica, ...europe, ...asia]
+
 const SelectWithOptionsGroupsDemo = () => {
   const id = useId()
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Select with options groups</Label>
-      <Select defaultValue='7'>
+      <Select items={items} defaultValue='7'>
         <SelectTrigger id={id} className='w-full'>
-          <SelectValue placeholder='Select framework' />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>North America</SelectLabel>
-            <SelectItem value='1'>United States</SelectItem>
-            <SelectItem value='2'>Canada</SelectItem>
-            <SelectItem value='3'>Mexico</SelectItem>
+            {northAmerica.map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Europe</SelectLabel>
-            <SelectItem value='4'>United Kingdom</SelectItem>
-            <SelectItem value='5'>Germany</SelectItem>
-            <SelectItem value='6'>France</SelectItem>
+            {europe.map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Asia</SelectLabel>
-            <SelectItem value='7'>India</SelectItem>
-            <SelectItem value='8'>Japan</SelectItem>
-            <SelectItem value='9'>China</SelectItem>
+            {asia.map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

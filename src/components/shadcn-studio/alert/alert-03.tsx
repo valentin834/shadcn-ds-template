@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
+import { Alert, AlertAction, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { CircleAlertIcon, XIcon } from 'lucide-react'
-
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 const AlertClosableDemo = () => {
   const [isActive, setIsActive] = useState(true)
@@ -13,16 +10,16 @@ const AlertClosableDemo = () => {
   if (!isActive) return null
 
   return (
-    <Alert className='flex justify-between'>
+    <Alert>
       <CircleAlertIcon />
-      <div className='flex-1 flex-col justify-center gap-1'>
-        <AlertTitle>New message!</AlertTitle>
-        <AlertDescription>12 unread messages. Tap to see.</AlertDescription>
-      </div>
-      <button className='cursor-pointer' onClick={() => setIsActive(false)}>
-        <XIcon className='size-5' />
-        <span className='sr-only'>Close</span>
-      </button>
+      <AlertTitle>New message!</AlertTitle>
+      <AlertDescription>12 unread messages. Tap to see.</AlertDescription>
+      <AlertAction>
+        <button className='cursor-pointer' onClick={() => setIsActive(false)}>
+          <XIcon className='size-4' />
+          <span className='sr-only'>Close</span>
+        </button>
+      </AlertAction>
     </Alert>
   )
 }

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect } from 'react'
@@ -46,12 +45,12 @@ const CardSpotlightDemo = () => {
   return (
     <div className='h-max w-max'>
       <div className='spotlight-card group bg-border relative overflow-hidden rounded-xl p-px transition-all duration-300 ease-in-out'>
-        <Card className='group-hover:bg-card/90 max-w-80 border-none transition-all duration-300 ease-in-out group-hover:backdrop-blur-[20px]'>
+        <Card className='group-hover:bg-card/90 max-w-80 ring-0 transition-all duration-300 ease-in-out group-hover:backdrop-blur-[20px]'>
           <CardHeader>
             <CardTitle>Hover for the Glow-Up</CardTitle>
           </CardHeader>
           <CardContent>
-            Glide your cursor here and watch magic unfold — an experience designed just for you.
+            Glide your cursor here and watch magic unfold - an experience designed just for you.
           </CardContent>
         </Card>
         <div className='blob absolute top-0 left-0 size-20 rounded-full bg-sky-600/60 opacity-0 blur-2xl transition-all duration-300 ease-in-out dark:bg-sky-400/60' />

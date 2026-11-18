@@ -74,27 +74,27 @@ const colors = [
   {
     value: 'black',
     colorOption:
-      'has-data-[state=checked]:outline-solid has-data-[state=checked]:outline has-data-[state=checked]:outline-offset-2 has-data-[state=checked]:outline-black bg-black'
+      'has-data-checked:outline-solid has-data-checked:outline has-data-checked:outline-offset-2 has-data-checked:outline-black bg-black'
   },
   {
     value: 'green',
     colorOption:
-      'has-data-[state=checked]:outline-solid has-data-[state=checked]:outline has-data-[state=checked]:outline-offset-2 has-data-[state=checked]:outline-green-600 bg-green-600'
+      'has-data-checked:outline-solid has-data-checked:outline has-data-checked:outline-offset-2 has-data-checked:outline-green-600 bg-green-600'
   },
   {
     value: 'orange',
     colorOption:
-      'has-data-[state=checked]:outline-solid has-data-[state=checked]:outline has-data-[state=checked]:outline-offset-2 has-data-[state=checked]:outline-amber-600 bg-amber-600'
+      'has-data-checked:outline-solid has-data-checked:outline has-data-checked:outline-offset-2 has-data-checked:outline-amber-600 bg-amber-600'
   },
   {
     value: 'gray',
     colorOption:
-      'has-data-[state=checked]:outline-solid has-data-[state=checked]:outline has-data-[state=checked]:outline-offset-2 has-data-[state=checked]:outline-gray-200 bg-gray-200 '
+      'has-data-checked:outline-solid has-data-checked:outline has-data-checked:outline-offset-2 has-data-checked:outline-gray-200 bg-gray-200 '
   },
   {
     value: 'blue',
     colorOption:
-      'has-data-[state=checked]:outline-solid has-data-[state=checked]:outline has-data-[state=checked]:outline-offset-2 has-data-[state=checked]:outline-blue-500 bg-blue-500 '
+      'has-data-checked:outline-solid has-data-checked:outline has-data-checked:outline-offset-2 has-data-checked:outline-blue-500 bg-blue-500 '
   }
 ]
 

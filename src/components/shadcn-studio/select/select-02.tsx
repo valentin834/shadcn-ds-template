@@ -1,25 +1,24 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
-import { SelectNative } from '@/components/ui/select-native'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
-const SelectNativePlaceholderDemo = () => {
+const NativeSelectPlaceholderDemo = () => {
   const id = useId()
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Native select with placeholder</Label>
-      <SelectNative id={id} defaultValue=''>
-        <option value='' disabled>
+      <NativeSelect id={id} defaultValue=''>
+        <NativeSelectOption value='' disabled>
           Please select a gender
-        </option>
-        <option value='1'>Male</option>
-        <option value='2'>Female</option>
-        <option value='3'>Other</option>
-      </SelectNative>
+        </NativeSelectOption>
+        <NativeSelectOption value='1'>Male</NativeSelectOption>
+        <NativeSelectOption value='2'>Female</NativeSelectOption>
+        <NativeSelectOption value='3'>Other</NativeSelectOption>
+      </NativeSelect>
     </div>
   )
 }
 
-export default SelectNativePlaceholderDemo
+export default NativeSelectPlaceholderDemo

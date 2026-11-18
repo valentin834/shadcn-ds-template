@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
@@ -9,7 +8,7 @@ const RadioGroupColorsDemo = () => {
         <RadioGroupItem
           value='destructive'
           id='color-destructive'
-          className='border-destructive text-destructive [&_svg]:fill-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive dark:focus-visible:ring-destructive/40'
+          className='border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 data-checked:border-destructive data-checked:bg-destructive dark:data-checked:border-destructive dark:data-checked:bg-destructive'
         />
         <Label htmlFor='color-destructive'>Destructive</Label>
       </div>
@@ -17,7 +16,7 @@ const RadioGroupColorsDemo = () => {
         <RadioGroupItem
           value='success'
           id='color-success'
-          className='border-green-600 text-green-600 focus-visible:border-green-600 focus-visible:ring-green-600/20 dark:border-green-400 dark:text-green-400 dark:focus-visible:border-green-400 dark:focus-visible:ring-green-400/40 [&_svg]:fill-green-600 dark:[&_svg]:fill-green-400'
+          className='border-green-600 focus-visible:border-green-600 focus-visible:ring-green-600/20 data-checked:border-green-600 data-checked:bg-green-600 dark:border-green-400 dark:focus-visible:ring-green-600/40 dark:data-checked:border-green-400 dark:data-checked:bg-green-400'
         />
         <Label htmlFor='color-success'>Success</Label>
       </div>
@@ -25,7 +24,7 @@ const RadioGroupColorsDemo = () => {
         <RadioGroupItem
           value='info'
           id='color-info'
-          className='border-sky-600 text-sky-600 focus-visible:border-sky-600 focus-visible:ring-sky-600/20 dark:border-sky-400 dark:text-sky-400 dark:focus-visible:border-sky-400 dark:focus-visible:ring-sky-400/40 [&_svg]:fill-sky-600 dark:[&_svg]:fill-sky-400'
+          className='border-sky-600 focus-visible:border-sky-600 focus-visible:ring-sky-600/20 data-checked:border-sky-600 data-checked:bg-sky-600 dark:border-sky-400 dark:focus-visible:ring-sky-600/40 dark:data-checked:border-sky-400 dark:data-checked:bg-sky-400'
         />
         <Label htmlFor='color-info'>Info</Label>
       </div>

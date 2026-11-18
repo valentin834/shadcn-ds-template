@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const items = [
@@ -20,10 +19,17 @@ const items = [
 
 const AccordionFilledDemo = () => {
   return (
-    <Accordion type='single' collapsible className='w-full space-y-2' defaultValue='item-1'>
+    <Accordion
+      className='overflow-visibled w-full space-y-2 border-0 [&>*>[data-slot="accordion-content"]]:px-0'
+      defaultValue={['item-1']}
+    >
       {items.map((item, index) => (
-        <AccordionItem key={index} value={`item-${index + 1}`} className='rounded-md border!'>
-          <AccordionTrigger className='bg-accent px-5 data-[state=open]:rounded-b-none'>{item.title}</AccordionTrigger>
+        <AccordionItem
+          key={index}
+          value={`item-${index + 1}`}
+          className='overflow-hidden rounded-lg border! bg-transparent'
+        >
+          <AccordionTrigger className='bg-accent px-5 aria-expanded:rounded-b-none'>{item.title}</AccordionTrigger>
           <AccordionContent className='text-muted-foreground px-5 pt-4'>{item.content}</AccordionContent>
         </AccordionItem>
       ))}

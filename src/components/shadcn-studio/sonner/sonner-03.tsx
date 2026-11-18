@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
-import { TruckIcon } from 'lucide-react'
-
 import { toast } from 'sonner'
-
 import { Button } from '@/components/ui/button'
+import { TruckIcon } from 'lucide-react'
 
 const SonnerWithIconDemo = () => {
   return (

@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
 
-import { Trash2Icon, XIcon, MinusIcon, PlusIcon } from 'lucide-react'
 import { Button as AriaButton, Group, Input as ReactInput, NumberField } from 'react-aria-components'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,6 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
+import { XIcon, Trash2Icon, MinusIcon, PlusIcon } from 'lucide-react'
 
 type CheckoutProps = {
   checkoutItems: {
@@ -74,13 +72,12 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
           <div className='lg:col-span-2'>
             <h2 className='mb-6 text-2xl font-semibold'>Shopping Cart</h2>
             <Card className='shadow-none lg:col-span-2'>
-              <CardHeader className='flex w-full items-center justify-between border-b !pb-2'>
-                <p className='font-medium max-sm:hidden'>Product</p>
-                <div className='flex items-center justify-between gap-20 max-sm:hidden'>
-                  <p className='font-medium max-sm:hidden'>Quantity</p>
-                  <p className='font-medium max-sm:hidden'>Price</p>
+              <CardHeader className='flex w-full items-center justify-between border-b py-2!'>
+                <p className='text-base font-medium max-sm:hidden'>Product</p>
+                <div className='flex items-center justify-between gap-20 max-sm:hidden sm:mr-6 sm:w-full sm:max-w-50'>
+                  <p className='text-base font-medium max-sm:hidden'>Quantity</p>
+                  <p className='text-base font-medium max-sm:hidden'>Price</p>
                 </div>
-
                 <p className='font-medium sm:hidden'>Product Details</p>
               </CardHeader>
               <CardContent>
@@ -94,12 +91,23 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
                     {activeCheckoutItems.map(item => (
                       <div key={item.id} className='flex flex-col gap-3'>
                         <div className='flex gap-6 max-sm:flex-col sm:items-center'>
-                          <div className='flex grow gap-4'>
+                          <div className='flex grow gap-5'>
                             <Popover
                               open={openPopovers[item.id] || false}
                               onOpenChange={open => setOpenPopovers(prev => ({ ...prev, [item.id]: open }))}
                             >
-                              <PopoverTrigger render={<Button variant='ghost' size='icon' className='text-muted-foreground my-auto cursor-pointer' />}><XIcon className='size-6' /><span className='sr-only'>Delete Item</span></PopoverTrigger>
+                              <PopoverTrigger
+                                render={
+                                  <Button
+                                    variant='ghost'
+                                    size='icon'
+                                    className='text-muted-foreground my-auto size-5.5 cursor-pointer'
+                                  />
+                                }
+                              >
+                                <XIcon className='size-4' />
+                                <span className='sr-only'>Delete Item</span>
+                              </PopoverTrigger>
                               <PopoverContent className='w-80'>
                                 <div className='flex flex-col items-center gap-4'>
                                   <div className='flex aspect-square size-12 items-center justify-center rounded-full bg-red-500/10'>
@@ -130,13 +138,15 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
                                 </div>
                               </PopoverContent>
                             </Popover>
-                            <div className='size-18 shrink-0'>
-                              <img src={item.image} alt={item.name} className='size-full rounded-md object-cover' />
-                            </div>
-                            <div className='space-y-4'>
-                              <div className='flex flex-col gap-2'>
-                                <h3>{item.name}</h3>
-                                <p className='text-muted-foreground'>{item.variant}</p>
+                            <div className='flex items-center gap-4'>
+                              <div className='size-18 shrink-0'>
+                                <img src={item.image} alt={item.name} className='size-full rounded-md object-cover' />
+                              </div>
+                              <div className='space-y-4'>
+                                <div className='flex flex-col gap-2'>
+                                  <h3 className='text-base'>{item.name}</h3>
+                                  <p className='text-muted-foreground text-base'>{item.variant}</p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -146,11 +156,12 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
                               onChange={value => handleQuantityChange(item.id, value)}
                               minValue={1}
                               className='w-full max-w-32 space-y-2'
+                              aria-labelledby='increament-decreament'
                             >
-                              <Group className='dark:bg-input/30 border-input data-focus-within:border-ring data-focus-within:ring-ring/50 data-focus-within:has-aria-invalid:ring-destructive/20 dark:data-focus-within:has-aria-invalid:ring-destructive/40 data-focus-within:has-aria-invalid:border-destructive relative inline-flex h-9 w-full min-w-0 items-center overflow-hidden rounded-md border bg-transparent text-base whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-focus-within:ring-[3px] md:text-sm'>
+                              <Group className='dark:bg-input/30 border-input data-focus-within:border-ring data-focus-within:ring-ring/50 data-focus-within:has-aria-invalid:ring-destructive/20 dark:data-focus-within:has-aria-invalid:ring-destructive/40 data-focus-within:has-aria-invalid:border-destructive relative inline-flex h-8 w-full min-w-0 items-center overflow-hidden rounded-md border bg-transparent text-base whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-focus-within:ring-[3px] md:text-sm'>
                                 <AriaButton
                                   slot='decrement'
-                                  className='bg-primary/10 text-muted-foreground hover:bg-accent hover:text-foreground ms-2 flex aspect-square h-5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                                  className='bg-primary/10 text-muted-foreground hover:text-foreground ms-2 flex aspect-square h-5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
                                 >
                                   <MinusIcon className='size-3' />
                                   <span className='sr-only'>Decrement</span>
@@ -158,7 +169,7 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
                                 <ReactInput className='selection:bg-primary selection:text-primary-foreground w-full grow px-3 py-2 text-center tabular-nums outline-none' />
                                 <AriaButton
                                   slot='increment'
-                                  className='bg-primary/10 text-muted-foreground hover:bg-accent hover:text-foreground me-2 flex aspect-square h-5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                                  className='bg-primary/10 text-muted-foreground hover:text-foreground me-2 flex aspect-square h-5 items-center justify-center rounded-sm text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
                                 >
                                   <PlusIcon className='size-3' />
                                   <span className='sr-only'>Increment</span>
@@ -181,30 +192,32 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
 
                     <div className='grid grid-cols-1 items-center justify-between gap-x-11 gap-y-6 sm:grid-cols-2'>
                       {/* Coupon */}
-                      <div className='flex flex-col gap-6'>
+                      <div className='flex h-full flex-col gap-6'>
                         <div className='space-y-1.5'>
                           <p className='text-xl font-semibold'>Coupon Code</p>
-                          <p className='text-muted-foreground'>Enter code to get discount instantly</p>
+                          <p className='text-muted-foreground text-base'>Enter code to get discount instantly</p>
                         </div>
                         <div className='flex gap-3'>
-                          <Input type='text' placeholder='Add discount code' className='h-10' />
-                          <Button size='lg'>Apply</Button>
+                          <Input type='text' placeholder='Add discount code' className='input-lg' />
+                          <Button className='w-21' size='lg'>
+                            Apply
+                          </Button>
                         </div>
                       </div>
 
                       {/* Summary */}
                       <div className='space-y-6'>
                         <div className='flex items-center justify-between gap-3'>
-                          <span className='text-muted-foreground font-medium'>Subtotal</span>
-                          <span className='font-medium'>${subtotal.toFixed(2)}</span>
+                          <span className='text-muted-foreground text-base font-medium'>Subtotal</span>
+                          <span className='text-base font-medium'>${subtotal.toFixed(2)}</span>
                         </div>
                         <div className='flex items-center justify-between gap-3'>
-                          <span className='text-muted-foreground font-medium'>Shipping Cost</span>
-                          <span className='font-medium'>${shippingCost.toFixed(2)}</span>
+                          <span className='text-muted-foreground text-base font-medium'>Shipping Cost</span>
+                          <span className='text-base font-medium'>${shippingCost.toFixed(2)}</span>
                         </div>
                         <div className='flex items-center justify-between gap-3'>
-                          <span className='text-muted-foreground font-medium'>Discount</span>
-                          <span className='font-medium'>${discount.toFixed(2)}</span>
+                          <span className='text-muted-foreground text-base font-medium'>Discount</span>
+                          <span className='text-base font-medium'>${discount.toFixed(2)}</span>
                         </div>
                         <Separator className='mb-3' />
                         <div className='flex items-center justify-between gap-3 text-lg'>
@@ -220,63 +233,80 @@ const Checkout = ({ checkoutItems }: CheckoutProps) => {
           </div>
 
           {/* Right Column - Payment */}
-          <div className='space-y-6'>
-            <h2 className='text-2xl font-semibold'>Payment Info</h2>
-            <Card className='shadow-none'>
+          <div>
+            <Card className='shadow-none lg:mt-14 lg:min-h-144'>
               <CardContent>
-                <CardTitle className='mb-6 text-xl'>Payment Info</CardTitle>
-                <RadioGroup defaultValue={paymentMethod} onValueChange={setPaymentMethod} className='gap-6'>
+                <CardTitle className='mb-6 text-xl leading-6 font-semibold'>Payment Info</CardTitle>
+                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className='gap-6'>
                   <div className='flex items-center gap-2'>
-                    <RadioGroupItem value='credit-card' id='credit-card' className='size-5 [&_svg]:size-3' />
-                    <Label htmlFor='credit-card'>Credit card</Label>
+                    <RadioGroupItem
+                      value='credit-card'
+                      id='credit-card'
+                      className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'
+                    />
+                    <Label htmlFor='credit-card' className='leading-5 font-normal'>
+                      Credit card
+                    </Label>
                   </div>
                   <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='paypal' id='paypal' className='size-5 [&_svg]:size-3' />
-                    <Label htmlFor='paypal'>Paypal</Label>
+                    <RadioGroupItem
+                      value='paypal'
+                      id='paypal'
+                      className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'
+                    />
+                    <Label htmlFor='paypal' className='leading-5 font-normal'>
+                      Paypal
+                    </Label>
                   </div>
                   <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='cod' id='cod' className='size-5 [&_svg]:size-3' />
-                    <Label htmlFor='cod'>Cash on delivery</Label>
+                    <RadioGroupItem
+                      value='cod'
+                      id='cod'
+                      className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'
+                    />
+                    <Label htmlFor='cod' className='leading-5 font-normal'>
+                      Cash on delivery
+                    </Label>
                   </div>
                 </RadioGroup>
-
-                <Separator className='my-6' />
-
-                <div className='space-y-6'>
-                  <div className='space-y-3.5'>
-                    <Label className='text-base font-normal' htmlFor='card-name'>
-                      Name on Card:
-                    </Label>
-                    <Input type='text' placeholder='John Joe' id='card-name' />
-                  </div>
-
-                  <div className='space-y-3.5'>
-                    <Label className='text-base font-normal' htmlFor='card-number'>
-                      Card Number
-                    </Label>
-                    <Input type='text' placeholder='0000 0000 0000 1235' id='card-number' />
-                  </div>
-
-                  <div className='flex gap-6'>
-                    <div className='grow space-y-3.5'>
-                      <Label className='text-base font-normal'>Expiration Date:</Label>
-                      <div className='mt-2 flex gap-3.5'>
-                        <Input type='text' placeholder='25' />
-                        <Input type='text' placeholder='2027' />
-                      </div>
-                    </div>
-                    <div className='space-y-3.5'>
-                      <Label className='text-base font-normal' htmlFor='card-cvv'>
-                        CVV
-                      </Label>
-                      <Input type='text' placeholder='248' id='card-cvv' />
-                    </div>
-                  </div>
-
-                  <Button size='lg' className='w-full'>
-                    Place Order
-                  </Button>
+              </CardContent>
+              <CardContent>
+                <Separator />
+              </CardContent>
+              <CardContent className='space-y-6'>
+                <div className='space-y-2'>
+                  <Label className='text-base leading-6 font-normal' htmlFor='card-name'>
+                    Name on Card:
+                  </Label>
+                  <Input type='text' placeholder='John Joe' id='card-name' />
                 </div>
+
+                <div className='space-y-2'>
+                  <Label className='text-base leading-6 font-normal' htmlFor='card-number'>
+                    Card Number
+                  </Label>
+                  <Input type='text' placeholder='0000 0000 0000 1235' id='card-number' />
+                </div>
+
+                <div className='flex gap-3.5'>
+                  <div className='grow space-y-2'>
+                    <Label className='text-base leading-6 font-normal'>Expiration Date:</Label>
+                    <div className='mt-2 flex gap-3.5'>
+                      <Input type='text' placeholder='25' />
+                      <Input type='text' placeholder='2027' />
+                    </div>
+                  </div>
+                  <div className='space-y-2'>
+                    <Label className='text-base leading-6 font-normal' htmlFor='card-cvv'>
+                      CVV
+                    </Label>
+                    <Input type='text' placeholder='248' id='card-cvv' maxLength={3} />
+                  </div>
+                </div>
+
+                <Button className='w-full' size='lg'>
+                  Place Order
+                </Button>
               </CardContent>
             </Card>
           </div>

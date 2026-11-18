@@ -1,13 +1,5 @@
-// @ts-nocheck
-import { MenuIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -18,6 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 
 import Logo from '@/components/shadcn-studio/logo'
+import { MenuIcon } from 'lucide-react'
 
 export type NavigationSection = {
   title: string
@@ -45,7 +38,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
               <NavigationMenuItem key={navItem.title}>
                 <NavigationMenuLink
                   href={navItem.href}
-                  className='text-muted-foreground hover:text-primary px-3 py-1.5 text-base! font-medium hover:bg-transparent'
+                  className='text-muted-foreground hover:text-primary bg-transparent! px-3 py-1.5 text-base! font-medium'
                 >
                   {navItem.title}
                 </NavigationMenuLink>
@@ -55,14 +48,21 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         </NavigationMenu>
 
         {/* Login Button */}
-        <Button className='rounded-lg max-md:hidden' render={<a href='#' />} nativeButton={false}>Login</Button>
+        <Button size='lg' className='max-md:hidden' render={<a href='#' />} nativeButton={false}>
+          Login
+        </Button>
 
         {/* Navigation for small screens */}
         <div className='flex gap-4 md:hidden'>
-          <Button className='rounded-lg' render={<a href='#' />} nativeButton={false}>Login</Button>
+          <Button size='lg' render={<a href='#' />} nativeButton={false}>
+            Login
+          </Button>
 
           <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant='outline' size='icon' />}><MenuIcon /><span className='sr-only'>Menu</span></DropdownMenuTrigger>
+            <DropdownMenuTrigger render={<Button variant='outline' size='icon-lg' />}>
+              <MenuIcon />
+              <span className='sr-only'>Menu</span>
+            </DropdownMenuTrigger>
             <DropdownMenuContent className='w-56' align='end'>
               {navigationData.map((item, index) => (
                 <DropdownMenuItem key={index}>

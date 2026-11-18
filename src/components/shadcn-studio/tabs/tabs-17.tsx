@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const tabs = [
@@ -27,8 +26,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -43,7 +42,7 @@ const TabsSoftVerticalDemo = () => {
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='data-[state=active]:bg-primary/20 data-[state=active]:text-primary dark:data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20 w-full data-[state=active]:shadow-none! dark:data-[state=active]:border-transparent'
+              className='data-active:bg-primary/20! data-active:text-primary! group-data-vertical/tabs:justify-center data-active:shadow-none! dark:data-active:border-transparent'
             >
               {tab.name}
             </TabsTrigger>

@@ -1,13 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { CheckIcon, CopyIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import { CheckIcon, CopyIcon } from 'lucide-react'
 
 const ButtonCopyStateDemo = () => {
   const [copied, setCopied] = useState<boolean>(false)
@@ -27,8 +24,8 @@ const ButtonCopyStateDemo = () => {
       <span className={cn('transition-all', copied ? 'scale-100 opacity-100' : 'scale-0 opacity-0')}>
         <CheckIcon className='stroke-green-600 dark:stroke-green-400' />
       </span>
-      <span className={cn('absolute left-4 transition-all', copied ? 'scale-0 opacity-0' : 'scale-100 opacity-100')}>
-        <CopyIcon />
+      <span className={cn('absolute left-3 transition-all', copied ? 'scale-0 opacity-0' : 'scale-100 opacity-100')}>
+        <CopyIcon className='size-3.5' />
       </span>
       {copied ? 'Copied!' : 'Copy'}
     </Button>

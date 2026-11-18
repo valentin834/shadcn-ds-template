@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -13,12 +12,11 @@ import {
 const DropdownSlideLeftAnimationDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Slide Left Animation</DropdownMenuTrigger>
-      <DropdownMenuContent
-        align='start'
-        className='data-[state=closed]:slide-out-to-left-20 data-[state=open]:slide-in-from-left-20 data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100 w-56 duration-400'
-      >
-        <DropdownMenuLabel>Settings</DropdownMenuLabel>
+      <DropdownMenuTrigger render={<Button variant='outline'>Slide Left Animation</Button>} />
+      <DropdownMenuContent className='data-open:slide-in-from-left-20 data-open:zoom-in-100 data-open:data-[side=bottom]:slide-in-from-top-0 data-open:data-[side=top]:slide-in-from-bottom-0 data-closed:slide-out-to-left-20 data-closed:zoom-out-100 w-56 duration-400'>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Settings</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           <DropdownMenuItem>My Profile</DropdownMenuItem>
           <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -26,7 +24,9 @@ const DropdownSlideLeftAnimationDemo = () => {
           <DropdownMenuItem>FAQs</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel>Contact</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Contact</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           <DropdownMenuItem>Call Support</DropdownMenuItem>
           <DropdownMenuItem>Chat with us</DropdownMenuItem>

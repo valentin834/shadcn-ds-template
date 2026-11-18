@@ -1,7 +1,6 @@
-// @ts-nocheck
 import { useId } from 'react'
 
-import { SelectNative } from '@/components/ui/select-native'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
 const NativeSelectWithOverlappingLabelDemo = () => {
   const id = useId()
@@ -14,12 +13,12 @@ const NativeSelectWithOverlappingLabelDemo = () => {
       >
         Native select with overlapping label
       </label>
-      <SelectNative id={id}>
-        <option value='1'>Developer</option>
-        <option value='2'>Designer</option>
-        <option value='3'>Manager</option>
-        <option value='4'>QA Engineer</option>
-      </SelectNative>
+      <NativeSelect id={id} className='w-full'>
+        <NativeSelectOption value='1'>Developer</NativeSelectOption>
+        <NativeSelectOption value='2'>Designer</NativeSelectOption>
+        <NativeSelectOption value='3'>Manager</NativeSelectOption>
+        <NativeSelectOption value='4'>QA Engineer</NativeSelectOption>
+      </NativeSelect>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
@@ -7,7 +6,7 @@ const PopoverZoomInDemo = () => {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant='outline' />}>Zoom in</PopoverTrigger>
-      <PopoverContent className='data-[state=open]:!zoom-in-0 data-[state=closed]:!zoom-out-0 origin-center duration-400'>
+      <PopoverContent className='data-open:zoom-in-0! data-closed:zoom-out-0! origin-center duration-400'>
         <div className='grid gap-4'>
           <div className='flex flex-col items-center gap-2'>
             <Avatar className='size-20'>
@@ -19,7 +18,7 @@ const PopoverZoomInDemo = () => {
               <span className='text-sm'>@iamhoward</span>
             </div>
           </div>
-          <div className='from-border/20 via-border to-border/20 mx-auto h-px w-45 bg-gradient-to-r' />
+          <div className='from-border/20 via-border to-border/20 mx-auto h-px w-45 bg-linear-to-r' />
           <p className='text-center text-sm italic'>
             Product Manager @oliviasparks, passionate about building user-centric solutions that solve real problems.
           </p>

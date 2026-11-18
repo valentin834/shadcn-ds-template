@@ -1,8 +1,10 @@
-// @ts-nocheck
-import { Globe, Code2, Camera, MessageCircle } from 'lucide-react'
-
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import GithubIcon from '@/assets/svg/github-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
 
 type TeamMember = {
   image: string
@@ -34,33 +36,31 @@ const Team = ({ teamMembers }: { teamMembers: TeamMember }) => {
           {teamMembers.map((member, index) => (
             <Card
               key={index}
-              className='hover:border-primary overflow-hidden py-0 shadow-none transition-colors duration-300'
+              className='hover:ring-primary overflow-hidden pt-0 shadow-none transition-shadow duration-300'
             >
-              <CardContent className='px-0'>
-                <div className='bg-muted pt-10'>
-                  <img src={member.image} alt={member.alt} className='mx-auto h-60 w-auto' />
+              <div className='bg-muted pt-10'>
+                <img src={member.image} alt={member.alt} className='mx-auto h-60 w-auto' />
+              </div>
+              <CardContent className='space-y-3 text-base'>
+                <CardTitle className='text-lg font-semibold'>{member.name}</CardTitle>
+                <Separator />
+                <div className='text-muted-foreground'>
+                  <p className='mb-1 font-medium'>{member.role}</p>
+                  <p>{member.description}</p>
                 </div>
-                <div className='space-y-3 p-6'>
-                  <CardTitle className='text-lg'>{member.name}</CardTitle>
-                  <Separator />
-                  <div className='text-muted-foreground'>
-                    <p className='mb-1 font-medium'>{member.role}</p>
-                    <p>{member.description}</p>
-                  </div>
-                  <div className='flex gap-3'>
-                    <a href={member.socialLinks.facebook}>
-                      <Globe className='size-5' />
-                    </a>
-                    <a href={member.socialLinks.twitter}>
-                      <MessageCircle className='size-5' />
-                    </a>
-                    <a href={member.socialLinks.github}>
-                      <Code2 className='size-5' />
-                    </a>
-                    <a href={member.socialLinks.instagram}>
-                      <Camera className='size-5' />
-                    </a>
-                  </div>
+                <div className='flex gap-3'>
+                  <a href={member.socialLinks.facebook}>
+                    <FacebookIcon className='size-5' />
+                  </a>
+                  <a href={member.socialLinks.twitter}>
+                    <TwitterIcon className='size-5' />
+                  </a>
+                  <a href={member.socialLinks.github}>
+                    <GithubIcon className='size-5' />
+                  </a>
+                  <a href={member.socialLinks.instagram}>
+                    <InstagramIcon className='size-5' />
+                  </a>
                 </div>
               </CardContent>
             </Card>

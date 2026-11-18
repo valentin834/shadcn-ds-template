@@ -1,11 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { MenuIcon, XIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { XIcon, MenuIcon } from 'lucide-react'
 
 const IconButtonToggleDemo = () => {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -8,6 +7,7 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
@@ -20,9 +20,11 @@ const DropdownMenuCheckboxDemo = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>With checkbox</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>With checkbox</Button>} />
       <DropdownMenuContent className='w-56'>
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
           Status Bar

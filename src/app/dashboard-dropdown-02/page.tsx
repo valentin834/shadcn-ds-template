@@ -10,7 +10,7 @@ const DropdownPage = () => {
         align='center'
         trigger={
           <button className='rounded-full'>
-            <Avatar className='size-10 cursor-pointer'>
+            <Avatar size='lg' className='cursor-pointer'>
               <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' alt='John Doe' />
               <AvatarFallback>JD</AvatarFallback>
             </Avatar>

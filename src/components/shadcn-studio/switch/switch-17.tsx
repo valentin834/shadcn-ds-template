@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
@@ -8,12 +7,8 @@ const SwitchCardDemo = () => {
   const id = useId()
 
   return (
-    <div className='border-input has-data-[state=checked]:border-primary/50 relative flex w-full items-start gap-2 rounded-md border p-4 shadow-xs outline-none'>
-      <Switch
-        id={id}
-        className='order-1 after:absolute after:inset-0 data-[size=default]:h-4 data-[size=default]:w-6 [&_span]:group-data-[size=default]/switch:size-3 data-[state=checked]:[&_span]:translate-x-2.5 data-[state=checked]:[&_span]:rtl:-translate-x-2.5'
-        aria-describedby={`${id}-description`}
-      />
+    <div className='border-input has-data-checked:border-primary/50 relative flex w-full items-start gap-2 rounded-md border p-4 shadow-xs outline-none'>
+      <Switch id={id} size='sm' className='order-1' aria-describedby={`${id}-description`} />
       <div className='flex grow items-center gap-3'>
         <img
           src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/github-icon.png?width=20&height=20&format=auto'

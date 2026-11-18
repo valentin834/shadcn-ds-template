@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { MenuIcon, SearchIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -11,6 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 import Logo from '@/components/shadcn-studio/logo'
+import { SearchIcon, MenuIcon } from 'lucide-react'
 
 type NavigationItem = {
   title: string
@@ -35,7 +33,7 @@ const Navbar = ({ navigationData }: { navigationData: NavigationItem }) => {
             About Us
           </a>
           <a href='#' className='hover:text-primary max-md:hidden'>
-            Contacts
+            Contact Us
           </a>
         </div>
 
@@ -45,7 +43,10 @@ const Navbar = ({ navigationData }: { navigationData: NavigationItem }) => {
             <span className='sr-only'>Search</span>
           </Button>
           <DropdownMenu>
-            <DropdownMenuTrigger className='md:hidden' render={<Button variant='outline' size='icon' />}><MenuIcon /><span className='sr-only'>Menu</span></DropdownMenuTrigger>
+            <DropdownMenuTrigger className='md:hidden' render={<Button variant='outline' size='icon' />}>
+              <MenuIcon />
+              <span className='sr-only'>Menu</span>
+            </DropdownMenuTrigger>
             <DropdownMenuContent className='w-56' align='end'>
               <DropdownMenuGroup>
                 {navigationData.map((item, index) => (

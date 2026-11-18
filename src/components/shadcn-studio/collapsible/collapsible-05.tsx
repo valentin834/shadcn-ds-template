@@ -1,20 +1,25 @@
-// @ts-nocheck
-import { ChevronDownIcon, StarIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import { ChevronDownIcon, StarIcon } from 'lucide-react'
 
 const CollapsibleFilterDemo = () => {
   return (
-    <div className='w-full max-w-[350px] space-y-3'>
+    <div className='w-full max-w-87.5 space-y-3'>
       <Collapsible className='flex flex-col gap-2'>
         <div className='flex items-center justify-between gap-4 px-4'>
           <div className='text-sm font-semibold'>Price Range</div>
-          <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+          <CollapsibleTrigger
+            render={
+              <Button variant='ghost' size='icon-sm'>
+                <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                <span className='sr-only'>Toggle</span>
+              </Button>
+            }
+          />
         </div>
         <CollapsibleContent className='flex flex-col gap-2'>
           <div className='flex items-center justify-between gap-4 px-4'>
@@ -32,10 +37,17 @@ const CollapsibleFilterDemo = () => {
         </CollapsibleContent>
       </Collapsible>
       <Separator />
-      <Collapsible className='flex w-full max-w-[350px] flex-col gap-2'>
+      <Collapsible className='flex w-full max-w-87.5 flex-col gap-2'>
         <div className='flex items-center justify-between gap-4 px-4'>
           <div className='text-sm font-semibold'>Customer Ratings</div>
-          <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+          <CollapsibleTrigger
+            render={
+              <Button variant='ghost' size='icon-sm'>
+                <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                <span className='sr-only'>Toggle</span>
+              </Button>
+            }
+          />
         </div>
         <CollapsibleContent className='flex flex-col gap-2'>
           <div className='flex items-center gap-2 px-4'>
@@ -43,7 +55,7 @@ const CollapsibleFilterDemo = () => {
             <Label htmlFor='rating-4' className='flex shrink-0 items-center gap-1 text-sm font-medium'>
               <span className='flex items-center gap-1'>
                 4
-                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400' />
+                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 text-amber-500 dark:fill-amber-400 dark:stroke-amber-400 dark:text-amber-400' />
               </span>
               & Up
             </Label>
@@ -53,7 +65,7 @@ const CollapsibleFilterDemo = () => {
             <Label htmlFor='rating-3' className='flex shrink-0 items-center gap-1 text-sm font-medium'>
               <span className='flex items-center gap-1'>
                 3
-                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400' />
+                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 text-amber-500 dark:fill-amber-400 dark:stroke-amber-400 dark:text-amber-400' />
               </span>
               & Up
             </Label>
@@ -63,7 +75,7 @@ const CollapsibleFilterDemo = () => {
             <Label htmlFor='rating-2' className='flex shrink-0 items-center gap-1 text-sm font-medium'>
               <span className='flex items-center gap-1'>
                 2
-                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400' />
+                <StarIcon className='size-4 fill-amber-500 stroke-amber-500 text-amber-500 dark:fill-amber-400 dark:stroke-amber-400 dark:text-amber-400' />
               </span>
               & Up
             </Label>
@@ -71,10 +83,17 @@ const CollapsibleFilterDemo = () => {
         </CollapsibleContent>
       </Collapsible>
       <Separator />
-      <Collapsible className='flex w-full max-w-[350px] flex-col gap-2'>
+      <Collapsible className='flex w-full max-w-87.5 flex-col gap-2'>
         <div className='flex items-center justify-between gap-4 px-4'>
           <div className='text-sm font-semibold'>Brand</div>
-          <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+          <CollapsibleTrigger
+            render={
+              <Button variant='ghost' size='icon-sm'>
+                <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                <span className='sr-only'>Toggle</span>
+              </Button>
+            }
+          />
         </div>
         <CollapsibleContent className='flex flex-col gap-2'>
           <div className='flex items-center gap-2 px-4'>
@@ -110,10 +129,17 @@ const CollapsibleFilterDemo = () => {
         </CollapsibleContent>
       </Collapsible>
       <Separator />
-      <Collapsible className='flex w-full max-w-[350px] flex-col gap-2'>
+      <Collapsible className='flex w-full max-w-87.5 flex-col gap-2'>
         <div className='flex items-center justify-between gap-4 px-4'>
           <div className='text-sm font-semibold'>Battery</div>
-          <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+          <CollapsibleTrigger
+            render={
+              <Button variant='ghost' size='icon-sm'>
+                <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                <span className='sr-only'>Toggle</span>
+              </Button>
+            }
+          />
         </div>
         <CollapsibleContent className='flex flex-col gap-2'>
           <div className='flex items-center gap-2 px-4'>

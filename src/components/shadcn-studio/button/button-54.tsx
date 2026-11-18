@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { NeuralButton } from '@/components/ui/neural-button'
 
 const NeuralButtonDemo = () => {

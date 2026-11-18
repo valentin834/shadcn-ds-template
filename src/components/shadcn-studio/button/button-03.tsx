@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { StarIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { StarIcon } from 'lucide-react'
 
 const ButtonRoundedDemo = () => {
   return (

@@ -1,4 +1,3 @@
-// @ts-nocheck
 const BadgeDotDemo = () => {
   return (
     <span className='inline-flex w-fit shrink-0 items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap'>

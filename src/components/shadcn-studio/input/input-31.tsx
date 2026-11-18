@@ -1,11 +1,8 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { SendHorizonalIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
+import { SendHorizonalIcon } from 'lucide-react'
 
 const InputEndInlineButtonDemo = () => {
   const id = useId()
@@ -13,17 +10,19 @@ const InputEndInlineButtonDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with end inline button</Label>
-      <div className='relative'>
-        <Input id={id} type='email' placeholder='Email address' className='pr-9' />
-        <Button
-          variant='ghost'
-          size='icon'
-          className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-        >
-          <SendHorizonalIcon />
-          <span className='sr-only'>Subscribe</span>
-        </Button>
-      </div>
+      <InputGroup>
+        <InputGroupInput id={id} placeholder='Email address' />
+        <InputGroupAddon align='inline-end'>
+          <Button
+            variant='ghost'
+            size='icon'
+            className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+          >
+            <SendHorizonalIcon />
+            <span className='sr-only'>Subscribe</span>
+          </Button>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   )
 }

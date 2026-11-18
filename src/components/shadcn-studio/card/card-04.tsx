@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent, CardHeader, CardDescription, CardTitle } from '@/components/ui/card'
 
 const CardBottomImageDemo = () => {

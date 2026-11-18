@@ -1,9 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState, type ChangeEvent } from 'react'
 
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
 
 const maxLength = 50
@@ -25,20 +24,21 @@ const InputCharacterLimitDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Input with character limit</Label>
-      <div className='relative'>
-        <Input
+      <InputGroup>
+        <InputGroupInput
           id={id}
           type='text'
           placeholder='Username'
           value={value}
           maxLength={maxLength}
           onChange={handleChange}
-          className='peer pr-14'
         />
-        <span className='text-muted-foreground pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-3 text-xs tabular-nums peer-disabled:opacity-50'>
-          {characterCount}/{maxLength}
-        </span>
-      </div>
+        <InputGroupAddon align='inline-end'>
+          <span className='text-muted-foreground pointer-events-none text-xs tabular-nums'>
+            {characterCount}/{maxLength}
+          </span>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
   )
 }

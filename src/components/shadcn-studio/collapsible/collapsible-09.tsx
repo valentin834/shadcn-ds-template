@@ -1,20 +1,16 @@
-// @ts-nocheck
 'use client'
 
 import { useId } from 'react'
 
-import { ChevronDownIcon, CreditCardIcon } from 'lucide-react'
-
 import { usePaymentInputs } from 'react-payment-inputs'
 import images, { type CardImages } from 'react-payment-inputs/images'
-
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
+import { ChevronDownIcon, CreditCardIcon } from 'lucide-react'
 
 const CollapsibleFormDemo = () => {
   const id = useId()
@@ -28,11 +24,18 @@ const CollapsibleFormDemo = () => {
 
   return (
     <div className='w-full space-y-3'>
-      <div className='w-full max-w-md space-y-3 rounded-md border py-4'>
+      <div className='divide-input w-full divide-y rounded-md border py-1 *:py-2'>
         <Collapsible className='flex flex-col gap-2'>
           <div className='flex items-center justify-between gap-4 px-4'>
             <div className='text-sm font-semibold'>Delivery Address</div>
-            <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+            <CollapsibleTrigger
+              render={
+                <Button variant='ghost' size='icon-sm'>
+                  <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                  <span className='sr-only'>Toggle</span>
+                </Button>
+              }
+            />
           </div>
           <CollapsibleContent className='flex flex-col gap-3 px-4 pt-3'>
             <div className='group relative w-full'>
@@ -82,18 +85,26 @@ const CollapsibleFormDemo = () => {
             </div>
           </CollapsibleContent>
         </Collapsible>
-        <Separator />
+
         <Collapsible className='flex flex-col gap-2'>
           <div className='flex items-center justify-between gap-4 px-4'>
             <div className='text-sm font-semibold'>Delivery Options</div>
-            <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+            <CollapsibleTrigger
+              className='group'
+              render={
+                <Button variant='ghost' size='icon-sm'>
+                  <ChevronDownIcon className='text-muted-foreground transition-transform in-data-open:rotate-180' />
+                  <span className='sr-only'>Toggle</span>
+                </Button>
+              }
+            />
           </div>
           <CollapsibleContent className='flex flex-col gap-2 px-4'>
             <RadioGroup className='w-full gap-0 -space-y-px rounded-md pt-3 shadow-xs' defaultValue='2'>
               {items.map(item => (
                 <div
                   key={`${id}-${item.value}`}
-                  className='border-input has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-accent relative flex flex-col gap-4 border p-4 outline-none first:rounded-t-md last:rounded-b-md has-data-[state=checked]:z-10'
+                  className='border-input has-checked:border-primary/50 has-checked:bg-accent relative flex flex-col gap-4 border p-4 outline-none first:rounded-t-md last:rounded-b-md has-checked:z-10'
                 >
                   <div className='flex items-center justify-between gap-1.5'>
                     <div className='flex items-center gap-2'>
@@ -123,11 +134,19 @@ const CollapsibleFormDemo = () => {
             </RadioGroup>
           </CollapsibleContent>
         </Collapsible>
-        <Separator />
+
         <Collapsible className='flex flex-col gap-2'>
           <div className='flex items-center justify-between gap-4 px-4'>
             <div className='text-sm font-semibold'>Payment</div>
-            <CollapsibleTrigger className='group' render={<Button variant='ghost' size='icon-sm' />}><ChevronDownIcon className='text-muted-foreground transition-transform group-data-[state=open]:rotate-180' /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+            <CollapsibleTrigger
+              className='group'
+              render={
+                <Button variant='ghost' size='icon-sm'>
+                  <ChevronDownIcon className='text-muted-foreground transition-transform group-data-panel-open:rotate-180' />
+                  <span className='sr-only'>Toggle</span>
+                </Button>
+              }
+            />
           </div>
           <CollapsibleContent className='flex flex-col gap-2'>
             <div className='w-full space-y-2 px-4 pt-2'>

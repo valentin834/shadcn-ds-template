@@ -1,14 +1,11 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { LoaderCircleIcon, SearchIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { SearchIcon, LoaderCircleIcon } from 'lucide-react'
 
 const users = [
   {
@@ -78,7 +75,10 @@ const PopoverSearchDemo = () => {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><SearchIcon /><span className='sr-only'>Search users</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <SearchIcon />
+        <span className='sr-only'>Search users</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
         <div className='grid gap-4'>
           <div className='relative'>

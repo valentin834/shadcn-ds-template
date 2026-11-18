@@ -1,13 +1,11 @@
-// @ts-nocheck
-import { BookIcon, GiftIcon, HeartIcon } from 'lucide-react'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { BookIcon, HeartIcon, GiftIcon } from 'lucide-react'
 
 const tabs = [
   {
     name: 'Explore',
     value: 'explore',
-    icon: BookIcon,
+    icon: <BookIcon />,
     content: (
       <>
         Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending topics, and hidden gems
@@ -18,7 +16,7 @@ const tabs = [
   {
     name: 'Favorites',
     value: 'favorites',
-    icon: HeartIcon,
+    icon: <HeartIcon />,
     content: (
       <>
         All your <span className='text-foreground font-semibold'>favorites</span> are saved here. Revisit articles,
@@ -29,11 +27,11 @@ const tabs = [
   {
     name: 'Surprise',
     value: 'surprise',
-    icon: GiftIcon,
+    icon: <GiftIcon />,
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -44,9 +42,9 @@ const TabsWithIconDemo = () => {
     <div className='w-full max-w-md'>
       <Tabs defaultValue='explore' className='gap-4'>
         <TabsList>
-          {tabs.map(({ icon: Icon, name, value }) => (
-            <TabsTrigger key={value} value={value} className='flex items-center gap-1 px-2.5 sm:px-3'>
-              <Icon />
+          {tabs.map(({ icon, name, value }) => (
+            <TabsTrigger key={value} value={value} className='gap-1 px-2.5 sm:px-3'>
+              {icon}
               {name}
             </TabsTrigger>
           ))}

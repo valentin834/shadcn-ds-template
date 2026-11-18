@@ -1,12 +1,9 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { MoonIcon, SunIcon } from 'lucide-react'
-
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
+import { MoonIcon, SunIcon } from 'lucide-react'
 
 const SwitchIconLabelDemo = () => {
   const [checked, setChecked] = useState<boolean>(true)

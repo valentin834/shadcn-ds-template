@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useRef } from 'react'
@@ -46,7 +45,7 @@ const Card3dDemo = () => {
       const imageTransform: CardTransform = {
         rotateX: -relativeY * 0.025,
         rotateY: relativeX * 0.025,
-        scale: 1.05
+        scale: 1.02
       }
 
       return { cardTransform, imageTransform }
@@ -105,11 +104,11 @@ const Card3dDemo = () => {
   }, [])
 
   return (
-    <Card ref={cardRef} className='max-w-md'>
+    <Card ref={cardRef} className='max-w-md border'>
       <CardHeader>
         <CardTitle>Dynamic 3D Hover Card</CardTitle>
       </CardHeader>
-      <CardContent className='space-y-6 text-sm'>
+      <CardContent className='space-y-6'>
         <img
           ref={imageRef}
           src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-10.png?width=350&format=auto'

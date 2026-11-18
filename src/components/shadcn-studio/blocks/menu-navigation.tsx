@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { ReactNode } from 'react'
 
 import {
@@ -35,12 +34,13 @@ export type NavigationSection = {
 type MenuNavigationProps = {
   navigationData: NavigationSection[]
   className?: string
+  align?: 'start' | 'center' | 'end'
 }
 
-const MenuNavigation = ({ navigationData, className }: MenuNavigationProps) => {
+const MenuNavigation = ({ navigationData, className, align = 'start' }: MenuNavigationProps) => {
   return (
-    <NavigationMenu viewport={false} className={className}>
-      <NavigationMenuList className='flex-wrap justify-start gap-0'>
+    <NavigationMenu className={className} align={align}>
+      <NavigationMenuList className='flex-wrap justify-start gap-1.5'>
         {navigationData.map(navItem => {
           if (navItem.href) {
             // Root link item
@@ -50,7 +50,7 @@ const MenuNavigation = ({ navigationData, className }: MenuNavigationProps) => {
                   href={navItem.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    'text-muted-foreground hover:text-primary dark:hover:bg-accent/50 bg-transparent px-3 py-1.5 text-base!'
+                    'text-muted-foreground hover:text-primary focus:text-primary dark:hover:bg-accent/50 bg-transparent! px-3 py-1.5 text-base!'
                   )}
                 >
                   {navItem.title}
@@ -62,10 +62,10 @@ const MenuNavigation = ({ navigationData, className }: MenuNavigationProps) => {
           // Section with dropdown
           return (
             <NavigationMenuItem key={navItem.title}>
-              <NavigationMenuTrigger className='dark:data-[state=open]:hover:bg-accent/50 text-muted-foreground hover:text-primary dark:hover:bg-accent/50 bg-transparent px-3 py-1.5 text-base [&>svg]:size-4'>
+              <NavigationMenuTrigger className='dark:data-open:hover:bg-accent/50 text-muted-foreground hover:text-primary focus:text-primary dark:hover:bg-accent/50 bg-transparent px-3 py-1.5 text-base [&>svg]:size-4'>
                 {navItem.title}
               </NavigationMenuTrigger>
-              <NavigationMenuContent className='data-[motion=from-start]:slide-in-from-left-30! data-[motion=to-start]:slide-out-to-left-30! data-[motion=from-end]:slide-in-from-right-30! data-[motion=to-end]:slide-out-to-right-30! absolute w-auto'>
+              <NavigationMenuContent className='data-[motion=from-start]:slide-in-from-left-30! data-[motion=to-start]:slide-out-to-left-30! data-[motion=from-end]:slide-in-from-right-30! data-[motion=to-end]:slide-out-to-right-30! w-auto'>
                 <ul className='grid w-38 gap-4'>
                   <li>
                     {navItem.items?.map(item => (

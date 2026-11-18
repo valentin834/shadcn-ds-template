@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Alert, AlertTitle } from '@/components/ui/alert'
 
 const AlertWithoutIconDemo = () => {

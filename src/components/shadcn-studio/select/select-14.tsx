@@ -1,8 +1,14 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'Tesla', value: '1' },
+  { label: 'BMW', value: '2' },
+  { label: 'Audi', value: '3' },
+  { label: 'Mercedes-Benz', value: '4' }
+]
 
 const SelectInvalidState = () => {
   const id = useId()
@@ -10,15 +16,16 @@ const SelectInvalidState = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Select with error</Label>
-      <Select defaultValue='1'>
+      <Select items={items} defaultValue='1'>
         <SelectTrigger id={id} aria-invalid className='w-full'>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='1'>Tesla</SelectItem>
-          <SelectItem value='2'>BMW</SelectItem>
-          <SelectItem value='3'>Audi</SelectItem>
-          <SelectItem value='4'>Mercedes-Benz</SelectItem>
+        <SelectContent className='p-1'>
+          {items.map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
       <p className='text-destructive mt-2 text-xs' role='alert' aria-live='polite'>

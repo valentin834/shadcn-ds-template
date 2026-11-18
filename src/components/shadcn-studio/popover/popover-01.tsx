@@ -1,11 +1,16 @@
-// @ts-nocheck
-import { StarIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverDescription
+} from '@/components/ui/popover'
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
+import { StarIcon } from 'lucide-react'
 
 const ratings = {
   1: 0,
@@ -22,17 +27,22 @@ const PopoverRatingsDemo = () => {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' size='icon' />}><StarIcon /><span className='sr-only'>Ratings & reviews</span></PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' size='icon' />}>
+        <StarIcon />
+        <span className='sr-only'>Ratings & reviews</span>
+      </PopoverTrigger>
       <PopoverContent className='w-80'>
         <div className='grid gap-4'>
-          <div className='space-y-1'>
+          <PopoverHeader>
             <div className='flex items-center gap-1'>
               <span className='text-xl font-semibold'>{averageRating}</span>
               <StarIcon className='size-5 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400' />
             </div>
-            <div className='text-sm font-medium'>Total {totalReviews} reviews</div>
-            <p className='text-muted-foreground text-sm'>All reviews are from genuine customers.</p>
-          </div>
+            <PopoverTitle className='text-sm font-medium'>Total {totalReviews} reviews</PopoverTitle>
+            <PopoverDescription className='text-muted-foreground text-sm'>
+              All reviews are from genuine customers.
+            </PopoverDescription>
+          </PopoverHeader>
           <div className='grid'>
             <div className='flex items-center justify-between'>
               <Badge variant='secondary' className='rounded-sm'>

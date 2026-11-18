@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { motion } from 'motion/react'
@@ -29,7 +28,7 @@ const FAQ = ({ faqItems }: FAQComponentProps) => {
             transition={{ duration: 0.7 }}
           >
             <div className='space-y-4'>
-              <Badge variant='outline' className='text-sm font-normal'>
+              <Badge variant='outline' className='h-auto text-sm font-normal'>
                 FAQS
               </Badge>
               <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>Discover the Most common Questions</h2>
@@ -57,10 +56,10 @@ const FAQ = ({ faqItems }: FAQComponentProps) => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 + index * 0.15 }}
                 >
-                  <Card className='shadow-none hover:shadow-lg'>
-                    <CardContent className='space-y-2'>
+                  <Card className='hover:shadow-lg'>
+                    <CardContent className='space-y-4'>
                       <h3 className='text-xl font-medium'>{item.question}</h3>
-                      <p className='text-muted-foreground leading-relaxed'>{item.answer}</p>
+                      <p className='text-muted-foreground text-base leading-relaxed'>{item.answer}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -71,9 +70,20 @@ const FAQ = ({ faqItems }: FAQComponentProps) => {
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.9 + faqItems.length * 0.15 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.9 + faqItems.length * 0.15
+                }}
               >
-                <Button variant='link' className='h-auto p-0 text-base underline' render={<a href='#' />} nativeButton={false}>Check All Common Questions</Button>
+                <Button
+                  size='sm'
+                  variant='link'
+                  className='px-0 text-base underline'
+                  render={<a href='#' />}
+                  nativeButton={false}
+                >
+                  Check All Common Questions
+                </Button>
               </motion.div>
             </div>
           </motion.div>

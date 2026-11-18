@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { ChevronDownIcon, ChevronUpIcon, ChevronsUpIcon, EqualIcon, ChevronsDownIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,31 +7,32 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { ChevronsUpIcon, ChevronUpIcon, EqualIcon, ChevronDownIcon, ChevronsDownIcon } from 'lucide-react'
 
 const listItems = [
   {
-    icon: ChevronsUpIcon,
-    color: 'text-destructive',
+    icon: <ChevronsUpIcon />,
+    color: '*:[svg]:text-destructive',
     priority: 'Highest'
   },
   {
-    icon: ChevronUpIcon,
-    color: 'text-destructive/60',
+    icon: <ChevronUpIcon />,
+    color: '*:[svg]:text-destructive/60',
     priority: 'High'
   },
   {
-    icon: EqualIcon,
-    color: 'text-amber-600 dark:text-amber-400',
+    icon: <EqualIcon />,
+    color: '*:[svg]:text-amber-600 dark:*:[svg]:text-amber-400',
     priority: 'Medium'
   },
   {
-    icon: ChevronDownIcon,
-    color: 'text-green-600/60 dark:text-green-400/60',
+    icon: <ChevronDownIcon />,
+    color: '*:[svg]:text-green-600/60 dark:*:[svg]:text-green-400/60',
     priority: 'Low'
   },
   {
-    icon: ChevronsDownIcon,
-    color: 'text-green-600 dark:text-green-400',
+    icon: <ChevronsDownIcon />,
+    color: '*:[svg]:text-green-600 dark:*:[svg]:text-green-400',
     priority: 'Lowest'
   }
 ]
@@ -42,13 +40,15 @@ const listItems = [
 const DropdownMenuBorderedMenuDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Bordered Menu</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Bordered Menu</Button>} />
       <DropdownMenuContent className='w-56 shadow-none'>
-        <DropdownMenuLabel>Task priority</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Task priority</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           {listItems.map((item, index) => (
             <DropdownMenuItem key={index}>
-              <item.icon className={item.color} />
+              <span className={item.color}>{item.icon}</span>
               {item.priority}
             </DropdownMenuItem>
           ))}

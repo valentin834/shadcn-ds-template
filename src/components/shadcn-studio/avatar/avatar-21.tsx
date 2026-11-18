@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const avatars = [
   {
@@ -26,15 +25,15 @@ const avatars = [
 
 const AvatarGroupPopularityIndicatorDemo = () => {
   return (
-    <div className='bg-background flex flex-wrap items-center justify-center rounded-full border p-1 shadow-sm'>
-      <div className='flex -space-x-1'>
+    <div className='bg-background flex w-fit flex-wrap items-center justify-center rounded-full border p-1 shadow-sm'>
+      <AvatarGroup className='flex -space-x-1'>
         {avatars.map((avatar, index) => (
-          <Avatar key={index} className='ring-background size-6 ring-2'>
+          <Avatar key={index} size='sm'>
             <AvatarImage src={avatar.src} alt={avatar.name} />
-            <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>
+            <AvatarFallback>{avatar.fallback}</AvatarFallback>
           </Avatar>
         ))}
-      </div>
+      </AvatarGroup>
       <p className='text-muted-foreground px-2 text-xs'>
         Loved by <strong className='text-foreground font-medium'>10K+</strong> developers.
       </p>

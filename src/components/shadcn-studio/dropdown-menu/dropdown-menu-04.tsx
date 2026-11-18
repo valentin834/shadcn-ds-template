@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -46,9 +45,11 @@ const listItems = [
 const DropdownMenuItemActionDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Menu item with action</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Menu item with action</Button>} />
       <DropdownMenuContent className='w-91'>
-        <DropdownMenuLabel>Contact List</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Contact List</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           {listItems.map((item, index) => (
             <DropdownMenuItem key={index} className='justify-between'>
@@ -65,7 +66,7 @@ const DropdownMenuItemActionDemo = () => {
               </Button>
             </DropdownMenuItem>
           ))}
-          <DropdownMenuItem>
+          <DropdownMenuItem className='not-data-[variant=destructive]:focus:**:text-primary-foreground'>
             <Button className='grow'>Add Contact</Button>
           </DropdownMenuItem>
         </DropdownMenuGroup>

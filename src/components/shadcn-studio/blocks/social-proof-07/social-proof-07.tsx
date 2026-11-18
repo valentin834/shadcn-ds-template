@@ -1,10 +1,9 @@
-// @ts-nocheck
-import type { ComponentType } from 'react'
+import type { ReactElement } from 'react'
 
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 
 type MetricItem = {
-  icon: ComponentType
+  icon: ReactElement
   value: string
   label: string
 }
@@ -26,8 +25,10 @@ const SocialProof = ({ metrics }: { metrics: MetricItem[] }) => {
             {metrics.map((metric, index) => (
               <Card key={index}>
                 <CardContent className='[&>svg]:text-muted-foreground flex flex-col items-center [&>svg]:size-7'>
-                  <metric.icon />
-                  <CardTitle className='mt-4 mb-3 text-2xl md:text-3xl lg:text-4xl'>{metric.value}</CardTitle>
+                  {metric.icon}
+                  <CardTitle className='mt-4 mb-3 text-2xl leading-10 font-semibold md:text-3xl lg:text-4xl'>
+                    {metric.value}
+                  </CardTitle>
                   <CardDescription className='text-xl font-medium'>{metric.label}</CardDescription>
                 </CardContent>
               </Card>

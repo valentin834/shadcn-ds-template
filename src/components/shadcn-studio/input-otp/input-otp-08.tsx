@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'

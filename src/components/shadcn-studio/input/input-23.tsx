@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Input } from '@/components/ui/input'
@@ -15,7 +14,7 @@ const InputOverlappingLabelDemo = () => {
       >
         Input with overlapping label
       </Label>
-      <Input id={id} type='email' placeholder='Email address' className='dark:bg-background h-10' />
+      <Input id={id} type='email' placeholder='Email address' className='dark:bg-background h-9' />
     </div>
   )
 }

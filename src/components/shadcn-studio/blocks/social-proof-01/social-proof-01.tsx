@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { CircleCheckIcon } from 'lucide-react'
 
 type Feature = {
@@ -23,8 +22,8 @@ const SocialProof = ({ features }: { features: Feature[] }) => {
 
             <ul className='mt-11 space-y-6 text-lg font-medium'>
               {features.map((feature, index) => (
-                <li key={index} className='flex gap-2'>
-                  <CircleCheckIcon className='mt-0.75 size-5' />
+                <li key={index} className='flex items-center gap-2'>
+                  <CircleCheckIcon className='size-5' />
                   <span>{feature.title}</span>
                 </li>
               ))}
@@ -35,12 +34,12 @@ const SocialProof = ({ features }: { features: Feature[] }) => {
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/social-proof/image-1.png'
               alt='Social Widget'
-              className='w-142 object-contain dark:hidden'
+              className='w-142 object-contain lg:max-xl:w-115 dark:hidden'
             />
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/social-proof/image-1-dark.png'
               alt='Social Widget'
-              className='hidden w-142 object-contain dark:inline-block'
+              className='hidden w-142 object-contain lg:max-xl:w-115 dark:inline-block'
             />
           </div>
         </div>

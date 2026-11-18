@@ -1,6 +1,4 @@
-// @ts-nocheck
-import { UserIcon, SettingsIcon, BellIcon, LogOutIcon, CreditCardIcon } from 'lucide-react'
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,26 +8,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { UserIcon, SettingsIcon, CreditCardIcon, BellIcon, LogOutIcon } from 'lucide-react'
 
 const listItems = [
   {
-    icon: UserIcon,
+    icon: <UserIcon />,
     property: 'Profile'
   },
   {
-    icon: SettingsIcon,
+    icon: <SettingsIcon />,
     property: 'Settings'
   },
   {
-    icon: CreditCardIcon,
+    icon: <CreditCardIcon />,
     property: 'Billing'
   },
   {
-    icon: BellIcon,
+    icon: <BellIcon />,
     property: 'Notifications'
   },
   {
-    icon: LogOutIcon,
+    icon: <LogOutIcon />,
     property: 'Sign Out'
   }
 ]
@@ -37,13 +36,22 @@ const listItems = [
 const DropdownMenuUserMenuDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='secondary' size='icon' className='overflow-hidden rounded-full' />}><img src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' /></DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        render={
+          <Button variant='ghost' size='icon' className='rounded-full'>
+            <Avatar>
+              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />
+              <AvatarFallback className='text-xs'>HR</AvatarFallback>
+            </Avatar>
+          </Button>
+        }
+      />
       <DropdownMenuContent className='w-56'>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
           {listItems.map((item, index) => (
-            <DropdownMenuItem key={index}>
-              <item.icon />
+            <DropdownMenuItem key={index} className='*:[svg]:text-muted-foreground'>
+              {item.icon}
               <span className='text-popover-foreground'>{item.property}</span>
             </DropdownMenuItem>
           ))}

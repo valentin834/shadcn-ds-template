@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-
-import { X } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { MotionPreset } from '@/components/ui/motion-preset'
+import { XIcon } from 'lucide-react'
 
 const AnnouncementBannerPage = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -59,7 +57,7 @@ const AnnouncementBannerPage = () => {
           />
         </MotionPreset>
 
-        <div className='relative container mx-auto flex flex-wrap items-center justify-between gap-6 px-7 py-4 max-md:justify-center max-md:gap-4'>
+        <div className='relative container mx-auto flex flex-wrap items-center justify-between gap-6 px-7 py-4.75 max-md:justify-center max-md:gap-4'>
           {/* Left Section - Spooky Deals Text */}
           <p
             className='text-3xl font-bold tracking-wide text-white uppercase max-md:text-3xl max-sm:text-2xl'
@@ -234,14 +232,14 @@ const AnnouncementBannerPage = () => {
           </div>
 
           {/* Right Section - Discount & CTA */}
-          <div className='flex flex-col justify-center gap-1'>
+          <div className='flex flex-col items-center justify-center gap-1'>
             <p
               className='bg-linear-to-b from-yellow-100 to-yellow-400 bg-clip-text text-center text-4xl leading-[88%] text-transparent uppercase max-sm:text-3xl'
               style={{ fontFamily: 'Bebas Neue' }}
             >
               Up To 50% Off
             </p>
-            <Button className='h-6.5 bg-linear-to-b from-yellow-100 to-yellow-400 text-xs text-black hover:from-yellow-200 hover:to-yellow-500'>
+            <Button className='h-6 rounded-md bg-linear-to-b from-yellow-100 to-yellow-400 px-2! text-xs text-black hover:from-yellow-200 hover:to-yellow-500'>
               Shop & Save Today
             </Button>
           </div>
@@ -249,12 +247,12 @@ const AnnouncementBannerPage = () => {
 
         {/* Close Button */}
         <Button
-          variant='ghost'
+          variant='link'
           size='icon'
-          className='absolute top-2 right-1 h-8 w-8 text-white hover:bg-cyan-700 hover:text-white xl:right-2'
+          className='absolute top-1 right-1 size-7.5 text-white hover:bg-cyan-700 hover:text-white xl:top-3 xl:right-3'
           onClick={() => setIsVisible(false)}
         >
-          <X className='size-5' />
+          <XIcon className='size-5' />
           <span className='sr-only'>Close</span>
         </Button>
       </div>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 
@@ -22,16 +21,14 @@ const AppIntegration = ({ integrations }: { integrations: Integration }) => {
               Harness the potential of seamless integration to boost your sales performance! Discover how connecting
               your tools can lead to greater efficiency and impressive results.
             </p>
-            <Button size='lg' className='rounded-lg text-base'>
-              Check all app
-            </Button>
+            <Button size='lg'>Check all app</Button>
           </div>
 
           <div className='space-y-6'>
             {integrations.map((integration, index) => (
-              <Card key={index} className='bg-transparent py-4 shadow-none'>
-                <CardContent className='flex items-center gap-6'>
-                  <div className='flex size-17 shrink-0 items-center justify-center rounded-md border'>
+              <Card key={index} className='bg-transparent shadow-none'>
+                <CardContent className='flex items-center gap-4'>
+                  <div className='flex size-16 shrink-0 items-center justify-center rounded-md border'>
                     <img src={integration.image} alt={integration.alt} className='size-10' />
                   </div>
                   <div>

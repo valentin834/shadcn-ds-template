@@ -1,7 +1,4 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { DotIcon } from 'lucide-react'
 
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import { Label } from '@/components/ui/label'
@@ -19,7 +16,7 @@ const InputOTPCustomSeparatorDemo = () => {
           <InputOTPSlot index={2} />
         </InputOTPGroup>
         <div role='separator' className='text-muted-foreground'>
-          <DotIcon />
+          <span className='bg-muted-foreground block h-1 w-1 rounded-full'></span>
         </div>
         <InputOTPGroup>
           <InputOTPSlot index={3} />

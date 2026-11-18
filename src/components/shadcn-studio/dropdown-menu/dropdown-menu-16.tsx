@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -23,11 +22,16 @@ const DropdownMenuSlideUpAnimationDemo = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Slide Up Animation</DropdownMenuTrigger>
-      <DropdownMenuContent className='data-[state=closed]:slide-out-to-left-0 data-[state=open]:slide-in-from-left-0 data-[state=closed]:slide-out-to-bottom-20 data-[state=open]:slide-in-from-bottom-20 data-[state=closed]:zoom-out-100 w-56 duration-400'>
-        <DropdownMenuLabel>Apps notification</DropdownMenuLabel>
+      <DropdownMenuTrigger render={<Button variant='outline'>Slide Up Animation</Button>} />
+      <DropdownMenuContent
+        align='center'
+        className='data-open:slide-in-from-left-0 data-open:data-[side=bottom]:slide-in-from-bottom-20 data-open:data-[side=top]:slide-in-from-bottom-20 data-closed:slide-out-to-bottom-20 data-closed:slide-out-to-left-0 data-closed:zoom-out-100 w-56 duration-400'
+      >
         <DropdownMenuGroup>
-          <DropdownMenuItem className='justify-between' onSelect={event => event.preventDefault()}>
+          <DropdownMenuLabel>Apps notification</DropdownMenuLabel>
+        </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <DropdownMenuItem className='justify-between' closeOnClick={false}>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/dropdown/google.png'
               alt='google'
@@ -36,7 +40,7 @@ const DropdownMenuSlideUpAnimationDemo = () => {
             <span className='flex-1'>Google</span>
             <Switch id='airplane-mode' checked={googleSwitch} onCheckedChange={setGoogleSwitch} />
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between' closeOnClick={false}>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/dropdown/twitter.png'
               alt='twitter'
@@ -45,7 +49,7 @@ const DropdownMenuSlideUpAnimationDemo = () => {
             <span className='flex-1'>Twitter</span>
             <Switch id='airplane-mode' checked={twitterSwitch} onCheckedChange={setTwitterSwitch} />
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between' closeOnClick={false}>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/dropdown/linkedin.png'
               alt='linkedin'
@@ -54,7 +58,7 @@ const DropdownMenuSlideUpAnimationDemo = () => {
             <span className='flex-1'>Linkedin</span>
             <Switch id='airplane-mode' checked={linkedinSwitch} onCheckedChange={setLinkedinSwitch} />
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between' closeOnClick={false}>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/dropdown/dribbble.png'
               alt='dribbble'
@@ -63,7 +67,7 @@ const DropdownMenuSlideUpAnimationDemo = () => {
             <span className='flex-1'>Dribbble</span>
             <Switch id='airplane-mode' checked={dribbbleSwitch} onCheckedChange={setDribbbleSwitch} />
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between' closeOnClick={false}>
             <img
               src='https://cdn.shadcnstudio.com/ss-assets/components/dropdown/behance.png'
               alt='behance'

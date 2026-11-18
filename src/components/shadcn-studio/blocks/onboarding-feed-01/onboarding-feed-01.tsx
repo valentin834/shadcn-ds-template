@@ -1,40 +1,37 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { CircleDashedIcon, LogIn, ImportIcon, PlusIcon, CircleCheckIcon } from 'lucide-react'
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
+import { LogInIcon, ImportIcon, PlusIcon, CircleCheckIcon, CircleDashedIcon } from 'lucide-react'
 
 const items = [
   {
     title: 'Sign up and create an account',
     content: `To get started, log in with your organization account from your company.`,
-    icon: LogIn,
+    icon: <LogInIcon />,
     label: 'Sign up'
   },
   {
     title: 'Import your data',
     content: 'Connect your database to the new workspace by using one of 20+ database connectors.',
-    icon: ImportIcon,
+    icon: <ImportIcon />,
     label: 'Import'
   },
   {
     title: 'Create your first report',
     content: 'Use our drag-and-drop report builder to create your first report and share it with your team.',
-    icon: PlusIcon,
+    icon: <PlusIcon />,
     label: 'Create'
   }
 ]
 
 function OnboardingFeed() {
-  const [active, setActive] = useState<string>('item-1')
+  const [active, setActive] = useState<string[]>(['item-1'])
   const [completed, setCompleted] = useState<Set<number>>(new Set())
 
-  const handleOpenChange = (val: string) => {
+  const handleOpenChange = (val: string[]) => {
     setActive(val)
   }
 
@@ -50,32 +47,29 @@ function OnboardingFeed() {
     const nextIndex = index + 1
 
     if (nextIndex < items.length) {
-      setActive(`item-${nextIndex + 1}`)
+      setActive([`item-${nextIndex + 1}`])
     } else {
-      setActive('')
+      setActive([])
     }
   }
 
   return (
     <Card className='w-full max-w-lg'>
       <CardHeader>
-        <CardTitle>Hello, John !</CardTitle>
+        <CardTitle className='leading-none font-semibold'>Hello, John !</CardTitle>
         <CardDescription>Let&apos;s set up your first data workspace</CardDescription>
       </CardHeader>
       <CardContent className='space-y-4 text-sm'>
         <Accordion
-          type='single'
-          collapsible
-          className='w-full space-y-2'
+          className='w-full space-y-2 overflow-visible border-0 [&>*>[data-slot="accordion-content"]]:px-0'
           value={active}
           onValueChange={handleOpenChange}
         >
           {items.map((item, index) => {
-            const Icon = item.icon
             const isCompleted = completed.has(index)
 
             return (
-              <AccordionItem key={index} value={`item-${index + 1}`} className='rounded-md border!'>
+              <AccordionItem key={index} value={`item-${index + 1}`} className='rounded-md border! bg-transparent'>
                 <AccordionTrigger className='px-5'>
                   <span className='flex items-center gap-2'>
                     {isCompleted ? (
@@ -92,8 +86,9 @@ function OnboardingFeed() {
                     size='sm'
                     onClick={() => handleComplete(index)}
                     disabled={isCompleted || !(index === 0 || completed.has(index - 1))}
+                    className='*:[svg]:size-4 *:[svg]:shrink-0'
                   >
-                    <Icon className='size-4 shrink-0' />
+                    {item.icon}
                     {item.label}
                   </Button>
                 </AccordionContent>

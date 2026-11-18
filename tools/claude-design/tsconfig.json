@@ -1,0 +1,6 @@
+{
+  // esbuild reads the nearest tsconfig.json: this one keeps the repo's (strict,
+  // which would prepend "use strict" to the bundle) away from this folder's
+  // sources. The repo's own files still build with the repo's tsconfig.
+  "compilerOptions": {}
+}

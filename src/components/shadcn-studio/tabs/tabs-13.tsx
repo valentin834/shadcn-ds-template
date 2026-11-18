@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const tabs = [
@@ -27,8 +26,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -38,12 +37,12 @@ const TabsLiftedDemo = () => {
   return (
     <div>
       <Tabs defaultValue='explore' className='gap-4'>
-        <TabsList className='bg-background justify-start rounded-none border-b p-0'>
+        <TabsList className='justify-start rounded-none border-b bg-transparent p-0'>
           {tabs.map(tab => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='bg-background border-b-border dark:data-[state=active]:bg-background data-[state=active]:border-border data-[state=active]:border-b-background h-full rounded-none rounded-t border border-transparent data-[state=active]:-mb-0.5 data-[state=active]:shadow-none! dark:border-b-0 dark:data-[state=active]:-mb-0.5'
+              className='data-active:border-b-background! data-active:border-border bg-transparent! shadow-none! data-active:-mb-0.75 data-active:rounded-b-none data-active:border-b-2'
             >
               {tab.name}
             </TabsTrigger>

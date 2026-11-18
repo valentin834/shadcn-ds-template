@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -57,9 +56,11 @@ const listItems = [
 const DropdownMenuItemAvatarDemo = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Menu item with avatar</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Menu item with avatar</Button>} />
       <DropdownMenuContent className='w-91'>
-        <DropdownMenuLabel>Chat List</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Chat List</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuGroup>
           {listItems.map((item, index) => (
             <DropdownMenuItem key={index} className='justify-between'>

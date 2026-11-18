@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarGroupCount, AvatarGroup, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const avatars = [
   {
@@ -21,17 +20,15 @@ const avatars = [
 
 const AvatarGroupMaxDemo = () => {
   return (
-    <div className='flex -space-x-2'>
+    <AvatarGroup>
       {avatars.map((avatar, index) => (
         <Avatar key={index} className='ring-background ring-2'>
           <AvatarImage src={avatar.src} alt={avatar.name} />
-          <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>
+          <AvatarFallback>{avatar.fallback}</AvatarFallback>
         </Avatar>
       ))}
-      <Avatar className='ring-background ring-2'>
-        <AvatarFallback className='text-xs'>+9</AvatarFallback>
-      </Avatar>
-    </div>
+      <AvatarGroupCount>+9</AvatarGroupCount>
+    </AvatarGroup>
   )
 }
 

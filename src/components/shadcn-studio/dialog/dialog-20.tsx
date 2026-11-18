@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -18,7 +17,7 @@ const DialogMiddleRightAlignDemo = () => {
     <Dialog>
       <form>
         <DialogTrigger render={<Button variant='outline' />}>Middle right align</DialogTrigger>
-        <DialogContent className='sm:right-0 sm:left-auto sm:mr-6 sm:max-w-[425px] sm:translate-x-0'>
+        <DialogContent className='sm:right-0 sm:left-auto sm:mr-6 sm:max-w-106.25 sm:translate-x-0'>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>

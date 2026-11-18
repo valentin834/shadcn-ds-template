@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
@@ -10,7 +9,7 @@ const CheckboxTodoListDemo = () => {
   return (
     <div className='flex items-center gap-2'>
       <Checkbox id={id} defaultChecked />
-      <Label htmlFor={id} className='peer-data-[state=checked]:line-through'>
+      <Label htmlFor={id} className='peer-data-checked:line-through'>
         Simple todo list item
       </Label>
     </div>

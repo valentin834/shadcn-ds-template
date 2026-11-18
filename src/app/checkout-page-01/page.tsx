@@ -19,7 +19,7 @@ const cartItemsData = [
     id: 3,
     name: 'Magic Keyboard for iPad Pro 11"',
     variant: 'Green : M',
-    price: 99,
+    price: 199,
     image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/ecommerce/checkout/image-3.png'
   }
 ]

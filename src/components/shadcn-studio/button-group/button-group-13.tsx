@@ -1,24 +1,23 @@
-// @ts-nocheck
-import { ArchiveIcon, InboxIcon, SendHorizonalIcon } from 'lucide-react'
-
+import { ButtonGroup } from '@/components/ui/button-group'
 import { RippleButton } from '@/components/ui/ripple-button'
+import { InboxIcon, ArchiveIcon, SendHorizonalIcon } from 'lucide-react'
 
 const ButtonGroupRippleDemo = () => {
   return (
-    <div className='inline-flex w-fit -space-x-px rounded-md shadow-xs rtl:space-x-reverse'>
-      <RippleButton variant='outline' className='rounded-none rounded-l-md shadow-none focus-visible:z-10'>
+    <ButtonGroup>
+      <RippleButton variant='outline'>
         <InboxIcon />
         Inbox
       </RippleButton>
-      <RippleButton variant='outline' className='rounded-none shadow-none focus-visible:z-10'>
+      <RippleButton variant='outline'>
         <ArchiveIcon />
         Archived
       </RippleButton>
-      <RippleButton variant='outline' className='rounded-none rounded-r-md shadow-none focus-visible:z-10'>
+      <RippleButton variant='outline'>
         <SendHorizonalIcon />
         Sent
       </RippleButton>
-    </div>
+    </ButtonGroup>
   )
 }
 

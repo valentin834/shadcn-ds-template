@@ -167,14 +167,14 @@ function getTooltipPosition({
 
 type TooltipProviderProps = {
   children: React.ReactNode
-  openDelay?: number
+  delay?: number
   closeDelay?: number
   transition?: Transition
 }
 
 function TooltipProvider({
   children,
-  openDelay = 150,
+  delay = 150,
   closeDelay = 100,
   transition = { type: 'spring', stiffness: 300, damping: 25 }
 }: TooltipProviderProps) {
@@ -194,11 +194,11 @@ function TooltipProvider({
       }
 
       const now = Date.now()
-      const delay = now - lastCloseTimeRef.current < closeDelay ? 0 : openDelay
+      const d = now - lastCloseTimeRef.current < closeDelay ? 0 : delay
 
-      timeoutRef.current = window.setTimeout(() => setCurrentTooltip(data), delay)
+      timeoutRef.current = window.setTimeout(() => setCurrentTooltip(data), d)
     },
-    [openDelay, closeDelay, currentTooltip]
+    [delay, closeDelay, currentTooltip]
   )
 
   const hideTooltip = React.useCallback(() => {

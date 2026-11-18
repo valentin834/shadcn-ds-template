@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { PrimaryOrionButton } from '@/components/ui/orion-button'
 
 const PrimaryOrionButtonDemo = () => {

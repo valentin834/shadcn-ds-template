@@ -1,33 +1,63 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
-import { UploadCloudIcon, TrashIcon, ImageIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ImageIcon, UploadCloudIcon, TrashIcon } from 'lucide-react'
 
 const countries = [
-  { value: 'india', label: 'India', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/india.png' },
-  { value: 'china', label: 'China', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/china.png' },
-  { value: 'monaco', label: 'Monaco', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/monaco.png' },
-  { value: 'serbia', label: 'Serbia', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/serbia.png' },
-  { value: 'romania', label: 'Romania', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/romania.png' },
-  { value: 'mayotte', label: 'Mayotte', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/mayotte.png' },
-  { value: 'iraq', label: 'Iraq', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/iraq.png' },
-  { value: 'syria', label: 'Syria', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/syria.png' },
-  { value: 'korea', label: 'Korea', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/korea.png' },
-  { value: 'zimbabwe', label: 'Zimbabwe', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/zimbabwe.png' }
+  {
+    value: 'india',
+    label: 'India',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/india.png'
+  },
+  {
+    value: 'china',
+    label: 'China',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/china.png'
+  },
+  {
+    value: 'monaco',
+    label: 'Monaco',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/monaco.png'
+  },
+  {
+    value: 'serbia',
+    label: 'Serbia',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/serbia.png'
+  },
+  {
+    value: 'romania',
+    label: 'Romania',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/romania.png'
+  },
+  {
+    value: 'mayotte',
+    label: 'Mayotte',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/mayotte.png'
+  },
+  {
+    value: 'iraq',
+    label: 'Iraq',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/iraq.png'
+  },
+  {
+    value: 'syria',
+    label: 'Syria',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/syria.png'
+  },
+  {
+    value: 'korea',
+    label: 'Korea',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/korea.png'
+  },
+  {
+    value: 'zimbabwe',
+    label: 'Zimbabwe',
+    flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/zimbabwe.png'
+  }
 ]
 
 const PersonalInfo = () => {
@@ -121,7 +151,7 @@ const PersonalInfo = () => {
                   <UploadCloudIcon />
                   Upload avatar
                 </Button>
-                <Button type='button' variant='ghost' onClick={remove} disabled={!file} className='text-destructive'>
+                <Button type='button' variant='ghost' onClick={remove} disabled={!file} className='text-destructive!'>
                   <TrashIcon />
                 </Button>
               </div>

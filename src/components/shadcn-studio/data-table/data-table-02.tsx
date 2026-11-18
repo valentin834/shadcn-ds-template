@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { Rows2Icon, Rows3Icon, Rows4Icon } from 'lucide-react'
 
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
@@ -14,7 +11,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Select,
@@ -28,6 +24,7 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { cn } from '@/lib/utils'
+import { Rows4Icon, Rows3Icon, Rows2Icon } from 'lucide-react'
 
 const data: Payment[] = [
   {
@@ -80,7 +77,8 @@ export const columns: ColumnDef<Payment>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -126,8 +124,33 @@ export const columns: ColumnDef<Payment>[] = [
   }
 ]
 
+type DensityOption = {
+  label: string
+  value: string | null
+  icon: React.ReactNode
+}
+
+const densityItems: DensityOption[] = [
+  { label: 'Density', value: null, icon: null },
+  {
+    label: 'Compact',
+    value: 'compact',
+    icon: <Rows4Icon className='size-4' />
+  },
+  {
+    label: 'Standard',
+    value: 'standard',
+    icon: <Rows3Icon className='size-4' />
+  },
+  {
+    label: 'Flexible',
+    value: 'flexible',
+    icon: <Rows2Icon className='size-4' />
+  }
+]
+
 const DataTableDensityDemo = () => {
-  const [density, setDensity] = useState<string>()
+  const [density, setDensity] = useState<string | null>(null)
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -155,30 +178,34 @@ const DataTableDensityDemo = () => {
   return (
     <div className='w-full'>
       <div className='py-4'>
-        <Select value={density} onValueChange={setDensity}>
+        <Select items={densityItems} value={density} onValueChange={value => setDensity(value as string | null)}>
           <SelectTrigger className='w-full max-w-3xs' aria-label='Density select'>
-            <SelectValue placeholder='Density' />
+            <SelectValue>
+              {(value: string | null) => {
+                const item = densityItems.find(i => i.value === value)
+
+                return value ? (
+                  <span className='flex items-center gap-2'>
+                    {item?.icon}
+                    {item?.label}
+                  </span>
+                ) : (
+                  'Density'
+                )
+              }}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Density</SelectLabel>
-              <SelectItem value='compact'>
-                <div className='flex items-center gap-2'>
-                  <Rows4Icon className='size-4' />
-                  Compact
-                </div>
-              </SelectItem>
-              <SelectItem value='standard' className='flex items-center gap-2'>
-                <div className='flex items-center gap-2'>
-                  <Rows3Icon className='size-4' /> Standard
-                </div>
-              </SelectItem>
-              <SelectItem value='flexible' className='flex items-center gap-2'>
-                <div className='flex items-center gap-2'>
-                  <Rows2Icon className='size-4' />
-                  Flexible
-                </div>
-              </SelectItem>
+              {densityItems.slice(1).map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  <div className='flex items-center gap-2'>
+                    {item.icon}
+                    {item.label}
+                  </div>
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>

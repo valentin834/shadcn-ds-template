@@ -1,17 +1,12 @@
-// @ts-nocheck
 'use client'
 
-import { useState, type ReactNode } from 'react'
-
-import { TriangleAlertIcon } from 'lucide-react'
-
+import { useState, type ReactElement } from 'react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -21,9 +16,10 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 
 import { cn } from '@/lib/utils'
+import { TriangleAlertIcon } from 'lucide-react'
 
 type Props = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   className?: string
 }
@@ -44,8 +40,10 @@ const ErrorDialog = ({ defaultOpen = false, trigger, className }: Props) => {
             </AvatarFallback>
           </Avatar>
           <div className='space-y-3.5 text-center'>
-            <DialogTitle className='leading-7'>Are you absolutely sure you want to delete?</DialogTitle>
-            <DialogDescription className='max-w-sm'>
+            <DialogTitle className='text-lg leading-7 font-semibold'>
+              Are you absolutely sure you want to delete?
+            </DialogTitle>
+            <DialogDescription className='mx-auto max-w-sm'>
               This action cannot be undone. This will permanently delete your account and remove your data from our
               servers.
               <span className='mt-4 flex items-center justify-center gap-3'>
@@ -56,12 +54,10 @@ const ErrorDialog = ({ defaultOpen = false, trigger, className }: Props) => {
           </div>
         </DialogHeader>
 
-        <DialogFooter className='flex-row items-center justify-center! gap-4'>
-          <DialogClose render={<Button size='lg' variant='outline' />}>Cancel
-                              </DialogClose>
-          <DialogClose render={<Button size='lg' variant='destructive' />}>Delete
-                              </DialogClose>
-        </DialogFooter>
+        <div className='flex justify-center gap-4 sm:flex-row'>
+          <DialogClose render={<Button size='lg' variant='outline' />}>Cancel</DialogClose>
+          <DialogClose render={<Button size='lg' variant='destructive' />}>Delete</DialogClose>
+        </div>
       </DialogContent>
     </Dialog>
   )

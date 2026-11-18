@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 const avatars = [
@@ -27,14 +26,19 @@ const avatars = [
 
 const AvatarGroupTooltipTransitionDemo = () => {
   return (
-    <div className='flex -space-x-2 hover:space-x-1'>
+    <AvatarGroup className='**:data-[slot=avatar]:ring-background hover:space-x-1 **:data-[slot=avatar]:ring-2'>
       {avatars.map((avatar, index) => (
         <Tooltip key={index}>
-          <TooltipTrigger render={<Avatar className='ring-background ring-2 transition-all duration-300 ease-in-out' />}><AvatarImage src={avatar.src} alt={avatar.name} /><AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback></TooltipTrigger>
+          <TooltipTrigger className='transition-all duration-300 ease-in-out'>
+            <Avatar>
+              <AvatarImage src={avatar.src} alt={avatar.name} />
+              <AvatarFallback>{avatar.fallback}</AvatarFallback>
+            </Avatar>
+          </TooltipTrigger>
           <TooltipContent>{avatar.name}</TooltipContent>
         </Tooltip>
       ))}
-    </div>
+    </AvatarGroup>
   )
 }
 

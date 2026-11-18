@@ -1,10 +1,7 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { HomeIcon } from 'lucide-react'
-
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { HomeIcon } from 'lucide-react'
 
 const TextareaEndIconDemo = () => {
   const id = useId()

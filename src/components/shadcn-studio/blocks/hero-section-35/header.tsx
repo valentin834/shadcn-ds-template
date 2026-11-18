@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { MailIcon, MenuIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import MenuDropdown from '@/components/shadcn-studio/blocks/menu-dropdown'
@@ -14,6 +10,7 @@ import type { NavigationSection } from '@/components/shadcn-studio/blocks/menu-n
 import { cn } from '@/lib/utils'
 
 import InkLogo from '@/assets/svg/ink-logo'
+import { MailIcon, MenuIcon } from 'lucide-react'
 
 type HeaderProps = {
   navigationData: NavigationSection[]
@@ -58,17 +55,22 @@ const Header = ({ navigationData, className }: HeaderProps) => {
 
         {/* Actions */}
         <div className='flex gap-4'>
-          <Button variant='outline' className='max-sm:hidden' render={<a href='#' />} nativeButton={false}>Get in Touch</Button>
+          <Button size='lg' variant='outline' className='max-sm:hidden' render={<a href='#' />} nativeButton={false}>
+            Get in Touch
+          </Button>
 
           {/* Navigation for small screens */}
-          <div className='flex gap-3'>
-            <Button variant='outline' size='icon' className='sm:hidden' render={<a href='#' />} nativeButton={false}><MailIcon /><span className='sr-only'>Get in Touch</span></Button>
+          <div className='flex gap-3 lg:hidden'>
+            <Button variant='outline' size='icon-lg' className='sm:hidden' render={<a href='#' />} nativeButton={false}>
+              <MailIcon />
+              <span className='sr-only'>Get in Touch</span>
+            </Button>
 
             <MenuDropdown
               align='end'
               navigationData={navigationData}
               trigger={
-                <Button variant='outline' size='icon' className='lg:hidden'>
+                <Button variant='outline' size='icon-lg' className='lg:hidden'>
                   <MenuIcon />
                   <span className='sr-only'>Menu</span>
                 </Button>

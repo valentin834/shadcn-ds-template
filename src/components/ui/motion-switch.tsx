@@ -1,17 +1,16 @@
-// @ts-nocheck
 'use client'
 
 import * as React from 'react'
 
-import { Switch as SwitchPrimitive } from 'radix-ui'
+import { Switch as SwitchPrimitive } from '@base-ui/react/switch'
 import { motion } from 'motion/react'
 
 import { cn } from '@/lib/utils'
 
 const SIZES = {
-  sm: { TRACK_WIDTH: 26, THUMB_SIZE: 14, THUMB_STRETCH: 18 },
-  md: { TRACK_WIDTH: 32, THUMB_SIZE: 16, THUMB_STRETCH: 25 },
-  lg: { TRACK_WIDTH: 48, THUMB_SIZE: 24, THUMB_STRETCH: 40 }
+  sm: { TRACK_WIDTH: 24, THUMB_SIZE: 12, THUMB_STRETCH: 17 },
+  md: { TRACK_WIDTH: 32, THUMB_SIZE: 16, THUMB_STRETCH: 26 },
+  lg: { TRACK_WIDTH: 40, THUMB_SIZE: 20, THUMB_STRETCH: 36 }
 }
 
 const STRETCH_DURATION = 120 // ms
@@ -38,9 +37,9 @@ function Switch({ className, size = 'md', ...props }: SwitchProps) {
     return () => clearTimeout(timeout)
   }, [isChecked])
 
-  const handleCheckedChange = (checked: boolean) => {
+  const handleCheckedChange = (checked: boolean, eventDetails: SwitchPrimitive.Root.ChangeEventDetails) => {
     setIsChecked(checked)
-    props.onCheckedChange?.(checked)
+    props.onCheckedChange?.(checked, eventDetails)
   }
 
   const thumbWidth = isStretching ? THUMB_STRETCH : THUMB_SIZE
@@ -53,27 +52,36 @@ function Switch({ className, size = 'md', ...props }: SwitchProps) {
     <SwitchPrimitive.Root
       data-slot='switch'
       className={cn(
-        `peer data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50`,
+        `peer focus-visible:border-ring focus-visible:ring-ring/50 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50`,
 
         // Dynamic width/height
-        size === 'sm' ? 'h-4 w-6.5' : size === 'lg' ? 'h-7 w-12' : 'h-[1.15rem] w-8',
+        size === 'sm' ? 'h-3.5 w-6' : size === 'lg' ? 'h-5.5 w-10' : 'h-4.5 w-8',
         className
       )}
       checked={isChecked}
       onCheckedChange={handleCheckedChange}
       {...props}
     >
-      <SwitchPrimitive.Thumb render={<motion.span data-slot='switch-thumb' className={cn(
-                      'bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none absolute block rounded-full ring-0'
-                    )} animate={{
-                      width: thumbWidth,
-                      left: thumbLeft,
-                      transition: { duration: STRETCH_DURATION / 1000 }
-                    }} style={{
-                      height: THUMB_SIZE,
-                      minWidth: THUMB_SIZE,
-                      maxWidth: THUMB_STRETCH
-                    }} />}></SwitchPrimitive.Thumb>
+      <SwitchPrimitive.Thumb
+        render={
+          <motion.span
+            data-slot='switch-thumb'
+            className={cn(
+              'bg-background dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground pointer-events-none absolute block rounded-full ring-0'
+            )}
+            animate={{
+              width: thumbWidth,
+              left: thumbLeft,
+              transition: { duration: STRETCH_DURATION / 1000 }
+            }}
+            style={{
+              height: THUMB_SIZE,
+              minWidth: THUMB_SIZE,
+              maxWidth: THUMB_STRETCH
+            }}
+          />
+        }
+      />
     </SwitchPrimitive.Root>
   )
 }

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -47,11 +46,13 @@ const DropdownMeetingScheduleDemo = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Meetings Schedule</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline'>Meetings Schedule</Button>} />
       <DropdownMenuContent className='sm:w-124'>
-        <DropdownMenuLabel>Today&apos;s meetings</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem className='justify-between gap-3.5' onSelect={event => event.preventDefault()}>
+          <DropdownMenuLabel>Today&apos;s meetings</DropdownMenuLabel>
+        </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <DropdownMenuItem className='justify-between gap-3.5' closeOnClick={false}>
             <span className='text-popover-foreground font-medium'>08:30</span>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Daily Project Review</span>
@@ -66,7 +67,7 @@ const DropdownMeetingScheduleDemo = () => {
               <Switch id='airplane-mode' checked={firstMeeting} onCheckedChange={setFirstMeeting} />
             </div>
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between gap-3.5' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between gap-3.5' closeOnClick={false}>
             <span className='text-popover-foreground font-medium'>09:00</span>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Sprint Surge</span>
@@ -85,7 +86,7 @@ const DropdownMeetingScheduleDemo = () => {
               <Switch id='airplane-mode' checked={secondMeeting} onCheckedChange={setSecondMeeting} />
             </div>
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between gap-3.5' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between gap-3.5' closeOnClick={false}>
             <span className='text-popover-foreground font-medium'>11:45</span>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Project Status Update</span>
@@ -100,7 +101,7 @@ const DropdownMeetingScheduleDemo = () => {
               <Switch id='airplane-mode' checked={thirdMeeting} onCheckedChange={setThirdMeeting} />
             </div>
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between gap-3.5' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between gap-3.5' closeOnClick={false}>
             <span className='text-popover-foreground font-medium'>06:30</span>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Team Performance</span>
@@ -119,7 +120,7 @@ const DropdownMeetingScheduleDemo = () => {
               <Switch id='airplane-mode' checked={forthMeeting} onCheckedChange={setForthMeeting} />
             </div>
           </DropdownMenuItem>
-          <DropdownMenuItem className='justify-between gap-3.5' onSelect={event => event.preventDefault()}>
+          <DropdownMenuItem className='justify-between gap-3.5' closeOnClick={false}>
             <span className='text-popover-foreground font-medium'>10:50</span>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Stakeholder Feedback</span>

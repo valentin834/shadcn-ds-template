@@ -1,18 +1,23 @@
-// @ts-nocheck
-import { ChevronsUpDownIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { ChevronsUpDownIcon } from 'lucide-react'
 
 const CollapsibleAnimatedDemo = () => {
   return (
-    <Collapsible className='flex w-full max-w-[350px] flex-col gap-2'>
+    <Collapsible className='group flex w-full max-w-87.5 flex-col gap-2'>
       <div className='flex items-center justify-between gap-4 px-4'>
         <div className='text-sm font-semibold'>@peduarte starred 3 repositories</div>
-        <CollapsibleTrigger render={<Button variant='ghost' size='icon-sm' />}><ChevronsUpDownIcon /><span className='sr-only'>Toggle</span></CollapsibleTrigger>
+        <CollapsibleTrigger
+          render={
+            <Button variant='ghost' size='icon-sm'>
+              <ChevronsUpDownIcon />
+              <span className='sr-only'>Toggle</span>
+            </Button>
+          }
+        />
       </div>
       <div className='rounded-md border px-4 py-2 font-mono text-sm'>@radix-ui/primitives</div>
-      <CollapsibleContent className='data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down flex flex-col gap-2 overflow-hidden transition-all duration-300'>
+      <CollapsibleContent className='flex h-(--collapsible-panel-height) flex-col gap-2 overflow-hidden transition-all duration-300 data-ending-style:h-0 data-starting-style:h-0'>
         <div className='rounded-md border px-4 py-2 font-mono text-sm'>@radix-ui/colors</div>
         <div className='rounded-md border px-4 py-2 font-mono text-sm'>@stitches/react</div>
       </CollapsibleContent>

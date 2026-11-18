@@ -1,10 +1,9 @@
-// @ts-nocheck
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 const DatePickerDemo = () => {
   return (
-    <div className='w-full max-w-xs space-y-2'>
+    <div className='flex w-full max-w-xs flex-col gap-2'>
       <Label htmlFor='time-picker' className='px-1'>
         Time input
       </Label>

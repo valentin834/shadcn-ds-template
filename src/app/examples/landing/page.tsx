@@ -234,7 +234,7 @@ export default function LandingPage() {
         <section id="faq" className="mx-auto max-w-3xl px-6 py-20 space-y-8">
           <div className="text-center space-y-3">
             <h2 className="text-3xl font-bold tracking-tight">Frequently asked questions</h2>
-            <p className="text-muted-foreground">Can't find the answer? <Link href="#" className="underline underline-offset-4">Chat with us.</Link></p>
+            <p className="text-muted-foreground">Can&apos;t find the answer? <Link href="#" className="underline underline-offset-4">Chat with us.</Link></p>
           </div>
           <Accordion className="w-full">
             {faqs.map((faq, i) => (

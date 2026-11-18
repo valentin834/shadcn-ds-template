@@ -1,7 +1,14 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'Select city', value: null },
+  { label: 'New York', value: '1' },
+  { label: 'London', value: '2' },
+  { label: 'Tokyo', value: '3' },
+  { label: 'Paris', value: '4' }
+]
 
 const SelectWithOverlappingLabelDemo = () => {
   const id = useId()
@@ -14,15 +21,16 @@ const SelectWithOverlappingLabelDemo = () => {
       >
         Select with overlapping label
       </label>
-      <Select>
-        <SelectTrigger id={id} className='dark:!bg-background w-full'>
-          <SelectValue placeholder='Select city' />
+      <Select items={items}>
+        <SelectTrigger id={id} className='dark:bg-background! w-full'>
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='1'>New York</SelectItem>
-          <SelectItem value='2'>London</SelectItem>
-          <SelectItem value='3'>Tokyo</SelectItem>
-          <SelectItem value='4'>Paris</SelectItem>
+        <SelectContent className='p-1'>
+          {items.slice(1).map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>

@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { StarIcon } from 'lucide-react'
-
 import { Badge } from '@/components/ui/badge'
+import { StarIcon } from 'lucide-react'
 
 const BadgeWithIconDemo = () => {
   return (

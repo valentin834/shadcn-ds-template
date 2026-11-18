@@ -1,6 +1,4 @@
-import InternationalEvents, {
-  type Event
-} from '@/components/shadcn-studio/blocks/user-schedule-01/user-schedule-01'
+import InternationalEvents, { type Event } from '@/components/shadcn-studio/blocks/user-schedule-01/user-schedule-01'
 
 const eventsData: Event[] = [
   {

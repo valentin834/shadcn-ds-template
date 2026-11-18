@@ -1,8 +1,7 @@
-import { LanguagesIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import LanguageDropdown from '@/components/shadcn-studio/blocks/dropdown-language'
+import { LanguagesIcon } from 'lucide-react'
 
 const DropdownPage = () => {
   return (

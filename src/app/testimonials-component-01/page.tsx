@@ -24,8 +24,7 @@ const testimonials: TestimonialItem[] = [
     company: 'Figma',
     avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png?width=40&height=40&format=auto',
     rating: 5,
-    content:
-      "The UI components are beautifully designed and incredibly easy to customize. It's transformed our design workflow."
+    content: "The UI components are beautifully designed and incredibly easy to customize. It's transformed our design."
   },
   {
     name: 'Alex Chen',
@@ -33,8 +32,7 @@ const testimonials: TestimonialItem[] = [
     company: 'Vercel',
     avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-4.png?width=40&height=40&format=auto',
     rating: 4,
-    content:
-      'shadcn/studio has saved us countless hours in development. The component library is comprehensive and well-documented.'
+    content: 'shadcn/studio has saved us countless hours in development. The component library is comprehensive.'
   }
 ]
 

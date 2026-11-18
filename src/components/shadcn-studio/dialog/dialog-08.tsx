@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -50,7 +49,7 @@ const DialogTermsAndConditionDemo = () => {
               </a>
             </p>
           </div>
-          <DialogFooter className='px-6 pb-4 sm:justify-end'>
+          <DialogFooter className='m-0 px-6 sm:justify-end'>
             <DialogClose render={<Button variant='outline' />}>Cancel</DialogClose>
             <DialogClose render={<Button type='button' />}>I Agree</DialogClose>
           </DialogFooter>

@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { BookmarkIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { BookmarkIcon } from 'lucide-react'
 
 const IconButtonDemo = () => {
   return (

@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { UploadIcon } from 'lucide-react'
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,6 +10,7 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
+import { UploadIcon } from 'lucide-react'
 
 const AlertDialogWithIconDemo = () => {
   return (

@@ -1,14 +1,13 @@
-// @ts-nocheck
-import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
-
-import { Checkbox as CheckboxPrimitive } from 'radix-ui'
-
+'use client'
+import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import Heart from '@/assets/svg/heart'
 
 import { cn } from '@/lib/utils'
+import { ShoppingCartIcon } from 'lucide-react'
 
 export type ProductItem = {
   image: string
@@ -24,6 +23,8 @@ type ProductProps = {
 }
 
 const ProductList = ({ products }: ProductProps) => {
+  const [liked, setLiked] = useState<Record<number, boolean>>({})
+
   return (
     <section className='bg-muted py-8 sm:py-16 lg:py-24'>
       <div className='mx-auto max-w-7xl space-y-12 px-4 sm:space-y-16 sm:px-6 lg:space-y-24 lg:px-8'>
@@ -35,20 +36,21 @@ const ProductList = ({ products }: ProductProps) => {
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {/* Product Cards */}
           {products.map((product, index) => (
-            <Card key={index} className={cn('border-none shadow-none', product.salePrice && 'relative')}>
+            <Card key={index} className={cn('ring-0', product.salePrice && 'relative')}>
               {/* Sale Badge */}
               {product.salePrice && (
-                <Badge className='bg-destructive/10 [a&]:hover:bg-destructive/5 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 text-destructive absolute top-6 left-6 rounded-sm px-3 py-1 uppercase focus-visible:outline-none'>
+                <Badge className='bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/5 absolute top-6 left-6 h-6 rounded-md px-3 py-1 uppercase focus-visible:outline-none'>
                   Sale
                 </Badge>
               )}
 
-              <CardContent className='flex flex-1 flex-col justify-between gap-6'>
+              <CardContent>
                 {/* Product Image */}
                 <a href='#'>
                   <img src={product.image} alt={product.imgAlt} className='mx-auto size-50' />
                 </a>
-
+              </CardContent>
+              <CardContent className='flex flex-1 flex-col justify-between'>
                 {/* Product Details */}
                 <div className='space-y-4'>
                   <div className='flex flex-col gap-2 text-center'>
@@ -75,25 +77,30 @@ const ProductList = ({ products }: ProductProps) => {
                     {product.salePrice && (
                       <div className='flex items-center gap-2.5'>
                         <span className='text-2xl font-semibold'>${product.salePrice.toFixed(2)}</span>
-                        <span className='text-muted-foreground font-medium line-through'>
+                        <span className='text-muted-foreground text-base font-medium line-through'>
                           ${product.price.toFixed(2)}
                         </span>
                       </div>
                     )}
 
                     <div>
-                      <CheckboxPrimitive.Root
-                        data-slot='checkbox'
-                        className='group focus-visible:ring-ring/50 rounded-sm p-2.5 outline-none focus-visible:ring-3'
-                        aria-label='Heart icon'
+                      <Button
+                        variant='ghost'
+                        size='icon'
+                        onClick={() =>
+                          setLiked(prev => ({
+                            ...prev,
+                            [index]: !prev[index]
+                          }))
+                        }
                       >
-                        <span className='group-data-[state=checked]:hidden'>
-                          <HeartIcon className='size-4' />
-                        </span>
-                        <span className='group-data-[state=unchecked]:hidden'>
-                          <HeartIcon className='fill-destructive stroke-destructive size-4' />
-                        </span>
-                      </CheckboxPrimitive.Root>
+                        <Heart
+                          className={cn('size-4', {
+                            'fill-destructive stroke-destructive': liked[index]
+                          })}
+                        />
+                        <span className='sr-only'>Explore</span>
+                      </Button>
 
                       <Button variant='ghost' className='size-9'>
                         <ShoppingCartIcon />

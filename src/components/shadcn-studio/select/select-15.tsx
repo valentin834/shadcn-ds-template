@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Select,
   SelectContent,
@@ -9,51 +8,78 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+const items = [
+  { label: 'Small select', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
+
+const itemsDefault = [
+  { label: 'Default select', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
+
+const itemsLarge = [
+  { label: 'Large select', value: null },
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Blueberry', value: 'blueberry' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Pineapple', value: 'pineapple' }
+]
+
 const SelectSizesDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
-      <Select>
+      <Select items={items}>
         <SelectTrigger size='sm' className='w-full'>
-          <SelectValue placeholder='Small select' />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
+            {items.slice(1).map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select>
+      <Select items={itemsDefault}>
         <SelectTrigger className='w-full'>
-          <SelectValue placeholder='Default select' />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
+            {itemsDefault.slice(1).map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select>
-        <SelectTrigger className='!h-10 w-full'>
-          <SelectValue placeholder='Large select' />
+      <Select items={itemsLarge}>
+        <SelectTrigger className='h-9! w-full'>
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value='apple'>Apple</SelectItem>
-            <SelectItem value='banana'>Banana</SelectItem>
-            <SelectItem value='blueberry'>Blueberry</SelectItem>
-            <SelectItem value='grapes'>Grapes</SelectItem>
-            <SelectItem value='pineapple'>Pineapple</SelectItem>
+            {itemsLarge.slice(1).map(item => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { Bar, BarChart } from 'recharts'
@@ -6,8 +5,6 @@ import { Bar, BarChart } from 'recharts'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer } from '@/components/ui/chart'
 import { Separator } from '@/components/ui/separator'
-
-import { cn } from '@/lib/utils'
 
 // Product reached data
 const productReachChartData = [
@@ -43,7 +40,7 @@ const orderPlacedChartConfig = {
 
 const ProductInsightsCard = ({ className }: { className?: string }) => {
   return (
-    <Card className={cn('gap-4', className)}>
+    <Card className={className}>
       <CardHeader className='flex justify-between'>
         <div className='flex flex-col gap-1'>
           <span className='text-lg font-semibold'>Product insight</span>
@@ -55,8 +52,10 @@ const ProductInsightsCard = ({ className }: { className?: string }) => {
           className='w-20.5 rounded-md'
         />
       </CardHeader>
-      <CardContent className='space-y-4'>
+      <CardContent>
         <Separator />
+      </CardContent>
+      <CardContent className='space-y-4'>
         <div className='flex items-center justify-between gap-1'>
           <div className='flex flex-col gap-1'>
             <span className='text-xs'>Product reached</span>

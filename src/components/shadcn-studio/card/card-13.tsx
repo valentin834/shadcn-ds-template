@@ -1,12 +1,16 @@
-// @ts-nocheck
-import { StarIcon } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardFooter, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
+import { Rating } from '@/components/ui/rating'
 
 const CardTestimonialDemo = () => {
+  const [yellow, setYellow] = useState(4)
+
   return (
-    <Card className='max-w-md border-none'>
+    <Card className='max-w-md'>
       <CardContent>
         <p>
           Incredible time-saver! shadcn/studio has made UI development a breeze. The pre build components are not only{' '}
@@ -26,11 +30,15 @@ const CardTestimonialDemo = () => {
           </div>
         </div>
         <div className='flex items-center gap-1'>
-          <StarIcon className='size-5 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400'></StarIcon>
-          <StarIcon className='size-5 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400'></StarIcon>
-          <StarIcon className='size-5 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400'></StarIcon>
-          <StarIcon className='size-5 fill-amber-500 stroke-amber-500 dark:fill-amber-400 dark:stroke-amber-400'></StarIcon>
-          <StarIcon className='size-5 stroke-amber-500 dark:stroke-amber-400'></StarIcon>
+          <Rating
+            size={24}
+            precision={1}
+            readOnly
+            value={yellow}
+            onValueChange={setYellow}
+            variant='yellow'
+            aria-label='Rating Yellow'
+          />
         </div>
       </CardFooter>
     </Card>

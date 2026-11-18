@@ -1,9 +1,8 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 
 const ButtonHeartbeatEffectDemo = () => {
   return (
-    <Button variant='destructive' className='animate-heartbeat dark:bg-destructive/100 m-9'>
+    <Button variant='destructive' className='animate-heartbeat bg-destructive! dark:bg-destructive! m-9 text-white'>
       Heartbeat Effect
     </Button>
   )

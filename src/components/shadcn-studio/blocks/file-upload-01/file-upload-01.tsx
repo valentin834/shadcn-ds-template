@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -8,10 +7,10 @@ function FileUpload() {
   return (
     <Card className='w-full max-w-lg'>
       <CardHeader>
-        <CardTitle>Set up your first Studio</CardTitle>
+        <CardTitle className='font-semibold'>Set up your first Studio</CardTitle>
         <CardDescription>Set up your Studio to start managing your projects efficiently.</CardDescription>
       </CardHeader>
-      <CardContent className='space-y-4 text-sm'>
+      <CardContent className='space-y-4'>
         <div className='w-full space-y-2'>
           <Label htmlFor='studio-name' className='gap-1'>
             Studio Name <span className='text-destructive'>*</span>
@@ -29,14 +28,14 @@ function FileUpload() {
           />
           <p className='text-muted-foreground text-xs'>You can upload a file here.</p>
         </div>
-        <div className='flex justify-end gap-2 max-sm:justify-center'>
-          <Button className='max-sm:flex-1' variant='outline'>
-            Cancel
-          </Button>
-          <Button className='max-sm:flex-1' type='submit'>
-            Upload
-          </Button>
-        </div>
+      </CardContent>
+      <CardContent className='flex justify-end gap-2 max-sm:justify-center'>
+        <Button className='max-sm:flex-1' variant='outline'>
+          Cancel
+        </Button>
+        <Button className='max-sm:flex-1' type='submit'>
+          Upload
+        </Button>
       </CardContent>
     </Card>
   )

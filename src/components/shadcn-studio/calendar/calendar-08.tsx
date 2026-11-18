@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -40,7 +39,7 @@ export function CalendarLocalizationDemo() {
               <SelectTrigger className='w-[100px]' aria-label='Select language'>
                 <SelectValue placeholder='Language' />
               </SelectTrigger>
-              <SelectContent align='end'>
+              <SelectContent align='end' className='p-1'>
                 <SelectItem value='hi'>Hindi</SelectItem>
                 <SelectItem value='en'>English</SelectItem>
               </SelectContent>

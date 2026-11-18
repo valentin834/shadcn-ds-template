@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/motion-switch'
 

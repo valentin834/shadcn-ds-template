@@ -1,14 +1,20 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useState } from 'react'
 
-import { CheckIcon, ChevronDownIcon } from 'lucide-react'
+import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 
-import { Button } from '@/components/ui/button'
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxTrigger,
+  ComboboxEmpty,
+  ComboboxItem,
+  ComboboxList
+} from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
 
 const countries = [
   { value: '1', label: 'India', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/india.png' },
@@ -23,46 +29,66 @@ const countries = [
   { value: '10', label: 'Zimbabwe', flag: 'https://cdn.shadcnstudio.com/ss-assets/flags/zimbabwe.png' }
 ]
 
+const ComboboxInput = ({
+  className,
+  children,
+  disabled = false,
+  showTrigger = true,
+  flag,
+  ...props
+}: ComboboxPrimitive.Input.Props & {
+  showTrigger?: boolean
+  flag?: string
+}) => {
+  return (
+    <InputGroup className={cn('w-auto', className)}>
+      {flag && (
+        <InputGroupAddon>
+          <img src={flag} alt='Country flag' className='h-4 w-5' />
+        </InputGroupAddon>
+      )}
+      <ComboboxPrimitive.Input render={<InputGroupInput disabled={disabled} />} {...props} />
+      <InputGroupAddon align='inline-end'>
+        {showTrigger && (
+          <InputGroupButton
+            size='icon-xs'
+            variant='ghost'
+            render={<ComboboxTrigger />}
+            data-slot='input-group-button'
+            className='data-pressed:bg-transparent'
+            disabled={disabled}
+          />
+        )}
+      </InputGroupAddon>
+      {children}
+    </InputGroup>
+  )
+}
+
 const ComboboxCountryFlagDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
+  const selectedCountry = countries.find(u => u.label === value)
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Options with flag and search</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]' />}>{value ? (
-                            <span className='flex min-w-0 items-center gap-2'>
-                              <img src={countries.find(item => item.label === value)?.flag} alt={value} className='h-4 w-5' />
-                              <span className='truncate'>{value}</span>
-                            </span>
-                          ) : (
-                            <span className='text-muted-foreground'>Select country</span>
-                          )}<ChevronDownIcon className='text-muted-foreground/80 shrink-0' aria-hidden='true' /></PopoverTrigger>
-        <PopoverContent className='border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0' align='start'>
-          <Command>
-            <CommandInput placeholder='Search country...' />
-            <CommandList>
-              <CommandEmpty>No country found.</CommandEmpty>
-              {countries.map(country => (
-                <CommandItem
-                  key={country.value}
-                  value={country.label}
-                  onSelect={currentValue => {
-                    setValue(currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  <img src={country.flag} alt={`${country.label} flag`} className='h-4 w-5' />
-                  {country.label}
-                  {value === country.value && <CheckIcon size={16} className='ml-auto' />}
-                </CommandItem>
-              ))}
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={countries} value={value} onValueChange={v => setValue(v ?? '')}>
+        <ComboboxInput placeholder='Select a country' flag={selectedCountry?.flag} />
+        <ComboboxContent>
+          <ComboboxEmpty>No countries found.</ComboboxEmpty>
+          <ComboboxList>
+            {item => (
+              <ComboboxItem key={item.value} value={item.label} className='flex items-center gap-2'>
+                <img src={item.flag} alt={`${item.label} flag`} className='h-4 w-5' />
+                <span className='flex flex-col'>
+                  <span className='font-medium'>{item.label}</span>
+                </span>
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

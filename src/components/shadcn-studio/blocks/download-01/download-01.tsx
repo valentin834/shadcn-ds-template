@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card, CardContent } from '@/components/ui/card'
 import { MotionPreset } from '@/components/ui/motion-preset'
 
@@ -22,7 +21,7 @@ const Download = ({ downloadPlatforms }: { downloadPlatforms: DownloadPlatform[]
                 <h2 className='text-2xl font-semibold text-white md:text-3xl lg:text-4xl'>
                   Start Saving Smarter Download the App Today.
                 </h2>
-                <p className='mb-4 text-white/70 sm:text-xl'>
+                <p className='mb-4 text-base text-white/70 sm:text-xl'>
                   Track expenses, build budgets, and set savings goals all in one powerful mobile app trusted by
                   millions worldwide.
                 </p>
@@ -33,7 +32,7 @@ const Download = ({ downloadPlatforms }: { downloadPlatforms: DownloadPlatform[]
                       href={platform.href}
                       className='flex w-40 items-center gap-2 rounded-md bg-white px-3 py-2.5 sm:w-50 sm:px-6'
                     >
-                      <img src={platform.icon} alt={platform.alt} className='h-7 w-7' />
+                      <img src={platform.icon} alt={platform.alt} className='size-7' />
                       <div className='flex flex-col items-start'>
                         <p className='text-xs leading-4 text-black/70'>Download on the</p>
                         <p className='text-base leading-6 font-medium text-black/92'>{platform.name}</p>

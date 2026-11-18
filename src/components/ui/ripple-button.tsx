@@ -2,11 +2,11 @@
 
 import * as React from 'react'
 
-import { motion, type HTMLMotionProps, type Transition } from 'motion/react'
 import type { VariantProps } from 'class-variance-authority'
+import { motion, type HTMLMotionProps, type Transition } from 'motion/react'
 
-import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 interface Ripple {
   id: number
@@ -72,9 +72,10 @@ function RippleButton({
   return (
     <motion.button
       ref={buttonRef}
-      data-slot='ripple-button'
+      data-slot='button'
+      data-size={size}
       onClick={handleClick}
-      className={cn(buttonVariants({ variant, size }), 'relative overflow-hidden', className)}
+      className={cn(buttonVariants({ variant, size }), 'relative overflow-hidden', 'active:translate-y-0', className)}
       {...props}
     >
       {children}

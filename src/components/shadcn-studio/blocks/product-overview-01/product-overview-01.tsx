@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useId, useEffect, useState } from 'react'
-
-import { StarIcon, ShoppingCartIcon, HeartIcon, TruckIcon, RefreshCcwIcon } from 'lucide-react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 
 import { cn } from '@/lib/utils'
+import { StarIcon, ShoppingCartIcon, HeartIcon, TruckIcon, RefreshCcwIcon } from 'lucide-react'
 
 type ProductOverviewProps = {
   productItems: {
@@ -165,10 +162,10 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                 </div>
                 {/* Price */}
                 {!hasDiscount ? (
-                  <h4 className='text-3xl font-bold'>${finalPrice.toFixed(2)}</h4>
+                  <p className='text-3xl font-bold'>${finalPrice.toFixed(2)}</p>
                 ) : (
                   <div className='flex items-center gap-3'>
-                    <h4 className='text-3xl font-bold'>${finalPrice.toFixed(2)}</h4>
+                    <p className='text-3xl font-bold'>${finalPrice.toFixed(2)}</p>
                     <span className='text-muted-foreground font-medium line-through'>
                       MRP ${originalPrice.toFixed(2)}
                     </span>
@@ -182,8 +179,8 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                 <Separator />
                 {/* Color Selection */}
                 <div className='flex items-center gap-6'>
-                  <h4 className='text-lg font-semibold'>Jacket Color :</h4>
-                  <RadioGroup className='flex' defaultValue={item.defaultColorOption}>
+                  <h4 className='text-lg font-semibold text-nowrap'>Jacket Color :</h4>
+                  <RadioGroup className='flex gap-3!' defaultValue={item.defaultColorOption}>
                     {colorsChart.map(colorItem => (
                       <label
                         key={`${id}-${colorItem.value}`}
@@ -195,7 +192,7 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                         <RadioGroupItem
                           id={`${id}-${colorItem.value}`}
                           value={colorItem.value}
-                          className='sr-only after:absolute after:inset-0'
+                          className='absolute inset-0 opacity-0'
                           aria-label={`color-radio-${colorItem.value}`}
                           disabled={colorItem.disabled}
                         />
@@ -205,21 +202,21 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                 </div>
                 {/* Size Selection */}
                 <div className='flex items-center gap-6'>
-                  <h4 className='text-lg font-semibold'>Jacket Size :</h4>
-                  <RadioGroup className='flex' defaultValue={item.defaultSize}>
+                  <h4 className='text-lg font-semibold text-nowrap'>Jacket Size :</h4>
+                  <RadioGroup className='flex gap-3!' defaultValue={item.defaultSize}>
                     {sizesChart.map(sizeItem => (
                       <label
                         key={`${id}-${sizeItem.value}`}
-                        className='border-input group has-data-[state=checked]:bg-primary has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex cursor-pointer flex-col items-center gap-3 rounded-md border px-3 py-1.5 text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50'
+                        className='border-input group has-data-checked:bg-primary has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex cursor-pointer flex-col items-center gap-3 rounded-md border px-2.5 py-1 text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50'
                       >
                         <RadioGroupItem
                           id={`${id}-${sizeItem.value}`}
                           value={sizeItem.value}
-                          className='sr-only after:absolute after:inset-0'
+                          className='absolute inset-0 opacity-0'
                           aria-label={`size-radio-${sizeItem.value}`}
                           disabled={sizeItem.disabled}
                         />
-                        <p className='text-foreground group-has-data-[state=checked]:text-primary-foreground text-sm leading-none font-medium'>
+                        <p className='text-foreground group-has-data-checked:text-primary-foreground pointer-events-none text-sm font-medium'>
                           {sizeItem.label}
                         </p>
                       </label>
@@ -238,7 +235,6 @@ const ProductOverview = ({ productItems, colorsChart, sizesChart }: ProductOverv
                     Wish List
                   </Button>
                 </div>
-                <Separator />
                 {/* Additional Info */}
                 <div className='rounded-md border *:not-last:border-b'>
                   <div className='flex items-center gap-6 px-6 py-4'>

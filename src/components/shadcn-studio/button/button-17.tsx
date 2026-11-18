@@ -1,7 +1,5 @@
-// @ts-nocheck
-import { LoaderCircleIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { LoaderCircleIcon } from 'lucide-react'
 
 const ButtonLoadingDemo = () => {
   return (

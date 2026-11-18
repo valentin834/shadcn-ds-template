@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { ReactNode } from 'react'
 
 import { Card } from '@/components/ui/card'
@@ -26,7 +25,7 @@ const CompareUILib = ({ data }: { data: ComparisonData }) => {
     <div className='bg-muted px-4 py-8 sm:px-6 sm:py-16 lg:px-8 lg:py-24'>
       <div className='bg-background mx-auto max-w-7xl space-y-12 rounded-3xl px-8 py-16'>
         {/* Header */}
-        <div className='mb-8 md:mb-12 lg:mb-24'>
+        <div className='mb-8 space-y-4 md:mb-12 lg:mb-24'>
           <h2 className='text-center text-xl font-semibold sm:text-2xl md:text-3xl lg:text-4xl'>
             Choose the Right AI Tool for Powerful, Faster Writing
           </h2>
@@ -34,7 +33,6 @@ const CompareUILib = ({ data }: { data: ComparisonData }) => {
             Find the perfect AI tool to help you write clearer, faster, and more impactful content.
           </p>
         </div>
-
         {/* Comparison Table */}
         <Card className='overflow-hidden overflow-x-auto py-0'>
           <table className='w-full'>
@@ -48,19 +46,19 @@ const CompareUILib = ({ data }: { data: ComparisonData }) => {
                         <img
                           src={data.column1Header.icon}
                           alt={data.column1Header.title}
-                          className='h-6 w-6 md:h-7.5 md:w-7.5'
+                          className='size-6 md:size-7.5'
                         />
                       ) : (
                         <>
                           <img
                             src={data.column1Header.icon.light}
                             alt={data.column1Header.title}
-                            className='h-6 w-6 md:h-7.5 md:w-7.5 dark:hidden'
+                            className='size-6 md:size-7.5 dark:hidden'
                           />
                           <img
                             src={data.column1Header.icon.dark}
                             alt={data.column1Header.title}
-                            className='hidden h-6 w-6 md:h-7.5 md:w-7.5 dark:block'
+                            className='hidden size-6 md:size-7.5 dark:block'
                           />
                         </>
                       ))}
@@ -71,18 +69,18 @@ const CompareUILib = ({ data }: { data: ComparisonData }) => {
                   <div className='flex items-center gap-3.5'>
                     {data.column2Header.icon &&
                       (typeof data.column2Header.icon === 'string' ? (
-                        <img src={data.column2Header.icon} alt={data.column2Header.title} className='h-7.5 w-7.5' />
+                        <img src={data.column2Header.icon} alt={data.column2Header.title} className='size-7.5' />
                       ) : (
                         <>
                           <img
                             src={data.column2Header.icon.light}
                             alt={data.column2Header.title}
-                            className='h-7.5 w-7.5 dark:hidden'
+                            className='size-7.5 dark:hidden'
                           />
                           <img
                             src={data.column2Header.icon.dark}
                             alt={data.column2Header.title}
-                            className='hidden h-7.5 w-7.5 dark:block'
+                            className='hidden size-7.5 dark:block'
                           />
                         </>
                       ))}
@@ -94,7 +92,7 @@ const CompareUILib = ({ data }: { data: ComparisonData }) => {
             </thead>
             <tbody>
               {data.features.map((feature, index) => (
-                <tr key={index} className='h-25 border-b last:border-b-0'>
+                <tr key={index} className='h-25 not-last:border-b'>
                   <td className='p-4'>
                     <div className='text-lg font-medium'>
                       {index + 1}. {feature.name}

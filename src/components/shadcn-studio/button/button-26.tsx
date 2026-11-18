@@ -1,13 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { LoaderCircleIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import { LoaderCircleIcon } from 'lucide-react'
 
 const ButtonPromiseDemo = () => {
   const [isLoading, setIsLoading] = useState(false)

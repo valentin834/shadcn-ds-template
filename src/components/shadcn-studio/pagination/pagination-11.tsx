@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Pagination,
   PaginationContent,
@@ -12,10 +11,10 @@ const NumberlessPaginationDemo = () => {
     <Pagination>
       <PaginationContent className='w-full justify-between'>
         <PaginationItem>
-          <PaginationPrevious href='#' className='border' />
+          <PaginationPrevious href='#' className='border-border border' />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href='#' className='border' />
+          <PaginationNext href='#' className='border-border border' />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

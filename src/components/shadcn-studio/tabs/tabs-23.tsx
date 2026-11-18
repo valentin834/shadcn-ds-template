@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -31,8 +30,8 @@ const tabs = [
     count: 6,
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -42,13 +41,9 @@ const TabsVerticalWithBadgeDemo = () => {
   return (
     <div className='w-full max-w-md'>
       <Tabs defaultValue='explore' orientation='vertical'>
-        <TabsList className='h-full flex-col gap-1.5'>
+        <TabsList className='h-full gap-1.5'>
           {tabs.map(tab => (
-            <TabsTrigger
-              key={tab.value}
-              value={tab.value}
-              className='flex w-full items-center justify-start gap-1.5 px-2.5 sm:px-3'
-            >
+            <TabsTrigger key={tab.value} value={tab.value} className='w-full gap-1.5 px-2.5 sm:px-3'>
               {tab.name}
               <Badge className='h-5 min-w-5 px-1 tabular-nums'>{tab.count}</Badge>
             </TabsTrigger>

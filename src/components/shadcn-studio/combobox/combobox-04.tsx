@@ -1,141 +1,105 @@
-// @ts-nocheck
 'use client'
 
-import { useId, useState } from 'react'
-
+import { useId } from 'react'
 import {
-  ChevronsUpDownIcon,
-  DollarSignIcon,
-  FactoryIcon,
-  FilmIcon,
-  HospitalIcon,
-  HotelIcon,
-  MonitorIcon,
-  ScaleIcon,
-  SchoolIcon,
-  TractorIcon,
-  ZapIcon
-} from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList
+} from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  MonitorIcon,
+  HospitalIcon,
+  DollarSignIcon,
+  SchoolIcon,
+  FilmIcon,
+  FactoryIcon,
+  ZapIcon,
+  HotelIcon,
+  ScaleIcon,
+  TractorIcon
+} from 'lucide-react'
 
 const industries = [
   {
     value: 'information technology',
     label: 'Information Technology',
-    icon: MonitorIcon
+    icon: <MonitorIcon />
   },
   {
     value: 'healthcare',
     label: 'Healthcare',
-    icon: HospitalIcon
+    icon: <HospitalIcon />
   },
   {
     value: 'finance',
     label: 'Finance',
-    icon: DollarSignIcon
+    icon: <DollarSignIcon />
   },
   {
     value: 'education',
     label: 'Education',
-    icon: SchoolIcon
+    icon: <SchoolIcon />
   },
   {
     value: 'entertainment',
     label: 'Entertainment',
-    icon: FilmIcon
+    icon: <FilmIcon />
   },
   {
     value: 'manufacturing',
     label: 'Manufacturing',
-    icon: FactoryIcon
+    icon: <FactoryIcon />
   },
   {
     value: 'energy',
     label: 'Energy',
-    icon: ZapIcon
+    icon: <ZapIcon />
   },
   {
     value: 'hospitality',
     label: 'Hospitality',
-    icon: HotelIcon
+    icon: <HotelIcon />
   },
   {
     value: 'legal',
     label: 'Legal',
-    icon: ScaleIcon
+    icon: <ScaleIcon />
   },
   {
     value: 'agriculture',
     label: 'Agriculture',
-    icon: TractorIcon
+    icon: <TractorIcon />
   }
 ]
 
 const ComboboxOptionWithIIconDemo = () => {
   const id = useId()
-  const [open, setOpen] = useState<boolean>(false)
-  const [value, setValue] = useState<string>('')
 
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Combobox option with icon</Label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button id={id} variant='outline' role='combobox' aria-expanded={open} className='bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]' />}>{value ? (
-                            <span className='flex min-w-0 items-center gap-2'>
-                              {(() => {
-                                const selectedItem = industries.find(industry => industry.value === value)
-
-                                if (selectedItem) {
-                                  const Icon = selectedItem.icon
-
-                                  return <Icon className='text-muted-foreground' />
-                                }
-
-                                return null
-                              })()}
-                              <span className='truncate'>{industries.find(industry => industry.value === value)?.label}</span>
-                            </span>
-                          ) : (
-                            <span className='text-muted-foreground'>Select industry category</span>
-                          )}<ChevronsUpDownIcon className='text-muted-foreground/80 shrink-0' aria-hidden='true' /></PopoverTrigger>
-        <PopoverContent className='border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0' align='start'>
-          <Command>
-            <CommandInput placeholder='Search industries...' />
-            <CommandList>
-              <CommandEmpty>No industry found.</CommandEmpty>
-              <CommandGroup>
-                {industries.map(industry => (
-                  <CommandItem
-                    key={industry.value}
-                    value={industry.value}
-                    onSelect={currentValue => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                    className='flex items-center justify-between'
-                  >
-                    <div className='flex items-center gap-2'>
-                      <industry.icon className='text-muted-foreground size-4' />
-                      {industry.label}
-                    </div>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+      <Combobox id={id} items={industries}>
+        <ComboboxInput placeholder='Select an industry' />
+        <ComboboxContent>
+          <ComboboxEmpty>No industries found.</ComboboxEmpty>
+          <ComboboxList>
+            {item => (
+              <ComboboxItem
+                key={item.value}
+                value={item.value}
+                className='*:[svg]:text-muted-foreground flex items-center gap-2 *:[svg]:size-4'
+              >
+                {item.icon}
+                {item.label}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
   )
 }

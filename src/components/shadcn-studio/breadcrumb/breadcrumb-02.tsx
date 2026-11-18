@@ -1,6 +1,3 @@
-// @ts-nocheck
-import { HomeIcon } from 'lucide-react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,13 +6,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { HomeIcon } from 'lucide-react'
 
 const BreadcrumbSlashSeparatorDemo = () => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='#' className='flex items-center gap-2'>
+          <BreadcrumbLink href='#' className='flex items-center gap-1'>
             <HomeIcon className='size-4' />
             Home
           </BreadcrumbLink>

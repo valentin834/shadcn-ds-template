@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const tabs = [
@@ -27,8 +26,8 @@ const tabs = [
     value: 'surprise',
     content: (
       <>
-        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected—a fun fact, a
-        quirky tip, or a daily challenge. Come back for a new surprise every day!
+        <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something unexpected - a fun fact,
+        a quirky tip, or a daily challenge. Come back for a new surprise every day!
       </>
     )
   }
@@ -38,12 +37,12 @@ const TabsUnderlineDemo = () => {
   return (
     <div className='w-full max-w-md'>
       <Tabs defaultValue='explore' className='gap-4'>
-        <TabsList className='bg-background rounded-none border-b p-0'>
+        <TabsList variant='line' className='rounded-none border-b p-0'>
           {tabs.map(tab => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='bg-background data-[state=active]:border-primary dark:data-[state=active]:border-primary h-full rounded-none border-0 border-b-2 border-transparent data-[state=active]:shadow-none!'
+              className='border-0 group-data-horizontal/tabs:after:-bottom-[0.5px]'
             >
               {tab.name}
             </TabsTrigger>

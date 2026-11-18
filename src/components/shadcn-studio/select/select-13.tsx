@@ -1,8 +1,15 @@
-// @ts-nocheck
 import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+const items = [
+  { label: 'Select framework', value: null },
+  { label: 'Florida', value: '1' },
+  { label: 'New York', value: '2' },
+  { label: 'California', value: '3' },
+  { label: 'Texas', value: '4' }
+]
 
 const SelectWithHelperTextDemo = () => {
   const id = useId()
@@ -10,15 +17,16 @@ const SelectWithHelperTextDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Select with helper text</Label>
-      <Select defaultValue='3'>
+      <Select items={items} defaultValue='3'>
         <SelectTrigger id={id} className='w-full'>
-          <SelectValue placeholder='Select framework' />
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='1'>Florida</SelectItem>
-          <SelectItem value='2'>New York</SelectItem>
-          <SelectItem value='3'>California</SelectItem>
-          <SelectItem value='4'>Texas</SelectItem>
+        <SelectContent className='p-1'>
+          {items.slice(1).map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
       <p className='text-muted-foreground mt-2 text-xs' role='region' aria-live='polite'>

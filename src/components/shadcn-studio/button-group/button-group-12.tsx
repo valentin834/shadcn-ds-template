@@ -1,24 +1,23 @@
-// @ts-nocheck
-import { BoxIcon, ChartBarBigIcon, SettingsIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
+import { SettingsIcon, BoxIcon, ChartBarBigIcon } from 'lucide-react'
 
 const ButtonGroupGhostDemo = () => {
   return (
-    <div className='inline-flex w-fit rounded-md rtl:space-x-reverse'>
-      <Button variant='ghost' className='rounded-none rounded-l-md focus-visible:z-10'>
+    <ButtonGroup>
+      <Button variant='ghost'>
         <SettingsIcon />
         Settings
       </Button>
-      <Button variant='ghost' className='rounded-none focus-visible:z-10'>
+      <Button variant='ghost'>
         <BoxIcon />
         Dashboard
       </Button>
-      <Button variant='ghost' className='rounded-none rounded-r-md focus-visible:z-10'>
+      <Button variant='ghost'>
         <ChartBarBigIcon />
         Analytics
       </Button>
-    </div>
+    </ButtonGroup>
   )
 }
 

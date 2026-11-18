@@ -1,16 +1,13 @@
-// @ts-nocheck
 'use client'
 
 import { Fragment } from 'react'
 
-import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
-
 import type { ColumnDef } from '@tanstack/react-table'
 import { flexRender, getCoreRowModel, getExpandedRowModel, useReactTable } from '@tanstack/react-table'
-
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 
 type Member = {
   name: string
@@ -153,7 +150,8 @@ const columns: ColumnDef<Team>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />

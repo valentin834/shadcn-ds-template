@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Checkbox } from '@/components/ui/checkbox'
 
 const CheckboxSizesDemo = () => {

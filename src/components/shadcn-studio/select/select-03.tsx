@@ -1,10 +1,7 @@
-// @ts-nocheck
 import { useId } from 'react'
-
-import { FilmIcon } from 'lucide-react'
-
 import { Label } from '@/components/ui/label'
-import { SelectNative } from '@/components/ui/select-native'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { FilmIcon } from 'lucide-react'
 
 const NativeSelectWithIconDemo = () => {
   const id = useId()
@@ -13,15 +10,15 @@ const NativeSelectWithIconDemo = () => {
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Native select with icon</Label>
       <div className='group relative'>
-        <SelectNative id={id} className='pl-9' defaultValue=''>
-          <option value='' disabled>
+        <NativeSelect id={id} className='*:data-[slot=native-select]:pl-9' defaultValue=''>
+          <NativeSelectOption value='' disabled>
             Pick your favorite movie
-          </option>
-          <option value='1'>Godfather</option>
-          <option value='2'>A Working Man</option>
-          <option value='3'>The Dark Knight</option>
-          <option value='4'>Inception</option>
-        </SelectNative>
+          </NativeSelectOption>
+          <NativeSelectOption value='1'>Godfather</NativeSelectOption>
+          <NativeSelectOption value='2'>A Working Man</NativeSelectOption>
+          <NativeSelectOption value='3'>The Dark Knight</NativeSelectOption>
+          <NativeSelectOption value='4'>Inception</NativeSelectOption>
+        </NativeSelect>
         <div className='text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 group-has-[select[disabled]]:opacity-50'>
           <FilmIcon size={16} aria-hidden='true' />
         </div>

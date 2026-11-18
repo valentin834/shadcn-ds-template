@@ -1,0 +1,172 @@
+[
+  {
+    "name": "ShellApplicatif",
+    "file": "shell",
+    "group": "Application",
+    "width": 1440,
+    "height": 900,
+    "summary": "Coquille d'une page d'application : sidebar de navigation, barre du haut avec fil d'Ariane et recherche, en-tête de page, zone de contenu à remplir.",
+    "when": "Point de départ de tout écran d'application qui n'a pas de gabarit dédié : remplacer la zone de contenu, garder la coquille identique d'un écran à l'autre.",
+    "parts": "SidebarProvider > Sidebar (produit, groupes de navigation, compte) + SidebarInset (barre du haut : SidebarTrigger, Breadcrumb, InputGroup de recherche, notifications), PageHeader, cadre en pointillés."
+  },
+  {
+    "name": "Liste",
+    "file": "liste",
+    "group": "Application",
+    "width": 1440,
+    "height": 1000,
+    "summary": "Page liste d'un back-office : en-tête et actions, onglets de vues, recherche + Filters, table avec statuts, pagination.",
+    "when": "Toute liste d'objets métier qu'on filtre, trie et sélectionne (clients, devis, commandes, utilisateurs).",
+    "parts": "Shell (sidebar + barre du haut), PageHeader, Tabs variant line, InputGroup, Filters (libellés français), Select avec items, Table, Badge de statut, Pagination."
+  },
+  {
+    "name": "ListeVide",
+    "file": "liste",
+    "group": "Application",
+    "width": 1440,
+    "height": 900,
+    "summary": "État vide de première utilisation d'une liste : on explique l'objet et on propose de créer ou d'importer.",
+    "when": "Une liste qui n'a encore aucune donnée (compte neuf, module jamais utilisé).",
+    "parts": "Shell, PageHeader, Empty (EmptyMedia icon, EmptyTitle, EmptyDescription, EmptyContent) dans un cadre en pointillés."
+  },
+  {
+    "name": "ListeSansResultat",
+    "file": "liste",
+    "group": "Application",
+    "width": 1440,
+    "height": 900,
+    "summary": "État vide après recherche ou filtrage : les filtres restent visibles et on propose de les effacer.",
+    "when": "Une liste qui a des données mais dont la recherche ou les filtres ne renvoient rien.",
+    "parts": "Les outils de la Liste (onglets, recherche, Filters), puis Empty à la place de la table."
+  },
+  {
+    "name": "FicheDetail",
+    "file": "fiche",
+    "group": "Application",
+    "width": 1440,
+    "height": 1520,
+    "summary": "Fiche détail d'un objet : en-tête titre + statut + actions, onglets, corps en cartes, colonne latérale sticky, blocs de redirection et bloc de rebond.",
+    "when": "La page d'un objet métier qu'on consulte et sur lequel on agit (client, commande, projet, dossier).",
+    "parts": "Shell, retour, identité (pastille, titre, Badge), actions (Button outline, icon, principal), Tabs line, Card Informations (liste dt/dd en grille), Accès rapides (Item outline vers les sous-pages), Timeline d'activité, Card « Et ensuite ? » (actions suggérées + objets similaires), colonne de 320 px en position sticky (résumé chiffré avec Progress, responsable, contact)."
+  },
+  {
+    "name": "FormulaireEtapes",
+    "file": "formulaire",
+    "group": "Application",
+    "width": 1440,
+    "height": 1000,
+    "summary": "Formulaire de création en étapes : barre de sortie avec brouillon, Stepper, étape courante en carte, récapitulatif sticky des étapes faites.",
+    "when": "Une création longue qu'on découpe (nouveau client, commande, dossier, onboarding) : 3 à 5 étapes, une seule visible à la fois.",
+    "parts": "Barre du haut (fermer, titre, état du brouillon), Stepper > StepperNav (StepperIndicator avec coche pour les étapes faites, StepperTitle, StepperDescription, StepperSeparator), Card avec FieldGroup : cartes de choix (FieldLabel > Field + RadioGroupItem), Input, Select, Checkbox, Textarea ; CardFooter Précédent / Continuer ; récapitulatif."
+  },
+  {
+    "name": "TableauDeBord",
+    "file": "tableau-de-bord",
+    "group": "Application",
+    "width": 1440,
+    "height": 1180,
+    "summary": "Tableau de bord : période, 4 indicateurs avec variation, graphique 12 mois, objectifs en barres de progression, derniers devis, points à traiter.",
+    "when": "La page d'accueil d'un outil métier : ce qui a bougé, où on en est des objectifs, ce qu'il faut traiter maintenant.",
+    "parts": "Shell, PageHeader avec ToggleGroup de période, Card size sm d'indicateurs (CardAction Badge de variation), SimpleChart dans une Card, Progress, Table, Item."
+  },
+  {
+    "name": "Parametres",
+    "file": "parametres",
+    "group": "Application",
+    "width": 1440,
+    "height": 1320,
+    "summary": "Paramètres : navigation des sections à gauche, cartes de réglages en lignes libellé + aide / contrôle, interrupteurs, zone sensible.",
+    "when": "Toute page de réglages (espace de travail, profil, notifications, facturation) : une carte par thème, une ligne par réglage.",
+    "parts": "Shell, nav sticky en markup, Card avec lignes en grille (label + aide, puis Input, Select ou Avatar + Button), FieldSeparator, Field horizontal + Switch, zone sensible avec Button destructive."
+  },
+  {
+    "name": "ListeMobile",
+    "file": "liste",
+    "group": "Application mobile",
+    "width": 390,
+    "height": 844,
+    "summary": "Liste en 390 : recherche pleine largeur, filtres et tri en boutons, lignes en Item, chargement progressif.",
+    "when": "La version mobile d'une Liste : la table devient une pile d'Item, les filtres passent dans un bouton.",
+    "parts": "MobileShell (barre du haut avec menu), InputGroup, Button sm, ItemGroup d'Item outline, Badge de statut."
+  },
+  {
+    "name": "FicheDetailMobile",
+    "file": "fiche",
+    "group": "Application mobile",
+    "width": 390,
+    "height": 1780,
+    "summary": "Fiche détail en 390 : retour, identité, action principale pleine largeur, onglets, puis résumé, accès rapides, informations et rebond en une colonne.",
+    "when": "La version mobile d'une FicheDetail : la colonne latérale passe en tête (résumé), le reste s'empile.",
+    "parts": "Barre du haut avec retour, identité compacte, Button pleine largeur + boutons icône, Tabs line, Card résumé, Item, Card Informations en une colonne, Card « Et ensuite ? »."
+  },
+  {
+    "name": "FormulaireEtapesMobile",
+    "file": "formulaire",
+    "group": "Application mobile",
+    "width": 390,
+    "height": 1000,
+    "summary": "Formulaire en étapes en 390 : fermer, étape courante et barre de progression, champs empilés, Précédent / Continuer collés en bas.",
+    "when": "La version mobile d'un FormulaireEtapes : le Stepper devient une barre de progression avec le nom de l'étape.",
+    "parts": "Barre du haut, Progress, FieldGroup (cartes de choix, Input, Select, Checkbox, Textarea), barre d'actions en position sticky en bas."
+  },
+  {
+    "name": "TableauDeBordMobile",
+    "file": "tableau-de-bord",
+    "group": "Application mobile",
+    "width": 390,
+    "height": 1700,
+    "summary": "Tableau de bord en 390 : période, indicateurs en 2 × 2, graphique en barres, points à traiter, derniers devis en Item.",
+    "when": "La version mobile d'un TableauDeBord : les indicateurs passent en grille de deux, la table devient une liste.",
+    "parts": "MobileShell, ToggleGroup, Card size sm d'indicateurs, SimpleChart type bar, Item, Badge."
+  },
+  {
+    "name": "Connexion",
+    "file": "connexion",
+    "group": "Authentification",
+    "width": 1440,
+    "height": 900,
+    "summary": "Connexion en deux colonnes : marque, SSO et lien par e-mail, identifiants, mot de passe oublié, rester connecté ; panneau visuel avec témoignage.",
+    "when": "L'écran de connexion d'un produit. Pour l'inscription ou le mot de passe oublié, garder la mise en page et changer le formulaire.",
+    "parts": "Grille 2 colonnes en markup, Button outline pleine largeur, FieldSeparator « ou », FieldGroup (Field, FieldLabel, Input, Checkbox), lien en markup, panneau muted avec emplacement d'image et citation."
+  },
+  {
+    "name": "ConnexionMobile",
+    "file": "connexion",
+    "group": "Authentification",
+    "width": 390,
+    "height": 844,
+    "summary": "Connexion en 390 : marque, formulaire pleine largeur, mentions en bas.",
+    "when": "La version mobile de Connexion : le panneau visuel disparaît.",
+    "parts": "Les mêmes champs que Connexion, en une colonne."
+  },
+  {
+    "name": "SiteVitrineMobile",
+    "file": "site-vitrine",
+    "group": "Site vitrine",
+    "width": 390,
+    "height": 4840,
+    "summary": "Site vitrine mobile-first en 390 : header compact (marque, démo, menu), hero empilé, logos, bénéfices, étapes, chiffres, témoignage, FAQ, appel à l'action, footer.",
+    "when": "La page d'accueil d'un site vitrine ou d'une landing, à dessiner d'abord en mobile. Chaque section est un bloc qu'on garde, retire ou réordonne.",
+    "parts": "Header sticky en markup + Button, hero (Badge, titre, Button lg pleine largeur, AvatarGroup), emplacements d'image en markup, Card de bénéfices, liste d'étapes numérotées, chiffres sur fond muted, citation, Accordion de FAQ, bandeau primary avec Button secondary, footer (InputGroup + InputGroupButton, colonnes de liens, Separator)."
+  },
+  {
+    "name": "SiteVitrine",
+    "file": "site-vitrine",
+    "group": "Site vitrine",
+    "width": 1440,
+    "height": 3700,
+    "summary": "Le même site vitrine en 1440 : navigation dans le header, hero en deux colonnes, sections en grilles, footer en colonnes.",
+    "when": "La version desktop d'un SiteVitrineMobile : mêmes sections dans le même ordre, conteneur de 1200 px.",
+    "parts": "Les sections de SiteVitrineMobile, élargies : grilles de 2, 3 ou 6 colonnes, titres à 56 et 36 px."
+  },
+  {
+    "name": "SiteMenuMobile",
+    "file": "site-vitrine",
+    "group": "Site vitrine",
+    "width": 390,
+    "height": 844,
+    "summary": "Menu mobile ouvert du site vitrine : navigation en plein écran, liens secondaires, actions en bas.",
+    "when": "L'état « menu ouvert » du header mobile, à relier au bouton menu de SiteVitrineMobile.",
+    "parts": "Barre avec marque et fermer, liens en markup séparés par des filets, Button lg pleine largeur."
+  }
+]

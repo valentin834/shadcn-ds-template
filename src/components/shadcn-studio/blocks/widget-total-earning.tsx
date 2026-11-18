@@ -1,9 +1,6 @@
-// @ts-nocheck
-import { ChevronDownIcon, ChevronUpIcon, EllipsisVerticalIcon } from 'lucide-react'
-
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +9,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Progress } from '@/components/ui/progress'
+import { EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 
 const listItems = ['Share', 'Update', 'Refresh']
 
@@ -34,20 +32,25 @@ type Props = {
 const TotalEarningCard = ({ earningData, title, earning, trend, percentage, comparisonText, className }: Props) => {
   return (
     <Card className={className}>
-      <CardHeader className='flex items-center justify-between'>
-        <span className='text-lg font-semibold'>{title}</span>
-        <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant='ghost' size='icon' className='text-muted-foreground size-6 rounded-full' />}><EllipsisVerticalIcon /><span className='sr-only'>Menu</span></DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuGroup>
-              {listItems.map((item, index) => (
-                <DropdownMenuItem key={index}>{item}</DropdownMenuItem>
-              ))}
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </CardHeader>
-      <CardContent className='flex flex-1 flex-col gap-4'>
+      <CardContent className='flex flex-col gap-6'>
+        <span className='flex items-center justify-between'>
+          <div className='text-lg font-semibold'>{title}</div>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={<Button variant='ghost' size='icon' className='text-muted-foreground size-6 rounded-full' />}
+            >
+              <EllipsisVerticalIcon />
+              <span className='sr-only'>Menu</span>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              <DropdownMenuGroup>
+                {listItems.map((item, index) => (
+                  <DropdownMenuItem key={index}>{item}</DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </span>
         <div className='flex flex-col gap-1'>
           <div className='flex items-center gap-2'>
             <span className='text-2xl font-semibold'>${earning}</span>
@@ -58,23 +61,25 @@ const TotalEarningCard = ({ earningData, title, earning, trend, percentage, comp
           </div>
           <span className='text-muted-foreground text-sm'>{comparisonText}</span>
         </div>
+      </CardContent>
+      <CardContent className='flex flex-1 flex-col gap-4'>
         <div className='flex flex-1 flex-col justify-evenly gap-4'>
           {earningData.map((earning, index) => (
             <div key={index} className='flex items-center justify-between gap-2.5'>
               <div className='flex items-center justify-between gap-2.5'>
-                <Avatar className='size-11 rounded-sm'>
+                <Avatar className='size-11 rounded-sm after:rounded-[inherit] after:border-0'>
                   <AvatarFallback className='bg-primary/10 shrink-0 rounded-sm'>
                     <img src={earning.img} alt={earning.platform} className='size-6' />
                   </AvatarFallback>
                 </Avatar>
                 <div className='flex flex-col gap-1'>
-                  <span className='font-medium'>{earning.platform}</span>
+                  <span className='text-base font-medium'>{earning.platform}</span>
                   <span className='text-muted-foreground text-sm'>{earning.technologies}</span>
                 </div>
               </div>
               <div className='space-y-2'>
                 <p className='text-sm'>{earning.earnings}</p>
-                <Progress value={earning.progressPercentage} className='w-36' />
+                <Progress value={earning.progressPercentage} className='w-36 **:data-[slot=progress-track]:h-1.5' />
               </div>
             </div>
           ))}

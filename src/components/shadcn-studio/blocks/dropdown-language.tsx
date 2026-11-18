@@ -1,8 +1,7 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 
 import {
   DropdownMenu,
@@ -13,7 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 type Props = {
-  trigger: ReactNode
+  trigger: ReactElement
   defaultOpen?: boolean
   align?: 'start' | 'center' | 'end'
 }
@@ -26,36 +25,11 @@ const LanguageDropdown = ({ defaultOpen, align, trigger }: Props) => {
       <DropdownMenuTrigger render={trigger} />
       <DropdownMenuContent className='w-50' align={align || 'end'}>
         <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
-          <DropdownMenuRadioItem
-            value='english'
-            className='data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground pl-2 text-base [&>span]:hidden'
-          >
-            English
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value='german'
-            className='data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground pl-2 text-base [&>span]:hidden'
-          >
-            Deutsch
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value='spanish'
-            className='data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground pl-2 text-base [&>span]:hidden'
-          >
-            Española
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value='portuguese'
-            className='data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground pl-2 text-base [&>span]:hidden'
-          >
-            Português
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value='korean'
-            className='data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground pl-2 text-base [&>span]:hidden'
-          >
-            한국인
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='english'>English</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='german'>Deutsch</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='spanish'>Española</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='portuguese'>Português</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='korean'>한국인</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

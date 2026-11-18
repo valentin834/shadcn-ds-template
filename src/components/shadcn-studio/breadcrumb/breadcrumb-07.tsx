@@ -1,10 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { ChevronsRightIcon, FolderIcon, FolderOpenIcon, HomeIcon } from 'lucide-react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,12 +9,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { HomeIcon, ChevronsRightIcon, FolderOpenIcon, FolderIcon } from 'lucide-react'
 
 const BreadcrumbWithIconDemo = () => {
   const [open, setOpen] = useState(false)
@@ -35,13 +27,13 @@ const BreadcrumbWithIconDemo = () => {
         <BreadcrumbSeparator>
           <ChevronsRightIcon />
         </BreadcrumbSeparator>
-        <BreadcrumbItem className='flex items-center gap-2'>
+        <BreadcrumbItem>
           <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger className='flex cursor-pointer items-center gap-1'>
               {open ? <FolderOpenIcon className='size-4' /> : <FolderIcon className='size-4' />}
               <span className='sr-only'>{open ? 'Open' : 'Close'}</span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align='start'>
+            <DropdownMenuContent>
               <DropdownMenuItem>Documentation</DropdownMenuItem>
               <DropdownMenuItem>Themes</DropdownMenuItem>
               <DropdownMenuItem>GitHub</DropdownMenuItem>

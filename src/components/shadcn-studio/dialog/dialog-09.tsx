@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -15,7 +14,7 @@ const DialogSubscribeDemo = () => {
   return (
     <Dialog>
       <DialogTrigger render={<Button variant='outline' />}>Subscribe</DialogTrigger>
-      <DialogContent className='sm:max-w-lg'>
+      <DialogContent className='p-6 sm:max-w-lg'>
         <DialogHeader className='text-center'>
           <DialogTitle className='text-xl'>Subscribe blog for latest updates</DialogTitle>
           <DialogDescription className='text-base'>
@@ -24,7 +23,7 @@ const DialogSubscribeDemo = () => {
           </DialogDescription>
         </DialogHeader>
         <form className='flex gap-4'>
-          <div className='grid grow-1 gap-3'>
+          <div className='grid grow gap-3'>
             <Label htmlFor='email'>Email</Label>
             <Input type='email' id='email' name='email' placeholder='example@gmail.com' required />
           </div>

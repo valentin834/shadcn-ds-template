@@ -1,9 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
-
-import { DownloadIcon, FileTextIcon, FileSpreadsheetIcon } from 'lucide-react'
 
 import Papa from 'papaparse'
 import * as XLSX from 'xlsx'
@@ -17,7 +14,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -30,8 +26,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-
-import { cn } from '@/lib/utils'
+import { DownloadIcon, FileTextIcon, FileSpreadsheetIcon } from 'lucide-react'
 
 const data: Payment[] = [
   {
@@ -105,7 +100,8 @@ export const columns: ColumnDef<Payment>[] = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />
@@ -140,7 +136,7 @@ export const columns: ColumnDef<Payment>[] = [
           'bg-amber-600/10 text-amber-600 focus-visible:ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-400 dark:focus-visible:ring-amber-400/40 [a&]:hover:bg-amber-600/5 dark:[a&]:hover:bg-amber-400/5'
       }[status]
 
-      return <Badge className={(cn('border-none focus-visible:outline-none'), styles)}>{row.getValue('status')}</Badge>
+      return <Badge className={styles}>{row.getValue('status')}</Badge>
     }
   },
   {
@@ -269,34 +265,27 @@ const DataTableWithExportDemo = () => {
             className='max-w-sm'
           />
         </div>
-        <div className='flex items-center space-x-2'>
-          <div className='text-muted-foreground text-sm'>
-            {table.getSelectedRowModel().rows.length > 0 && (
-              <span className='mr-2'>
-                {table.getSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected
-              </span>
-            )}
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant='outline' size='sm' />}><DownloadIcon className='mr-2' />Export
-                                    </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuItem onClick={exportToCSV}>
-                <FileTextIcon className='mr-2 size-4' />
-                Export as CSV
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={exportToExcel}>
-                <FileSpreadsheetIcon className='mr-2 size-4' />
-                Export as Excel
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={exportToJSON}>
-                <FileTextIcon className='mr-2 size-4' />
-                Export as JSON
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger render={<Button variant='outline' size='sm' />}>
+            <DownloadIcon className='mr-2' />
+            Export
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end' className='w-full'>
+            <DropdownMenuItem onClick={exportToCSV}>
+              <FileTextIcon className='mr-2 size-4' />
+              Export as CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={exportToExcel}>
+              <FileSpreadsheetIcon className='mr-2 size-4' />
+              Export as Excel
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={exportToJSON}>
+              <FileTextIcon className='mr-2 size-4' />
+              Export as JSON
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className='rounded-md border'>
         <Table>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
@@ -14,14 +13,14 @@ const CheckboxBadgeDemo = () => {
   return (
     <div className='flex items-center gap-2'>
       {snacks.map(label => (
-        <Badge key={label} variant='secondary' className='relative gap-2 rounded-sm px-3 py-1.5'>
+        <Badge key={label} variant='secondary' className='relative h-auto gap-2 rounded-sm px-3 py-1.5'>
           <Checkbox
             id={label}
             checked={selected.includes(label)}
             onCheckedChange={checked =>
               setSelected(checked ? [...selected, label] : selected.filter(item => item !== label))
             }
-            className='data-[state=unchecked]:hidden'
+            className='data-unchecked:hidden'
           />
           <label htmlFor={label} className='cursor-pointer select-none after:absolute after:inset-0'>
             {label}

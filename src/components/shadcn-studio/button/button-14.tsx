@@ -1,11 +1,9 @@
-// @ts-nocheck
-import { DownloadIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { DownloadIcon } from 'lucide-react'
 
 const ButtonDownloadDemo = () => {
   return (
-    <Button variant='outline' className='border-primary border-dashed shadow-none'>
+    <Button variant='outline' className='border-primary dark:border-primary border-dashed shadow-none'>
       <DownloadIcon />
       Download
     </Button>

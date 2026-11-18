@@ -1,7 +1,10 @@
-import { Globe, Camera, Briefcase, MessageCircle } from 'lucide-react'
-
 import { Card, CardContent } from '@/components/ui/card'
 import { Sidebar, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+
+import FacebookIcon from '@/assets/svg/facebook-icon'
+import InstagramIcon from '@/assets/svg/instagram-icon'
+import LinkedinIcon from '@/assets/svg/linkedin-icon'
+import TwitterIcon from '@/assets/svg/twitter-icon'
 
 const Footer = () => {
   return (
@@ -12,7 +15,7 @@ const Footer = () => {
         </Sidebar>
         <div className='flex flex-1 flex-col'>
           <header className='bg-card sticky top-0 z-50 flex h-13.75 items-center justify-between gap-6 border-b px-4 py-2 sm:px-6'>
-            <SidebarTrigger className='[&_svg]:!size-5' />
+            <SidebarTrigger className='[&_svg]:size-5!' />
           </header>
           <main className='size-full flex-1 px-4 py-6 sm:px-6'>
             <Card className='h-250'>
@@ -31,16 +34,16 @@ const Footer = () => {
             </p>
             <div className='flex items-center gap-5'>
               <a href='#'>
-                <Globe className='size-4' />
+                <FacebookIcon className='hover:text-primary size-4' />
               </a>
               <a href='#'>
-                <Camera className='size-4' />
+                <InstagramIcon className='hover:text-primary size-4' />
               </a>
               <a href='#'>
-                <Briefcase className='size-4' />
+                <LinkedinIcon className='hover:text-primary size-4' />
               </a>
               <a href='#'>
-                <MessageCircle className='size-4' />
+                <TwitterIcon className='hover:text-primary size-4' />
               </a>
             </div>
           </footer>
