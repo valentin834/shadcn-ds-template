@@ -104,6 +104,7 @@ voir plus bas.
 
 - **React 18** : le canevas fournit React 18, le repo est en React 19. `shims/jsx-runtime.cjs` enveloppe en `forwardRef`
   les composants du repo (marqués `__dsRef` au build) pour que Base UI reçoive les `ref` de `render={<Button />}`.
+- **Images d'autres sites** : un canevas et la page du design system ne chargent aucune image venue d'ailleurs (`cdn.shadcnstudio.com`, Unsplash, avatars GitHub). Le bundle remplace toute image en erreur par un repère gris à sa taille (`imagePlaceholders` dans `gen-entry.mjs`). `test-previews.mjs` et `audit-canvas.mjs` bloquent ces sites et signalent une image cassée.
 - **Cales** : `next/link`, `next/image`, `next-themes`, `xlsx` et le highlighter Shiki sont remplacés par des cales
   légères (`shims/`).
 - **Chaque `x-import` est enveloppé** : le runtime (`dc-runtime.js`) pose `data-dc-tpl` sur les éléments du template.

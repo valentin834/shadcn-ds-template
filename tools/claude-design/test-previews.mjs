@@ -42,12 +42,16 @@ async function run(comp, theme) {
   }
   await new Promise((r) => (ws.onopen = r))
   const send = (method, params = {}) => new Promise((r) => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })) })
-  await send("Runtime.enable"); await send("Page.enable")
+  await send("Runtime.enable"); await send("Page.enable"); await send("Network.enable")
+  // the design system page loads no image from other sites: block them likewise
+  await send("Network.setBlockedURLs", { urls: ["*cdn.shadcnstudio.com*", "*images.unsplash.com*", "*githubusercontent.com*", "*://github.com/*", "*imgix.net*", "*wikipedia.org*", "*shadcnstudio.com/*", "*ui.shadcn.com*"] })
   await send("Page.navigate", { url: `http://localhost:4062/preview/${comp}?theme=${theme}` })
   const t0 = Date.now(); while (!loaded && Date.now() - t0 < 30000) await sleep(50)
   await sleep(2500)
   res.height = (await send("Runtime.evaluate", { expression: "Math.round(document.body.scrollHeight)", returnByValue: true })).result?.value ?? 0
   res.text = (await send("Runtime.evaluate", { expression: "document.body.innerText.trim().length", returnByValue: true })).result?.value ?? 0
+  // a blocked image must show the bundle's placeholder, never a broken image
+  res.broken = (await send("Runtime.evaluate", { expression: "[...document.images].filter((i) => i.complete && i.naturalWidth === 0 && getComputedStyle(i).display !== 'none').length", returnByValue: true })).result?.value ?? 0
   ws.close(); await fetch(`http://127.0.0.1:${PORT}/json/close/${t.id}`).catch(() => {})
   return res
 }
@@ -56,6 +60,7 @@ const jobs = comps.flatMap((c) => [[c, "light"], [c, "dark"]])
 const results = []
 await Promise.all(Array.from({ length: Number(conc) }, async () => { while (jobs.length) { const [c, th] = jobs.shift(); try { results.push(await run(c, th)) } catch (e) { results.push({ comp: c, theme: th, errors: ["fatal " + e.message] }) } } }))
 chrome.kill(); server.close()
+for (const r of results) if (r.broken) r.errors.push(`${r.broken} image(s) cassée(s)`)
 fs.writeFileSync(outFile, JSON.stringify(results, null, 1))
 const bad = results.filter((r) => r.errors.length)
 const blank = results.filter((r) => !r.errors.length && r.height < 24)

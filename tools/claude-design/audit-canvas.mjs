@@ -8,7 +8,7 @@
 //   icons      lucide icons at 24 px inside buttons, menus, badges, triggers
 //   colour     colours outside the grey scale (destructive red reported apart)
 //   contrast   text under 4.5:1 (3:1 for large text) on its real background
-//   images     images that failed to load
+//   images     images that failed to load (images from other sites are blocked, as on a canvas)
 // Screenshots go to audit-run/shots, the report to audit-run/report.json and a
 // contact sheet to audit-run/index.html.
 // Usage: node audit-canvas.mjs [regex on target] [--widths=1440,390] [--themes=light,dark] [--tabs=6] [--boards=dir]
@@ -100,6 +100,9 @@ async function openTab() {
   tab.send = (method, params = {}) => new Promise((r) => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })) })
   tab.eval = async (expression) => (await tab.send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result?.value
   await tab.send("Runtime.enable"); await tab.send("Page.enable"); await tab.send("Network.enable")
+  // A Design canvas and the design system page load no image from other sites:
+  // block them the same way (--allow-external to load them).
+  if (!args.includes("--allow-external")) await tab.send("Network.setBlockedURLs", { urls: ["*cdn.shadcnstudio.com*", "*images.unsplash.com*", "*githubusercontent.com*", "*://github.com/*", "*imgix.net*", "*wikipedia.org*", "*shadcnstudio.com/*", "*ui.shadcn.com*"] })
   tab.close = () => { ws.close(); return fetch(`http://127.0.0.1:${PORT}/json/close/${t.id}`).catch(() => {}) }
   return tab
 }

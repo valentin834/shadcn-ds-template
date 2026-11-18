@@ -159,7 +159,7 @@ for (const b of meta.blocks) {
     "",
     `**Sur un canevas** : \`<x-import component-from-global-scope="Ds4060.${b.name}"></x-import>\`, sans props, dans un artboard pleine largeur. Pour l'adapter, la recomposer en markup avec les composants officiels plutôt que de la modifier.`,
     "",
-    `**Attention** : contenu d'exemple en anglais ; certaines sections chargent des images depuis \`cdn.shadcnstudio.com\` (absentes si le canevas les bloque) et gardent des couleurs codées en dur.`,
+    `**Attention** : contenu d'exemple en anglais ; certaines sections chargent des images depuis \`cdn.shadcnstudio.com\`, qu'un canevas bloque : le bundle les remplace par un repère gris (le nom pour un logo, une icône et la légende pour une photo). Elles gardent aussi des couleurs codées en dur.`,
     "",
     `**Source** : \`src/app/${b.slug}/page.tsx\` et \`src/components/shadcn-studio/blocks/\` — dépôt \`valentin834/shadcn-ds-template\`, route \`/${b.slug}\`.`,
   ].join("\n") + "\n")

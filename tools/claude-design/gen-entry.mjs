@@ -114,6 +114,39 @@ for (const p of primitives) addFamily("studio", p, `@/components/ui/${p}`, src(`
 // 40-60's own components (src/components/ds), built on the official ones
 for (const p of ["simple-chart"]) addFamily("maison", p, `@/components/ds/${p}`, src(`components/ds/${p}.tsx`), "maison")
 
+// Images from other sites (cdn.shadcnstudio.com, Unsplash, GitHub avatars) do not
+// load on a Design canvas nor on the design system page. A broken image becomes a
+// neutral placeholder: its alt text (a brand in a logo cloud) or an image icon, in
+// a mid grey that reads on both themes.
+body.push(`;(function imagePlaceholders() {
+  const grey = "#808080"
+  const clean = (v: string) => String(v || "").replace(/[<>&"]/g, "").trim().slice(0, 40)
+  const icon = (x: number, y: number) => '<g fill="none" stroke="' + grey + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(' + (x - 12) + " " + (y - 12) + ')"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></g>'
+  const text = (t: string, x: number, y: number, size: number) => '<text x="' + x + '" y="' + y + '" dominant-baseline="central" text-anchor="middle" font-family="Geist, system-ui, sans-serif" font-size="' + size + '" font-weight="600" fill="' + grey + '">' + t + "</text>"
+  const svg = (w: number, h: number, fit: string, inner: string) => "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '" preserveAspectRatio="xMidYMid ' + fit + '"><rect width="' + w + '" height="' + h + '" rx="6" fill="' + grey + '" fill-opacity="0.12"/>' + inner + "</svg>")
+  const placeholder = (img: HTMLImageElement) => {
+    const t = clean(img.alt)
+    const r = img.getBoundingClientRect()
+    // a photo, sized by its layout: a frame of that size, never stretched
+    if (r.width >= 64 && r.height >= 64) {
+      const w = Math.round(r.width), h = Math.round(r.height)
+      return svg(w, h, "slice", t && h >= 96 ? icon(w / 2, h / 2 - 12) + text(t, w / 2, h / 2 + 20, 13) : icon(w / 2, h / 2))
+    }
+    // a small square (avatar, thumbnail): a plain tile
+    if (!t || Math.abs(r.width - r.height) <= 8) return svg(40, 40, "meet", "")
+    // a logo or an inline picture: its name, like a wordmark
+    const w = Math.max(96, Math.round(t.length * 8.5) + 32)
+    return svg(w, 40, "meet", text(t, w / 2, 20, 14))
+  }
+  window.addEventListener("error", (e: Event) => {
+    const img = e.target as HTMLImageElement
+    if (!(img instanceof HTMLImageElement) || img.dataset.dsPlaceholder) return
+    img.dataset.dsPlaceholder = "true"
+    img.removeAttribute("srcset")
+    img.src = placeholder(img)
+  }, true)
+})()`)
+
 body.push("NS.Examples = {}")
 // Theme: sets data-theme on the artboard document too, so portaled overlays
 // (menus, select lists, popovers, dialogs) follow the dark theme.
